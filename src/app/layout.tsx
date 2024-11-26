@@ -1,5 +1,5 @@
-import NavBar from "@/components/GeneralComponent/NavBar";
-import Footer from "@/components/GeneralComponent/Footer";
+import NavBar from "@/customer-side/components/NavBar";
+import Footer from "@/customer-side/components/Footer";
 
 export const metadata = {
   title: "Next.js",
