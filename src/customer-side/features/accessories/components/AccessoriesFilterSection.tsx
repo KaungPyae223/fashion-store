@@ -1,13 +1,12 @@
-'use client'
+"use client";
 import FilterContainer from "@/customer-side/components/FilterContainer";
 import FilterRadioBox from "@/customer-side/components/FilterRadioBox";
 import SectionTitle from "@/customer-side/components/SectionTitle";
 import React, { useState } from "react";
 
-const FootwearFilterSection = () => {
-  
+const AccessoriesFilterSection = () => {
   const [brands, setBrand] = useState<string>("All");
-  
+
   const brandNames: string[] = [
     "All",
     "Giordano",
@@ -20,18 +19,15 @@ const FootwearFilterSection = () => {
     "Polo",
   ];
 
+  const [type, setType] = useState<string[]>([]);
 
-  
-
-  const [color, setColor] = useState<string[]>([]);
-
-  const ColorsName: string[] = [
+  const typesName: string[] = [
     "All",
-    "White",
-    "Black",
-    "Green",
-    "Red",
-    "Blue",
+    "Bags",
+    "Pop Culture",
+    "Hats",
+    "Umbrella",
+    "Fancy",
   ];
 
   const [price, setPrice] = useState<string[]>([]);
@@ -44,20 +40,13 @@ const FootwearFilterSection = () => {
     "> 500000",
   ];
 
-  const [Sizes, SetSizes] = useState<string[]>([]);
-
-  const SizeName: string[] = ["All", "Small", "Medium", "Large"];
-
   return (
     <div>
       <SectionTitle title="filter" />
       <section className="w-full bg-white divide-y divide-slate-200 shadow-slate-200">
-      
-      <FilterContainer title="Brands" setState={setBrand} items={brandNames} />
-      <FilterContainer title="Colors" setState={setColor} items={ColorsName} />
-      <FilterContainer title="Sizes" setState={SetSizes} items={SizeName} />
-      <FilterContainer title="Price Range" setState={setPrice} items={PrinceRanges} columns={2}/>
-        
+        <FilterContainer title="Brands" setState={setBrand} items={brandNames} />
+        <FilterContainer title="Types" setState={setType} items={typesName} />
+        <FilterContainer title="Price Range" setState={setPrice} items={PrinceRanges} columns={2}/> 
       </section>
       <div className="uppercase mt-8 bg-gray-900 px-4 py-3 flex cursor-pointer justify-center text-white">
         Filter
@@ -66,4 +55,4 @@ const FootwearFilterSection = () => {
   );
 };
 
-export default FootwearFilterSection;
+export default AccessoriesFilterSection;

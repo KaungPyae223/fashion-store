@@ -1,27 +1,11 @@
 'use client'
 import FilterContainer from "@/customer-side/components/FilterContainer";
-import FilterRadioBox from "@/customer-side/components/FilterRadioBox";
 import SectionTitle from "@/customer-side/components/SectionTitle";
 import React, { useState } from "react";
 
-const FootwearFilterSection = () => {
+const LifeStyleFilter = () => {
   
-  const [brands, setBrand] = useState<string>("All");
-  
-  const brandNames: string[] = [
-    "All",
-    "Giordano",
-    "I Max",
-    "Nike",
-    "North The Face",
-    "Victor",
-    "Lacoste",
-    "Zara",
-    "Polo",
-  ];
 
-
-  
 
   const [color, setColor] = useState<string[]>([]);
 
@@ -44,18 +28,13 @@ const FootwearFilterSection = () => {
     "> 500000",
   ];
 
-  const [Sizes, SetSizes] = useState<string[]>([]);
-
-  const SizeName: string[] = ["All", "Small", "Medium", "Large"];
-
+  
   return (
     <div>
       <SectionTitle title="filter" />
       <section className="w-full bg-white divide-y divide-slate-200 shadow-slate-200">
       
-      <FilterContainer title="Brands" setState={setBrand} items={brandNames} />
-      <FilterContainer title="Colors" setState={setColor} items={ColorsName} />
-      <FilterContainer title="Sizes" setState={SetSizes} items={SizeName} />
+     <FilterContainer title="Colors" setState={setColor} items={ColorsName} />
       <FilterContainer title="Price Range" setState={setPrice} items={PrinceRanges} columns={2}/>
         
       </section>
@@ -66,4 +45,4 @@ const FootwearFilterSection = () => {
   );
 };
 
-export default FootwearFilterSection;
+export default LifeStyleFilter;

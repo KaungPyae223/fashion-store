@@ -28,7 +28,7 @@ const Pagination = () => {
 
   useEffect(() => {
     const Page = searchParams.get("page");
-    setCurrentPage(Page ? parseInt(Page, 10) : 0);
+    setCurrentPage(Page ? parseInt(Page, 10) : 1);
   }, []);
 
   const Pages: number[] = [1, 2, 3, 4, 5];
