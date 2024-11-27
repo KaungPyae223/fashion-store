@@ -1,7 +1,7 @@
 import React from "react";
 import Container from "../../../components/Container";
 import { HomeTitle } from "./HomeTitle";
-import HomeBrandTypeCard from "./HomeBrandTypeCard";
+import HomeBrandTypeCard from "../../../components/HomeBrandTypeCard";
 
 const Type = () => {
   interface TypeInterface {
@@ -36,7 +36,7 @@ const Type = () => {
   return (
     <div className="py-16 mb-6 bg-[#F8F8F8]">
       <Container>
-        <HomeTitle title="Types" />
+        <HomeTitle title="Categories" />
         <div className="col-span-12 grid grid-cols-4 gap-6">
           {brands.map((brand, i) => (
             <HomeBrandTypeCard

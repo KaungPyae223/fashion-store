@@ -1,7 +1,7 @@
 import React from "react";
 import Container from "../../../components/Container";
 import { HomeTitle } from "./HomeTitle";
-import HomeBrandTypeCard from "./HomeBrandTypeCard";
+import HomeBrandTypeCard from "../../../components/HomeBrandTypeCard";
 
 const HomeBrand = () => {
   interface BrandInterface {

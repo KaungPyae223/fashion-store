@@ -14,15 +14,17 @@ const Pagination = () => {
     setCurrentPage(page);
   };
 
-  const PrevNext = (preOrNex:string) => {
-    if(preOrNex === "prev" && currentPage != 1){
-        setCurrentPage((prevPage) => prevPage-1)
-        updateParams("page", (currentPage-1).toString());
-    }else{
-        setCurrentPage((prevPage) => prevPage+1)
-        updateParams("page", (currentPage+1).toString());
+  const PrevNext = (preOrNex: string) => {
+    if (preOrNex === "prev" && currentPage > 1) {
+      const newPage = currentPage - 1;
+      setCurrentPage(newPage);
+      updateParams("page", newPage.toString());
+    } else if (preOrNex === "next" && currentPage < Pages[Pages.length - 1]) {
+      const newPage = currentPage + 1;
+      setCurrentPage(newPage);
+      updateParams("page", newPage.toString());
     }
-  }
+  };
 
   useEffect(() => {
     const Page = searchParams.get("page");

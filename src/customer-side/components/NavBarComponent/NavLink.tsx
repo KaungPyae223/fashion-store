@@ -15,7 +15,7 @@ const NavLink = () => {
         <Link href={"/accessories"} className={pathName.startsWith("/accessories") ? 'border-b border-b-gray-800' : 'text-gray-500'}>Accessories</Link>
         <Link href={"/lifestyle"} className={pathName.startsWith("/lifestyle") ? 'border-b border-b-gray-800' : 'text-gray-500'}>Lifestyle</Link>
         <Link href={"/blogs"} className={pathName.startsWith("/blogs") ? 'border-b border-b-gray-800' : 'text-gray-500'}>Blogs</Link>
-        <Link href={"/supports"} className={pathName.startsWith("/supports") ? 'border-b border-b-gray-800' : 'text-gray-500'}>Blogs</Link>
+        <Link href={"/supports"} className={pathName.startsWith("/supports") ? 'border-b border-b-gray-800' : 'text-gray-500'}>Supports</Link>
        
     </div>
   )

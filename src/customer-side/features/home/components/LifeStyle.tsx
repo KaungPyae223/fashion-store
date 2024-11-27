@@ -2,7 +2,7 @@ import React from "react";
 import Container from "../../../components/Container";
 import { HomeTitle } from "./HomeTitle";
 import ProductCard from "../../../components/ProductCard";
-import HomeBrandTypeCard from "./HomeBrandTypeCard";
+import HomeBrandTypeCard from "../../../components/HomeBrandTypeCard";
 import Image from "next/image";
 
 const LifeStyle = () => {
