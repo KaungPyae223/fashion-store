@@ -1,6 +1,6 @@
 "use client";
 
-import React, { use, useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import Noti from "./NavBarComponent/NavNotification";
 import NavBody from "./NavBarComponent/NavBody";
 import NavLink from "./NavBarComponent/NavLink";
@@ -48,7 +48,7 @@ const NavBar = () => {
 
   return (
     <>
-      <div ref={navRef} className="duration-300 bg-white">
+      <div ref={navRef} className="duration-300 bg-white z-50">
         <Noti />
         <NavBody setOpenSearchSection={setOpenSearchSection} />
         <NavLink />

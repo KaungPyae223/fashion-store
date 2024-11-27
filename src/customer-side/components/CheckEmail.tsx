@@ -2,7 +2,7 @@
 import React, { useState } from "react";
 import { tailspin } from "ldrs";
 import { AnimatePresence, motion } from "motion/react";
-import { useForm, SubmitHandler } from "react-hook-form";
+import { useForm } from "react-hook-form";
 
 interface CheckEmailInterface {
   setEmail: React.Dispatch<React.SetStateAction<string>>;
@@ -16,11 +16,11 @@ const CheckEmail = ({ setEmail, setTypeOfNavigation }: CheckEmailInterface) => {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<FormValues>();
+  } = useForm();
 
   const [loading, isLoading] = useState<boolean>(false);
 
-  const handleCheckEmail: SubmitHandler<FormValues> = (data) => {
+  const handleCheckEmail = (data) => {
     isLoading(true);
     setTypeOfNavigation("CreateAccount");
     setEmail(data.email);

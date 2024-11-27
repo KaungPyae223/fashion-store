@@ -15,11 +15,12 @@ const FooterSignUp = () => {
         <p className="font-semibold uppercase text-sm inline">Email Address</p>
         <div className="flex gap-3 mt-2 max-w-lg mb-5 ">
           <input
-            type="email"
+            className="border-b w-[300px] border-b-black py-2 outline-none"
+            name="email"
             onChange={chaneEmail}
             value={email}
-            className="flex-1 border-b w-[300px] border-b-black py-2 outline-none"
           />
+
           <button
             disabled={email.length === 0}
             className="border disabled:bg-slate-200 disabled:text-gray-500 uppercase bg-black text-white px-6 py-2"

@@ -19,8 +19,7 @@ const NavBody = ({setOpenSearchSection}:NavBodyInterface) => {
     const genderParam = searchParams.get("gender");
     if (genderParam) {
       setGender(genderParam);
-    } else {
-    }
+    } 
   }, []);
 
   const handleGenderChange = (newGender: string) => {

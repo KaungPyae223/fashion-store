@@ -9,6 +9,7 @@ interface ProductCardInterface {
   amount: string;
 }
 
+
 const ProductCard = ({ img, title, color, amount }: ProductCardInterface) => {
   return (
     <Link href={"/"}>

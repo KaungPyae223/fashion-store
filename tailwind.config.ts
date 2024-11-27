@@ -5,6 +5,7 @@ const config: Config = {
     "./src/admin-side/**/*.{js,ts,jsx,tsx,mdx}",
     "./src/customer-side/**/*.{js,ts,jsx,tsx,mdx}",
     "./src/app/**/*.{js,ts,jsx,tsx,mdx}",
+    
   ],
   theme: {
     extend: {
