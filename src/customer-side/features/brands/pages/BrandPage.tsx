@@ -7,7 +7,7 @@ const BrandPage = () => {
 
   return (
     <div>
-      <Heros title="Brands" />
+      <Heros previousSection={[{title:"Home",link:"/"}]} title="Brands" />
       <BrandContainer />
     </div>
   );

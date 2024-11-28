@@ -5,7 +5,7 @@ import LifeStyleContainer from '../components/LifeStyleContainer'
 const LifeStylePage = () => {
   return (
     <div>
-        <Heros title='Life Style'/>
+        <Heros previousSection={[{title:"Home",link:"/"}]} title='Life Style'/>
         <LifeStyleContainer/>
     </div>
   )

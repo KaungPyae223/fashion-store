@@ -1,11 +1,12 @@
-'use client'
+"use client";
 import FilterContainer from "@/customer-side/components/FilterContainer";
 import SectionTitle from "@/customer-side/components/SectionTitle";
 import React, { useState } from "react";
 
 const LifeStyleFilter = () => {
-  
+  const [type, setType] = useState<string[]>([]);
 
+  const typesName: string[] = ["All", "Chair", "Table", "Beds", "Lambs"];
 
   const [color, setColor] = useState<string[]>([]);
 
@@ -28,15 +29,23 @@ const LifeStyleFilter = () => {
     "> 500000",
   ];
 
-  
   return (
     <div>
       <SectionTitle title="filter" />
       <section className="w-full bg-white divide-y divide-slate-200 shadow-slate-200">
-      
-     <FilterContainer title="Colors" setState={setColor} items={ColorsName} />
-      <FilterContainer title="Price Range" setState={setPrice} items={PrinceRanges} columns={2}/>
         
+        <FilterContainer title="Types" setState={setType} items={typesName} />
+        <FilterContainer
+          title="Colors"
+          setState={setColor}
+          items={ColorsName}
+        />
+        <FilterContainer
+          title="Price Range"
+          setState={setPrice}
+          items={PrinceRanges}
+          columns={2}
+        />
       </section>
       <div className="uppercase mt-8 bg-gray-900 px-4 py-3 flex cursor-pointer justify-center text-white">
         Filter

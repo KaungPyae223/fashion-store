@@ -5,7 +5,7 @@ import FootwearContainer from "../components/FootwearContainer";
 const FootwearPage = () => {
   return (
     <div>
-      <Heros title="footwears" />
+      <Heros previousSection={[{title:"Home",link:"/"}]} title="footwears" />
       <FootwearContainer />
     </div>
   );

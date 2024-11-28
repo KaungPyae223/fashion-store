@@ -7,7 +7,7 @@ const HomeHero = () => {
     <div className="py-6 mb-6">
       <Container>
         <div className="col-span-6 flex flex-col items-start justify-center gap-5">
-          <p className="text-4xl tracking-wide font-bold ">
+          <p className="text-37xl tracking-wide font-bold ">
             New Nike Air Max is Available Now
           </p>
           <p className="text-sm cursor-pointer py-1 px-3 border border-blue-800 text-blue-800">

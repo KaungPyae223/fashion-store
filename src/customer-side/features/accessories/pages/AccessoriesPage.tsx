@@ -5,7 +5,7 @@ import AccessoriesContainer from "../components/AccessoriesContainer";
 const AccessoriesPage = () => {
   return (
     <div>
-      <Heros title="Accessories" />
+      <Heros previousSection={[{title:"Home",link:"/"}]} title="Accessories" />
       <AccessoriesContainer />
     </div>
   );

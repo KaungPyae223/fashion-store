@@ -13,6 +13,7 @@ const CreateAccount = ({
   email,
   setTypeOfNavigation,
 }: CreateAccountInterface) => {
+  
   tailspin.register();
 
   const [validations, setValidations] = useState({

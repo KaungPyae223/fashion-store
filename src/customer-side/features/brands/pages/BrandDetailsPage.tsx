@@ -5,7 +5,7 @@ import BrandClothesContainer from "../components/BrandClothesContainer";
 const BrandDetailsPage = ({ name }: { name: string }) => {
   return (
     <div>
-      <Heros title={name} />
+      <Heros previousSection={[{title:"Home",link:"/"},{title:"Brands",link:"/brands"}]} title={name} />
       <BrandClothesContainer />
     </div>
   );
