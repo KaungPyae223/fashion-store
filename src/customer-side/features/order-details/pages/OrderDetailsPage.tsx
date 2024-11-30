@@ -4,6 +4,7 @@ import React, { useRef } from "react";
 import VoucherTr from "../components/VoucherTr";
 import SectionTitle from "@/customer-side/components/SectionTitle";
 import { useReactToPrint } from "react-to-print";
+import { useRouter } from "next/navigation";
 
 const OrderDetailsPage = ({ orderID }: { orderID: string }) => {
   interface productInterface {
@@ -39,11 +40,17 @@ const OrderDetailsPage = ({ orderID }: { orderID: string }) => {
     contentRef,
   });
 
+  const Router = useRouter();
+
+  const routeBack = () => {
+    Router.back();
+  }
+
   return (
     <div className="py-10">
       <Container>
         <div className=" pb-3 border-b col-span-12 flex items-center justify-between">
-          <div className="flex flex-1 text-xl flex-row gap-3 items-center cursor-pointer">
+          <div onClick={routeBack} className="flex flex-1 text-xl flex-row gap-3 items-center cursor-pointer">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
@@ -167,7 +174,7 @@ const OrderDetailsPage = ({ orderID }: { orderID: string }) => {
               </tfoot>
             </table>
           </div>
-          <div className="grid grid-cols-3 gap-5 pt-14 pb-6">
+          <div className="grid grid-cols-2 md:grid-cols-3 gap-y-5 gap-5 pt-14 pb-6">
             <div>
               <SectionTitle title="Ship to" />
               <table>
@@ -251,7 +258,7 @@ const OrderDetailsPage = ({ orderID }: { orderID: string }) => {
                 </tbody>
               </table>
             </div>
-            <div className="flex justify-center border-x h-full">
+            <div className="flex justify-end md:justify-center md:border-x h-full">
               <div>
                 <SectionTitle title="Payment Information" />
                 <table>
@@ -317,7 +324,7 @@ const OrderDetailsPage = ({ orderID }: { orderID: string }) => {
                 </table>
               </div>
             </div>
-            <div className="flex justify-end">
+            <div className="flex  md:justify-end">
               <div>
                 <SectionTitle title="Contact Information" />
                 <table>

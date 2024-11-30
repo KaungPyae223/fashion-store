@@ -2,27 +2,20 @@ import SectionTitle from "@/customer-side/components/SectionTitle";
 import Link from "next/link";
 import React from "react";
 
-const OrderInformation = () => {
+const OrderHistory = () => {
   return (
     <div>
-      <SectionTitle title="Order Information" />
+      <SectionTitle title="Order History" />
       <div className="mt-6">
         <div className="py-3 border-b">
           <div className="flex flex-row items-center gap-5">
             <p className="text-2xl font-medium">INV-17860-12-11-2024</p>
-            <div className="py-1.5 px-4 font-medium rounded-full border text-sm border-gray-300">
-              Preparing to Deliver
-            </div>
           </div>
           <table className="my-3">
             <tbody>
               <tr className="pb-2">
                 <td className="font-semibold pe-2 text-sm">Date:</td>
                 <td className="text-sm">12 June 2024</td>
-              </tr>
-              <tr className="pb-2">
-                <td className="font-semibold pe-2 text-sm">Status:</td>
-                <td className="text-sm">Preparing to deliver</td>
               </tr>
               <tr className="pb-2">
                 <td className="font-semibold pe-2 text-sm">Receiver:</td>
@@ -33,9 +26,7 @@ const OrderInformation = () => {
                 <td className="text-sm">0923051728</td>
               </tr>
               <tr className="pb-2">
-                <td className="font-semibold pe-2 text-sm">
-                  Address:
-                </td>
+                <td className="font-semibold pe-2 text-sm">Address:</td>
                 <td className="text-sm">
                   No. 28 Ahlone Road, Ahlone Town, Yangon.
                 </td>
@@ -58,4 +49,4 @@ const OrderInformation = () => {
   );
 };
 
-export default OrderInformation;
+export default OrderHistory;

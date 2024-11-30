@@ -6,6 +6,7 @@ import ProfileData from "./ProfileData";
 import EditProfile from "./EditProfile";
 import EditPassword from "./EditPassword";
 import OrderInformation from "./OrderInformation";
+import OrderHistory from "./OrderHistory";
 
 const ProfileSectionContainer = () => {
   const [section, setSection] = useState<string>("ProfileData");
@@ -48,9 +49,9 @@ const ProfileSectionContainer = () => {
             <p>Order Information</p>
           </div>
           <div
-            onClick={() => setSection("STF")}
+            onClick={() => setSection("OrderHistory")}
             className={`border-b ${
-              section === "STF" ? "" : "text-gray-400"
+              section === "OrderHistory" ? "" : "text-gray-400"
             }  cursor-pointer py-4 pr-8 tracking-wider font-medium`}
           >
             <p>Order History</p>
@@ -71,7 +72,7 @@ const ProfileSectionContainer = () => {
           ) : section === "OrderInformation" ? (
             <OrderInformation />
           ) : (
-            <OrderInformation />
+            <OrderHistory />
           )}
         </div>
       </Container>
