@@ -8,8 +8,8 @@ import SearchSection from "./NavBarComponent/SearchSection";
 import { AnimatePresence, motion } from "motion/react";
 
 const NavBar = () => {
-  const navRef = useRef();
-  const blankRef = useRef();
+  const navRef = useRef<HTMLDivElement>();
+  const containerRef = useRef<HTMLDivElement>();
 
   const [previousScroll, setPreviousScroll] = useState<number>(0);
   const [currentScroll, setCurrentScroll] = useState<number>(0);
@@ -17,18 +17,18 @@ const NavBar = () => {
   const [openSearchSection, setOpenSearchSection] = useState<boolean>(false);
 
   const handleScroll = () => {
-    if (!navRef.current || !blankRef.current) return;
+    if (!navRef.current || !containerRef.current) return;
 
     setCurrentScroll(window.scrollY);
     setCurrentScroll(window.scrollY);
 
-    if (window.scrollY > navRef.current.offsetHeight) {
-      navRef.current.classList.add("fixed");
-      blankRef.current.style.height = `${navRef.current.offsetHeight}px`;
-    } else if (window.scrollY == 0) {
-      navRef.current.classList.remove("fixed");
-      blankRef.current.style.height = `0px`;
-    }
+    // if (window.scrollY > navRef.current.offsetHeight) {
+    //   navRef.current.classList.add("fixed");
+    //   blankRef.current.style.height = `${navRef.current.offsetHeight}px`;
+    // } else if (window.scrollY == 0) {
+    //   navRef.current.classList.remove("fixed");
+    //   blankRef.current.style.height = `0px`;
+    // }
 
     if (currentScroll > previousScroll) {
       navRef.current.classList.add("-translate-y-[100%]");
@@ -46,16 +46,21 @@ const NavBar = () => {
     };
   }, [currentScroll]);
 
+  useEffect(() => {
+    if (navRef.current && containerRef.current) {
+      containerRef.current.style.height = `${navRef.current.offsetHeight}px`;
+    }
+  }, [navRef.current,containerRef.current]);
+
   return (
-    <>
-      <div ref={navRef} className="duration-300 bg-white z-50">
+    <div ref={containerRef}>
+      <div ref={navRef} className="duration-300 fixed w-full bg-white z-50">
         <Noti />
         <NavBody setOpenSearchSection={setOpenSearchSection} />
         <NavLink />
       </div>
       <AnimatePresence>
         {openSearchSection && (
-          
           <motion.div
             initial={{ y: "-100%" }}
             animate={{ y: "0%", opacity: 1 }}
@@ -68,9 +73,7 @@ const NavBar = () => {
           </motion.div>
         )}
       </AnimatePresence>
-
-      <div ref={blankRef}></div>
-    </>
+    </div>
   );
 };
 

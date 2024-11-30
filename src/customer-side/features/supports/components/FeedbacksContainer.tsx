@@ -12,7 +12,9 @@ const FeedbacksContainer = () => {
           necessitatibus nam, officia amet, officiis ad obcaecati modi suscipit
           voluptates.
         </p>
-        <p className="text-gray-500 text-sm">Question: 21 October 2021 / Answer: 24 October 2021</p>
+        <p className="text-gray-500 text-sm">
+          Question: 21 October 2021 / Answer: 24 October 2021
+        </p>
       </div>
       <div className="py-3 border-b">
         <p className="text-xl text-gray-700">When do I get my order?</p>
@@ -23,7 +25,9 @@ const FeedbacksContainer = () => {
           necessitatibus nam, officia amet, officiis ad obcaecati modi suscipit
           voluptates.
         </p>
-        <p className="text-gray-500 text-sm">Question: 21 October 2021 / Answer: 24 October 2021</p>
+        <p className="text-gray-500 text-sm">
+          Question: 21 October 2021 / Answer: 24 October 2021
+        </p>
       </div>
       <div className="py-3 border-b">
         <p className="text-xl text-gray-700">When do I get my order?</p>
@@ -34,8 +38,10 @@ const FeedbacksContainer = () => {
           necessitatibus nam, officia amet, officiis ad obcaecati modi suscipit
           voluptates.
         </p>
-        <p className="text-gray-500 text-sm">Question: 21 October 2021 / Answer: 24 October 2021</p>
-      </div>-/
+        <p className="text-gray-500 text-sm">
+          Question: 21 October 2021 / Answer: 24 October 2021
+        </p>
+      </div>
     </div>
   );
 };

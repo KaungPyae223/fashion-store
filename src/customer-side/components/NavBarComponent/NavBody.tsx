@@ -48,7 +48,7 @@ const NavBody = ({setOpenSearchSection}:NavBodyInterface) => {
             Women
           </div>
         </div>
-        <div className="text-4xl font-bold">Alexa</div>
+        <Link href={"/"} className="text-4xl font-bold">Alexa</Link>
         <div className="flex flex-row gap-5 items-center">
           <svg
             xmlns="http://www.w3.org/2000/svg"

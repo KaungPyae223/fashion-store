@@ -16,7 +16,7 @@ const NavNotification = () => {
 
   return (
     <div className="bg-black">
-      <div className="flex py-2 container mx-auto text-sm text-white overflow-hidden">
+      <div className="flex py-2 w-full text-sm text-white overflow-hidden">
         <motion.div
           initial={{ x: "0%" }}
           animate={{ x: "-100%" }}

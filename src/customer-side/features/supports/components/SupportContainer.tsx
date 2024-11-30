@@ -17,24 +17,24 @@ export const SupportContainer = () => {
           <div
             onClick={() => setSection("FAQ")}
             className={`border-b ${
-              section === "FAQ" ? "underline" : "text-gray-500"
-            }  cursor-pointer py-4 pr-8 tracking-wider text-lg font-medium`}
+              section === "FAQ" ? "" : "text-gray-400"
+            }  cursor-pointer py-4 pr-8 tracking-wider font-medium`}
           >
             <p>Frequently Ask Questions</p>
           </div>
           <div
             onClick={() => setSection("CST")}
             className={`border-b ${
-              section === "CST" ? "underline" : "text-gray-500"
-            }  cursor-pointer py-4 pr-8 tracking-wider text-lg font-medium`}
+              section === "CST" ? "" : "text-gray-400"
+            }  cursor-pointer py-4 pr-8 tracking-wider font-medium`}
           >
             <p>Contact Support Team</p>
           </div>
           <div
             onClick={() => setSection("STF")}
             className={`border-b ${
-              section === "STF" ? "underline" : "text-gray-500"
-            }  cursor-pointer py-4 pr-8 tracking-wider text-lg font-medium`}
+              section === "STF" ? "" : "text-gray-400"
+            }  cursor-pointer py-4 pr-8 tracking-wider font-medium`}
           >
             <p>Support Team Feedbacks</p>
           </div>
