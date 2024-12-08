@@ -77,7 +77,7 @@ const Trending = () => {
   return (
     <div className="pt-16 pb-6 mb-6">
       <Container>
-        <HomeTitle title="Trending Clothes" />
+        <HomeTitle title="Trending Clothes" link="clothing" />
         <div className="col-span-12 grid grid-cols-5 gap-x-3 gap-y-6">
           {LatestProducts.map((product, i) => (
             <ProductCard

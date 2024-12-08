@@ -43,7 +43,7 @@ const LifeStyle = () => {
   return (
     <div className="py-16  mb-6 bg-[#F8F8F8]">
       <Container>
-        <HomeTitle title="Lifestyle" />
+        <HomeTitle title="Lifestyle" link="/life-style" />
         <div className="col-span-6">
           <img
             className="h-full w-full object-cover"

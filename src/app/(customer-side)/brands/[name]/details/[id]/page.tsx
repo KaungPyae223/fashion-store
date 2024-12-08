@@ -1,5 +1,4 @@
 import React from "react";
-import "../../../../../../styles/globals.css";
 import DetailsPage from "@/customer-side/features/product-details/pages/DetailsPage";
 
 const page = ({ params: { id,name } }: { params: { id: string , name:string } }) => {

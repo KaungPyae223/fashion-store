@@ -1,10 +1,10 @@
 import React from "react";
-import SupportPage from "@/customer-side/features/supports/pages/SupportPage";
+import WishListPage from "@/customer-side/features/wishlist/pages/WishListPage";
 
 const page = () => {
   return (
     <div>
-      <SupportPage />
+      <WishListPage />
     </div>
   );
 };

@@ -1,5 +1,4 @@
 import React from 'react'
-import "../../../styles/globals.css";
 import AccessoriesPage from '@/customer-side/features/accessories/pages/AccessoriesPage';
 
 

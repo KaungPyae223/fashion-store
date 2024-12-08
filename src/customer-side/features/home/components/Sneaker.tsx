@@ -35,7 +35,7 @@ const Sneaker = () => {
   return (
     <div className="pt-16 pb-6 mb-12">
       <Container>
-        <HomeTitle title="New Sneakers" />
+        <HomeTitle title="New Sneakers" link="footwears" />
         <div className="col-span-12 grid grid-cols-3 gap-x-6">
           {NewSneakers.map((sneaker, i) => (
             <ProductCard

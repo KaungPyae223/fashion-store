@@ -6,10 +6,10 @@ import useUpdateParams from "@/hooks/useUpdateParams";
 import Link from "next/link";
 
 interface NavBodyInterface {
-  setOpenSearchSection:React.Dispatch<React.SetStateAction<boolean>>;
+  setOpenSearchSection: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-const NavBody = ({setOpenSearchSection}:NavBodyInterface) => {
+const NavBody = ({ setOpenSearchSection }: NavBodyInterface) => {
   const [gender, setGender] = useState<string>("Men");
 
   const searchParams = useSearchParams();
@@ -19,7 +19,7 @@ const NavBody = ({setOpenSearchSection}:NavBodyInterface) => {
     const genderParam = searchParams.get("gender");
     if (genderParam) {
       setGender(genderParam);
-    } 
+    }
   }, []);
 
   const handleGenderChange = (newGender: string) => {
@@ -48,13 +48,15 @@ const NavBody = ({setOpenSearchSection}:NavBodyInterface) => {
             Women
           </div>
         </div>
-        <Link href={"/"} className="text-4xl font-bold">Alexa</Link>
-        <div className="flex flex-row gap-5 items-center">
+        <Link href={"/"} className="text-4xl font-bold">
+          Alexa
+        </Link>
+        <div className="flex flex-row gap-4 items-center">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
             viewBox="0 0 24 24"
-            strokeWidth={1.5}
+            strokeWidth={1}
             stroke="currentColor"
             className="size-6 cursor-pointer"
             onClick={() => setOpenSearchSection(true)}
@@ -69,7 +71,21 @@ const NavBody = ({setOpenSearchSection}:NavBodyInterface) => {
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
             viewBox="0 0 24 24"
-            strokeWidth={1.5}
+            strokeWidth={1}
+            stroke="currentColor"
+            className="size-6 cursor-pointer"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12Z"
+            />
+          </svg>
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            strokeWidth={1}
             stroke="currentColor"
             className="size-6 cursor-pointer"
           >
@@ -80,7 +96,10 @@ const NavBody = ({setOpenSearchSection}:NavBodyInterface) => {
             />
           </svg>
 
-          <Link href={"/authentication"} className="px-6 py-1 rounded-full border cursor-pointer hover:bg-black hover:text-white duration-300">
+          <Link
+            href={"/authentication"}
+            className="px-6 py-1 rounded-full border cursor-pointer hover:bg-black hover:text-white duration-300"
+          >
             Log In
           </Link>
         </div>

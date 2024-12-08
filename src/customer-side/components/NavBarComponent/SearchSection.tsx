@@ -58,11 +58,11 @@ const SearchSection = ({ setOpenSearchSection }: SearchSectionInterface) => {
       <div className="py-16">
         <Container>
           <div className="col-span-3">
-            <SearchTitle title="Popular Search" />
+            <SearchTitle title="Recently Search" />
             <SearchTitleList />
           </div>
           <div className="col-span-9">
-            <SearchTitle title="Popular Products" />
+            <SearchTitle title="Recently Viewed" />
             <SearchProducts />
           </div>
         </Container>

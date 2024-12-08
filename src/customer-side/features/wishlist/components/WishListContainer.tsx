@@ -1,17 +1,15 @@
 import React from "react";
-import Container from "../../../components/Container";
-import { HomeTitle } from "./HomeTitle";
-import ProductCard from "../../../components/ProductCard";
+import WishCard from "./WishCard";
 
-const Latest = () => {
-  interface Product {
+const WishListContainer = () => {
+  interface Cloth {
     img: string;
     title: string;
     color: string;
     amount: string;
   }
 
-  const LatestProducts: Product[] = [
+  const Clothes: Cloth[] = [
     {
       img: "https://www.sans-sans.com.sg/wp-content/uploads/51-2815-SK-SKIRT-STREEL-BLUE.jpg",
       title: "Sisburma Mora Skirt",
@@ -65,6 +63,18 @@ const Latest = () => {
       title: "Men Suit",
       color: "White",
       amount: "30000",
+    },
+    {
+      img: "https://louisphilippe.abfrl.in/blog/wp-content/uploads/2022/06/Cream-Kurta-And-Pyjama-For-Men.png",
+      title: "India Traditional Dress",
+      color: "White",
+      amount: "42000",
+    },
+    {
+      img: "https://louisphilippe.abfrl.in/blog/wp-content/uploads/2022/06/Cream-Kurta-And-Pyjama-For-Men.png",
+      title: "India Traditional Dress",
+      color: "White",
+      amount: "42000",
     },
     {
       img: "https://louisphilippe.abfrl.in/blog/wp-content/uploads/2022/06/Cream-Kurta-And-Pyjama-For-Men.png",
@@ -75,23 +85,12 @@ const Latest = () => {
   ];
 
   return (
-    <div className="pt-16 pb-6 mb-12">
-      <Container>
-        <HomeTitle title="Latest Clothes" link="clothing" />
-        <div className="col-span-12 grid grid-cols-5 gap-x-3 gap-y-6">
-          {LatestProducts.map((product, i) => (
-            <ProductCard
-              key={i}
-              img={product.img}
-              title={product.title}
-              color={product.color}
-              amount={product.amount}
-            />
-          ))}
-        </div>
-      </Container>
+    <div className="mt-6 grid grid-cols-5 gap-6 gap-y-12">
+      {Clothes.map((cloth, index) => (
+        <WishCard img={cloth.img} title={cloth.title} color={cloth.color} amount={cloth.amount} key={index} />
+      ))}
     </div>
   );
 };
 
-export default Latest;
+export default WishListContainer;
