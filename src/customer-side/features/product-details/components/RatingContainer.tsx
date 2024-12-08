@@ -1,10 +1,10 @@
+
 import React from "react";
 import Rating from "./Rating";
 import ReviewCard from "./ReviewCard";
+import ReviewRoute from "./ReviewRoute";
 
 const RatingContainer = () => {
-
-  
   return (
     <div className="mt-20 mb-10">
       <div className="flex gap-8 items-center">
@@ -15,7 +15,7 @@ const RatingContainer = () => {
           <span className="text-sm">12 reviewers</span>
         </div>
       </div>
-      
+
       <div className="grid grid-cols-2 gap-2 mt-10">
         <ReviewCard />
         <ReviewCard />
@@ -24,11 +24,7 @@ const RatingContainer = () => {
         <ReviewCard />
         <ReviewCard />
       </div>
-      <div className="flex items-center">
-        <div className="border mt-12 border-gray-500 mx-auto px-16 py-3 cursor-pointer">
-          Write Review
-        </div>
-      </div>
+      <ReviewRoute />
     </div>
   );
 };

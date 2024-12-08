@@ -12,6 +12,7 @@ const DetailsPage = ({
   id: string;
   PreviousSection: { link: string; title: string }[];
 }) => {
+
   return (
     <div className="py-5">
       <Container>
