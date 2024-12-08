@@ -7,6 +7,7 @@ import EditProfile from "./EditProfile";
 import EditPassword from "./EditPassword";
 import OrderInformation from "./OrderInformation";
 import OrderHistory from "./OrderHistory";
+import { AnimatePresence, motion } from "motion/react";
 
 const ProfileSectionContainer = () => {
   const [section, setSection] = useState<string>("ProfileData");
@@ -63,17 +64,59 @@ const ProfileSectionContainer = () => {
           </div>
         </div>
         <div className="col-span-8">
-          {section === "ProfileData" ? (
-            <ProfileData />
-          ) : section === "EditProfile" ? (
-            <EditProfile />
-          ) : section === "EditPassword" ? (
-            <EditPassword />
-          ) : section === "OrderInformation" ? (
-            <OrderInformation />
-          ) : (
-            <OrderHistory />
-          )}
+          <AnimatePresence mode="wait">
+            {section === "ProfileData" ? (
+              <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                transition={{ ease: "linear", duration: 0.3 }}
+                key={"ProfileData"}
+              >
+                <ProfileData />
+              </motion.div>
+            ) : section === "EditProfile" ? (
+              <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                transition={{ ease: "linear", duration: 0.3 }}
+                key={"EditProfile"}
+              >
+                <EditProfile />
+              </motion.div>
+            ) : section === "EditPassword" ? (
+              <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                transition={{ ease: "linear", duration: 0.3 }}
+                key={"EditPassword"}
+              >
+                <EditPassword />
+              </motion.div>
+            ) : section === "OrderInformation" ? (
+              <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                transition={{ ease: "linear", duration: 0.3 }}
+                key={"OrderInformation"}
+              >
+                <OrderInformation />
+              </motion.div>
+            ) : (
+              <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                transition={{ ease: "linear", duration: 0.3 }}
+                key={"OrderHistory"}
+              >
+                <OrderHistory />
+              </motion.div>
+            )}
+          </AnimatePresence>
         </div>
       </Container>
     </div>

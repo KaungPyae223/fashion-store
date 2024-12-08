@@ -5,6 +5,8 @@ import React, { useState } from "react";
 import FAQSection from "./FAQSection";
 import ContactSupportTeamSection from "./ContactSupportTeamSection";
 import SupportTeamFeedBackSection from "./SupportTeamFeedBackSection";
+import { AnimatePresence, motion } from "motion/react";
+import { line } from "motion/react-client";
 
 export const SupportContainer = () => {
   const [section, setSection] = useState<string>("FAQ");
@@ -40,13 +42,39 @@ export const SupportContainer = () => {
           </div>
         </div>
         <div className="col-span-8">
-          {section === "FAQ" ? (
-            <FAQSection />
-          ) : section === "CST" ? (
-            <ContactSupportTeamSection />
-          ) : (
-            <SupportTeamFeedBackSection />
-          )}
+          <AnimatePresence mode="wait">
+            {section === "FAQ" ? (
+              <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                transition={{ ease: "linear", duration: 0.3 }}
+                key={"FAQ"}
+              >
+                <FAQSection />
+              </motion.div>
+            ) : section === "CST" ? (
+              <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                transition={{ ease: "linear", duration: 0.3 }}
+                key={"CST"}
+              >
+                <ContactSupportTeamSection />
+              </motion.div>
+            ) : (
+              <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                transition={{ ease: "linear", duration: 0.3 }}
+                key={"STF"}
+              >
+                <SupportTeamFeedBackSection />
+              </motion.div>
+            )}
+          </AnimatePresence>
         </div>
       </Container>
     </div>

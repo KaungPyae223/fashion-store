@@ -11,7 +11,7 @@ interface SearchSectionInterface {
 
 const SearchSection = ({ setOpenSearchSection }: SearchSectionInterface) => {
   return (
-    <div className="w-full h-full overflow-y-scroll">
+    <div className="w-full h-full overflow-y-scroll z-50">
       <div className="py-4 border-b col-span-12">
         <Container>
           <div className="col-span-12 flex items-center justify-between">

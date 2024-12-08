@@ -1,35 +1,38 @@
-import React from "react";
+import { AnimatePresence, motion } from "motion/react";
+import React, { useState } from "react";
 
-const FAQ = ({question,answer}:{question:string,answer:string}) => {
+const FAQ = ({ question, answer }: { question: string; answer: string }) => {
+  const [isOpen, setExpanded] = useState<boolean>(false);
+
   return (
-    <div>
-      <details className="py-4 group border-b select-none">
-        <summary className="[&::-webkit-details-marker]:hidden relative pr-8 font-medium list-none cursor-pointer text-slate-700 focus-visible:outline-none transition-colors duration-300 group-hover:text-slate-900 ">
-          {question}
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            className="absolute right-0 w-4 h-4 transition duration-300 top-1 stroke-slate-700 shrink-0 group-open:rotate-45"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-            strokeWidth="1.5"
-            aria-labelledby="title-ac15 desc-ac15"
+    <div className="py-4 group border-b">
+      <div
+        className="pr-8 font-medium list-none cursor-pointer text-slate-700 focus-visible:outline-none transition-colors duration-300 group-hover:text-slate-900"
+        onClick={() => setExpanded(!isOpen)}
+      >
+        {question}
+      </div>
+      <AnimatePresence initial={false}>
+        {isOpen && (
+          <motion.section
+            key="content"
+            initial="collapsed"
+            animate="open"
+            exit="collapsed"
+            variants={{
+              open: { opacity: 1, height: "auto" },
+              collapsed: { opacity: 0, height: 0 },
+            }}
+            transition={{
+              height: { duration: 0.6, ease: [0.04, 0.62, 0.23, 0.98] },
+              opacity: { duration: 0.4, delay: 0.2 }, // Delay opacity to start after height begins
+            }}
+            className="overflow-hidden"
           >
-            <title id="title-ac15">Open icon</title>
-            <desc id="desc-ac15">
-              icon that represents the state of the summary
-            </desc>
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              d="M12 4v16m8-8H4"
-            />
-          </svg>
-        </summary>
-        <div className="mt-6 mb-3 select-none text-gray-500">
-          {answer}
-        </div>
-      </details>
+            <div className="pt-6 pb-3 select-none text-gray-500">{answer}</div>
+          </motion.section>
+        )}
+      </AnimatePresence>
     </div>
   );
 };

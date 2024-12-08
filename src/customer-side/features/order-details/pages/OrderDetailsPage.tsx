@@ -106,7 +106,7 @@ const OrderDetailsPage = ({ orderID }: { orderID: string }) => {
               <p className="py-1.5 px-3 border-y mt-3 font-medium">
                 21 November 2024
               </p>
-              <p className="text-sm my-2">Order Invoice</p>
+              <p className="text-sm my-2 uppercase tracking-widest">Order Invoice</p>
             </div>
           </div>
           <p className="text-center mt-5 mb-10 uppercase tracking-wide text-xl font-medium">

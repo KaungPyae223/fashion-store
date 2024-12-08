@@ -22,13 +22,6 @@ const NavBar = () => {
     setCurrentScroll(window.scrollY);
     setCurrentScroll(window.scrollY);
 
-    // if (window.scrollY > navRef.current.offsetHeight) {
-    //   navRef.current.classList.add("fixed");
-    //   blankRef.current.style.height = `${navRef.current.offsetHeight}px`;
-    // } else if (window.scrollY == 0) {
-    //   navRef.current.classList.remove("fixed");
-    //   blankRef.current.style.height = `0px`;
-    // }
 
     if (currentScroll > previousScroll) {
       navRef.current.classList.add("-translate-y-[100%]");
@@ -54,7 +47,7 @@ const NavBar = () => {
 
   return (
     <div ref={containerRef}>
-      <div ref={navRef} className="duration-300 fixed w-full bg-white z-50">
+      <div ref={navRef} className="duration-300 fixed w-full bg-white z-30">
         <Noti />
         <NavBody setOpenSearchSection={setOpenSearchSection} />
         <NavLink />
@@ -67,7 +60,7 @@ const NavBar = () => {
             exit={{ opacity: 0 }}
             key="search-section"
             transition={{ duration: 0.3, ease: "linear" }}
-            className="w-screen h-screen bg-white fixed top-0 left-0"
+            className="w-screen h-screen bg-white fixed top-0 left-0 z-50"
           >
             <SearchSection setOpenSearchSection={setOpenSearchSection} />
           </motion.div>
