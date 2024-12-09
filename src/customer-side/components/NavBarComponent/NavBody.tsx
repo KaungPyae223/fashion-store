@@ -7,10 +7,12 @@ import Link from "next/link";
 
 interface NavBodyInterface {
   setOpenSearchSection: React.Dispatch<React.SetStateAction<boolean>>;
+  setOpenCraft: React.Dispatch<React.SetStateAction<boolean>>;
+
 }
 
-const NavBody = ({ setOpenSearchSection }: NavBodyInterface) => {
-  const [gender, setGender] = useState<string>("Men");
+const NavBody = ({ setOpenSearchSection,setOpenCraft }: NavBodyInterface) => {
+  const [gender, setGender] = useState<string>("");
 
   const searchParams = useSearchParams();
   const updateParams = useUpdateParams();
@@ -88,6 +90,7 @@ const NavBody = ({ setOpenSearchSection }: NavBodyInterface) => {
             strokeWidth={1}
             stroke="currentColor"
             className="size-6 cursor-pointer"
+            onClick={() => setOpenCraft(true)}
           >
             <path
               strokeLinecap="round"

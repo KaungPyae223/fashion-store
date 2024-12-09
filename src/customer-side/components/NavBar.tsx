@@ -6,6 +6,7 @@ import NavBody from "./NavBarComponent/NavBody";
 import NavLink from "./NavBarComponent/NavLink";
 import SearchSection from "./NavBarComponent/SearchSection";
 import { AnimatePresence, motion } from "motion/react";
+import Craft from "./NavBarComponent/Craft";
 
 const NavBar = () => {
   const navRef = useRef<HTMLDivElement>();
@@ -15,13 +16,25 @@ const NavBar = () => {
   const [currentScroll, setCurrentScroll] = useState<number>(0);
 
   const [openSearchSection, setOpenSearchSection] = useState<boolean>(false);
+  const [openCraft, setOpenCraft] = useState<boolean>(false);
+
+
+  useEffect(() => {
+    if (openCraft) {
+      
+      document.body.classList.add("no-scroll");
+    } else {
+      
+      document.body.classList.remove("no-scroll");
+    }
+    return () => document.body.classList.remove("no-scroll");
+  }, [openCraft]);
 
   const handleScroll = () => {
     if (!navRef.current || !containerRef.current) return;
 
     setCurrentScroll(window.scrollY);
     setCurrentScroll(window.scrollY);
-
 
     if (currentScroll > previousScroll) {
       navRef.current.classList.add("-translate-y-[100%]");
@@ -43,13 +56,16 @@ const NavBar = () => {
     if (navRef.current && containerRef.current) {
       containerRef.current.style.height = `${navRef.current.offsetHeight}px`;
     }
-  }, [navRef.current,containerRef.current]);
+  }, [navRef.current, containerRef.current]);
 
   return (
     <div ref={containerRef}>
       <div ref={navRef} className="duration-300 fixed w-full bg-white z-30">
         <Noti />
-        <NavBody setOpenSearchSection={setOpenSearchSection} />
+        <NavBody
+          setOpenCraft={setOpenCraft}
+          setOpenSearchSection={setOpenSearchSection}
+        />
         <NavLink />
       </div>
       <AnimatePresence>
@@ -64,6 +80,29 @@ const NavBar = () => {
           >
             <SearchSection setOpenSearchSection={setOpenSearchSection} />
           </motion.div>
+        )}
+
+        {openCraft && (
+          <>
+            <motion.div
+              onClick={() => setOpenCraft(false)}
+              className="w-screen h-screen fixed top-0 left-0 z-40"
+              initial={{ backgroundColor: "rgba(0, 0, 0, 0)" }}
+              animate={{ backgroundColor: "rgba(0, 0, 0, 0.5)" }} 
+              exit={{ backgroundColor: "rgba(0, 0, 0, 0)" }} 
+              transition={{ duration: 0.3 }} 
+            />
+            <motion.div
+              initial={{ x: "100%" }}
+              animate={{ x: "0%" }}
+              exit={{ x: "100%" }}
+              key="Craft-slider"
+              transition={{ duration: 0.3, ease: "linear" }}
+              className="w-fit h-screen  fixed top-0 right-0 z-50"
+            >
+              <Craft setOpenCraft={setOpenCraft} />
+            </motion.div>
+          </>
         )}
       </AnimatePresence>
     </div>
