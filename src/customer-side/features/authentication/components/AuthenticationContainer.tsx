@@ -1,12 +1,12 @@
 "use client";
 import { AnimatePresence, motion } from "motion/react";
 import React, { useRef, useState } from "react";
-import CheckEmail from "../../../components/CheckEmail";
+import CheckEmail from "./CheckEmail";
 import SignIn from "./SignIn";
 import CreateAccount from "./CreateAccount";
 
 const AuthenticationContainer = () => {
-  const [email,setEmail] = useState<string>("");
+  const [email, setEmail] = useState<string>("");
   const [typeOfNavigation, setTypeOfNavigation] =
     useState<string>("CheckEmail");
 
@@ -34,10 +34,7 @@ const AuthenticationContainer = () => {
             exit={{ x: "-100%" }}
             transition={{ duration: 0.5, ease: "linear" }}
           >
-            <SignIn
-              setTypeOfNavigation={setTypeOfNavigation}
-              email={email}
-            />
+            <SignIn setTypeOfNavigation={setTypeOfNavigation} email={email} />
           </motion.div>
         ) : (
           <motion.div

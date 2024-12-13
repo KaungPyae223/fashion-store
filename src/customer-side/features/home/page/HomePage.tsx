@@ -12,7 +12,7 @@ import "../../../../styles/globals.css"
 
 const HomePage = () => {
   return (
-    <div>
+    <div className="bg-white">
       <HomeHero />
       <Latest />
       <HomeBrand />

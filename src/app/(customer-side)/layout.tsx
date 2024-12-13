@@ -1,6 +1,6 @@
 import NavBar from "@/customer-side/components/NavBar";
 import Footer from "@/customer-side/components/Footer";
-import '../styles/globals.css'
+import "../../styles/globals.css";
 
 export const metadata = {
   title: "Next.js",
@@ -18,8 +18,8 @@ export default function RootLayout({
         <header>
           <NavBar />
         </header>
-        <main className="flex-grow">{children}</main>
-        <footer className="mt-auto">
+        <main>{children}</main>
+        <footer>
           <Footer />
         </footer>
       </body>

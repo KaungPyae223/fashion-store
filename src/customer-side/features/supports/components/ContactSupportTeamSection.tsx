@@ -4,6 +4,7 @@ import React from "react";
 import { useForm } from "react-hook-form";
 import toast, { Toaster } from "react-hot-toast";
 import QuestionsHistory from "./QuestionsHistory";
+import FormErrorMessage from "@/customer-side/components/FormErrorMessage";
 
 const ContactSupportTeamSection = () => {
   const {
@@ -39,9 +40,7 @@ const ContactSupportTeamSection = () => {
           className="w-full mt-3 border-b border-b-black py-1 outline-none resize-none"
         ></textarea>
         {errors.Question && (
-          <span className="text-xs mt-2 block text-red-800">
-            {errors.Question.message}
-          </span>
+          <FormErrorMessage message={errors.Question.message} />
         )}
         <button className="my-3 block ms-auto bg-black text-white py-2 px-12">
           Ask

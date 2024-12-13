@@ -3,6 +3,7 @@ import { tailspin } from "ldrs";
 import { AnimatePresence, motion } from "motion/react";
 import { useForm, SubmitHandler } from "react-hook-form";
 import ValidOrNot from "./ValidOrNot";
+import FormErrorMessage from "@/customer-side/components/FormErrorMessage";
 
 interface CreateAccountInterface {
   email: string;
@@ -13,7 +14,6 @@ const CreateAccount = ({
   email,
   setTypeOfNavigation,
 }: CreateAccountInterface) => {
-  
   tailspin.register();
 
   const [validations, setValidations] = useState({
@@ -37,7 +37,7 @@ const CreateAccount = ({
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<FormValues>();
+  } = useForm();
 
   const [loading, isLoading] = useState<boolean>(false);
 
@@ -70,11 +70,7 @@ const CreateAccount = ({
           })}
           className="border-b w-[380px] border-b-black py-2 outline-none"
         />
-        {errors.name && (
-          <span className="text-xs mt-2 block text-red-800">
-            {errors.name.message}
-          </span>
-        )}
+        {errors.name && <FormErrorMessage message={errors.name.message} />}
       </div>
       <div className="mb-6">
         <p className="uppercase font-medium text-sm">create password *</p>
@@ -96,11 +92,7 @@ const CreateAccount = ({
           })}
           className="border-b w-[380px] border-b-black py-2 outline-none"
         />
-        {errors.password && (
-          <span className="text-xs mt-2 block text-red-800">
-            {errors.password.message}
-          </span>
-        )}
+        {errors.password && <FormErrorMessage message={errors.password.message} />}
       </div>
 
       <div className="flex flex-col gap-3">
@@ -117,9 +109,8 @@ const CreateAccount = ({
         <div className="flex flex-row gap-5 items-center">
           <ValidOrNot valid={validations.hasMinLength} />
           <p className="text-sm">Be at least 8 characters long</p>
-          
         </div>
-      </div>  
+      </div>
 
       <div className="flex justify-center mt-8">
         <button

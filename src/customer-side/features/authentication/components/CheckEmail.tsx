@@ -1,8 +1,9 @@
-'use client'
+"use client";
 import React, { useState } from "react";
 import { tailspin } from "ldrs";
 import { AnimatePresence, motion } from "motion/react";
 import { useForm } from "react-hook-form";
+import FormErrorMessage from "../../../components/FormErrorMessage";
 
 interface CheckEmailInterface {
   setEmail: React.Dispatch<React.SetStateAction<string>>;
@@ -42,11 +43,7 @@ const CheckEmail = ({ setEmail, setTypeOfNavigation }: CheckEmailInterface) => {
         })}
         className="border-b w-[380px] border-b-black py-2 outline-none"
       />
-      {errors.email && (
-        <span className="text-xs mt-2 block text-red-800">
-          {errors.email.message}
-        </span>
-      )}
+      {errors.email && <FormErrorMessage message={errors.email.message} />}
       <div className="flex justify-center mt-8">
         <button
           type="submit"

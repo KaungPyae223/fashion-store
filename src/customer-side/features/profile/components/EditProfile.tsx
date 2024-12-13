@@ -1,6 +1,8 @@
+import FormErrorMessage from "@/customer-side/components/FormErrorMessage";
 import SectionTitle from "@/customer-side/components/SectionTitle";
 import React from "react";
 import { useForm } from "react-hook-form";
+import ProfileEditInput from "./ProfileEditInput";
 
 const EditProfile = () => {
   const {
@@ -14,81 +16,45 @@ const EditProfile = () => {
   return (
     <div>
       <SectionTitle title="Edit Profile" />
-      <form className="max-w-[400px]" onSubmit={handleSubmit(handleProfileDataChange)}>
-        <div className="mb-6 ">
-          <p className="uppercase font-medium text-sm">Name *</p>
-          <input
-            type="text"
-            defaultValue={"Kaung Pyae Aung"}
-            {...register("name", {
-              required: "Name is required",
-            })}
-            className="border-b w-full border-b-black py-2 outline-none"
-          />
-          {errors.name && (
-            <span className="text-xs mt-2 block text-red-800">
-              {errors.name.message}
-            </span>
-          )}
-        </div>
-        <div className="mb-6 ">
-          <p className="uppercase font-medium text-sm">Email *</p>
-          <input
-            type="text"
-            defaultValue={"kaungpyaeaung8123@gmail.com"}
-            {...register("email", {
-              required: "Email is required",
-            })}
-            className="border-b w-full border-b-black py-2 outline-none"
-          />
-          {errors.email && (
-            <span className="text-xs mt-2 block text-red-800">
-              {errors.email.message}
-            </span>
-          )}
-        </div>
-        <div className="mb-6 ">
-          <p className="uppercase font-medium text-sm">City *</p>
-          <input
-            type="text"
-            defaultValue={"Yangon"}
-            {...register("city", {
-              required: "City is required",
-            })}
-            className="border-b w-full border-b-black py-2 outline-none"
-          />
-          {errors.city && (
-            <span className="text-xs mt-2 block text-red-800">
-              {errors.city.message}
-            </span>
-          )}
-        </div>
-        <div className="mb-6 ">
-          <p className="uppercase font-medium text-sm">Township *</p>
-          <input
-            type="text"
-            defaultValue={"Kyee Myint Daing"}
-            {...register("township", {
-              required: "Township is required",
-            })}
-            className="border-b w-full border-b-black py-2 outline-none"
-          />
-          {errors.township && (
-            <span className="text-xs mt-2 block text-red-800">
-              {errors.township.message}
-            </span>
-          )}
-        </div>
-        <div className="mb-6 ">
-          <p className="uppercase font-medium text-sm">Zip Code</p>
-          <input
-            type="number"
-            defaultValue={"078145"}
-            {...register("zipCode")}
-            className="border-b w-full border-b-black py-2 outline-none"
-          />
-          
-        </div>
+      <form
+        className="max-w-[400px]"
+        onSubmit={handleSubmit(handleProfileDataChange)}
+      >
+        <ProfileEditInput
+          inputName="Name"
+          register={register}
+          errors={errors}
+          required={true}
+          defaultValue="Kaung Pyae"
+        />
+        <ProfileEditInput
+          inputName="Email"
+          register={register}
+          errors={errors}
+          required={true}
+          defaultValue="kaungpyaeaung8123@gmail.com"
+        />
+        <ProfileEditInput
+          inputName="City"
+          register={register}
+          errors={errors}
+          required={true}
+          defaultValue="Yangon"
+        />
+        <ProfileEditInput
+          inputName="Township"
+          register={register}
+          errors={errors}
+          required={true}
+          defaultValue="Kyee Myint Daing"
+        />
+        <ProfileEditInput
+          inputName="Zip Code"
+          register={register}
+          errors={errors}
+          required={false}
+          defaultValue="123456"
+        />
         <div className="mb-6 ">
           <p className="uppercase font-medium text-sm">Address *</p>
           <textarea
@@ -101,29 +67,20 @@ const EditProfile = () => {
             No.123 Inya Road, Yangon Kyee Myint Daing
           </textarea>
           {errors.address && (
-            <span className="text-xs mt-2 block text-red-800">
-              {errors.address.message}
-            </span>
+            <FormErrorMessage message={errors.address.message} />
           )}
         </div>
-        <div className="mb-6 ">
-          <p className="uppercase font-medium text-sm">Password *</p>
-          <input
-            type="text"
-            {...register("password", {
-                required: "Password is required",
-              })}
-            className="border-b w-full border-b-black py-2 outline-none"
-          />
-          {errors.password && (
-            <span className="text-xs mt-2 block text-red-800">
-              {errors.password.message}
-            </span>
-          )}
-        </div>
+        <ProfileEditInput
+          inputName="Password"
+          register={register}
+          errors={errors}
+          required={true}
+          defaultValue=""
+        />
         <button
-        type="submit"
-        className="my-3 block ms-auto bg-black text-white py-2 px-12">
+          type="submit"
+          className="my-3 block ms-auto bg-black text-white py-2 px-12"
+        >
           Edit
         </button>
       </form>
