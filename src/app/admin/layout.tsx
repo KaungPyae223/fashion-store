@@ -17,7 +17,9 @@ export default function RootLayout({
         <header className="bg-white">
           <AdminNav />
         </header>
-        <main id="root" className="flex-1 p-5 h-screen overflow-y-auto ">{children}</main>
+        <main id="root" className="flex-1 p-5 h-screen overflow-y-auto ">
+          {children}
+        </main>
       </body>
     </html>
   );

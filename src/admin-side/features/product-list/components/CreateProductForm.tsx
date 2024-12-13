@@ -76,6 +76,16 @@ const CreateProductForm = () => {
           <AdminSelect
             register={register}
             errors={errors}
+            inputName={"Status"}
+            required={true}
+            data={[
+              { id: "Public", name: "Public" },
+              { id: "Private", name: "Private" },
+            ]}
+          />
+          <AdminSelect
+            register={register}
+            errors={errors}
             inputName={"Category"}
             required={true}
             data={[

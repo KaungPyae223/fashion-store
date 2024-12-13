@@ -1,12 +1,12 @@
 import PageTitle from "@/admin-side/components/PageTitle";
-import PageManagement from "@/admin-side/features/page_management/page/PageManagement";
+import OrderHistoryPage from "@/admin-side/features/order-history/page/OrderHistoryPage";
 import React from "react";
 
 const page = () => {
   return (
     <div>
-      <PageTitle title="Page Management" />
-      <PageManagement />
+      <PageTitle title="Order History" />
+      <OrderHistoryPage />
     </div>
   );
 };

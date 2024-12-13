@@ -1,12 +1,12 @@
 import PageTitle from "@/admin-side/components/PageTitle";
-import PageManagement from "@/admin-side/features/page_management/page/PageManagement";
+import ProductDataPage from "@/admin-side/features/product-data/page/ProductDataPage";
 import React from "react";
 
 const page = () => {
   return (
     <div>
-      <PageTitle title="Page Management" />
-      <PageManagement />
+      <PageTitle title="Product Data List" />
+      <ProductDataPage/>
     </div>
   );
 };

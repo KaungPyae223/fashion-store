@@ -1,4 +1,4 @@
-'use client'
+"use client";
 import AdminSubTitle from "@/admin-side/components/AdminSubTitle";
 import ProductCard from "@/customer-side/components/ProductCard";
 import ProductData from "@/customer-side/features/product-details/components/ProductData";
@@ -28,6 +28,14 @@ const ProductCreateConfirm = () => {
           <tr>
             <td className="px-2 pb-1 font-semibold">Name:</td>
             <td className=" pb-1">Nike Air Max</td>
+          </tr>
+          <tr>
+            <td className="px-2 pb-1 font-semibold">Status:</td>
+            <td className=" pb-1">
+              <div className="text-sm bg-green-400 text-gray-700 w-fit rounded-full px-5 py-0.5">
+                Public
+              </div>
+            </td>
           </tr>
           <tr>
             <td className="px-2 pb-1 font-semibold">Price:</td>
@@ -99,8 +107,11 @@ const ProductCreateConfirm = () => {
             className=" outline-none py-2 h-11 px-3 border border-gray-300 w-[300px]"
           />
           <button
-          disabled = {confirmText !== "Confirm"}
-          className="px-6 bg-gray-800 text-white disabled:bg-gray-300 disabled:text-gray-500">Create</button>
+            disabled={confirmText !== "Confirm"}
+            className="px-6 bg-gray-800 text-white disabled:bg-gray-300 disabled:text-gray-500"
+          >
+            Create
+          </button>
         </div>
       </div>
     </div>
