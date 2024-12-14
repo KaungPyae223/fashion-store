@@ -15,7 +15,9 @@ const OrderHistoryContainer = () => {
             <th className="text-end px-2">Total Order</th>
             <th className="text-end px-2">Total Price</th>
             <th className="text-end px-2">Order Date</th>
-            <th className="text-end px-2">Packager</th>
+            <th className="text-start px-2">Packager</th>
+            <th className="text-start px-2">Delivery</th>
+            
             <th className="text-center px-2">Action</th>
           </tr>
         </thead>

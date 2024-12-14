@@ -7,7 +7,6 @@ import ProductBlankImage from "@/assets/image.png";
 import Image from "next/image";
 import React, { useRef, useState } from "react";
 import { useForm } from "react-hook-form";
-import { json } from "stream/consumers";
 import MultipleImageUpload from "@/admin-side/components/MultipleImageUpload";
 
 const CreateProductForm = () => {

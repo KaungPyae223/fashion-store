@@ -1,14 +1,38 @@
+import Link from "next/link";
 import React from "react";
-import OrderHistoryContainer from "../components/OrderHistoryContainer";
+import DeliveryContainer from "../components/DeliveryContainer";
 
-const OrderHistoryPage = () => {
+const DeliveryPage = () => {
   return (
     <div>
-      <div className="flex flex-row justify-end border-b pb-6">
+      <div className="flex flex-row justify-between border-b pb-6">
+        <div className="flex">
+          <Link
+            href={"/admin/delivery/create"}
+            className="flex flex-row h-10 mt-auto cursor-pointer justify-center items-center gap-2 p-3 text-sm bg-gray-800 text-white "
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              strokeWidth={1.5}
+              stroke="currentColor"
+              className="size-4"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                d="M12 4.5v15m7.5-7.5h-15"
+              />
+            </svg>
+            Create Delivery
+          </Link>
+        </div>
+
         <div className="flex flex-row gap-2">
           <div className="flex flex-col gap-1">
             <label className="text-sm text-gray-700" htmlFor="search">
-              Customer Name
+              Delivery Name
             </label>
             <input
               id="search"
@@ -16,28 +40,7 @@ const OrderHistoryPage = () => {
               className="border border-gray-300  px-3 py-2 outline-none h-10 w-[250px]"
             />
           </div>
-          <div className="flex flex-col gap-1">
-            <label className="text-sm text-gray-700" htmlFor="search">
-              Order Time
-            </label>
-            <input
-              id="search"
-              type="month"
-              className="border border-gray-300  px-3 py-2 outline-none h-10 w-[250px]"
-            />
-          </div>
 
-          <div className="flex flex-col gap-1 text-gray-800">
-            <label className="text-sm text-gray-700">Price Range</label>
-            <select className="border border-gray-300 bg-white  px-3 py-2 h-10 min-w-32 outline-none">
-              <option value={""}>All</option>
-              <option value={""}>&lt; 10000</option>
-              <option value={""}>100000 &lt; 500000</option>
-              <option value={""}>500000 &lt; 1000000</option>
-              <option value={""}>1000000 &gt;</option>
-            </select>
-          </div>
-          
           <div className="flex flex-row h-10 mt-auto cursor-pointer justify-center items-center gap-2 p-3 text-sm  text-gray-700 border bg-gray-300 hover:border-gray-800 duration-300">
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -57,9 +60,9 @@ const OrderHistoryPage = () => {
           </div>
         </div>
       </div>
-      <OrderHistoryContainer />
+      <DeliveryContainer />
     </div>
   );
 };
 
-export default OrderHistoryPage;
+export default DeliveryPage;

@@ -16,7 +16,7 @@ const ProductTrashContainer = () => {
             <th className="text-center px-2">Gender</th>
             <th className="text-end px-2">Price</th>
             <th className="px-2 text-start">Rating</th>
-            <th className="px-2">Action</th>
+            <th className="px-2 text-center">Action</th>
           </tr>
         </thead>
         <tbody>

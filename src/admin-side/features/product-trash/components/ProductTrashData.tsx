@@ -109,8 +109,8 @@ const ProductTrashData = () => {
         </div>
       </td>
 
-      <td className="text-start px-2">
-        <div className="flex flex-row items-center gap-3">
+      <td className="px-2">
+        <div className="flex flex-row justify-center items-center gap-3">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             fill="none"

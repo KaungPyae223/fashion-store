@@ -30,7 +30,7 @@ const ProductListPage = () => {
         <div className="flex flex-row gap-2">
           <div className="flex flex-col gap-1">
             <label className="text-sm text-gray-700" htmlFor="search">
-              Search Product
+              Product Name
             </label>
             <input
               id="search"

@@ -2,15 +2,16 @@ import React from "react";
 
 const OrderHistoryTr = () => {
   return (
-    <tr className="text-gray-800 bg-white border-y-[12px] border-y-gray-100">
-      <td className="p-2 text-gray-800 text-end">1</td>
-      <td className="text-start p-2 text-gray-800">Min Khant Naing</td>
-      <td className="text-start p-2 text-gray-800">No. 28 Aye Road, Yangon</td>
-      <td className="text-end p-2 text-gray-800">3</td>
-      <td className="text-end p-2 text-gray-800">250000 Ks</td>
-      <td className="text-end p-2 text-gray-800">24 December 2023</td>
-      <td className="text-end p-2 text-gray-800">U Myo Aung</td>
-      <td className="text-center p-2 text-gray-800">
+    <tr className="duration-100 hover:bg-gray-800 hover:text-white text-gray-800 bg-white border-y-[12px] border-y-gray-100">
+      <td className="p-2 py-4  text-end">1</td>
+      <td className="text-start p-2 ">Min Khant Naing</td>
+      <td className="text-start p-2 ">No. 28 Aye Road, Yangon</td>
+      <td className="text-end p-2 ">3</td>
+      <td className="text-end p-2 ">250000 Ks</td>
+      <td className="text-end p-2 ">24 December 2023</td>
+      <td className="text-start p-2 ">U Myo Aung</td>
+      <td className="text-start p-2 ">Royal Express</td>
+      <td className="text-center p-2 ">
         <svg
           xmlns="http://www.w3.org/2000/svg"
           fill="none"
