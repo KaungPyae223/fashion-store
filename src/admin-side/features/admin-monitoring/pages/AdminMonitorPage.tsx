@@ -1,14 +1,14 @@
 import React from "react";
-import OrderHistoryContainer from "../components/OrderHistoryContainer";
+import AdminMonitorContainer from "../components/AdminMonitorContainer";
 
-const OrderHistoryPage = () => {
+const AdminMonitorPage = () => {
   return (
     <div>
       <div className="flex flex-row justify-end border-b pb-6">
         <div className="flex flex-row gap-2">
           <div className="flex flex-col gap-1">
             <label className="text-sm text-gray-700" htmlFor="search">
-              Customer Name
+              Admin Name
             </label>
             <input
               id="search"
@@ -18,17 +18,7 @@ const OrderHistoryPage = () => {
           </div>
           <div className="flex flex-col gap-1">
             <label className="text-sm text-gray-700" htmlFor="search">
-              Packager ID
-            </label>
-            <input
-              id="search"
-              type="text"
-              className="border border-gray-300  px-3 py-2 outline-none h-10 w-[150px]"
-            />
-          </div>
-          <div className="flex flex-col gap-1">
-            <label className="text-sm text-gray-700" htmlFor="search">
-              Order Time
+              Time
             </label>
             <input
               id="search"
@@ -37,7 +27,7 @@ const OrderHistoryPage = () => {
             />
           </div>
           <div className="flex flex-col gap-1 text-gray-800">
-            <label className="text-sm text-gray-700">Price Range</label>
+            <label className="text-sm text-gray-700">Role</label>
             <select className="border border-gray-300 bg-white  px-3 py-2 h-10 min-w-32 outline-none">
               <option value={""}>All</option>
               <option value={""}>&lt; 10000</option>
@@ -66,9 +56,9 @@ const OrderHistoryPage = () => {
           </div>
         </div>
       </div>
-      <OrderHistoryContainer />
+      <AdminMonitorContainer />
     </div>
   );
 };
 
-export default OrderHistoryPage;
+export default AdminMonitorPage;

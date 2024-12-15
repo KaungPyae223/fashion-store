@@ -10,7 +10,7 @@ const OrderListTr = () => {
       <td className="text-end p-2 ">250000 Ks</td>
       <td className="text-end p-2 ">3 days</td>
       <td className="text-center p-2 ">
-        <div className="px-4 py-1 border border-gray-300 inline-block cursor-pointer">Packaging</div>
+        <div className="px-4 py-1 border border-gray-300 inline-block cursor-pointer">Package</div>
       </td>
 
     </tr>

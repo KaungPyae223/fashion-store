@@ -1,4 +1,5 @@
 import React from "react";
+import FeedbackHistoryContainer from "../components/FeedbackHistoryContainer";
 
 const FeedbackHistoryPage = () => {
   return (
@@ -44,6 +45,7 @@ const FeedbackHistoryPage = () => {
           </div>
         </div>
       </div>
+      <FeedbackHistoryContainer />
     </div>
   );
 };

@@ -1,36 +1,12 @@
 import React from "react";
 
-const BrandData = () => {
-  return (
-    <table className="w-full bg-white">
-      <thead>
-        <tr className="text-gray-800">
-          <th className="text-start p-1 px-1.5 border-y border-s border-s-gray-300 border-y-gray-300">Brands</th>
-          
-          <th className="text-start p-1 px-1.5 border-y border-y-gray-300 border-e border-e-gray-300"></th>
-        </tr>
-      </thead>
-      <tbody>
-        <BrandDataTr brand="Nike" />
-        <BrandDataTr brand="Adidas" />
-        <BrandDataTr brand="Puma" />
-        <BrandDataTr brand="Logo" />
-        <BrandDataTr brand="Giordano" />
-        <BrandDataTr brand="Wiki" />
-      </tbody>
-    </table>
-  );
-};
-
-const BrandDataTr = ({
-  brand,
-}: {
-    brand: string;
-}) => {
+const CategoryDataTr = ({category,name}:{category:string,name:string}) => {
   return (
     <tr className="text-gray-700">
-      <td className="text-start p-1 px-1.5 border-y border-s border-s-gray-300 border-y-gray-300">{brand}</td>
-      
+      <td className="text-start p-1 px-1.5 border border-gray-300">{name}</td>
+      <td className="text-start p-1 px-1.5 border-y border-y-gray-300">
+        {category}
+      </td>
       <td className="text-start  p-1 px-1.5 border-y border-y-gray-300 border-e border-e-gray-300">
         <div className="flex flex-row gap-2 items-center justify-end">
           <svg
@@ -67,4 +43,4 @@ const BrandDataTr = ({
   );
 };
 
-export default BrandData;
+export default CategoryDataTr;

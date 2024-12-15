@@ -4,7 +4,7 @@ import OrderHistoryTr from "./OrderHistoryTr";
 
 const OrderHistoryContainer = () => {
   return (
-    <div>
+    <div className="mt-6">
       <table className="table-auto w-full text-left text-sm border-spacing-y-4 border-spacing-x-0">
         <thead>
           <tr className="text-sm text-gray-400">

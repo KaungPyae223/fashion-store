@@ -1,7 +1,7 @@
-import React from "react";
-import CategoryDataTr from "./CategoryDataTr";
+import React from 'react'
+import CategoryDataTr from './CategoryDataTr'
 
-const CategoryData = () => {
+const SizeData = () => {
   return (
     <table className="w-full bg-white">
       <thead>
@@ -14,17 +14,15 @@ const CategoryData = () => {
         </tr>
       </thead>
       <tbody>
-        <CategoryDataTr category="Clothing" name="T-Shirt" />
-        <CategoryDataTr category="Clothing" name="Ginger" />
-        <CategoryDataTr category="Footwear" name="Sneaker" />
-        <CategoryDataTr category="Accessories" name="Hat" />
-        <CategoryDataTr category="Clothing" name="Skirt" />
+        <CategoryDataTr category="Clothing" name="small" />
+        <CategoryDataTr category="Clothing" name="large" />
+        <CategoryDataTr category="Footwear" name="Us 29" />
+        <CategoryDataTr category="Accessories" name="one-size" />
+        <CategoryDataTr category="Clothing" name="extreme large" />
       
       </tbody>
     </table>
-  );
-};
+  )
+}
 
-
-
-export default CategoryData;
+export default SizeData

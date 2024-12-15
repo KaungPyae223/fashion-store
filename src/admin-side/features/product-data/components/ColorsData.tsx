@@ -2,7 +2,7 @@ import React from "react";
 
 const ColorsData = () => {
   return (
-    <table className="w-full">
+    <table className="w-full bg-white">
       <thead>
         <tr className="text-gray-800">
           <th className="text-start p-1 px-1.5 border-y border-s border-s-gray-300 border-y-gray-300">Colors</th>
