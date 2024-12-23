@@ -89,7 +89,7 @@ const ClothesDisplaySection = () => {
   return (
     <div>
       <SectionTitle title="clothes" />
-      <div className="grid grid-cols-3 gap-x-3 gap-y-6">
+      <div className="grid grid-cols-4 gap-x-3 gap-y-6">
         {Clothes.map((product, i) => (
           <ProductCard
             key={i}

@@ -7,6 +7,7 @@ import NavLink from "./NavBarComponent/NavLink";
 import SearchSection from "./NavBarComponent/SearchSection";
 import { AnimatePresence, motion } from "motion/react";
 import Craft from "./NavBarComponent/Craft";
+import { usePathname } from "next/navigation";
 
 const NavBar = () => {
   const navRef = useRef<HTMLDivElement>();
@@ -18,13 +19,10 @@ const NavBar = () => {
   const [openSearchSection, setOpenSearchSection] = useState<boolean>(false);
   const [openCraft, setOpenCraft] = useState<boolean>(false);
 
-
   useEffect(() => {
     if (openCraft) {
-      
       document.body.classList.add("no-scroll");
     } else {
-      
       document.body.classList.remove("no-scroll");
     }
     return () => document.body.classList.remove("no-scroll");
@@ -58,6 +56,12 @@ const NavBar = () => {
     }
   }, [navRef.current, containerRef.current]);
 
+  const pathName = usePathname();
+
+  useEffect(() => {
+    navRef.current.classList.remove("-translate-y-[100%]");
+  }, [pathName]);
+
   return (
     <div ref={containerRef}>
       <div ref={navRef} className="duration-300 fixed w-full bg-white z-30">
@@ -68,6 +72,7 @@ const NavBar = () => {
         />
         <NavLink />
       </div>
+
       <AnimatePresence>
         {openSearchSection && (
           <motion.div
@@ -88,9 +93,9 @@ const NavBar = () => {
               onClick={() => setOpenCraft(false)}
               className="w-screen h-screen fixed top-0 left-0 z-40"
               initial={{ backgroundColor: "rgba(0, 0, 0, 0)" }}
-              animate={{ backgroundColor: "rgba(0, 0, 0, 0.5)" }} 
-              exit={{ backgroundColor: "rgba(0, 0, 0, 0)" }} 
-              transition={{ duration: 0.3 }} 
+              animate={{ backgroundColor: "rgba(0, 0, 0, 0.5)" }}
+              exit={{ backgroundColor: "rgba(0, 0, 0, 0)" }}
+              transition={{ duration: 0.3 }}
             />
             <motion.div
               initial={{ x: "100%" }}

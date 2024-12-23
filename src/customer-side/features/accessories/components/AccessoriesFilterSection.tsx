@@ -46,7 +46,7 @@ const AccessoriesFilterSection = () => {
       <section className="w-full bg-white divide-y divide-slate-200 shadow-slate-200">
         <FilterContainer title="Brands" setState={setBrand} items={brandNames} />
         <FilterContainer title="Types" setState={setType} items={typesName} />
-        <FilterContainer title="Price Range" setState={setPrice} items={PrinceRanges} columns={2}/> 
+        <FilterContainer title="Price Range" setState={setPrice} items={PrinceRanges} columns={1}/> 
       </section>
       <div className="uppercase mt-8 bg-gray-900 px-4 py-3 flex cursor-pointer justify-center text-white">
         Filter

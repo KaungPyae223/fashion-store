@@ -9,15 +9,20 @@ interface ProductCardInterface {
   amount: string;
 }
 
-
 const ProductCard = ({ img, title, color, amount }: ProductCardInterface) => {
   return (
-    <Link href={"/"}>
-      <img alt={title} className="h-[300px] w-full object-cover object-center" src={img} />
-      <p className="mt-1">{title}</p>
-      <p className="text-gray-500 text-sm">{color}</p>
-      <p className="mt-1">{amount} Ks</p>
-    </Link>
+    
+      <Link href={"/"}>
+        <img
+          alt={title}
+          className="h-[300px] w-full object-cover object-center"
+          src={img}
+        />
+        <p className="mt-1">{title}</p>
+        <p className="text-gray-500 text-sm">{color}</p>
+        <p className="mt-1">{amount} Ks</p>
+      </Link>
+    
   );
 };
 

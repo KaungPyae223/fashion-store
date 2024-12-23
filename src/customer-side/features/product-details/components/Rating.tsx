@@ -8,7 +8,7 @@ const Rating = ({ rating }: { rating: number }) => {
         index <= Math.ceil(rating) ? (
           <svg
             key={index}
-            className="w-4 h-4 text-gray-800 ms-1"
+            className="w-4 h-4 text-gray-800"
             aria-hidden="true"
             xmlns="http://www.w3.org/2000/svg"
             fill="currentColor"
@@ -19,7 +19,7 @@ const Rating = ({ rating }: { rating: number }) => {
         ) : (
           <svg
             key={index}
-            className="w-4 h-4 ms-1 text-gray-300 dark:text-gray-500"
+            className="w-4 h-4 text-gray-300 dark:text-gray-500"
             aria-hidden="true"
             xmlns="http://www.w3.org/2000/svg"
             fill="currentColor"
@@ -33,7 +33,7 @@ const Rating = ({ rating }: { rating: number }) => {
     return stars;
   };
 
-  return <div className="flex items-center">{generateStars()}</div>;
+  return <div className="flex items-center gap-1">{generateStars()}</div>;
 };
 
 export default Rating;

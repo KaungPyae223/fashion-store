@@ -11,6 +11,7 @@ const AdminMonitorContainer = () => {
             <th className="text-start px-2">Admin</th>
             <th className="text-center px-2">Role</th>
             <th className="px-2 text-start">Method</th>
+            <th className="px-2 text-start">Type</th>
             <th className="px-2 text-start">Action</th>
             <th className="px-2 text-end">Time</th>
 

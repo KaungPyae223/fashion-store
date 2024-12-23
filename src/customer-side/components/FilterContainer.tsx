@@ -65,7 +65,7 @@ const FilterContainer = ({
           >
             <div
               className={`grid ${
-                columns === 2 ? "grid-cols-2" : "grid-cols-3"
+                columns === 1 ? "grid-cols-1" : "grid-cols-2"
               } pt-6 pb-3`}
             >
               {items.map((item) => (

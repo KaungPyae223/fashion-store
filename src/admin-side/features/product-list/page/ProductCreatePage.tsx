@@ -1,4 +1,4 @@
-import AdminSubTitle from "@/admin-side/components/AdminSubTitle";
+'use client'
 import BreadCrumb from "@/customer-side/components/BreadCrumb";
 import React from "react";
 import CreateProductForm from "../components/CreateProductForm";
@@ -25,6 +25,7 @@ const ProductCreatePage = () => {
           </svg>
           Back
         </Link>
+       
         <div className="flex flex-col items-center">
           <p className="text-xl tracking-wide mb-3">Product Create </p>
           <BreadCrumb

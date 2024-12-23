@@ -2,6 +2,7 @@ import React from "react";
 import Container from "../../../components/Container";
 import { HomeTitle } from "./HomeTitle";
 import ProductCard from "../../../components/ProductCard";
+import ProductRating from "@/customer-side/components/ProductRating";
 
 const Latest = () => {
   interface Product {
@@ -78,7 +79,7 @@ const Latest = () => {
     <div className="pt-16 pb-6 mb-12">
       <Container>
         <HomeTitle title="Latest Clothes" link="clothing" />
-        <div className="col-span-12 grid grid-cols-5 gap-x-3 gap-y-6">
+        <div className="col-span-full grid grid-cols-5 gap-x-3 gap-y-6">
           {LatestProducts.map((product, i) => (
             <ProductCard
               key={i}
@@ -88,6 +89,7 @@ const Latest = () => {
               amount={product.amount}
             />
           ))}
+          
         </div>
       </Container>
     </div>

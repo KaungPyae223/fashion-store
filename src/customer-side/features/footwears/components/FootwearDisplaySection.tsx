@@ -53,7 +53,7 @@ const FootwearDisplaySection = () => {
   return (
     <div>
       <SectionTitle title="footwears" />
-      <div className="grid grid-cols-2 gap-x-3 gap-y-6">
+      <div className="grid grid-cols-3 gap-x-3 gap-y-6">
         {footwears.map((product, i) => (
           <ProductCard
             key={i}

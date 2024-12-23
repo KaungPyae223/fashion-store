@@ -27,6 +27,16 @@ const AdminMonitorPage = () => {
             />
           </div>
           <div className="flex flex-col gap-1 text-gray-800">
+            <label className="text-sm text-gray-700">Type</label>
+            <select className="border border-gray-300 bg-white  px-3 py-2 h-10 min-w-32 outline-none">
+              <option value={""}>All</option>
+              <option value={""}>Product</option>
+              <option value={""}>Colors</option>
+              <option value={""}>Deliveries</option>
+              <option value={""}>Blog</option>
+            </select>
+          </div>
+          <div className="flex flex-col gap-1 text-gray-800">
             <label className="text-sm text-gray-700">Role</label>
             <select className="border border-gray-300 bg-white  px-3 py-2 h-10 min-w-32 outline-none">
               <option value={""}>All</option>

@@ -1,15 +1,19 @@
-import Heros from '@/customer-side/components/Heros'
-import React from 'react'
-import ClothesContainer from '../components/ClothesContainer'
-import { title } from 'process'
+import Heros from "@/customer-side/components/Heros";
+import React from "react";
+import ClothesContainer from "../components/ClothesContainer";
+import ClotheImage from "@/assets/ClothingImage.jpg";
 
 const ClothesPage = () => {
   return (
     <div>
-        <Heros previousSection={[{title:"Home",link:"/"}]} title='clothing'/>
-        <ClothesContainer/>
+      <Heros
+        image={ClotheImage.src}
+        previousSection={[{ title: "Home", link: "/" }]}
+        title="clothing"
+      />
+      <ClothesContainer />
     </div>
-  )
-}
+  );
+};
 
-export default ClothesPage
+export default ClothesPage;

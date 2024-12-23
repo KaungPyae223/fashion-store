@@ -73,7 +73,7 @@ const BrandProductsFilterSection = () => {
       <FilterContainer title="Types" setState={setType} items={typesName} />
       <FilterContainer title="Colors" setState={setColor} items={ColorsName} />
       <FilterContainer title="Sizes" setState={SetSizes} items={SizeName} />
-      <FilterContainer title="Price Range" setState={setPrice} items={PrinceRanges} columns={2} />
+      <FilterContainer title="Price Range" setState={setPrice} items={PrinceRanges} columns={1} />
         
       </section>
       <div className="uppercase mt-8 bg-gray-900 px-4 py-3 flex cursor-pointer justify-center text-white">

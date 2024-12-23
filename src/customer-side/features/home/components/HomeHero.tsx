@@ -1,29 +1,89 @@
+"use client";
+
 import React from "react";
-import Container from "../../../components/Container";
-import Image from "next/image";
+// Import Swiper styles
+import "swiper/css";
+import "swiper/css/navigation";
+
+import { Autoplay, Pagination, Navigation } from "swiper/modules";
+import { Swiper, SwiperSlide } from "swiper/react";
+import CarouselCard from "./CarouselCard";
 
 const HomeHero = () => {
   return (
-    <div className="py-6 mb-6">
-      <Container>
-        <div className="col-span-6 flex flex-col items-start justify-center gap-5">
-          <p className="text-3xl tracking-wide font-bold ">
-            New Nike Air Max is Available Now
-          </p>
-          <p className="text-sm cursor-pointer py-1 px-3 border border-blue-800 text-blue-800">
-            View Details
-          </p>
+    <Swiper
+      spaceBetween={0}
+      centeredSlides={true}
+      autoplay={{
+        delay: 6000, // Set the autoplay delay (5 seconds)
+        disableOnInteraction: false,
+      }}
+      speed={500} // Slide transition duration (1 second)
+      pagination={{
+        el: ".custom-pagination", // Use custom pagination
+        clickable: true,
+        renderBullet: (index, className) =>
+          `<div class="${className} custom-bullet relative"></div>`,
+      }}
+      navigation={{
+        nextEl: ".custom-next",
+        prevEl: ".custom-prev",
+      }}
+      modules={[Autoplay, Pagination, Navigation]}
+      className="mySwiper mb-6 relative"
+    >
+      <SwiperSlide>
+        <CarouselCard />
+      </SwiperSlide>
+      <SwiperSlide>
+        <CarouselCard />
+      </SwiperSlide>
+      <SwiperSlide>
+        <CarouselCard />
+      </SwiperSlide>
+      <SwiperSlide>
+        <CarouselCard />
+      </SwiperSlide>
+
+      {/* Custom Navigation Buttons */}
+      <div className="custom-navigation absolute top-1/2 px-12 left-0 right-0 flex justify-between z-50">
+        <div className="custom-prev w-10 h-10 cursor-pointer text-white/80 hover:text-white hover:bg-opacity-50 duration-300 rounded-full bg-black bg-opacity-20 flex items-center justify-center">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            strokeWidth={1}
+            stroke="currentColor"
+            className="size-6 "
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              d="M15.75 19.5 8.25 12l7.5-7.5"
+            />
+          </svg>
         </div>
-        <div className="col-span-6">
-          <img
-            layout="intrinsic"
-            className="shadow-lg w-2/3 mx-auto object-cover object-center rounded-lg"
-            alt="Nike Air Max"
-            src="https://static.nike.com/a/images/t_PDP_1728_v1/f_auto,q_auto:eco/62ac892a-1628-4b60-b2ef-acfadc0d0754/AIR+MAX+DN.png"
-          />
+        <div className="custom-next w-10 h-10 cursor-pointer text-white/80 hover:text-white hover:bg-opacity-50 duration-300 rounded-full bg-black bg-opacity-20 flex items-center justify-center">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            strokeWidth={1}
+            stroke="currentColor"
+            className="size-6"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              d="m8.25 4.5 7.5 7.5-7.5 7.5"
+            />
+          </svg>
         </div>
-      </Container>
-    </div>
+      </div>
+
+      {/* Custom Pagination */}
+      <div className="z-50 absolute bottom-10 w-full custom-pagination flex flex-row gap-3 items-center justify-center"></div>
+    </Swiper>
   );
 };
 

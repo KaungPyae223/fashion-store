@@ -24,6 +24,9 @@ const AdminMonitorTr = () => {
       <td className="p-2 text-start border-spacing-0 font-medium">
         Create
       </td>
+      <td className="p-2 text-start border-spacing-0 font-medium">
+        Product
+      </td>
       <td className="p-2 text-start border-spacing-0">
         Create a product Hocololo
       </td>

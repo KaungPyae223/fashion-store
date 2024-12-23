@@ -8,7 +8,10 @@ const ProductListPage = () => {
     <div>
       <div className="flex flex-row justify-between border-b pb-6">
         <div className="flex">
-          <Link href={"/admin/product-list/create"} className="flex flex-row h-10 mt-auto cursor-pointer justify-center items-center gap-2 p-3 text-sm bg-gray-800 text-white ">
+          <Link
+            href={"/admin/product-list/create"}
+            className="flex flex-row h-10 mt-auto cursor-pointer justify-center items-center gap-2 p-3 text-sm bg-gray-800 text-white "
+          >
             <svg
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
@@ -39,7 +42,7 @@ const ProductListPage = () => {
             />
           </div>
           <div className="flex flex-col gap-1 text-gray-800">
-            <label className="text-sm text-gray-700">Categories</label>
+            <label className="text-sm text-gray-700">Status</label>
             <select className="border border-gray-300 bg-white  px-3 py-2 h-10 min-w-32 outline-none">
               <option value={""}>All</option>
               <option value={""}>Footwear</option>
@@ -49,7 +52,7 @@ const ProductListPage = () => {
             </select>
           </div>
           <div className="flex flex-col gap-1 text-gray-800">
-            <label className="text-sm text-gray-700">Gender</label>
+            <label className="text-sm text-gray-700">Categories</label>
             <select className="border border-gray-300 bg-white  px-3 py-2 h-10 min-w-32 outline-none">
               <option value={""}>All</option>
               <option value={""}>Footwear</option>
@@ -58,6 +61,7 @@ const ProductListPage = () => {
               <option value={""}>Accessories</option>
             </select>
           </div>
+          
           <div className="flex flex-col gap-1 text-gray-800">
             <label className="text-sm text-gray-700">Brand</label>
             <select className="border border-gray-300 bg-white  px-3 py-2 h-10 min-w-32 outline-none">

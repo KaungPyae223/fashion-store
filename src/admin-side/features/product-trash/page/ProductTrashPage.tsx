@@ -29,16 +29,7 @@ const ProductTrashPage = () => {
               <option value={""}>Accessories</option>
             </select>
           </div>
-          <div className="flex flex-col gap-1 text-gray-800">
-            <label className="text-sm text-gray-700">Gender</label>
-            <select className="border border-gray-300 bg-white  px-3 py-2 h-10 min-w-32 outline-none">
-              <option value={""}>All</option>
-              <option value={""}>Footwear</option>
-              <option value={""}>Clothing</option>
-              <option value={""}>Lifestyle</option>
-              <option value={""}>Accessories</option>
-            </select>
-          </div>
+          
           <div className="flex flex-col gap-1 text-gray-800">
             <label className="text-sm text-gray-700">Brand</label>
             <select className="border border-gray-300 bg-white  px-3 py-2 h-10 min-w-32 outline-none">

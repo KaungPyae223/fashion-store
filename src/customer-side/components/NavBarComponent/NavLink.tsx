@@ -20,7 +20,7 @@ const NavLink = () => {
         Home
       </Link>
       <Link
-        href={AddParamsToURL("clothing")}
+        href={AddParamsToURL("/clothing")}
         className={
           pathName.startsWith("/clothing")
             ? "border-b border-b-gray-800"
