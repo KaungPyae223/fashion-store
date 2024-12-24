@@ -10,15 +10,14 @@ import Craft from "./NavBarComponent/Craft";
 import { usePathname } from "next/navigation";
 
 const NavBar = () => {
-  const navRef = useRef<HTMLDivElement>();
-  const containerRef = useRef<HTMLDivElement>();
+  const navRef = useRef<HTMLDivElement>(null);
+  const containerRef = useRef<HTMLDivElement>(null);
 
   const [previousScroll, setPreviousScroll] = useState<number>(0);
-  const [currentScroll, setCurrentScroll] = useState<number>(0);
-
   const [openSearchSection, setOpenSearchSection] = useState<boolean>(false);
   const [openCraft, setOpenCraft] = useState<boolean>(false);
 
+  // Handle body scroll locking for the craft section
   useEffect(() => {
     if (openCraft) {
       document.body.classList.add("no-scroll");
@@ -28,38 +27,42 @@ const NavBar = () => {
     return () => document.body.classList.remove("no-scroll");
   }, [openCraft]);
 
+  // Handle scroll behavior
   const handleScroll = () => {
-    if (!navRef.current || !containerRef.current) return;
+    if (!navRef.current) return;
 
-    setCurrentScroll(window.scrollY);
-    setCurrentScroll(window.scrollY);
+    const currentScroll = window.scrollY;
 
     if (currentScroll > previousScroll) {
-      navRef.current.classList.add("-translate-y-[100%]");
-    } else if (window.scrollY < previousScroll) {
-      navRef.current.classList.remove("-translate-y-[100%]");
+      navRef.current.classList.add("-translate-y-full");
+    } else {
+      navRef.current.classList.remove("-translate-y-full");
     }
+
     setPreviousScroll(currentScroll);
   };
 
+  
   useEffect(() => {
     window.addEventListener("scroll", handleScroll);
 
     return () => {
-      window.removeEventListener("scroll", handleScroll); // Fix cleanup function
+      window.removeEventListener("scroll", handleScroll);
     };
-  }, [currentScroll]);
+  }, [previousScroll]); 
 
+  // Adjust container height based on nav height
   useEffect(() => {
     if (navRef.current && containerRef.current) {
       containerRef.current.style.height = `${navRef.current.offsetHeight}px`;
     }
-  }, [navRef.current, containerRef.current]);
+  }, []); 
 
+  
   const pathName = usePathname();
 
   useEffect(() => {
-    navRef.current.classList.remove("-translate-y-[100%]");
+    navRef.current?.classList.remove("-translate-y-full");
   }, [pathName]);
 
   return (

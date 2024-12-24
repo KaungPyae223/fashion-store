@@ -1,45 +1,55 @@
 import AdminSubTitle from "@/admin-side/components/AdminSubTitle";
 import React from "react";
-import CategoryData from "../components/CategoryData";
-import ColorsData from "../components/ColorsData";
-import BrandData from "../components/BrandData";
-import SizeData from "../components/SizeData";
+import { CiRuler } from "react-icons/ci";
+import { LuType } from "react-icons/lu";
+import { VscSymbolColor } from "react-icons/vsc";
+import { SiNike } from "react-icons/si";
+import { MdOutlineCategory } from "react-icons/md";
+
+import Link from "next/link";
 
 const ProductDataPage = () => {
   return (
-    <div>
-      <div className="grid grid-cols-2 border border-gray-300 ">
-        <div className="border border-gray-300  p-3">
-          <div className="flex flex-row gap-3 items-center">
-            <AdminSubTitle title="Types" />
-          </div>
-          <CategoryData />
-          <div className="mt-3 cursor-pointer text-sm p-2 px-6 bg-gray-800 text-white inline-block">
-            Create Type
-          </div>
-        </div>
-        <div className="border border-gray-300 p-3">
-          <AdminSubTitle title="Colors" />
-          <ColorsData />
-          <div className="mt-3 cursor-pointer text-sm p-2 px-6 bg-gray-800 text-white inline-block">
-            Create Color
-          </div>
-        </div>
-        <div className="border border-gray-300 p-3">
-          <AdminSubTitle title="Brands" />
-          <BrandData />
-          <div className="mt-3 cursor-pointer text-sm p-2 px-6 bg-gray-800 text-white inline-block">
-            Create Brand
-          </div>
-        </div>
-        <div className="p-3 border border-gray-300">
-          <AdminSubTitle title="Sizes" />
-          <SizeData />
-          <div className="mt-3 cursor-pointer text-sm p-2 px-6 bg-gray-800 text-white inline-block">
-            Create Size
-          </div>
-        </div>
-      </div>
+    <div className="grid grid-cols-4 gap-6">
+      <Link
+        href={"/product-data-list/brands"}
+        className="border border-gray-300 p-3 flex justify-center items-center flex-coll gap-3 cursor-pointer hover:bg-gray-700 hover:text-white duration-300"
+      >
+        <SiNike className="size-5" />
+
+        <p className="text-lg">Brands</p>
+      </Link>
+      <Link
+        href={"/admin/product-data-list/types"}
+        className="border border-gray-300 p-3 flex justify-center items-center flex-coll gap-3 cursor-pointer hover:bg-gray-700 hover:text-white duration-300"
+      >
+        <LuType className="size-5" />
+
+        <p className="text-lg">Types</p>
+      </Link>
+      <Link
+        href={"/admin/product-data-list/colors"}
+        className="border border-gray-300 p-3 flex justify-center items-center flex-coll gap-3 cursor-pointer hover:bg-gray-700 hover:text-white duration-300"
+      >
+        <VscSymbolColor className="size-5" />
+
+        <p className="text-lg">Colors</p>
+      </Link>
+      <Link
+        href={"/admin/product-data-list/sizes"}
+        className="border border-gray-300 p-3 py-6 flex justify-center items-center flex-coll gap-3 cursor-pointer hover:bg-gray-700 hover:text-white duration-300"
+      >
+        <CiRuler className="size-6" />
+
+        <p className="text-lg">Sizes</p>
+      </Link>
+      <Link
+        href={"/admin/product-data-list/categories"}
+        className="border border-gray-300 p-3 py-6 flex justify-center items-center flex-coll gap-3 cursor-pointer hover:bg-gray-700 hover:text-white duration-300"
+      >
+        <MdOutlineCategory className="size-6" />
+        <p className="text-lg">Categories</p>
+      </Link>
     </div>
   );
 };

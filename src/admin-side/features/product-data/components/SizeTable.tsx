@@ -1,38 +1,43 @@
+import AdminPagination from "@/admin-side/components/AdminPagimation";
 import React from "react";
 
-const BrandData = () => {
+const SizeTable = ({sizes}) => {
+
   return (
-    <table className="w-full bg-white">
-      <thead>
-        <tr className="text-gray-800">
-          <th className="text-start p-1 px-1.5 border-y border-s border-s-gray-300 border-y-gray-300">Brands</th>
-          
-          <th className="text-start p-1 px-1.5 border-y border-y-gray-300 border-e border-e-gray-300"></th>
-        </tr>
-      </thead>
-      <tbody>
-        <BrandDataTr brand="Nike" />
-        <BrandDataTr brand="Adidas" />
-        <BrandDataTr brand="Puma" />
-        <BrandDataTr brand="Logo" />
-        <BrandDataTr brand="Giordano" />
-        <BrandDataTr brand="Wiki" />
-      </tbody>
-    </table>
+    <div className="mt-6">
+      <table className="table-auto w-full text-left text-sm border-spacing-y-4 border-spacing-x-0">
+        <thead>
+          <tr className="text-sm text-gray-400">
+            <th className="text-start px-2">Size</th>
+            <th className="text-center px-2">Relative Category</th>
+            <th className="text-end px-2">Total Products</th>
+            <th className="px-4 text-center">Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          {
+            sizes.map((size) => (
+              <SizeTr size={size} key={size.id}/>
+            ))
+          }
+        </tbody>
+      </table>
+      <AdminPagination />
+    </div>
   );
 };
 
-const BrandDataTr = ({
-  brand,
-}: {
-    brand: string;
-}) => {
+const SizeTr = ({size}) => {
   return (
-    <tr className="text-gray-700">
-      <td className="text-start p-1 px-1.5 border-y border-s border-s-gray-300 border-y-gray-300">{brand}</td>
-      
-      <td className="text-start  p-1 px-1.5 border-y border-y-gray-300 border-e border-e-gray-300">
-        <div className="flex flex-row gap-2 items-center justify-end">
+    <tr className="text-gray-800 bg-white border-y-[12px] border-y-gray-100">
+      <td className="p-2 py-4 border-spacing-0">
+        <p className="font-medium text-base text-start">{size.size}</p>
+      </td>
+      <td className="px-2 text-center">{size.relative_category}</td>
+
+      <td className="px-2 text-end">{size.total_products}</td>
+      <td className="px-4">
+        <div className="flex flex-row w-full justify-center items-center gap-3">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
@@ -67,4 +72,4 @@ const BrandDataTr = ({
   );
 };
 
-export default BrandData;
+export default SizeTable;
