@@ -30,7 +30,7 @@ const SingleImageUpload = ({ setImage }) => {
       </button>
       <Modal openModal={openModal} setOpenModal={setOpenModal}>
         <div className="bg-white p-5">
-          <h2 className="text-xl font-semibold mb-4">Upload Images</h2>
+          <h2 className="text-2xl font-semibold mb-4 text-center">Upload Images</h2>
           <div
             {...getRootProps()}
             className={`border-2 border-dashed p-6 text-center ${

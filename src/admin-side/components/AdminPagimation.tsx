@@ -1,29 +1,33 @@
-"use client";
+'use client'
 import useUpdateParams from "@/hooks/useUpdateParams";
-import { useSearchParams } from "next/navigation";
-import React, { useEffect, useState } from "react";
 
-const AdminPagination = () => {
+const AdminPagination = ({ meta }) => {
   const updateParams = useUpdateParams();
-  const searchParams = useSearchParams();
 
-  const [currentPage, setCurrentPage] = useState<number>(1);
+  const totalPage = meta.last_page;
+
+  const currentPage = meta.current_page
 
   const UpdatePage = (page: number) => {
-    setCurrentPage(page);
+    updateParams("page", page.toString());
   };
 
   const PrevNext = (preOrNex: string) => {
     if (preOrNex === "prev" && currentPage > 1) {
       const newPage = currentPage - 1;
-      setCurrentPage(newPage);
-    } else if (preOrNex === "next" && currentPage < Pages[Pages.length - 1]) {
+      updateParams("page", newPage.toString());
+    } else if (preOrNex === "next" && currentPage < totalPage) {
       const newPage = currentPage + 1;
-      setCurrentPage(newPage);
+      updateParams("page", newPage.toString());
     }
   };
 
-  const Pages: number[] = [1, 2, 3, 4, 5];
+  
+  const lastPage = Math.min(currentPage + 2, totalPage);
+  const startPage = currentPage < 3 ? 1 : Math.max(1, totalPage >= 5 ? currentPage - 2 : totalPage - 4);
+
+
+  const Pages = Array.from({ length: lastPage - startPage + 1 }, (_, i) => startPage + i);
 
   const Button = ({ pageNo }: { pageNo: number }) => {
     return (
@@ -41,9 +45,13 @@ const AdminPagination = () => {
     );
   };
 
-  return (
+  return totalPage > 1 && (
+
     <div className="mt-9  flex justify-center">
-      <div className="flex items-center -space-x-px bg-white" aria-label="Pagination">
+      <div
+        className="flex items-center -space-x-px bg-white"
+        aria-label="Pagination"
+      >
         <button
           type="button"
           className="min-h-[38px] min-w-[38px] py-2 px-2.5 inline-flex justify-center items-center gap-x-1.5 text-sm  border border-gray-200 text-gray-800 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 disabled:opacity-50 disabled:pointer-events-none dark:border-neutral-700 dark:text-white dark:hover:bg-white/10 dark:focus:bg-white/10"

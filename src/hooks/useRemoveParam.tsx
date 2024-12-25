@@ -5,15 +5,19 @@ const useRemoveParam = () => {
   const searchParams = useSearchParams();
   const router = useRouter();
 
-  const deleteParam = (key: string) => {
+  const deleteParams = (keys: string | string[]) => {
     const updatedParams = new URLSearchParams(searchParams.toString());
-    
-    updatedParams.delete(key)
 
+    // Ensure `keys` is always an array
+    const keysArray = Array.isArray(keys) ? keys : [keys];
+
+    keysArray.forEach((key) => updatedParams.delete(key));
+
+    // Update the URL without refreshing the page
     router.push(`?${updatedParams.toString()}`);
   };
 
-  return deleteParam;
+  return deleteParams;
 };
 
 export default useRemoveParam;

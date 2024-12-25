@@ -2,43 +2,58 @@
 
 import BreadCrumb from "@/customer-side/components/BreadCrumb";
 import Link from "next/link";
-import React, { useRef, useState } from "react";
-import SizeTable from "../components/SizeTable";
+import React, { useEffect, useRef, useState } from "react";
+import SizeTable from "../components/Size/SizeTable";
 import useAddParamsToURL from "@/hooks/useAddParamsToURL";
-import useSWR from "swr";
+import useSWR, {mutate} from "swr";
 import { fetchSizes } from "../../../services/size";
 import useUpdateParams from "@/hooks/useUpdateParams";
 import { throttle } from "lodash";
 import useRemoveParam from "@/hooks/useRemoveParam";
+import { useSearchParams } from "next/navigation";
+import AdminPagination from "@/admin-side/components/AdminPagimation";
+import Loading from "@/admin-side/components/Loading";
+import Modal from "@/admin-side/components/Modal";
+
+import CreateSizeForm from "../components/Size/CreateSizeForm";
+import { Toaster } from "react-hot-toast";
 
 const SizePage = () => {
   const AddParamsToURL = useAddParamsToURL();
   const updateParams = useUpdateParams();
   const deleteParam = useRemoveParam();
+  const searchParams = useSearchParams();
 
   const baseUrl = process.env.NEXT_PUBLIC_BASE_URL;
 
   const [fetchUrl, setFetchUrl] = useState(AddParamsToURL(baseUrl + "/size"));
+  const [openModal, setOpenModal] = useState<boolean>(false);
+
+  useEffect(() => {
+    setFetchUrl(AddParamsToURL(baseUrl + "/size"));
+  }, [searchParams]);
 
   const { data, isLoading, error } = useSWR(fetchUrl, fetchSizes);
+
+  const handleRevalidate = async () => {
+    await mutate(fetchUrl); 
+  };
 
   const filterSize = useRef();
 
   const handleFilter = throttle(() => {
-
-    deleteParam("page");
-
     if (filterSize.current.value) {
-      updateParams("q",filterSize.current.value);
-      setFetchUrl(AddParamsToURL(baseUrl + "/size"));
-    }else{
-      deleteParam("q");
-      setFetchUrl(AddParamsToURL(baseUrl + "/size"));
+      updateParams("q", filterSize.current.value);
+    } else {
+      deleteParam(["q", "page"]);
     }
-  },500);
+  }, 500);
+
+  
 
   return (
     <div>
+      <Toaster/>
       <div className="flex flex-row justify-between items-center border-b pb-4">
         <Link
           href={"/admin/product-data-list"}
@@ -74,7 +89,10 @@ const SizePage = () => {
 
       <div className="flex flex-row justify-between py-6 border-b">
         <div className="flex">
-          <div className="flex flex-row h-10 mt-auto cursor-pointer justify-center items-center gap-2 p-3 text-sm bg-gray-800 text-white ">
+          <div
+            onClick={() => setOpenModal(true)}
+            className="flex flex-row h-10 mt-auto cursor-pointer justify-center items-center gap-2 p-3 text-sm bg-gray-800 text-white "
+          >
             <svg
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
@@ -127,7 +145,19 @@ const SizePage = () => {
           </div>
         </div>
       </div>
-      {!isLoading && <SizeTable sizes={data?.data} />}
+
+      {isLoading ? (
+        <Loading />
+      ) : (
+        <>
+          <SizeTable handleRevalidate={handleRevalidate} sizes={data?.data} />
+          <AdminPagination meta={data?.meta} />
+        </>
+      )}
+
+      <Modal openModal={openModal} setOpenModal={setOpenModal}>
+        <CreateSizeForm handleRevalidate={handleRevalidate} setOpenModal={setOpenModal}/>
+      </Modal>
     </div>
   );
 };

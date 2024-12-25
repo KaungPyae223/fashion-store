@@ -33,7 +33,7 @@ const NavBar = () => {
 
     const currentScroll = window.scrollY;
 
-    if (currentScroll > previousScroll) {
+    if (currentScroll > previousScroll && currentScroll > navRef.current.offsetHeight) {
       navRef.current.classList.add("-translate-y-full");
     } else {
       navRef.current.classList.remove("-translate-y-full");
