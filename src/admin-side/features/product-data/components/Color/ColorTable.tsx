@@ -1,30 +1,27 @@
 import Modal from "@/admin-side/components/Modal";
 import React, { useState } from "react";
-import UpdateSizeForm from "./UpdateSizeForm";
+import UpdateColorForm from "./UpdateColorForm";
 import toast from "react-hot-toast";
-import { deleteSize } from "@/admin-side/services/size";
+import {deleteColor} from "../../../../services/color"
 
-const SizeTable = ({ sizes, handleRevalidate }) => {
+const ColorTable = ({ colors, handleRevalidate }) => {
   return (
     <div className="mt-6">
       <table className="table-auto w-full text-left text-sm border-spacing-y-4 border-spacing-x-0">
         <thead>
           <tr className="text-sm text-gray-400">
-            <th className="text-start ps-4 px-2">Size</th>
-            <th className="text-start px-2">Relative Category</th>
+            <th className="text-start ps-4 px-2">Color</th>
             <th className="text-end px-2">Total Products</th>
             <th className="px-4 text-center w-16 ps-8">Action</th>
           </tr>
         </thead>
         <tbody>
-          {sizes.map((size) => (
-            <>
-              <SizeTr
-                handleRevalidate={handleRevalidate}
-                size={size}
-                key={size.id}
-              />
-            </>
+          {colors.map((color) => (
+            <ColorTr
+              key={color.id}
+              color={color}
+              handleRevalidate={handleRevalidate}
+            />
           ))}
         </tbody>
       </table>
@@ -32,13 +29,13 @@ const SizeTable = ({ sizes, handleRevalidate }) => {
   );
 };
 
-const SizeTr = ({ size, handleRevalidate }) => {
+const ColorTr = ({ color, handleRevalidate }) => {
   const [openUpdateForm, setOpenUpdateForm] = useState<boolean>(false);
 
   const handleDeleteBtn = async () => {
     if (window.confirm("Are you sure to delete")) {
       try {
-        const res = await deleteSize(size.id);
+        const res = await deleteColor(color.id);
         const json = await res.json();
 
         if (res.ok) {
@@ -58,21 +55,20 @@ const SizeTr = ({ size, handleRevalidate }) => {
     <>
       <tr className="text-gray-800 bg-white border-y-[12px] border-y-gray-100">
         <td className="p-2 ps-4 py-4 border-spacing-0">
-          <p className="font-medium text-base text-start">{size.size}</p>
+          <p className="font-medium text-base text-start">{color.color}</p>
         </td>
-        <td className="px-2 text-start">{size.relative_category}</td>
 
-        <td className="px-2 text-end">{size.total_products}</td>
+        <td className="px-2 text-end">{color.total_products}</td>
         <td className="px-4 w-16 ps-8">
           <div className="flex flex-row w-full justify-center items-center gap-3">
             <svg
+              onClick={() => setOpenUpdateForm(true)}
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
               viewBox="0 0 24 24"
               strokeWidth={1}
               stroke="currentColor"
               className="size-4 cursor-pointer"
-              onClick={() => setOpenUpdateForm(true)}
             >
               <path
                 strokeLinecap="round"
@@ -81,13 +77,13 @@ const SizeTr = ({ size, handleRevalidate }) => {
               />
             </svg>
             <svg
+              onClick={handleDeleteBtn}
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
               viewBox="0 0 24 24"
               strokeWidth={1}
               stroke="currentColor"
               className="size-4 cursor-pointer"
-              onClick={handleDeleteBtn}
             >
               <path
                 strokeLinecap="round"
@@ -98,13 +94,12 @@ const SizeTr = ({ size, handleRevalidate }) => {
           </div>
         </td>
       </tr>
-
       <div className="h-0">
         <Modal openModal={openUpdateForm} setOpenModal={setOpenUpdateForm}>
-          <UpdateSizeForm
+          <UpdateColorForm
             handleRevalidate={handleRevalidate}
             setOpenModal={setOpenUpdateForm}
-            oldData={size}
+            oldData={color}
           />
         </Modal>
       </div>
@@ -112,4 +107,4 @@ const SizeTr = ({ size, handleRevalidate }) => {
   );
 };
 
-export default SizeTable;
+export default ColorTable;

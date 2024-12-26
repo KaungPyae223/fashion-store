@@ -9,16 +9,17 @@ const AdminPagination = ({ meta }) => {
   const currentPage = meta.current_page
 
   const UpdatePage = (page: number) => {
-    updateParams("page", page.toString());
+    updateParams({page:page.toString()});
+    
   };
 
   const PrevNext = (preOrNex: string) => {
     if (preOrNex === "prev" && currentPage > 1) {
       const newPage = currentPage - 1;
-      updateParams("page", newPage.toString());
+      updateParams({page:newPage.toString()});
     } else if (preOrNex === "next" && currentPage < totalPage) {
       const newPage = currentPage + 1;
-      updateParams("page", newPage.toString());
+      updateParams({page:newPage.toString()});
     }
   };
 

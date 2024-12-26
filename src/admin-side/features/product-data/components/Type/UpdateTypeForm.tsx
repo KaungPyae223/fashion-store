@@ -1,11 +1,11 @@
 import AdminInput from "@/admin-side/components/AdminInput";
 import AdminSelect from "@/admin-side/components/AdminSelect";
-import { updateSize } from "@/admin-side/services/size";
+import { updateType } from "@/admin-side/services/type";
 import React, { SetStateAction } from "react";
 import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
 
-const UpdateSizeForm = ({
+const UpdateTypeForm = ({
   setOpenModal,
   handleRevalidate,
   oldData,
@@ -21,14 +21,14 @@ const UpdateSizeForm = ({
     reset,
   } = useForm({
     defaultValues: {
-      Size: oldData.size,
+      Type: oldData.type,
       Category: oldData.category_id,
     },
   });
 
-  const handleUpdateSize = async (data) => {
+  const handleUpdateType = async (data) => {
     try {
-      await updateSize(oldData.id, data.Category, data.Size);
+      await updateType(oldData.id, data.Category, data.Type);
       toast.success("Product updated successfully");
       reset();
       handleRevalidate();
@@ -42,12 +42,12 @@ const UpdateSizeForm = ({
   return (
     <div>
       <div className="bg-white p-5">
-        <h2 className="text-2xl font-semibold mb-4 text-center">Update Size</h2>
-        <form onSubmit={handleSubmit(handleUpdateSize)} className="my-4">
+        <h2 className="text-2xl font-semibold mb-4 text-center">Update Type</h2>
+        <form onSubmit={handleSubmit(handleUpdateType)} className="my-4">
           <AdminInput
             register={register}
             errors={errors}
-            inputName={"Size"}
+            inputName={"Type"}
             type={"text"}
             required={true}
           />
@@ -85,4 +85,4 @@ const UpdateSizeForm = ({
   );
 };
 
-export default UpdateSizeForm;
+export default UpdateTypeForm;

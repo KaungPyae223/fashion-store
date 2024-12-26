@@ -1,40 +1,42 @@
 import AdminInput from "@/admin-side/components/AdminInput";
 import AdminSelect from "@/admin-side/components/AdminSelect";
-import { updateSize } from "@/admin-side/services/size";
+import { storeType } from "@/admin-side/services/type";
 import React, { SetStateAction } from "react";
 import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
 
-const UpdateSizeForm = ({
+const CreateTypeForm = ({
   setOpenModal,
   handleRevalidate,
-  oldData,
 }: {
   setOpenModal: React.Dispatch<SetStateAction<boolean>>;
   handleRevalidate: Function;
-  oldData: any;
 }) => {
   const {
     register,
     handleSubmit,
     formState: { errors },
     reset,
-  } = useForm({
-    defaultValues: {
-      Size: oldData.size,
-      Category: oldData.category_id,
-    },
-  });
+  } = useForm();
 
-  const handleUpdateSize = async (data) => {
+  const handleCreateType = async (data) => {
     try {
-      await updateSize(oldData.id, data.Category, data.Size);
-      toast.success("Product updated successfully");
+      const res = await storeType(data.Category, data.Type);
+      const json = await res.json();
+
+      if (res.status !== 201) {
+        toast.error(json.message);
+        return;
+      }
+
+      toast.success("Product created successfully");
       reset();
+
       handleRevalidate();
+
       setOpenModal(false);
     } catch (error) {
-      toast.error("An error occurred while updating the product.");
+      toast.error("An error occurred while creating the product.");
       console.error("Error:", error);
     }
   };
@@ -42,12 +44,12 @@ const UpdateSizeForm = ({
   return (
     <div>
       <div className="bg-white p-5">
-        <h2 className="text-2xl font-semibold mb-4 text-center">Update Size</h2>
-        <form onSubmit={handleSubmit(handleUpdateSize)} className="my-4">
+        <h2 className="text-2xl font-semibold mb-4 text-center">Create Type</h2>
+        <form onSubmit={handleSubmit(handleCreateType)} className="my-4">
           <AdminInput
             register={register}
             errors={errors}
-            inputName={"Size"}
+            inputName={"Type"}
             type={"text"}
             required={true}
           />
@@ -76,7 +78,7 @@ const UpdateSizeForm = ({
               type="submit"
               className="py-2 cursor-pointer w-20 bg-gray-800 text-white text-center"
             >
-              Update
+              Create
             </button>
           </div>
         </form>
@@ -85,4 +87,4 @@ const UpdateSizeForm = ({
   );
 };
 
-export default UpdateSizeForm;
+export default CreateTypeForm;

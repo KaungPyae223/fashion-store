@@ -1,11 +1,10 @@
 import AdminInput from "@/admin-side/components/AdminInput";
-import AdminSelect from "@/admin-side/components/AdminSelect";
-import { updateSize } from "@/admin-side/services/size";
+import { updateBrandName } from "@/admin-side/services/brand";
 import React, { SetStateAction } from "react";
 import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
 
-const UpdateSizeForm = ({
+const UpdateBrandNameForm = ({
   setOpenModal,
   handleRevalidate,
   oldData,
@@ -21,14 +20,13 @@ const UpdateSizeForm = ({
     reset,
   } = useForm({
     defaultValues: {
-      Size: oldData.size,
-      Category: oldData.category_id,
+      Brand: oldData.name,
     },
   });
 
-  const handleUpdateSize = async (data) => {
+  const handleUpdateBrand = async (data) => {
     try {
-      await updateSize(oldData.id, data.Category, data.Size);
+      await updateBrandName(oldData.id, data.Brand);
       toast.success("Product updated successfully");
       reset();
       handleRevalidate();
@@ -42,27 +40,16 @@ const UpdateSizeForm = ({
   return (
     <div>
       <div className="bg-white p-5">
-        <h2 className="text-2xl font-semibold mb-4 text-center">Update Size</h2>
-        <form onSubmit={handleSubmit(handleUpdateSize)} className="my-4">
+        <h2 className="text-2xl font-semibold mb-4 text-center">Update Brand</h2>
+        <form onSubmit={handleSubmit(handleUpdateBrand)} className="my-4">
           <AdminInput
             register={register}
             errors={errors}
-            inputName={"Size"}
+            inputName={"Brand"}
             type={"text"}
             required={true}
           />
-          <AdminSelect
-            register={register}
-            errors={errors}
-            inputName={"Category"}
-            required={true}
-            data={[
-              { id: "1", name: "Clothing" },
-              { id: "2", name: "Footwears" },
-              { id: "3", name: "Accessories" },
-              { id: "4", name: "Life Styles" },
-            ]}
-          />
+
           <div className="flex flex-row justify-end gap-3 mt-8">
             <div
               onClick={() => {
@@ -85,4 +72,4 @@ const UpdateSizeForm = ({
   );
 };
 
-export default UpdateSizeForm;
+export default UpdateBrandNameForm;

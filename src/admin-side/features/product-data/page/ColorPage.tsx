@@ -1,11 +1,31 @@
+"use client";
 import BreadCrumb from "@/customer-side/components/BreadCrumb";
 import Link from "next/link";
 import React from "react";
-import ColorTable from "../components/ColorTable";
+import ColorTable from "../components/Color/ColorTable";
+import AdminPagination from "@/admin-side/components/AdminPagimation";
+import { useColorData } from "../hook/useColorData";
+import Loading from "@/admin-side/components/Loading";
+import Modal from "@/admin-side/components/Modal";
+import CreateColorForm from "../components/Color/CreateColorForm";
+import { Toaster } from "react-hot-toast";
+import NoData from "@/admin-side/components/NoData";
 
 const ColorPage = () => {
+  const {
+    handleFilter,
+    handleRevalidate,
+    data,
+    isLoading,
+    openModal,
+    setOpenModal,
+    filterColorRef,
+    error,
+  } = useColorData();
+
   return (
     <div>
+      <Toaster />
       <div className="flex flex-row justify-between items-center border-b pb-4">
         <Link
           href={"/admin/product-data-list"}
@@ -41,7 +61,12 @@ const ColorPage = () => {
 
       <div className="flex flex-row justify-between py-6 border-b">
         <div className="flex">
-          <div className="flex flex-row h-10 mt-auto cursor-pointer justify-center items-center gap-2 p-3 text-sm bg-gray-800 text-white ">
+          <div
+            onClick={() => {
+              setOpenModal(true);
+            }}
+            className="flex flex-row h-10 mt-auto cursor-pointer justify-center items-center gap-2 p-3 text-sm bg-gray-800 text-white "
+          >
             <svg
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
@@ -67,11 +92,15 @@ const ColorPage = () => {
             <input
               id="search"
               type="text"
+              ref={filterColorRef}
               className="border border-gray-300  px-3 py-2 outline-none h-10 w-[250px]"
             />
           </div>
 
-          <div className="flex flex-row h-10 mt-auto cursor-pointer justify-center items-center gap-2 p-3 text-sm  text-gray-700 border bg-gray-300 hover:border-gray-800 duration-300">
+          <div
+            onClick={handleFilter}
+            className="flex flex-row h-10 mt-auto cursor-pointer justify-center items-center gap-2 p-3 text-sm  text-gray-700 border bg-gray-300 hover:border-gray-800 duration-300"
+          >
             <svg
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
@@ -90,7 +119,24 @@ const ColorPage = () => {
           </div>
         </div>
       </div>
-      <ColorTable />
+
+      {isLoading ? (
+        <Loading />
+      ) : data.data.length > 0 ? (
+        <>
+          <ColorTable colors={data.data} handleRevalidate={handleRevalidate} />
+          <AdminPagination meta={data?.meta} />
+        </>
+      ) : (
+        <NoData />
+      )}
+
+      <Modal openModal={openModal} setOpenModal={setOpenModal}>
+        <CreateColorForm
+          setOpenModal={setOpenModal}
+          handleRevalidate={handleRevalidate}
+        />
+      </Modal>
     </div>
   );
 };

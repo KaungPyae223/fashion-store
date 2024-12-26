@@ -1,11 +1,32 @@
+"use client";
 import BreadCrumb from "@/customer-side/components/BreadCrumb";
 import Link from "next/link";
 import React from "react";
-import TypeTable from "../components/TypeTable";
+import TypeTable from "../components/Type/TypeTable";
+import { useTypeData } from "../hook/useTypeData";
+import AdminPagination from "@/admin-side/components/AdminPagimation";
+import Loading from "@/admin-side/components/Loading";
+import NoData from "@/admin-side/components/NoData";
+import CreateTypeForm from "../components/Type/CreateTypeForm";
+import Modal from "@/admin-side/components/Modal";
+import { Toaster } from "react-hot-toast";
 
 const TypePage = () => {
+  const {
+    handleFilter,
+    handleRevalidate,
+    data,
+    isLoading,
+    openModal,
+    setOpenModal,
+    filterTypeRef,
+    filterCategoryRef,
+    error,
+  } = useTypeData();
+
   return (
     <div>
+      <Toaster />
       <div className="flex flex-row justify-between items-center border-b pb-4">
         <Link
           href={"/admin/product-data-list"}
@@ -41,7 +62,10 @@ const TypePage = () => {
 
       <div className="flex flex-row justify-between py-6 border-b">
         <div className="flex">
-          <div className="flex flex-row h-10 mt-auto cursor-pointer justify-center items-center gap-2 p-3 text-sm bg-gray-800 text-white ">
+          <div
+            onClick={() => setOpenModal(true)}
+            className="flex flex-row h-10 mt-auto cursor-pointer justify-center items-center gap-2 p-3 text-sm bg-gray-800 text-white "
+          >
             <svg
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
@@ -65,13 +89,29 @@ const TypePage = () => {
               Type
             </label>
             <input
+              ref={filterTypeRef}
               id="search"
               type="text"
               className="border border-gray-300  px-3 py-2 outline-none h-10 w-[250px]"
             />
           </div>
-
-          <div className="flex flex-row h-10 mt-auto cursor-pointer justify-center items-center gap-2 p-3 text-sm  text-gray-700 border bg-gray-300 hover:border-gray-800 duration-300">
+          <div className="flex flex-col gap-1 text-gray-800">
+            <label className="text-sm text-gray-700">Categories</label>
+            <select
+              ref={filterCategoryRef}
+              className="border border-gray-300 bg-white  px-3 py-2 h-10 min-w-32 outline-none"
+            >
+              <option value={""}>All</option>
+              <option value={"clothing"}>Clothing</option>
+              <option value={"footwear"}>Footwears</option>
+              <option value={"accessories"}>Accessories</option>
+              <option value={"lifestyle"}>LifeStyles</option>
+            </select>
+          </div>
+          <div
+            onClick={handleFilter}
+            className="flex flex-row h-10 mt-auto cursor-pointer justify-center items-center gap-2 p-3 text-sm  text-gray-700 border bg-gray-300 hover:border-gray-800 duration-300"
+          >
             <svg
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
@@ -90,7 +130,23 @@ const TypePage = () => {
           </div>
         </div>
       </div>
-      <TypeTable />
+      {isLoading ? (
+        <Loading />
+      ) : data.data.length > 0 ? (
+        <>
+          <TypeTable handleRevalidate={handleRevalidate} types={data?.data} />
+          <AdminPagination meta={data?.meta} />
+        </>
+      ) : (
+        <NoData />
+      )}
+
+      <Modal openModal={openModal} setOpenModal={setOpenModal}>
+        <CreateTypeForm
+          handleRevalidate={handleRevalidate}
+          setOpenModal={setOpenModal}
+        />
+      </Modal>
     </div>
   );
 };

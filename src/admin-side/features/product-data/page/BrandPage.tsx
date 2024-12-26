@@ -1,11 +1,31 @@
+"use client";
 import BreadCrumb from "@/customer-side/components/BreadCrumb";
 import Link from "next/link";
 import React from "react";
-import BrandTable from "../components/BrandTable";
+import BrandTable from "../components/Brand/BrandTable";
+import { useBrandData } from "../hook/useBrandData";
+import AdminPagination from "@/admin-side/components/AdminPagimation";
+import Modal from "@/admin-side/components/Modal";
+import NoData from "@/admin-side/components/NoData";
+import Loading from "@/admin-side/components/Loading";
+import CreateBrandForm from "../components/Brand/CreateBrandForm";
+import { Toaster } from "react-hot-toast";
 
 const BrandPage = () => {
+  const {
+    handleFilter,
+    handleRevalidate,
+    data,
+    isLoading,
+    openModal,
+    setOpenModal,
+    filterBrandRef,
+    error,
+  } = useBrandData();
+
   return (
     <div>
+      <Toaster />
       <div className="flex flex-row justify-between items-center border-b pb-4">
         <Link
           href={"/admin/product-data-list"}
@@ -41,7 +61,10 @@ const BrandPage = () => {
 
       <div className="flex flex-row justify-between py-6 border-b">
         <div className="flex">
-          <div className="flex flex-row h-10 mt-auto cursor-pointer justify-center items-center gap-2 p-3 text-sm bg-gray-800 text-white ">
+          <div
+            onClick={() => setOpenModal(true)}
+            className="flex flex-row h-10 mt-auto cursor-pointer justify-center items-center gap-2 p-3 text-sm bg-gray-800 text-white "
+          >
             <svg
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
@@ -65,13 +88,17 @@ const BrandPage = () => {
               Brand Name
             </label>
             <input
+              ref={filterBrandRef}
               id="search"
               type="text"
               className="border border-gray-300  px-3 py-2 outline-none h-10 w-[250px]"
             />
           </div>
-         
-          <div className="flex flex-row h-10 mt-auto cursor-pointer justify-center items-center gap-2 p-3 text-sm  text-gray-700 border bg-gray-300 hover:border-gray-800 duration-300">
+
+          <div
+            onClick={handleFilter}
+            className="flex flex-row h-10 mt-auto cursor-pointer justify-center items-center gap-2 p-3 text-sm  text-gray-700 border bg-gray-300 hover:border-gray-800 duration-300"
+          >
             <svg
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
@@ -91,7 +118,25 @@ const BrandPage = () => {
         </div>
       </div>
 
-      <BrandTable />
+      {isLoading ? (
+        <Loading />
+      ) : data.data.length ? (
+        <>
+          <BrandTable brands={data.data} handleRevalidate={handleRevalidate} />
+          <AdminPagination meta={data?.meta} />
+        </>
+      ) : (
+        <NoData />
+      )}
+
+      <Modal openModal={openModal} setOpenModal={setOpenModal}>
+        <CreateBrandForm
+          setOpenModal={setOpenModal}
+          handleRevalidate={handleRevalidate}
+        />
+        
+      </Modal>
+      
     </div>
   );
 };

@@ -3,6 +3,7 @@ import React, { useState, useCallback } from "react";
 import { useDropzone } from "react-dropzone";
 import Modal from "./Modal";
 
+
 const SingleImageUpload = ({ setImage }) => {
   const [openModal, setOpenModal] = useState<boolean>(false);
 
@@ -22,12 +23,12 @@ const SingleImageUpload = ({ setImage }) => {
 
   return (
     <div className="mt-3">
-      <button
+      <div
         onClick={() => setOpenModal(true)}
-        className="px-6 py-2 bg-gray-800 text-white"
+        className="px-6 py-2 bg-gray-800 text-white w-fit cursor-pointer"
       >
-        Upload Images
-      </button>
+        Upload Image
+      </div>
       <Modal openModal={openModal} setOpenModal={setOpenModal}>
         <div className="bg-white p-5">
           <h2 className="text-2xl font-semibold mb-4 text-center">Upload Images</h2>
@@ -47,12 +48,12 @@ const SingleImageUpload = ({ setImage }) => {
             )}
           </div>
 
-          <button
+          <div
             onClick={()=>setOpenModal(false)}
-            className="mt-4 px-6 py-2 border border-gray-300 hover:border-gray-800 text-gray-500 hover:text-gray-800 duration-150  transition"
+            className="mt-4 w-fit px-6 py-2 border border-gray-300 hover:border-gray-800 text-gray-500 hover:text-gray-800 duration-150  transition"
           >
             Close
-          </button>
+          </div>
         </div>
       </Modal>
     </div>

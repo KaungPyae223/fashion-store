@@ -1,67 +1,83 @@
-import AdminPagination from "@/admin-side/components/AdminPagimation";
-import React from "react";
+import Modal from "@/admin-side/components/Modal";
+import React, { useState } from "react";
+import UpdateTypeForm from "./UpdateTypeForm";
+import { deleteType } from "@/admin-side/services/type";
+import toast from "react-hot-toast";
 
-const TypeTable = () => {
+const TypeTable = ({ handleRevalidate, types }) => {
   return (
     <div className="mt-6">
       <table className="table-auto w-full text-left text-sm border-spacing-y-4 border-spacing-x-0">
         <thead>
           <tr className="text-sm text-gray-400">
-            <th className="text-start px-2">Type</th>
-            <th className="text-center px-2">Relative Category</th>
+            <th className="text-start ps-4 px-2">Type</th>
+            <th className="text-start px-2">Relative Category</th>
             <th className="text-start px-2">Relative Brands</th>
             <th className="text-end px-2">Total Products</th>
-            <th className="px-4 text-center">Action</th>
+            <th className="px-4 text-center w-16 ps-8">Action</th>
           </tr>
         </thead>
         <tbody>
-          <TypeTr />
-          <TypeTr />
-          <TypeTr />
-          <TypeTr />
-          <TypeTr />
-          <TypeTr />
-          <TypeTr />
-          <TypeTr />
-          <TypeTr />
+          {types.map((type) => (
+            <TypeTr
+              key={type.id}
+              type={type}
+              handleRevalidate={handleRevalidate}
+            />
+          ))}
         </tbody>
       </table>
-      <AdminPagination />
     </div>
   );
 };
 
-const TypeTr = () => {
+const TypeTr = ({ type, handleRevalidate }) => {
+
+  const [openUpdateForm, setOpenUpdateForm] = useState<boolean>(false);
+
+  const handleDeleteBtn = async () => {
+    if (window.confirm("Are you sure to delete")) {
+      try {
+        const res = await deleteType(type.id);
+        const json = await res.json();
+
+        if (res.ok) {
+          toast.success(json.message);
+          handleRevalidate();
+        } else {
+          toast.error(json.message);
+        }
+      } catch (error) {
+        toast.error("An error occurred while deleting the product.");
+        console.error("Error:", error);
+      }
+    }
+  };
+
   return (
+    <>
     <tr className="text-gray-800 bg-white border-y-[12px] border-y-gray-100">
-      <td className="p-2 py-4 border-spacing-0">
+      <td className="p-2 ps-4 py-4 border-spacing-0">
         <div className="flex flex-row gap-3 items-center">
-          
-          <p className="font-medium text-base text-start">T - Shirt</p>
+          <p className="font-medium text-base text-start">{type.type}</p>
         </div>
       </td>
-      <td className="px-2 text-center">
-        Clothing
-      </td>
+      <td className="px-2 text-start">{type.relative_category}</td>
       <td className="px-2 text-start">
         <div className="flex flex-row gap-2">
-          <p className="text-xs text-gray-500 bg-gray-200 px-3 py-0.5 rounded-full">
-            Nike
-          </p>
-          <p className="text-xs text-gray-500 bg-gray-200 px-3 py-0.5 rounded-full">
-           Puma
-          </p>
-          <p className="text-xs text-gray-500 bg-gray-200 px-3 py-0.5 rounded-full">
-            Adidas
-          </p>
-          
+          {type.relative_brand.map((brand) => (
+            <p key={brand.brandID} className="text-xs text-slate-600 bg-gray-200 px-3 py-0.5 rounded-full">
+              {brand.brandName}
+            </p>
+          ))}
         </div>
       </td>
 
-      <td className="px-2 text-end">50</td>
-      <td className="px-4">
+      <td className="px-2 text-end">{type.total_products}</td>
+      <td className="px-4 w-16 ps-8">
         <div className="flex flex-row w-full justify-center items-center gap-3">
           <svg
+            onClick={()=>setOpenUpdateForm(true)}
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
             viewBox="0 0 24 24"
@@ -76,6 +92,7 @@ const TypeTr = () => {
             />
           </svg>
           <svg
+            onClick={handleDeleteBtn}
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
             viewBox="0 0 24 24"
@@ -92,6 +109,17 @@ const TypeTr = () => {
         </div>
       </td>
     </tr>
+    <div className="h-0">
+        <Modal openModal={openUpdateForm} setOpenModal={setOpenUpdateForm}>
+          <UpdateTypeForm
+            handleRevalidate={handleRevalidate}
+            setOpenModal={setOpenUpdateForm}
+            oldData={type}
+          />
+        </Modal>
+      </div>
+    </>
+    
   );
 };
 

@@ -1,6 +1,6 @@
 "use client";
 import { AnimatePresence, motion } from "motion/react";
-import React, { ReactElement, SetStateAction, useEffect } from "react";
+import React, { ReactElement, SetStateAction, useEffect, useRef } from "react";
 
 interface ModalInterface {
   openModal: boolean;
@@ -24,11 +24,23 @@ const Modal = ({
     return () => document.body.classList.remove("no-scroll");
   }, [openModal]);
 
+  const backgroundRef = useRef()
+
+  useEffect(() => {
+    if (backgroundRef.current) {
+      // Example of setting the position using style (instead of directly manipulating offsetTop/offsetLeft)
+      backgroundRef.current.style.top = "0px";
+      backgroundRef.current.style.left = "0px";
+    }
+  }, []);
+
+
   return (
     <AnimatePresence>
       {openModal && (
         <>
           <motion.div
+            ref={backgroundRef}
             onClick={() => setOpenModal(false)}
             className="w-screen h-screen fixed top-0 left-0 z-40"
             initial={{ backgroundColor: "rgba(0, 0, 0, 0)" }}

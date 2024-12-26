@@ -2,58 +2,33 @@
 
 import BreadCrumb from "@/customer-side/components/BreadCrumb";
 import Link from "next/link";
-import React, { useEffect, useRef, useState } from "react";
+import React from "react";
 import SizeTable from "../components/Size/SizeTable";
-import useAddParamsToURL from "@/hooks/useAddParamsToURL";
-import useSWR, {mutate} from "swr";
-import { fetchSizes } from "../../../services/size";
-import useUpdateParams from "@/hooks/useUpdateParams";
-import { throttle } from "lodash";
-import useRemoveParam from "@/hooks/useRemoveParam";
-import { useSearchParams } from "next/navigation";
+
 import AdminPagination from "@/admin-side/components/AdminPagimation";
 import Loading from "@/admin-side/components/Loading";
 import Modal from "@/admin-side/components/Modal";
 
 import CreateSizeForm from "../components/Size/CreateSizeForm";
 import { Toaster } from "react-hot-toast";
+import { useSizeData } from "../hook/useSizeData";
+import NoData from "@/admin-side/components/NoData";
 
 const SizePage = () => {
-  const AddParamsToURL = useAddParamsToURL();
-  const updateParams = useUpdateParams();
-  const deleteParam = useRemoveParam();
-  const searchParams = useSearchParams();
-
-  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL;
-
-  const [fetchUrl, setFetchUrl] = useState(AddParamsToURL(baseUrl + "/size"));
-  const [openModal, setOpenModal] = useState<boolean>(false);
-
-  useEffect(() => {
-    setFetchUrl(AddParamsToURL(baseUrl + "/size"));
-  }, [searchParams]);
-
-  const { data, isLoading, error } = useSWR(fetchUrl, fetchSizes);
-
-  const handleRevalidate = async () => {
-    await mutate(fetchUrl); 
-  };
-
-  const filterSize = useRef();
-
-  const handleFilter = throttle(() => {
-    if (filterSize.current.value) {
-      updateParams("q", filterSize.current.value);
-    } else {
-      deleteParam(["q", "page"]);
-    }
-  }, 500);
-
-  
+  const {
+    handleFilter,
+    handleRevalidate,
+    data,
+    isLoading,
+    openModal,
+    setOpenModal,
+    filterSizeRef,
+    filterCategoryRef
+  } = useSizeData();
 
   return (
     <div>
-      <Toaster/>
+      <Toaster />
       <div className="flex flex-row justify-between items-center border-b pb-4">
         <Link
           href={"/admin/product-data-list"}
@@ -116,13 +91,22 @@ const SizePage = () => {
               Size
             </label>
             <input
-              ref={filterSize}
+              ref={filterSizeRef}
               id="search"
               type="text"
               className="border border-gray-300  px-3 py-2 outline-none h-10 w-[250px]"
             />
           </div>
-
+          <div className="flex flex-col gap-1 text-gray-800">
+            <label className="text-sm text-gray-700">Categories</label>
+            <select ref={filterCategoryRef} className="border border-gray-300 bg-white  px-3 py-2 h-10 min-w-32 outline-none">
+              <option value={""}>All</option>
+              <option value={"clothing"}>Clothing</option>
+              <option value={"footwear"}>Footwears</option>
+              <option value={"accessories"}>Accessories</option>
+              <option value={"lifestyle"}>LifeStyles</option>
+            </select>
+          </div>
           <div
             onClick={handleFilter}
             className="flex flex-row h-10 mt-auto cursor-pointer justify-center items-center gap-2 p-3 text-sm  text-gray-700 border bg-gray-300 hover:border-gray-800 duration-300"
@@ -148,15 +132,20 @@ const SizePage = () => {
 
       {isLoading ? (
         <Loading />
-      ) : (
+      ) : data.data.length > 0 ? (
         <>
           <SizeTable handleRevalidate={handleRevalidate} sizes={data?.data} />
           <AdminPagination meta={data?.meta} />
         </>
+      ) : (
+        <NoData />
       )}
 
       <Modal openModal={openModal} setOpenModal={setOpenModal}>
-        <CreateSizeForm handleRevalidate={handleRevalidate} setOpenModal={setOpenModal}/>
+        <CreateSizeForm
+          handleRevalidate={handleRevalidate}
+          setOpenModal={setOpenModal}
+        />
       </Modal>
     </div>
   );

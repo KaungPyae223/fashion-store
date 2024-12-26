@@ -12,7 +12,7 @@ const ProductDataPage = () => {
   return (
     <div className="grid grid-cols-4 gap-6">
       <Link
-        href={"/product-data-list/brands"}
+        href={"/admin/product-data-list/brands"}
         className="border border-gray-300 p-3 flex justify-center items-center flex-coll gap-3 cursor-pointer hover:bg-gray-700 hover:text-white duration-300"
       >
         <SiNike className="size-5" />
