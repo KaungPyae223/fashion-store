@@ -1,4 +1,4 @@
-import ProductCreateConfirmPage from "@/admin-side/features/product-list/page/ProductCreateConfirmPage";
+import ProductCreateConfirmPage from "@/admin-side/features/product-management/product-list/page/ProductCreateConfirmPage";
 import React from "react";
 
 const page = () => {

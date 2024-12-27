@@ -1,5 +1,5 @@
 import PageTitle from "@/admin-side/components/PageTitle";
-import FeedbackHistoryPage from "@/admin-side/features/feedback-history/pages/FeedbackHistoryPage";
+import FeedbackHistoryPage from "@/admin-side/features/customer-support/feedback-history/pages/FeedbackHistoryPage";
 import React from "react";
 import FeedbackHistoryAnimation from "@/assets/FeedbackHistoryAnimation.json";
 

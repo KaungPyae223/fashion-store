@@ -1,5 +1,5 @@
 import PageTitle from "@/admin-side/components/PageTitle";
-import PaymentPage from "@/admin-side/features/payment/page/PaymentPage";
+import PaymentPage from "@/admin-side/features/customer-support/payment/page/PaymentPage";
 import React from "react";
 import PaymentHistoryAnimation from "@/assets/PaymentHistoryAnimation.json";
 

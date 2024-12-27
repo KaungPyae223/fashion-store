@@ -1,5 +1,5 @@
 import PageTitle from "@/admin-side/components/PageTitle";
-import CustomerListPage from "@/admin-side/features/customer-list/pages/CustomerListPage";
+import CustomerListPage from "@/admin-side/features/customer-support/customer-list/pages/CustomerListPage";
 import React from "react";
 import CustomerListAnimation from "@/assets/CustomerListAnimation.json";
 

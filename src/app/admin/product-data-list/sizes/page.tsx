@@ -1,12 +1,12 @@
-import SizePage from '@/admin-side/features/product-data/page/SizePage'
-import React from 'react'
+import SizePage from "@/admin-side/features/product-management/product-data/page/SizePage";
+import React from "react";
 
 const page = () => {
   return (
     <div>
-      <SizePage/>
+      <SizePage />
     </div>
-  )
-}
+  );
+};
 
-export default page
+export default page;

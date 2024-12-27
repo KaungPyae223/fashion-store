@@ -1,4 +1,4 @@
-import CategoryPage from "@/admin-side/features/product-data/page/CategoryPage";
+import CategoryPage from "@/admin-side/features/product-management/product-data/page/CategoryPage";
 import React from "react";
 
 const page = () => {
