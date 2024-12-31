@@ -17,7 +17,7 @@ const BrandTable = ({ brands, brandImage, setBrandImageUploadModel }) => {
             <th className="text-start px-2">Relative Category</th>
             <th className="text-start px-2">Relative Type</th>
             <th className="text-end px-2">Total Products</th>
-            <th className="px-4 text-center">Action</th>
+            <th className="px-4 text-center ps-8 w-16">Action</th>
           </tr>
         </thead>
         <tbody>
@@ -61,9 +61,9 @@ const BrandTr = ({ brand, brandImage,setBrandImageUploadModel }) => {
         <td className="p-2 border-spacing-0">
           <div className="flex flex-row gap-3 items-center">
             <Image
-              className="w-28 h-28 object-cover object-center"
-              width={112}
-              height={112}
+              className="w-[70px] h-[70px] object-cover object-center"
+              width={70}
+              height={70}
               src={brand.photo}
               alt={brand.name + " image"}
             />
@@ -96,7 +96,7 @@ const BrandTr = ({ brand, brandImage,setBrandImageUploadModel }) => {
         </td>
 
         <td className="px-2 text-end">{brand.total_products}</td>
-        <td className="px-4">
+        <td className="px-4 text-center ps-8 w-16">
           <div className="flex flex-row w-full justify-center items-center gap-3">
             <svg
               xmlns="http://www.w3.org/2000/svg"

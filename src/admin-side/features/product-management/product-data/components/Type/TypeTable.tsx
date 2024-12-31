@@ -112,7 +112,6 @@ const TypeTr = ({ type }) => {
       <div className="h-0">
         <Modal openModal={openUpdateForm} setOpenModal={setOpenUpdateForm}>
           <UpdateTypeForm
-            handleRevalidate={handleRevalidate}
             setOpenModal={setOpenUpdateForm}
             oldData={type}
           />

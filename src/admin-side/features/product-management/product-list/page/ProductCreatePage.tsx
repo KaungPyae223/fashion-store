@@ -1,14 +1,16 @@
-'use client'
 import BreadCrumb from "@/customer-side/components/BreadCrumb";
-import React from "react";
-import CreateProductForm from "../components/CreateProductForm";
 import Link from "next/link";
+import React from "react";
+import NewProductCreateForm from "../components/ProductCreateComponents/ProductCreateForm";
 
 const ProductCreatePage = () => {
   return (
     <div>
       <div className="flex flex-row justify-between items-center border-b pb-4">
-        <Link href={"/admin/product-list"} className="flex flex-row items-center gap-3 py-3 px-6 cursor-pointer hover:border-gray-800 duration-300 border border-gray-300">
+        <Link
+          href={"/admin/product-list"}
+          className="flex flex-row items-center gap-3 py-3 px-6 cursor-pointer hover:border-gray-800 duration-300 border border-gray-300"
+        >
           <svg
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
@@ -25,7 +27,7 @@ const ProductCreatePage = () => {
           </svg>
           Back
         </Link>
-       
+
         <div className="flex flex-col items-center">
           <p className="text-xl tracking-wide mb-3">Product Create </p>
           <BreadCrumb
@@ -36,7 +38,7 @@ const ProductCreatePage = () => {
           />
         </div>
       </div>
-      <CreateProductForm />
+      <NewProductCreateForm />
     </div>
   );
 };

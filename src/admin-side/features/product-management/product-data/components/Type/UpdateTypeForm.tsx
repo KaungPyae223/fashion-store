@@ -29,7 +29,15 @@ const UpdateTypeForm = ({
 
   const handleUpdateType = async (data) => {
     try {
-      await updateType(oldData.id, data.Category, data.Type);
+      const res = await updateType(oldData.id, data.Category, data.Type);
+
+      const json = await res.json();
+
+      if(res.status != 200){
+        toast.error(json.message);
+        return;
+      }
+
       toast.success("Product updated successfully");
       reset();
       await revalidate("/type");

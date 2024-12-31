@@ -16,7 +16,7 @@ export const useBrandData = () => {
 
   const baseUrl = process.env.NEXT_PUBLIC_BASE_URL;
 
-  const [fetchUrl, setFetchUrl] = useState(AddParamsToURL(baseUrl + "/size"));
+  const [fetchUrl, setFetchUrl] = useState(AddParamsToURL(baseUrl + "/brand"));
   const [openModal, setOpenModal] = useState<boolean>(false);
 
   const filterBrandRef = useRef();

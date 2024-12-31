@@ -34,7 +34,7 @@ const MultipleImageUpload = ({ setImages }) => {
           <h2 className="text-2xl font-semibold mb-4 text-center">Upload Images</h2>
           <div
             {...getRootProps()}
-            className={`border-2 border-dashed p-6 text-center ${
+            className={`border-2 border-dashed w-[400px] py-20 text-center ${
               isDragActive ? "border-blue-500" : "border-gray-300"
             }`}
           >

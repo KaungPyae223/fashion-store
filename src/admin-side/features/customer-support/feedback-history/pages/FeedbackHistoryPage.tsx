@@ -1,7 +1,22 @@
+'use client'
 import React from "react";
 import FeedbackHistoryContainer from "../components/FeedbackHistoryContainer";
+import { useFeedbackData } from "../hooks/useFeedbackData";
+import Loading from "@/admin-side/components/Loading";
+import AdminPagination from "@/admin-side/components/AdminPagimation";
+import NoData from "@/admin-side/components/NoData";
 
 const FeedbackHistoryPage = () => {
+
+  const {
+    handleFilter,
+    data,
+    isLoading,
+    filterCustomerName,
+    filterAdminName,
+    error,
+  } = useFeedbackData();
+
   return (
     <div>
       <div className="flex flex-row justify-end border-b pb-6">
@@ -11,6 +26,7 @@ const FeedbackHistoryPage = () => {
               Customer Name
             </label>
             <input
+              ref={filterCustomerName}
               id="search"
               type="text"
               className="border border-gray-300  px-3 py-2 outline-none h-10 w-[250px]"
@@ -21,12 +37,13 @@ const FeedbackHistoryPage = () => {
               Admin Name
             </label>
             <input
+              ref={filterAdminName}
               id="search"
               type="text"
               className="border border-gray-300  px-3 py-2 outline-none h-10 w-[250px]"
             />
           </div>
-          <div className="flex flex-row h-10 mt-auto cursor-pointer justify-center items-center gap-2 p-3 text-sm  text-gray-700 border bg-gray-300 hover:border-gray-800 duration-300">
+          <div onClick={handleFilter} className="flex flex-row h-10 mt-auto cursor-pointer justify-center items-center gap-2 p-3 text-sm  text-gray-700 border bg-gray-300 hover:border-gray-800 duration-300">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
@@ -45,7 +62,16 @@ const FeedbackHistoryPage = () => {
           </div>
         </div>
       </div>
-      <FeedbackHistoryContainer />
+      {isLoading ? (
+        <Loading />
+      ) : data?.data.length > 0 ? (
+        <>
+          <FeedbackHistoryContainer feedback={data.data} />
+          <AdminPagination meta={data?.meta} />
+        </>
+      ) : (
+        <NoData />
+      )}
     </div>
   );
 };

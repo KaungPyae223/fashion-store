@@ -23,6 +23,7 @@ export const updateBrandName = (id, brand) => {
     }),
     headers: {
       "Content-Type": "application/json",
+      "Accept": "application/json",
       Authorization: `Bearer 3BlHS7l6qKpEpCukKESpffk4Llg17LLfsGRUDEMT3ebb5733`,
     },
   });
@@ -50,6 +51,7 @@ export const deleteBrand = (id) => {
     method: "DELETE",
     headers: {
       "Content-Type": "application/json",
+      "Accept": "application/json",
       Authorization: `Bearer 3BlHS7l6qKpEpCukKESpffk4Llg17LLfsGRUDEMT3ebb5733`,
     },
   });

@@ -7,6 +7,7 @@ export const storeSize = (category_id, size) => {
     }),
     headers: {
       "Content-Type": "application/json",
+      "Accept": "application/json",
       Authorization: `Bearer 3BlHS7l6qKpEpCukKESpffk4Llg17LLfsGRUDEMT3ebb5733`,
     },
   });
@@ -17,6 +18,7 @@ export const deleteSize = (id) => {
     method: "DELETE",
     headers: {
       "Content-Type": "application/json",
+      "Accept": "application/json",
       Authorization: `Bearer 3BlHS7l6qKpEpCukKESpffk4Llg17LLfsGRUDEMT3ebb5733`,
     },
   });
@@ -31,6 +33,7 @@ export const updateSize = (id, category_id, size) => {
     }),
     headers: {
       "Content-Type": "application/json",
+      "Accept": "application/json",
       Authorization: `Bearer 3BlHS7l6qKpEpCukKESpffk4Llg17LLfsGRUDEMT3ebb5733`,
     },
   });

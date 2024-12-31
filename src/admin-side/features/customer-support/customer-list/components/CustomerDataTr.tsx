@@ -3,7 +3,7 @@ import React from "react";
 const CustomerDataTr = () => {
   return (
     <tr className=" duration-100 hover:bg-gray-800 hover:text-white text-gray-800 bg-white border-y-[12px] border-y-gray-100">
-      <td className="text-start p-2 py-4 ">Royal Express</td>
+      <td className="text-start p-2 ps-4 py-4 ">Royal Express</td>
       <td className="text-start p-2 ">0923052418</td>
       <td className="text-start p-2 ">
         www.info@royalexpress.com
@@ -14,7 +14,7 @@ const CustomerDataTr = () => {
      
       <td className="  p-2 text-end">320</td>
 
-      <td className=" px-2">
+      <td className=" w-10 ps-4 px-2">
         <div className="flex w-full flex-row items-center justify-center gap-3">
          
 

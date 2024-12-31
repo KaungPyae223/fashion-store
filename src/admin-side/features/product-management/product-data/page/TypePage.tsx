@@ -131,7 +131,7 @@ const TypePage = () => {
       </div>
       {isLoading ? (
         <Loading />
-      ) : data?.data.length > 0 ? (
+      ) : data.data && data?.data.length > 0 ? (
         <>
           <TypeTable  types={data?.data} />
           <AdminPagination meta={data?.meta} />

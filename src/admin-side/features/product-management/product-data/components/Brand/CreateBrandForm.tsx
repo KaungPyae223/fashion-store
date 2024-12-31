@@ -70,7 +70,10 @@ const CreateBrandForm = ({
               Product profile image *
             </label>
             {brandImage ? (
-              <img
+              <Image
+                alt="Brand Image"
+                width={400}
+                height={300}
                 src={brandImage.preview}
                 className="w-[400px] h-[300px] object-cover"
               />

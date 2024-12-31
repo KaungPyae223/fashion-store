@@ -7,6 +7,7 @@ export const storeType = (category_id, type) => {
     }),
     headers: {
       "Content-Type": "application/json",
+      "Accept": "application/json",
       Authorization: `Bearer 3BlHS7l6qKpEpCukKESpffk4Llg17LLfsGRUDEMT3ebb5733`,
     },
   });
@@ -17,6 +18,7 @@ export const deleteType = (id) => {
     method: "DELETE",
     headers: {
       "Content-Type": "application/json",
+      "Accept": "application/json",
       Authorization: `Bearer 3BlHS7l6qKpEpCukKESpffk4Llg17LLfsGRUDEMT3ebb5733`,
     },
   });
@@ -31,6 +33,7 @@ export const updateType = (id, category_id, type) => {
     }),
     headers: {
       "Content-Type": "application/json",
+      "Accept": "application/json",
       Authorization: `Bearer 3BlHS7l6qKpEpCukKESpffk4Llg17LLfsGRUDEMT3ebb5733`,
     },
   });

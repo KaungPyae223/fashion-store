@@ -13,7 +13,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className="flex flex-row min-h-screen bg-gray-100">
+      <body className="flex flex-row min-h-screen bg-gray-100 overflow-y-hidden">
         <header className="bg-white">
           <AdminNav />
         </header>

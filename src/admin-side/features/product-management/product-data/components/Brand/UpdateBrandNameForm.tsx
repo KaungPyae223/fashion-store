@@ -27,7 +27,15 @@ const UpdateBrandNameForm = ({
 
   const handleUpdateBrand = async (data) => {
     try {
-      await updateBrandName(oldData.id, data.Brand);
+      const res = await updateBrandName(oldData.id, data.Brand);
+
+      const json = await res.json();
+
+      if(res.status != 200){
+        toast.error(json.message);
+        return;
+      }
+
       toast.success("Product updated successfully");
       reset();
       revalidate("/brand");

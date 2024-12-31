@@ -25,7 +25,7 @@ const SizeCard = ({
       onClick={handleSizeChange}
       className={`border py-3 ${
         selectedSize === id ? "border-black border-2 font-semibold" : ""
-      } cursor-pointer flex items-center justify-center uppercase tracking-widest text-xs`}
+      } cursor-pointer w-1/3 flex items-center justify-center uppercase tracking-widest text-xs`}
     >
       {size}
     </div>

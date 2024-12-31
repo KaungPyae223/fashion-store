@@ -30,7 +30,15 @@ const UpdateSizeForm = ({
 
   const handleUpdateSize = async (data) => {
     try {
-      await updateSize(oldData.id, data.Category, data.Size);
+      const res = await updateSize(oldData.id, data.Category, data.Size);
+      
+      const json = await res.json();
+
+      if(res.status != 200){
+        toast.error(json.message);
+        return;
+      }
+      
       toast.success("Product updated successfully");
       reset();
       await revalidate("/size");

@@ -47,7 +47,7 @@ const CategoryPage = () => {
       </div>
       {isLoading ? (
         <Loading />
-      ) : data?.data.length > 0 ? (
+      ) : data.data && data?.data.length > 0 ? (
         <>
           <CategoryTable categories={data.data} />
         </>

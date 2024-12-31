@@ -9,7 +9,7 @@ const UpdateBrandImageForm = ({
   setOpenModal,
   setBrandImageUploadModel,
   oldData,
-  brandImage
+  brandImage,
 }: {
   setOpenModal: React.Dispatch<SetStateAction<boolean>>;
   setBrandImageUploadModel: React.Dispatch<SetStateAction<boolean>>;
@@ -35,7 +35,15 @@ const UpdateBrandImageForm = ({
     }
 
     try {
-      await updateBrandPhoto(oldData.id, brandImage.file);
+      const res = await updateBrandPhoto(oldData.id, brandImage.file);
+
+      const json = await res.json();
+
+      if (res.status != 200) {
+        toast.error(json.message);
+        return;
+      }
+
       toast.success("Product updated successfully");
       reset();
       await revalidate("/brand");
@@ -61,11 +69,14 @@ const UpdateBrandImageForm = ({
               Product profile image *
             </label>
             {brandImage ? (
-              <img
+              <Image
+                alt="Update Brand Image"
+                width={400}
+                height={300}
                 src={brandImage.preview}
                 className="w-[400px] h-[300px] object-cover"
               />
-            )  : (
+            ) : (
               <Image
                 className="border w-[400px] h-[300px] mt-1.5 border-gray-300 cursor-pointer object-cover"
                 src={oldData.photo}
@@ -74,7 +85,10 @@ const UpdateBrandImageForm = ({
                 height={300}
               />
             )}
-             <div onClick={() => setBrandImageUploadModel(true)} className="mt-3 px-6 py-2 bg-gray-800 text-white w-fit">
+            <div
+              onClick={() => setBrandImageUploadModel(true)}
+              className="mt-3 px-6 py-2 bg-gray-800 text-white w-fit"
+            >
               Upload an Image
             </div>
           </div>

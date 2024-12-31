@@ -1,6 +1,5 @@
 import React from "react";
 import CustomerContainer from "../components/CustomerContainer";
-import AdminPagination from "@/admin-side/components/AdminPagimation";
 
 const CustomerListPage = () => {
   return (
@@ -38,7 +37,7 @@ const CustomerListPage = () => {
         </div>
       </div>
       <CustomerContainer />
-      <AdminPagination />
+      
     </div>
   );
 };

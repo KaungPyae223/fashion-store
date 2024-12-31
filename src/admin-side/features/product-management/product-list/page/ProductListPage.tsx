@@ -1,9 +1,28 @@
-import AdminSubTitle from "@/admin-side/components/AdminSubTitle";
+"use client";
 import React from "react";
-import ProductsContainer from "../components/ProductsContainer";
+import ProductsContainer from "../components/ProductListComponents/ProductsContainer";
 import Link from "next/link";
+import { useProductListData } from "../hooks/useProductListData";
+import Loading from "@/admin-side/components/Loading";
+import NoData from "@/admin-side/components/NoData";
+import AdminPagination from "@/admin-side/components/AdminPagimation";
 
 const ProductListPage = () => {
+  const {
+    handleFilter,
+    categoryFilterRef,
+    FilterData,
+    data,
+    isLoading,
+    filterProductNameRef,
+    typeData,
+    handleCategoryChange,
+    typeFilterRef,
+    brandFilterRef,
+    statusFilterRef,
+    error,
+  } = useProductListData();
+
   return (
     <div>
       <div className="flex flex-row justify-between border-b pb-6">
@@ -36,6 +55,7 @@ const ProductListPage = () => {
               Product Name
             </label>
             <input
+              ref={filterProductNameRef}
               id="search"
               type="text"
               className="border border-gray-300  px-3 py-2 outline-none h-10 w-[250px]"
@@ -43,46 +63,58 @@ const ProductListPage = () => {
           </div>
           <div className="flex flex-col gap-1 text-gray-800">
             <label className="text-sm text-gray-700">Status</label>
-            <select className="border border-gray-300 bg-white  px-3 py-2 h-10 min-w-32 outline-none">
-              <option value={""}>All</option>
-              <option value={""}>Footwear</option>
-              <option value={""}>Clothing</option>
-              <option value={""}>Lifestyle</option>
-              <option value={""}>Accessories</option>
+            <select ref={statusFilterRef} className="border border-gray-300 bg-white  px-3 py-2 h-10 min-w-32 outline-none">
+              <option value={"all"}>All</option>
+              <option value={"public"}>Public</option>
+              <option value={"private"}>Private</option>
             </select>
           </div>
           <div className="flex flex-col gap-1 text-gray-800">
             <label className="text-sm text-gray-700">Categories</label>
-            <select className="border border-gray-300 bg-white  px-3 py-2 h-10 min-w-32 outline-none">
-              <option value={""}>All</option>
-              <option value={""}>Footwear</option>
-              <option value={""}>Clothing</option>
-              <option value={""}>Lifestyle</option>
-              <option value={""}>Accessories</option>
+            <select
+              ref={categoryFilterRef}
+              onChange={handleCategoryChange}
+              className="border border-gray-300 bg-white  px-3 py-2 h-10 min-w-32 outline-none"
+            >
+              <option value={"all"}>All</option>
+              <option value={"clothing"}>Clothing</option>
+              <option value={"footwear"}>Footwears</option>
+              <option value={"accessories"}>Accessories</option>
+              <option value={"lifestyle"}>Life Styles</option>
             </select>
           </div>
-          
-          <div className="flex flex-col gap-1 text-gray-800">
-            <label className="text-sm text-gray-700">Brand</label>
-            <select className="border border-gray-300 bg-white  px-3 py-2 h-10 min-w-32 outline-none">
-              <option value={""}>All</option>
-              <option value={""}>Footwear</option>
-              <option value={""}>Clothing</option>
-              <option value={""}>Lifestyle</option>
-              <option value={""}>Accessories</option>
-            </select>
-          </div>
-          <div className="flex flex-col gap-1 text-gray-800">
-            <label className="text-sm text-gray-700">Type</label>
-            <select className="border border-gray-300 bg-white  px-3 py-2 h-10 min-w-32 outline-none">
-              <option value={""}>All</option>
-              <option value={""}>Footwear</option>
-              <option value={""}>Clothing</option>
-              <option value={""}>Lifestyle</option>
-              <option value={""}>Accessories</option>
-            </select>
-          </div>
-          <div className="flex flex-row h-10 mt-auto cursor-pointer justify-center items-center gap-2 p-3 text-sm  text-gray-700 border bg-gray-300 hover:border-gray-800 duration-300">
+
+          {!FilterData.isLoading && typeData && (
+            <>
+              <div className="flex flex-col gap-1 text-gray-800">
+                <label className="text-sm text-gray-700">Brand</label>
+                <select ref={brandFilterRef} className="border border-gray-300 bg-white  px-3 py-2 h-10 min-w-32 outline-none">
+                  <option value={""}>All</option>
+                  {FilterData.data.brands.map((el) => (
+                    <option value={el.name} key={el.name}>
+                      {el.name}
+                    </option>
+                  ))}
+                </select>
+              </div>
+              <div className="flex flex-col gap-1 text-gray-800">
+                <label className="text-sm text-gray-700">Type</label>
+                <select ref={typeFilterRef} className="border border-gray-300 bg-white  px-3 py-2 h-10 min-w-32 outline-none">
+                  <option value={""}>All</option>
+                  {typeData.map((el) => (
+                    <option value={el.name} key={el.name}>
+                      {el.name}
+                    </option>
+                  ))}
+                </select>
+              </div>
+            </>
+          )}
+
+          <div
+            onClick={handleFilter}
+            className="flex flex-row h-10 mt-auto cursor-pointer justify-center items-center gap-2 p-3 text-sm  text-gray-700 border bg-gray-300 hover:border-gray-800 duration-300"
+          >
             <svg
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
@@ -101,7 +133,17 @@ const ProductListPage = () => {
           </div>
         </div>
       </div>
-      <ProductsContainer />
+
+      {isLoading ? (
+        <Loading />
+      ) : data.data && data?.data.length ? (
+        <>
+          <ProductsContainer products={data.data} />
+          <AdminPagination meta={data?.meta} />
+        </>
+      ) : (
+        <NoData />
+      )}
     </div>
   );
 };

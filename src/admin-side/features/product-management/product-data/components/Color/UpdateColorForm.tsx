@@ -28,7 +28,15 @@ const UpdateColorForm = ({
 
   const handleUpdateColor = async (data) => {
     try {
-      await updateColor(oldData.id, data.Color);
+      const res = await updateColor(oldData.id, data.Color);
+
+      const json = await res.json();
+
+      if(res.status != 200){
+        toast.error(json.message);
+        return;
+      }
+
       toast.success("Product updated successfully");
       reset();
       await revalidate("/color")

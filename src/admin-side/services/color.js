@@ -6,6 +6,7 @@ export const storeColor = (color) => {
     }),
     headers: {
       "Content-Type": "application/json",
+      "Accept": "application/json",
       Authorization: `Bearer 3BlHS7l6qKpEpCukKESpffk4Llg17LLfsGRUDEMT3ebb5733`,
     },
   });
@@ -19,6 +20,7 @@ export const updateColor = (id, color) => {
     }),
     headers: {
       "Content-Type": "application/json",
+      "Accept": "application/json",
       Authorization: `Bearer 3BlHS7l6qKpEpCukKESpffk4Llg17LLfsGRUDEMT3ebb5733`,
     },
   });

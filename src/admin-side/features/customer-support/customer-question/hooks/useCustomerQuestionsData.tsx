@@ -11,7 +11,7 @@ export const useCustomerQuestionsData = () => {
 
   const baseUrl = process.env.NEXT_PUBLIC_BASE_URL;
 
-  const [fetchUrl, setFetchUrl] = useState(AddParamsToURL(baseUrl + "/size"));
+  const [fetchUrl, setFetchUrl] = useState(AddParamsToURL(baseUrl + "/questions"));
 
   useEffect(() => {
     setFetchUrl(AddParamsToURL(baseUrl + "/questions"));

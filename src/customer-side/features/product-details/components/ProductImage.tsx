@@ -1,4 +1,5 @@
 "use client";
+import Image from "next/image";
 import React, { useRef, useState } from "react";
 
 const ProductImage = ({ image }: { image: string }) => {
@@ -27,9 +28,11 @@ const ProductImage = ({ image }: { image: string }) => {
         isZoomed ? "cursor-zoom-out" : "cursor-zoom-in"
       }`}
     >
-      <img
+      <Image
         src={image}
-        alt="Zoomable"
+        alt="DetailsImage"
+        width={1000}
+        height={1000}
         className={`w-full object-cover transition-transform duration-300 ${
           isZoomed ? "scale-150" : "scale-100"
         }`}

@@ -137,8 +137,8 @@ const AdminNav = () => {
         />
         <NavButton
           pathName={pathName}
-          href="/admin/delivery"
-          name="Deliveries"
+          href="/admin/deliveries"
+          name="Deliveries Data"
           icon={
             <path
               strokeLinecap="round"
@@ -147,6 +147,7 @@ const AdminNav = () => {
             />
           }
         />
+        
       </div>
       <div className="mt-6">
         <p className="text-sm text-gray-500 mb-4">Customers Support</p>
@@ -270,7 +271,32 @@ const AdminNav = () => {
             <path
               strokeLinecap="round"
               strokeLinejoin="round"
+              d="m9 7.5 3 4.5m0 0 3-4.5M12 12v5.25M15 12H9m6 3H9m12-3a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"
+            />
+          }
+        />
+
+        <NavButton
+          pathName={pathName}
+          href="/admin/payment-management"
+          name="Payment Management"
+          icon={
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
               d="M2.25 8.25h19.5M2.25 9h19.5m-16.5 5.25h6m-6 2.25h3m-3.75 3h15a2.25 2.25 0 0 0 2.25-2.25V6.75A2.25 2.25 0 0 0 19.5 4.5h-15a2.25 2.25 0 0 0-2.25 2.25v10.5A2.25 2.25 0 0 0 4.5 19.5Z"
+            />
+          }
+        />
+        <NavButton
+          pathName={pathName}
+          href="/admin/delivery-management"
+          name="Deliveries Management"
+          icon={
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              d="M8.25 18.75a1.5 1.5 0 0 1-3 0m3 0a1.5 1.5 0 0 0-3 0m3 0h6m-9 0H3.375a1.125 1.125 0 0 1-1.125-1.125V14.25m17.25 4.5a1.5 1.5 0 0 1-3 0m3 0a1.5 1.5 0 0 0-3 0m3 0h1.125c.621 0 1.129-.504 1.09-1.124a17.902 17.902 0 0 0-3.213-9.193 2.056 2.056 0 0 0-1.58-.86H14.25M16.5 18.75h-2.25m0-11.177v-.958c0-.568-.422-1.048-.987-1.106a48.554 48.554 0 0 0-10.026 0 1.106 1.106 0 0 0-.987 1.106v7.635m12-6.677v6.677m0 4.5v-4.5m0 0h-12"
             />
           }
         />

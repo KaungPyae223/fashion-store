@@ -1,21 +1,16 @@
 import React from "react";
 import FeedbackHistoryData from "./FeedbackHistoryData";
-import AdminPagination from "@/admin-side/components/AdminPagimation";
 
-const FeedbackHistoryContainer = () => {
+const FeedbackHistoryContainer = ({feedback}) => {
   return (
     <div>
-      <div className="mt-6 grid grid-cols-2 border border-gray-300">
-        <FeedbackHistoryData />
-        <FeedbackHistoryData />
-        <FeedbackHistoryData />
-        <FeedbackHistoryData />
-        <FeedbackHistoryData />
-        <FeedbackHistoryData />
-        <FeedbackHistoryData />
-        <FeedbackHistoryData />
-      </div>
-      <AdminPagination />
+      <div className="mt-6 grid grid-cols-2 border border-gray-200">
+        {
+          feedback.map((el) => (
+            <FeedbackHistoryData data={el} key={el.id} />
+          ))
+        }
+      </div> 
     </div>
   );
 };

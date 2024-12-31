@@ -1,41 +1,44 @@
-'use client';
+"use client";
 import { answerQuestion } from "@/admin-side/services/customer_support";
 import FormErrorMessage from "@/customer-side/components/FormErrorMessage";
+import { useRevalidatedData } from "@/hooks/useRevalidatedData";
 import React from "react";
 import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
 
 const AnswerForm = ({ setOpenModal, id, question, handleRevalidate }) => {
-
   const {
-      register,
-      handleSubmit,
-      formState: { errors },
-      reset
-    } = useForm();
+    register,
+    handleSubmit,
+    formState: { errors },
+    reset,
+  } = useForm();
 
-    const handleAnswer= async(data) => {
-      try {
-        const res = await answerQuestion(id,data.answer);
-        const json = await res.json();
-  
-        if (res.status !== 201) {
-          toast.error(json.message);
-          return;
-        }
-  
-        toast.success("Product created successfully");
-        reset();
-  
-        handleRevalidate()
-  
+  const { revalidate } = useRevalidatedData();
+
+  const handleAnswer = async (data) => {
+    try {
+      const res = await answerQuestion(id, data.answer);
+      const json = await res.json();
+
+      if (res.status !== 201) {
+        toast.error(json.message);
+        await revalidate("/questions");
         setOpenModal(false)
-        
-      } catch (error) {
-        toast.error("An error occurred while creating the color.");
-        console.error("Error:", error);
+        return;
       }
+
+      toast.success("Product created successfully");
+      reset();
+
+      handleRevalidate();
+
+      setOpenModal(false);
+    } catch (error) {
+      toast.error("An error occurred while answering the question.");
+      console.error("Error:", error);
     }
+  };
 
   return (
     <div>
@@ -48,7 +51,7 @@ const AnswerForm = ({ setOpenModal, id, question, handleRevalidate }) => {
             <textarea
               id="answer"
               rows={6}
-              {...register("answer", {required:"Answer is required"} )}
+              {...register("answer", { required: "Answer is required" })}
               className={`${
                 errors.answer ? "border-red-500" : ""
               } resize-none outline-none py-2 px-3 border border-gray-300 w-[400px]`}

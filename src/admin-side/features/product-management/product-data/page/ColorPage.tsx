@@ -121,7 +121,7 @@ const ColorPage = () => {
 
       {isLoading ? (
         <Loading />
-      ) : data?.data.length > 0 ? (
+      ) : data.data && data?.data.length > 0 ? (
         <>
           <ColorTable colors={data.data} />
           <AdminPagination meta={data?.meta} />

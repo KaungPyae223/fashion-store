@@ -125,7 +125,7 @@ const BrandPage = () => {
 
       {isLoading ? (
         <Loading />
-      ) : data?.data.length ? (
+      ) : data.data && data?.data.length ? (
         <>
           <BrandTable brandImage={brandImage} setBrandImageUploadModel={setBrandImageUploadModel} brands={data.data} />
           <AdminPagination meta={data?.meta} />
