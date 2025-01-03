@@ -19,6 +19,12 @@ const useProductStore = create((set) => ({
     productDetailsImage: null,
     productStatus: null,
   },
+
+  setUpdateProductData: (productData) =>
+    set({
+      product: productData,
+    }),
+
   setProductData: (productData) =>
     set((state) => ({
       product: { ...state.product, productData: productData },
@@ -53,6 +59,28 @@ const useProductStore = create((set) => ({
     set((state) => ({
       product: { ...state.product, productStatus: productStatus },
     })),
+
+  setResetProductStore: () =>
+    set({
+      product: {
+        productData: {
+          Name: null,
+          Price: null,
+          CategoryID: null,
+          Gender: null,
+          Description: null,
+        },
+        productProperties: {
+          Brand: null,
+          Type: null,
+          Color: null,
+          Size: "[]",
+        },
+        productCoverImage: null,
+        productDetailsImage: null,
+        productStatus: null,
+      },
+    }),
 }));
 
 export default useProductStore;

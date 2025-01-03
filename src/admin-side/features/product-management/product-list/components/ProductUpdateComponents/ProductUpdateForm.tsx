@@ -1,21 +1,18 @@
-"use client";
 import React, { useState } from "react";
 import { IoMdPhotos } from "react-icons/io";
 import { AiFillProduct } from "react-icons/ai";
 import { SiInstatus } from "react-icons/si";
 import { FaDatabase } from "react-icons/fa6";
 import { FaImage } from "react-icons/fa6";
-
-import { IoMdCheckmark } from "react-icons/io";
-import ProductDataEntryForm from "./ProductDataEntryForm";
-import { AnimatePresence, motion } from "motion/react";
-import ProductPropertiesEntry from "./ProductPropertiesEntry";
-import ProductProfileImageEntry from "./ProductCoverImageEntry";
-import ProductDetailsImagesEntry from "./ProductDetailsImagesEntry";
-import ProductStatusEntry from "./ProductStatusEntry";
 import StageStatus from "../StageStatus";
+import { AnimatePresence, motion } from "motion/react";
+import ProductDataUpdateForm from "./ProductDataUpdateForm";
+import ProductPropertiesUpdateForm from "./ProductPropertiesUpdateForm";
+import ProductCoverImageUpdate from "./ProductCoverImageUpdate";
+import ProductDetailsImagesUpdate from "./ProductDeatailsImageUpdate";
+import ProductStatusUpdate from "./ProductStatusUpdate";
 
-const ProductCreateForm = () => {
+const ProductUpdateForm = () => {
   const [stage, setStage] = useState(1);
 
   return (
@@ -69,53 +66,53 @@ const ProductCreateForm = () => {
         <AnimatePresence mode="wait">
           {stage == 1 ? (
             <motion.div
-              key={"ProductDataEntry"}
+              key={"ProductDataUpdate"}
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               transition={{ duration: 0.3, ease: "linear" }}
             >
-              <ProductDataEntryForm setStage={setStage} />
+              <ProductDataUpdateForm setStage={setStage} />
             </motion.div>
           ) : stage == 2 ? (
             <motion.div
-              key={"ProductPropertiesEntry"}
+              key={"ProductPropertiesUpdate"}
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               transition={{ duration: 0.3, ease: "linear" }}
             >
-              <ProductPropertiesEntry setStage={setStage} />
+              <ProductPropertiesUpdateForm setStage={setStage} />
             </motion.div>
-          ) : stage == 3 ? (
+          ) :  stage == 3 ?  (
             <motion.div
-              key={"ProductProfileEntry"}
+              key={"ProductCoverImageUpdate"}
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               transition={{ duration: 0.3, ease: "linear" }}
             >
-              <ProductProfileImageEntry setStage={setStage} />
+              <ProductCoverImageUpdate setStage={setStage} />
             </motion.div>
           ) : stage == 4 ? (
             <motion.div
-              key={"ProductDetailsEntry"}
+              key={"ProductDetailsImageUpdate"}
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               transition={{ duration: 0.3, ease: "linear" }}
             >
-              <ProductDetailsImagesEntry setStage={setStage} />
+              <ProductDetailsImagesUpdate setStage={setStage} />
             </motion.div>
-          ) : (
+          ):(
             <motion.div
-              key={"ProductStatusEntry"}
+              key={"ProductDetailsImageUpdate"}
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               transition={{ duration: 0.3, ease: "linear" }}
             >
-              <ProductStatusEntry setStage={setStage} />
+              <ProductStatusUpdate setStage={setStage} />
             </motion.div>
           )}
         </AnimatePresence>
@@ -124,4 +121,4 @@ const ProductCreateForm = () => {
   );
 };
 
-export default ProductCreateForm;
+export default ProductUpdateForm;

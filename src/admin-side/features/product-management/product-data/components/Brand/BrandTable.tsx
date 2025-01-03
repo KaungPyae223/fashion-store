@@ -49,7 +49,7 @@ const BrandTr = ({ brand, brandImage,setBrandImageUploadModel }) => {
           toast.error(json.message);
         }
       } catch (error) {
-        toast.error("An error occurred while deleting the product.");
+        toast.error("An error occurred while deleting the brand.");
         console.error("Error:", error);
       }
     }

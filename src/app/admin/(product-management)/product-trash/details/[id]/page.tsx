@@ -1,14 +1,14 @@
+import AdminProductDetailsPage from "@/admin-side/features/product-management/product-list/page/AdminProductDetailsPage";
 import BreadCrumb from "@/customer-side/components/BreadCrumb";
 import Link from "next/link";
 import React from "react";
-import ProductCreateForm from "../components/ProductCreateComponents/ProductCreateForm";
 
-const ProductCreatePage = () => {
+const page = ({ params: { id } }: { params: { id: string } }) => {
   return (
     <div>
       <div className="flex flex-row justify-between items-center border-b pb-4">
         <Link
-          href={"/admin/product-list"}
+          href={"/admin/product-trash"}
           className="flex flex-row items-center gap-3 py-3 px-6 cursor-pointer hover:border-gray-800 duration-300 border border-gray-300"
         >
           <svg
@@ -29,18 +29,18 @@ const ProductCreatePage = () => {
         </Link>
 
         <div className="flex flex-col items-center">
-          <p className="text-xl tracking-wide mb-3">Product Create </p>
+          <p className="text-xl tracking-wide mb-3">Product Details</p>
           <BreadCrumb
             previousSection={[
-              { link: "/admin/product-list", title: "Product List" },
+              { link: "/admin/product-trash", title: "Product Trash" },
             ]}
-            title="Product Create"
+            title="Product Details"
           />
         </div>
       </div>
-      <ProductCreateForm />
+      <AdminProductDetailsPage id={id} />
     </div>
   );
 };
 
-export default ProductCreatePage;
+export default page;

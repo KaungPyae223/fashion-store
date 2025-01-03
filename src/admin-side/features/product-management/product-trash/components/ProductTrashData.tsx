@@ -1,46 +1,72 @@
+import { restoreProduct } from "@/admin-side/services/product";
+import { useRevalidatedData } from "@/hooks/useRevalidatedData";
+import Image from "next/image";
+import Link from "next/link";
 import React from "react";
+import toast from "react-hot-toast";
 
-const ProductTrashData = () => {
+const ProductTrashData = ({ product }) => {
+  const { revalidate } = useRevalidatedData();
+
+  const handleRestoreBtn = async () => {
+    if (window.confirm("Are you sure to restore")) {
+      try {
+        const res = await restoreProduct(product.id);
+        const json = await res.json();
+
+        if (res.ok) {
+          toast.success(json.message);
+          await revalidate("/product/trash");
+        } else {
+          toast.error(json.message);
+        }
+      } catch (error) {
+        toast.error("An error occurred while deleting the product.");
+        console.error("Error:", error);
+      }
+    }
+  };
+
   return (
     <tr className="text-gray-800 bg-white border-y-[12px] border-y-gray-100">
       <td className="p-2 border-spacing-0">
         <div className="flex flex-row gap-3 items-center">
-          <img
+          <Image
+            alt={product.name + " image"}
+            width={70}
+            height={70}
             className="w-[70px] h-[70px] object-cover"
-            src="https://static.nike.com/a/images/t_PDP_1728_v1/f_auto,q_auto:eco/62819db5-c5c6-4757-930b-9a305b2d628d/NIKE+DUNK+LOW+RETRO.png"
+            src={product.cover_image}
           />
           <div>
             <div className="flex flex-row items-center gap-2">
-              <p className="font-medium text-base text-start">
-                Nike Dunk Low Retro
-              </p>
+              <p className="font-medium text-base text-start">{product.name}</p>
               <p className="text-gray-600 border-gray-300 text-xs px-3 py-0.5 border rounded-full">
-                White
+                {product.color}
               </p>
             </div>
 
             <div className="flex mt-2 flex-wrap justify-start gap-1">
-              <p className="text-xs text-gray-500 bg-gray-200 px-3 py-0.5 rounded-full">
-                Medium
-              </p>
-              <p className="text-xs text-gray-500 bg-gray-200 px-3 py-0.5 rounded-full">
-                Large
-              </p>
-              <p className="text-xs text-gray-500 bg-gray-200 px-3 py-0.5 rounded-full">
-                XL
-              </p>
+              {product.sizes.map((size) => (
+                <p
+                  key={size.id}
+                  className="text-xs text-gray-500 bg-gray-200 px-3 py-0.5 rounded-full"
+                >
+                  {size.size}
+                </p>
+              ))}
             </div>
           </div>
         </div>
       </td>
 
-      <td className="text-start px-2 text-gray-800">Footwear</td>
-      <td className="text-start px-2 text-gray-800">Nike</td>
-      <td className="text-start px-2 text-gray-800">Sneakers</td>
-      <td className="text-center px-2 text-gray-800">All</td>
-      <td className="text-end px-2 text-gray-800">520000 Ks</td>
+      <td className="text-start px-2 text-gray-800">{product.category}</td>
+      <td className="text-start px-2 text-gray-800">{product.brand}</td>
+      <td className="text-start px-2 text-gray-800">{product.type}</td>
+      <td className="text-center px-2 text-gray-800">{product.gender}</td>
+      <td className="text-end px-2 text-gray-800">{product.price} Ks</td>
 
-      <td className=" text-gray-800 px-2 text-center">
+      <td className=" text-gray-800 px-4 text-center">
         <div className="flex flex-row gap-2 items-center">
           <div className="flex flex-row gap-0.5 text-gray-600">
             <svg
@@ -111,26 +137,29 @@ const ProductTrashData = () => {
 
       <td className="px-2">
         <div className="flex flex-row justify-center items-center gap-3">
+          <Link href={"/admin/product-trash/details/" + product.id}>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              strokeWidth={1}
+              stroke="currentColor"
+              className="size-4 cursor-pointer"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                d="M2.036 12.322a1.012 1.012 0 0 1 0-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178Z"
+              />
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                d="M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z"
+              />
+            </svg>
+          </Link>
           <svg
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 24 24"
-            strokeWidth={1}
-            stroke="currentColor"
-            className="size-4 cursor-pointer"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              d="M2.036 12.322a1.012 1.012 0 0 1 0-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178Z"
-            />
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              d="M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z"
-            />
-          </svg>
-          <svg
+            onClick={handleRestoreBtn}
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
             viewBox="0 0 24 24"

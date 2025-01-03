@@ -3,7 +3,7 @@ import AdminSubTitle from "@/admin-side/components/AdminSubTitle";
 import ProductCard from "@/customer-side/components/ProductCard";
 import ProductData from "@/customer-side/features/product-details/components/ProductData";
 import React from "react";
-import { useProductCreateConfirm } from "../hooks/useProductCreateConfirm";
+import { useProductCreateConfirm } from "../../hooks/useProductCreateConfirm";
 
 const ProductCreateConfirm = () => {
   const {

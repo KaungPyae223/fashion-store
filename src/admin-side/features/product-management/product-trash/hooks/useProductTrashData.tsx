@@ -7,7 +7,7 @@ import { useSearchParams } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import useSWR from "swr";
 
-export const useProductListData = () => {
+export const useProductTrashData = () => {
   const { setResetProductStore } = useProductStore();
 
   const AddParamsToURL = useAddParamsToURL();
@@ -18,7 +18,7 @@ export const useProductListData = () => {
   const baseUrl = process.env.NEXT_PUBLIC_BASE_URL;
 
   const [fetchUrl, setFetchUrl] = useState(
-    AddParamsToURL(baseUrl + "/product")
+    AddParamsToURL(baseUrl + "/product/trash")
   );
 
   const filterProductNameRef = useRef();
@@ -28,7 +28,7 @@ export const useProductListData = () => {
   const statusFilterRef = useRef();
 
   useEffect(() => {
-    setFetchUrl(AddParamsToURL(baseUrl + "/product"));
+    setFetchUrl(AddParamsToURL(baseUrl + "/product/trash"));
     if (searchParams) {
       filterProductNameRef.current.value = searchParams.get("q");
     }

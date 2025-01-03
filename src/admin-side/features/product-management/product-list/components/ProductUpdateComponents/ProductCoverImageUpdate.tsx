@@ -5,7 +5,7 @@ import SingleImageUpload from "@/admin-side/components/SingleImageUpload";
 import useProductStore from "@/admin-side/stores/useProductStore";
 import toast, { Toaster } from "react-hot-toast";
 
-const ProductCoverImageEntry = ({ setStage }) => {
+const ProductCoverImageUpdate = ({ setStage }) => {
   const {
     setProductCoverImage,
     product: { productCoverImage },
@@ -32,7 +32,7 @@ const ProductCoverImageEntry = ({ setStage }) => {
     <div>
       <Toaster />
       <p className="text-2xl font-medium tracking-wide">
-        Product Cover Image
+        Product Cover Image Update
       </p>
       <div className="mt-6">
         {coverImage?.preview ? (
@@ -83,4 +83,4 @@ const ProductCoverImageEntry = ({ setStage }) => {
   );
 };
 
-export default ProductCoverImageEntry;
+export default ProductCoverImageUpdate;

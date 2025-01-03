@@ -25,10 +25,11 @@ export const useProductPropertiesEntry = (setStage) => {
 
   const [size, setSize] = useState(JSON.parse(productProperties.Size));
 
+ 
+
   const [nextStage, setNextStage] = useState(0);
 
-  console.log(productProperties);
-
+  
   const SizeRef = useRef();
 
   const AddSize = () => {
@@ -48,7 +49,7 @@ export const useProductPropertiesEntry = (setStage) => {
 
   const baseUrl = process.env.NEXT_PUBLIC_BASE_URL;
 
-  const fetchURL = baseUrl + "/product-properties/" + productData.CategoryID;
+  const fetchURL = baseUrl + "/product/properties/" + productData.CategoryID;
 
   const { data, isLoading, error } = useSWR(fetchURL, fetchProduct);
 

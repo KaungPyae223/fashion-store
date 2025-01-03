@@ -6,6 +6,7 @@ import { useProductListData } from "../hooks/useProductListData";
 import Loading from "@/admin-side/components/Loading";
 import NoData from "@/admin-side/components/NoData";
 import AdminPagination from "@/admin-side/components/AdminPagimation";
+import { Toaster } from "react-hot-toast";
 
 const ProductListPage = () => {
   const {
@@ -25,6 +26,7 @@ const ProductListPage = () => {
 
   return (
     <div>
+      <Toaster />
       <div className="flex flex-row justify-between border-b pb-6">
         <div className="flex">
           <Link
@@ -63,7 +65,10 @@ const ProductListPage = () => {
           </div>
           <div className="flex flex-col gap-1 text-gray-800">
             <label className="text-sm text-gray-700">Status</label>
-            <select ref={statusFilterRef} className="border border-gray-300 bg-white  px-3 py-2 h-10 min-w-32 outline-none">
+            <select
+              ref={statusFilterRef}
+              className="border border-gray-300 bg-white  px-3 py-2 h-10 min-w-32 outline-none"
+            >
               <option value={"all"}>All</option>
               <option value={"public"}>Public</option>
               <option value={"private"}>Private</option>
@@ -88,7 +93,10 @@ const ProductListPage = () => {
             <>
               <div className="flex flex-col gap-1 text-gray-800">
                 <label className="text-sm text-gray-700">Brand</label>
-                <select ref={brandFilterRef} className="border border-gray-300 bg-white  px-3 py-2 h-10 min-w-32 outline-none">
+                <select
+                  ref={brandFilterRef}
+                  className="border border-gray-300 bg-white  px-3 py-2 h-10 min-w-32 outline-none"
+                >
                   <option value={""}>All</option>
                   {FilterData.data.brands.map((el) => (
                     <option value={el.name} key={el.name}>
@@ -99,7 +107,10 @@ const ProductListPage = () => {
               </div>
               <div className="flex flex-col gap-1 text-gray-800">
                 <label className="text-sm text-gray-700">Type</label>
-                <select ref={typeFilterRef} className="border border-gray-300 bg-white  px-3 py-2 h-10 min-w-32 outline-none">
+                <select
+                  ref={typeFilterRef}
+                  className="border border-gray-300 bg-white  px-3 py-2 h-10 min-w-32 outline-none"
+                >
                   <option value={""}>All</option>
                   {typeData.map((el) => (
                     <option value={el.name} key={el.name}>

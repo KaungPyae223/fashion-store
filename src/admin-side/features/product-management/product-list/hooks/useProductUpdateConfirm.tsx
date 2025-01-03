@@ -1,10 +1,10 @@
-import { storeProduct } from "@/admin-side/services/product";
+import { updateProduct } from "@/admin-side/services/product";
 import useProductStore from "@/admin-side/stores/useProductStore";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import toast from "react-hot-toast";
 
-export const useProductCreateConfirm = () => {
+export const useProductUpdateConfirm = () => {
   const { product} = useProductStore();
 
   console.log(product);
@@ -58,7 +58,7 @@ export const useProductCreateConfirm = () => {
     return el.id;
   });
 
-  const handleCreateProduct = async () => {
+  const handleUpdateProduct = async () => {
     try {
       const data = {
         type_id: Type.id,
@@ -73,12 +73,13 @@ export const useProductCreateConfirm = () => {
         status: product.productStatus,
         gender: product.productData.Gender,
         size_id: Sizes.join(","),
+        id:product.productID
       };
 
-      const res = await storeProduct(data);
+      const res = await updateProduct(data);
       const json = await res.json();
 
-      if (res.status !== 201) {
+      if (res.status !== 200) {
         toast.error(json.message);
         return;
       }
@@ -95,7 +96,7 @@ export const useProductCreateConfirm = () => {
   };
 
   return {
-    handleCreateProduct,
+    handleUpdateProduct,
     category,
     confirmText,
     setConfirmText,

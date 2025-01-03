@@ -1,14 +1,14 @@
 import BreadCrumb from "@/customer-side/components/BreadCrumb";
 import Link from "next/link";
 import React from "react";
-import ProductCreateForm from "../components/ProductCreateComponents/ProductCreateForm";
+import ProductUpdateConfirm from "../components/ProductUpdateComponents/ProductUpdateConfirm";
 
-const ProductCreatePage = () => {
+const ProductUpdateConfirmPage = ({id}) => {
   return (
     <div>
       <div className="flex flex-row justify-between items-center border-b pb-4">
         <Link
-          href={"/admin/product-list"}
+          href={`/admin/product-list/update/${id}`}
           className="flex flex-row items-center gap-3 py-3 px-6 cursor-pointer hover:border-gray-800 duration-300 border border-gray-300"
         >
           <svg
@@ -27,20 +27,20 @@ const ProductCreatePage = () => {
           </svg>
           Back
         </Link>
-
         <div className="flex flex-col items-center">
-          <p className="text-xl tracking-wide mb-3">Product Create </p>
+          <p className="text-xl tracking-wide mb-3">Product Update Confirm</p>
           <BreadCrumb
             previousSection={[
               { link: "/admin/product-list", title: "Product List" },
+              { link: `/admin/product-list/update/${id}`, title: "Product Update" },
             ]}
-            title="Product Create"
+            title="Confirm"
           />
         </div>
       </div>
-      <ProductCreateForm />
+      <ProductUpdateConfirm />
     </div>
   );
 };
 
-export default ProductCreatePage;
+export default ProductUpdateConfirmPage;
