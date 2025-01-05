@@ -6,7 +6,7 @@
   @apply w-1 h-1 rounded-full bg-black;
 }
 
-input[type="radio"]:checked {
+input[type="radio"]:checked, input[type="checkbox"]:checked {
   accent-color: black;
 }
 

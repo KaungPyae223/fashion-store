@@ -14,6 +14,8 @@ const ProductSaleColumnChart = ({ data }) => {
 
   ];
 
+  
+
   return (
     <div className="p-5 bg-white col-span-2">
       <p className="text-xl tracking-wider font-medium">

@@ -1,4 +1,3 @@
-import AdminPagination from "@/admin-side/components/AdminPagimation";
 import React from "react";
 import OrderHistoryTr from "./OrderHistoryTr";
 
@@ -35,7 +34,7 @@ const OrderHistoryContainer = () => {
           <OrderHistoryTr />
         </tbody>
       </table>
-      <AdminPagination />
+      
     </div>
   );
 };

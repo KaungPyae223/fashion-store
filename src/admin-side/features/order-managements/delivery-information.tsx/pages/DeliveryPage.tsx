@@ -15,6 +15,8 @@ const DeliveryPage = () => {
     error,
   } = useDeliveryData();
 
+  console.log(data);
+
   return (
     <div>
       <div className="flex flex-row justify-between border-b pb-6">
@@ -59,7 +61,7 @@ const DeliveryPage = () => {
 
       {isLoading ? (
         <Loading />
-      ) : data?.data.length > 0 ? (
+      ) : data.data && data?.data.length > 0 ? (
         <>
           <DeliveryDataContainer deliveries={data.data} />
           <AdminPagination meta={data?.meta} />

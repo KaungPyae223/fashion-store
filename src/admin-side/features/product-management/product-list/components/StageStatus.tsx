@@ -10,7 +10,7 @@ const StageStatus = ({ currentStage, stage, icon, title }) => {
           <IoMdCheckmark className="size-5" />
         </div>
         <h3 className="ms-6 duration-300 font-medium text-slate-500">
-          Product Data
+          {title}
         </h3>
       </>
     );
