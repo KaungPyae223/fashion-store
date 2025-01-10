@@ -10,7 +10,7 @@ const OrderListContainer = ({orders}) => {
           <tr className="text-sm text-gray-400">
             <th className="text-end px-4 w-24">Order ID</th>
 
-            <th className="text-start px-4 w-16">Customer Name</th>
+            <th className="text-start px-4 w-16 text-nowrap">Customer Name</th>
             <th className="text-start px-2">Address</th>
             <th className="text-end px-2">Total Order</th>
             <th className="text-end px-2">Total Price</th>

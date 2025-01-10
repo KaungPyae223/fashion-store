@@ -4,6 +4,7 @@ import UpdatePaymentForm from "./UpdatePaymentForm";
 import toast from "react-hot-toast";
 import { useRevalidatedData } from "@/hooks/useRevalidatedData";
 import { deletePayment } from "@/admin-side/services/payment";
+import { revalidateTag } from "next/cache";
 
 const PaymentTr = ({ payment }) => {
   const [openModal, setOpenModal] = useState(false);
@@ -17,6 +18,7 @@ const PaymentTr = ({ payment }) => {
         const json = await res.json();
 
         if (res.ok) {
+          revalidateTag("allPayments");
           toast.success(json.message);
           await revalidate("/payment");
         } else {

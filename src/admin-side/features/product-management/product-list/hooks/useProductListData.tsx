@@ -31,6 +31,10 @@ export const useProductListData = () => {
     setFetchUrl(AddParamsToURL(baseUrl + "/product"));
     if (searchParams) {
       filterProductNameRef.current.value = searchParams.get("q");
+      categoryFilterRef.current.value = searchParams.get("category");
+      typeFilterRef.current.value = searchParams.get("type");
+      brandFilterRef.current.value = searchParams.get("brand");
+      statusFilterRef.current.value = searchParams.get("status");
     }
   }, [searchParams]);
 

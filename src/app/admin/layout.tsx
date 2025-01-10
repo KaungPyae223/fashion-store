@@ -1,3 +1,4 @@
+import { Toaster } from "react-hot-toast";
 import "../../styles/globals.css";
 import AdminNav from "@/admin-side/components/AdminNav";
 
@@ -14,6 +15,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className="flex flex-row min-h-screen bg-gray-100 overflow-y-hidden">
+        <Toaster />
         <header className="bg-white">
           <AdminNav />
         </header>

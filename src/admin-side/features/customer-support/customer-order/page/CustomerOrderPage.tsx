@@ -1,7 +1,23 @@
+"use client";
 import React from "react";
-import PaymentsContainer from "../components/PaymentsContainer";
+import CustomerOrderContainer from "../components/CustomerOrderContainer";
+import { useCustomerOrderData } from "../hooks/useCustomerOrderData";
+import Loading from "@/admin-side/components/Loading";
+import AdminPagination from "@/admin-side/components/AdminPagimation";
+import NoData from "@/admin-side/components/NoData";
 
-const PaymentPage = () => {
+const CustomerOrderPage = () => {
+  const {
+    customerNameRef,
+    OrderMonthRef,
+    paymentRef,
+    paymentData,
+    handleFilter,
+    data,
+    isLoading,
+    error,
+  } = useCustomerOrderData();
+
   return (
     <div>
       <div className="flex flex-row justify-end border-b pb-6">
@@ -11,26 +27,19 @@ const PaymentPage = () => {
               Customer Name
             </label>
             <input
+              ref={customerNameRef}
               id="search"
               type="text"
               className="border border-gray-300  px-3 py-2 outline-none h-10 w-[250px]"
             />
           </div>
-          <div className="flex flex-col gap-1">
-            <label className="text-sm text-gray-700" htmlFor="search">
-              Order Id
-            </label>
-            <input
-              id="search"
-              type="text"
-              className="border border-gray-300  px-3 py-2 outline-none h-10 w-[150px]"
-            />
-          </div>
+
           <div className="flex flex-col gap-1">
             <label className="text-sm text-gray-700" htmlFor="Time">
-              Payment Time
+              Order Time
             </label>
             <input
+              ref={OrderMonthRef}
               id="Time"
               type="month"
               className="border border-gray-300  px-3 py-2 outline-none h-10"
@@ -38,12 +47,24 @@ const PaymentPage = () => {
           </div>
           <div className="flex flex-col gap-1 text-gray-800">
             <label className="text-sm text-gray-700">Payment</label>
-            <select className="border border-gray-300 bg-white  px-3 py-2 h-10 min-w-32 outline-none">
-              <option value={""}>All</option>
-              <option value={""}>Kbz Pay</option>
+            <select
+              ref={paymentRef}
+              className="border border-gray-300 bg-white  px-3 py-2 h-10 min-w-32 outline-none"
+            >
+              <option value="">All</option>
+
+              {paymentData &&
+                paymentData.map((item, index) => (
+                  <option key={index} value={item}>
+                    {item}
+                  </option>
+                ))}
             </select>
           </div>
-          <div className="flex flex-row h-10 mt-auto cursor-pointer justify-center items-center gap-2 p-3 text-sm  text-gray-700 border bg-gray-300 hover:border-gray-800 duration-300">
+          <div
+            onClick={handleFilter}
+            className="flex flex-row h-10 mt-auto cursor-pointer justify-center items-center gap-2 p-3 text-sm  text-gray-700 border bg-gray-300 hover:border-gray-800 duration-300"
+          >
             <svg
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
@@ -62,9 +83,19 @@ const PaymentPage = () => {
           </div>
         </div>
       </div>
-      <PaymentsContainer />
+
+      {isLoading ? (
+        <Loading />
+      ) : data?.data && data?.data.length > 0 ? (
+        <>
+          <CustomerOrderContainer orders={data.data} />
+          <AdminPagination meta={data?.meta} />
+        </>
+      ) : (
+        <NoData />
+      )}
     </div>
   );
 };
 
-export default PaymentPage;
+export default CustomerOrderPage;

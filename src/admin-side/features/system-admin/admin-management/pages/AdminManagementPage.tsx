@@ -1,14 +1,22 @@
+"use client";
 import Link from "next/link";
 import React from "react";
 import AdminContainer from "../components/AdminContainer";
+import { useAdminData } from "../hooks/useAdminData";
+import Loading from "@/admin-side/components/Loading";
+import AdminPagination from "@/admin-side/components/AdminPagimation";
+import NoData from "@/admin-side/components/NoData";
 
 const AdminManagementPage = () => {
+  const { handleFilter, data, isLoading, filterAdminNameRef, roleRef, error } =
+    useAdminData();
+
   return (
     <div>
       <div className="flex flex-row justify-between border-b pb-6">
         <div className="flex">
           <Link
-            href={"/admin/product-list/create"}
+            href={"/admin/admin-management/create"}
             className="flex flex-row h-10 mt-auto cursor-pointer justify-center items-center gap-2 p-3 text-sm bg-gray-800 text-white "
           >
             <svg
@@ -35,6 +43,7 @@ const AdminManagementPage = () => {
               Admin Name
             </label>
             <input
+              ref={filterAdminNameRef}
               id="search"
               type="text"
               className="border border-gray-300  px-3 py-2 outline-none h-10 w-[250px]"
@@ -42,16 +51,25 @@ const AdminManagementPage = () => {
           </div>
           <div className="flex flex-col gap-1 text-gray-800">
             <label className="text-sm text-gray-700">Admin Role</label>
-            <select className="border border-gray-300 bg-white  px-3 py-2 h-10 min-w-32 outline-none">
-              <option value={""}>All</option>
-              <option value={""}>Footwear</option>
-              <option value={""}>Clothing</option>
-              <option value={""}>Lifestyle</option>
-              <option value={""}>Accessories</option>
+            <select
+              ref={roleRef}
+              className="border border-gray-300 bg-white  px-3 py-2 h-10 min-w-32 outline-none"
+            >
+              <option value={"all"}>All</option>
+              <option value={"Product Management"}>Product Management</option>
+              <option value={"Customer Support"}>Customer Support</option>
+              <option value={"Order Management"}>Order Management</option>
+              <option value={"Super Admin"}>Super Admin</option>
+              <option value={"System Admin"}>System Admin</option>
+              <option value={"Blog Management"}>Blog Management</option>
+              <option value={"Retired"}>Retired</option>
             </select>
           </div>
 
-          <div className="flex flex-row h-10 mt-auto cursor-pointer justify-center items-center gap-2 p-3 text-sm  text-gray-700 border bg-gray-300 hover:border-gray-800 duration-300">
+          <div
+            onClick={handleFilter}
+            className="flex flex-row h-10 mt-auto cursor-pointer justify-center items-center gap-2 p-3 text-sm  text-gray-700 border bg-gray-300 hover:border-gray-800 duration-300"
+          >
             <svg
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
@@ -70,9 +88,17 @@ const AdminManagementPage = () => {
           </div>
         </div>
       </div>
-      <AdminContainer />
-      
 
+      {isLoading ? (
+        <Loading />
+      ) : data.data && data?.data.length ? (
+        <>
+          <AdminContainer admins={data.data} />
+          <AdminPagination meta={data?.meta} />
+        </>
+      ) : (
+        <NoData />
+      )}
     </div>
   );
 };

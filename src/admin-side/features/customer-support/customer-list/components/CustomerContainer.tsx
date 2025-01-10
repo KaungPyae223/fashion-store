@@ -1,7 +1,7 @@
 import React from "react";
 import CustomerDataTr from "./CustomerDataTr";
 
-const CustomerContainer = () => {
+const CustomerContainer = ({customers}) => {
   return (
     <div className="mt-6">
       <table className="table-auto w-full text-left text-sm border-spacing-y-4 border-spacing-x-0">
@@ -16,14 +16,12 @@ const CustomerContainer = () => {
           </tr>
         </thead>
         <tbody>
-          <CustomerDataTr/>
-          <CustomerDataTr/>
-          <CustomerDataTr/>
-          <CustomerDataTr/>
-          <CustomerDataTr/>
-          <CustomerDataTr/>
-          <CustomerDataTr/>
-          <CustomerDataTr/>
+
+        {
+          customers.map((customer) => (
+            <CustomerDataTr key={customer.id} customer={customer} />
+          ))
+        }
 
         </tbody>
       </table>

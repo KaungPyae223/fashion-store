@@ -29,12 +29,12 @@ const ProductCreatePage = () => {
         </Link>
 
         <div className="flex flex-col items-center">
-          <p className="text-xl tracking-wide mb-3">Product Create </p>
+          <p className="text-xl tracking-wide mb-3">Create Product</p>
           <BreadCrumb
             previousSection={[
               { link: "/admin/product-list", title: "Product List" },
             ]}
-            title="Product Create"
+            title="Create Product"
           />
         </div>
       </div>

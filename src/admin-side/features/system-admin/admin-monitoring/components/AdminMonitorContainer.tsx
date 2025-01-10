@@ -1,8 +1,8 @@
-import AdminPagination from "@/admin-side/components/AdminPagimation";
+"use client";
 import React from "react";
 import AdminMonitorTr from "./AdminMonitorTr";
 
-const AdminMonitorContainer = () => {
+const AdminMonitorContainer = ({ activities }) => {
   return (
     <div className="mt-6">
       <table className="table-auto w-full text-left text-sm border-spacing-y-4 border-spacing-x-0">
@@ -14,24 +14,14 @@ const AdminMonitorContainer = () => {
             <th className="px-2 text-start">Type</th>
             <th className="px-2 text-start">Action</th>
             <th className="px-2 text-end">Time</th>
-
           </tr>
         </thead>
         <tbody>
-          <AdminMonitorTr />
-          <AdminMonitorTr />
-          <AdminMonitorTr />
-          <AdminMonitorTr />
-          <AdminMonitorTr />
-          <AdminMonitorTr />
-          <AdminMonitorTr />
-          <AdminMonitorTr />
-          <AdminMonitorTr />
-          <AdminMonitorTr />
-
+          {activities.map((activity) => (
+            <AdminMonitorTr key={activity.id} activity={activity} />
+          ))}
         </tbody>
       </table>
-      <AdminPagination />
     </div>
   );
 };

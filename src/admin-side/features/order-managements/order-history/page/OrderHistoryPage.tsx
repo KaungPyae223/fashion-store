@@ -1,7 +1,23 @@
+"use client";
 import React from "react";
 import OrderHistoryContainer from "../components/OrderHistoryContainer";
+import { useOrderHistoryData } from "../hooks/useOrderHistoryData";
+import Loading from "@/admin-side/components/Loading";
+import NoData from "@/admin-side/components/NoData";
+import AdminPagination from "@/admin-side/components/AdminPagimation";
 
 const OrderHistoryPage = () => {
+  const {
+    customerNameRef,
+    OrderMonthRef,
+    OrderIdRef,
+    handleFilter,
+    data,
+    isLoading,
+    AdminRef,
+    error,
+  } = useOrderHistoryData();
+
   return (
     <div>
       <div className="flex flex-row justify-end border-b pb-6">
@@ -11,6 +27,7 @@ const OrderHistoryPage = () => {
               Customer Name
             </label>
             <input
+              ref={customerNameRef}
               id="search"
               type="text"
               className="border border-gray-300  px-3 py-2 outline-none h-10 w-[250px]"
@@ -18,10 +35,22 @@ const OrderHistoryPage = () => {
           </div>
           <div className="flex flex-col gap-1">
             <label className="text-sm text-gray-700" htmlFor="search">
-              Packager ID
+              Admin Name
             </label>
             <input
+              ref={AdminRef}
               id="search"
+              type="text"
+              className="border border-gray-300  px-3 py-2 outline-none h-10 w-[250px]"
+            />
+          </div>
+          <div className="flex flex-col gap-1">
+            <label className="text-sm text-gray-700" htmlFor="orderID">
+              Order ID
+            </label>
+            <input
+              ref={OrderIdRef}
+              id="orderID"
               type="text"
               className="border border-gray-300  px-3 py-2 outline-none h-10 w-[150px]"
             />
@@ -31,23 +60,17 @@ const OrderHistoryPage = () => {
               Order Time
             </label>
             <input
+              ref={OrderMonthRef}
               id="search"
               type="month"
               className="border border-gray-300  px-3 py-2 outline-none h-10"
             />
           </div>
-          <div className="flex flex-col gap-1 text-gray-800">
-            <label className="text-sm text-gray-700">Price Range</label>
-            <select className="border border-gray-300 bg-white  px-3 py-2 h-10 min-w-32 outline-none">
-              <option value={""}>All</option>
-              <option value={""}>&lt; 10000</option>
-              <option value={""}>100000 &lt; 500000</option>
-              <option value={""}>500000 &lt; 1000000</option>
-              <option value={""}>1000000 &gt;</option>
-            </select>
-          </div>
 
-          <div className="flex flex-row h-10 mt-auto cursor-pointer justify-center items-center gap-2 p-3 text-sm  text-gray-700 border bg-gray-300 hover:border-gray-800 duration-300">
+          <div
+            onClick={handleFilter}
+            className="flex flex-row h-10 mt-auto cursor-pointer justify-center items-center gap-2 p-3 text-sm  text-gray-700 border bg-gray-300 hover:border-gray-800 duration-300"
+          >
             <svg
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
@@ -66,7 +89,17 @@ const OrderHistoryPage = () => {
           </div>
         </div>
       </div>
-      <OrderHistoryContainer />
+
+      {isLoading ? (
+        <Loading />
+      ) : data.data && data?.data.length > 0 ? (
+        <>
+          <OrderHistoryContainer data={data.data} />
+          <AdminPagination meta={data?.meta} />
+        </>
+      ) : (
+        <NoData />
+      )}
     </div>
   );
 };

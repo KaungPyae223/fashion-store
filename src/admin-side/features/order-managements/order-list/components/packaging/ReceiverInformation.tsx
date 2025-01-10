@@ -1,7 +1,11 @@
+import { deliveredPackage } from "@/admin-side/services/packaging";
+import { useRevalidatedData } from "@/hooks/useRevalidatedData";
+import { useRouter } from "next/navigation";
 import React, { useRef, useState } from "react";
+import toast from "react-hot-toast";
 import { useReactToPrint } from "react-to-print";
 
-const ReceiverInformation = ({ setCurrentStage }) => {
+const ReceiverInformation = ({ select, setCurrentStage, receiverInfo }) => {
   const [confirm, setConfirm] = useState(false);
 
   const contentRef = useRef();
@@ -9,22 +13,45 @@ const ReceiverInformation = ({ setCurrentStage }) => {
     contentRef,
   });
 
+  const router = useRouter();
+
+  const {revalidate} = useRevalidatedData();
+
+  const handleDeliver = async () => {
+    try {
+      const res = await deliveredPackage(receiverInfo.id, select);
+
+      const json = await res.json();
+
+      if (res.status != 200) {
+        toast.error(json.message);
+        return;
+      }
+
+      toast.success("Order delivered successfully");
+
+      await revalidate("/order-list");
+
+      router.push("/admin/order-list");
+
+    } catch (error) {
+      toast.error("An error occurred while updating the product.");
+      console.error("Error:", error);
+    }
+  };
+
   return (
     <div className="py-9">
       <p className="text-xl text-center font-medium tracking-wide mb-3">
         Receiver Information
       </p>
       <div ref={contentRef} className="mt-6 bg-white p-6 flex flex-col gap-3">
-        <p className="text-2xl font-medium">Daw Aye Thida</p>
-        <p>+959 123456789</p>
-        <p>AyeThida123@gmail.com</p>
-        <p>123453</p>
-        <p>No.123 Street, Yangon</p>
+        <p className="text-2xl font-medium">{receiverInfo.name}</p>
+        <p>{receiverInfo.phone}</p>
+        <p>{receiverInfo.email}</p>
+        <p>{receiverInfo.address}</p>
         <p className="text-sm text-gray-800 text-justify">
-          <span className="font-semibold">Note:</span> Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quidem
-          in aperiam quas suscipit eligendi repellendus quasi porro iste
-          distinctio animi exercitationem soluta odit, maxime ipsam dolorum hic
-          temporibus perspiciatis officiis.
+          <span className="font-semibold">Note:</span> {receiverInfo.note}
         </p>
       </div>
       <div
@@ -67,7 +94,8 @@ const ReceiverInformation = ({ setCurrentStage }) => {
         </button>
         <button
           disabled={!confirm}
-          onClick={() => setCurrentStage(3)}
+          onClick={handleDeliver}
+          
           className="px-9 py-2 disabled:opacity-50 bg-gray-800 text-white"
         >
           Complete

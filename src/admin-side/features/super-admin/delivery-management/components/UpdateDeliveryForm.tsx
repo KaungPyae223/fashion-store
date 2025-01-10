@@ -3,6 +3,7 @@ import AdminSelect from "@/admin-side/components/AdminSelect";
 import { updateDeliver } from "@/admin-side/services/deliver";
 import FormErrorMessage from "@/customer-side/components/FormErrorMessage";
 import { useRevalidatedData } from "@/hooks/useRevalidatedData";
+import { revalidateTag } from "next/cache";
 import React, { SetStateAction } from "react";
 import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
@@ -46,9 +47,10 @@ const UpdateDeliveryForm = ({
 
       if(res.status != 200){
         toast.error(json.message);
+        
         return;
       }
-
+      revalidateTag("delivery");
       toast.success("Delivery Data updated successfully");
       reset();
       await revalidate("/deliver");

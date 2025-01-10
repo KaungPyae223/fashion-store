@@ -27,6 +27,8 @@ export const updatePayment = (id, payment, status) => {
   });
 };
 
+
+
 export const deletePayment = (id) => {
   return fetch(process.env.NEXT_PUBLIC_BASE_URL + "/payment/" + id, {
     method: "DELETE",

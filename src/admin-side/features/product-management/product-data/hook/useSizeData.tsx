@@ -24,7 +24,7 @@ export const useSizeData = () => {
   useEffect(() => {
     setFetchUrl(AddParamsToURL(baseUrl + "/size"));
     const queryParam = searchParams;
-    if (queryParam.get("category")) {
+    if (queryParam) {
       filterSizeRef.current.value = queryParam.get("q");
       filterCategoryRef.current.value = queryParam.get("category");
     }

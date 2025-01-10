@@ -1,9 +1,18 @@
-import React, { useState } from "react";
+import { fetchDelivery } from "@/admin-side/services/packaging";
+import React, { useEffect, useState } from "react";
 
-const SelectDelivery = ({setCurrentStage}) => {
-  const [select, setSelect] = useState<number | null>(null);
+const SelectDelivery = ({ setCurrentStage,select,setSelect }) => {
 
-  console.log(select);
+  const [data, setData] = useState(null);
+
+  useEffect(() => {
+    const FetchDelivery = async () => {
+      const Deliveries = await fetchDelivery();
+      setData(Deliveries);
+    };
+
+    FetchDelivery();
+  }, []);
 
   return (
     <div className="py-9">
@@ -21,22 +30,24 @@ const SelectDelivery = ({setCurrentStage}) => {
             </tr>
           </thead>
           <tbody>
-            {Array.from({ length: 10 }).map((_, index) => (
-              <DeliveryTr
-                key={index}
-                id={index}
-                select={select}
-                setSelect={setSelect}
-              />
+            { data && data.delivery_data.map((delivery) => (
+              <DeliveryTr key={delivery.id} select={select} setSelect={setSelect} delivery={delivery}  />
             ))}
           </tbody>
         </table>
       </div>
       <div className="flex mt-6 flex-row items-center justify-end gap-3">
-        <button onClick={() => setCurrentStage(2)} className="px-9 py-2 disabled:opacity-50 border border-gray-800 ">
+        <button
+          onClick={() => setCurrentStage(2)}
+          className="px-9 py-2 disabled:opacity-50 border border-gray-800 "
+        >
           Back
         </button>
-        <button onClick={() => setCurrentStage(4)} disabled={!select} className="px-9 py-2 disabled:opacity-50 bg-gray-800 text-white">
+        <button
+          onClick={() => setCurrentStage(4)}
+          disabled={!select}
+          className="px-9 py-2 disabled:opacity-50 bg-gray-800 text-white"
+        >
           Next
         </button>
       </div>
@@ -44,18 +55,18 @@ const SelectDelivery = ({setCurrentStage}) => {
   );
 };
 
-const DeliveryTr = ({ id, select, setSelect }) => {
+const DeliveryTr = ({ delivery, select, setSelect }) => {
   return (
     <tr
-      onClick={() => setSelect(id)}
+      onClick={() => setSelect(delivery.id)}
       className={`text-sm ${
-        select === id ? "bg-gray-800 text-white" : ""
+        select === delivery.id ? "bg-gray-800 text-white" : ""
       } text-gray-800 border-b last:border-b-0`}
     >
-      <td className="py-3 text-end pe-6">{id}</td>
-      <td className="py-3 text-start px-6">Royal Express</td>
-      <td className="py-3 text-start px-6">0123456789</td>
-      <td className="py-3 text-start">No. 1, Street, City</td>
+      <td className="py-3 text-end pe-6">{delivery.id}</td>
+      <td className="py-3 text-start px-6">{delivery.name}</td>
+      <td className="py-3 text-start px-6">{delivery.phone}</td>
+      <td className="py-3 text-start">{delivery.address}</td>
     </tr>
   );
 };

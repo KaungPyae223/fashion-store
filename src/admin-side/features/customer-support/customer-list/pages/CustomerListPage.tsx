@@ -1,7 +1,15 @@
+"use client";
 import React from "react";
 import CustomerContainer from "../components/CustomerContainer";
+import { useCustomerListData } from "../hooks/useCustomerListData";
+import Loading from "@/admin-side/components/Loading";
+import NoData from "@/admin-side/components/NoData";
+import AdminPagination from "@/admin-side/components/AdminPagimation";
 
 const CustomerListPage = () => {
+  const { handleFilter, data, isLoading, filterSearchRef, error } =
+    useCustomerListData();
+
   return (
     <div>
       <div className="flex flex-row justify-end border-b pb-6">
@@ -11,13 +19,14 @@ const CustomerListPage = () => {
               Customer Name / Phone / Email
             </label>
             <input
+              ref={filterSearchRef}
               id="search"
               type="text"
               className="border border-gray-300  px-3 py-2 outline-none h-10 w-[250px]"
             />
           </div>
 
-          <div className="flex flex-row h-10 mt-auto cursor-pointer justify-center items-center gap-2 p-3 text-sm  text-gray-700 border bg-gray-300 hover:border-gray-800 duration-300">
+          <div onClick={handleFilter} className="flex flex-row h-10 mt-auto cursor-pointer justify-center items-center gap-2 p-3 text-sm  text-gray-700 border bg-gray-300 hover:border-gray-800 duration-300">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
@@ -36,8 +45,17 @@ const CustomerListPage = () => {
           </div>
         </div>
       </div>
-      <CustomerContainer />
-      
+
+      {isLoading ? (
+        <Loading />
+      ) : data.data && data?.data.length > 0 ? (
+        <>
+          <CustomerContainer customers={data.data} />
+          <AdminPagination meta={data?.meta} />
+        </>
+      ) : (
+        <NoData />
+      )}
     </div>
   );
 };

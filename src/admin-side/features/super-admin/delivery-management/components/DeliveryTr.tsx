@@ -5,6 +5,7 @@ import UpdateDeliveryForm from "./UpdateDeliveryForm";
 import toast from "react-hot-toast";
 import { useRevalidatedData } from "@/hooks/useRevalidatedData";
 import { deleteDeliver } from "@/admin-side/services/deliver";
+import { revalidateTag } from "next/cache";
 
 const DeliveryTr = ({ delivery }) => {
   const [openModel, setOpenModel] = useState(false);
@@ -18,6 +19,7 @@ const DeliveryTr = ({ delivery }) => {
 
         if (res.ok) {
           toast.success(json.message);
+          revalidateTag("delivery");
           await revalidate("/deliver");
         } else {
           toast.error(json.message);

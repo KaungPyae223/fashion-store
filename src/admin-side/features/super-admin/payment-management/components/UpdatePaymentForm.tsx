@@ -2,6 +2,7 @@ import AdminInput from "@/admin-side/components/AdminInput";
 import AdminSelect from "@/admin-side/components/AdminSelect";
 import { updatePayment } from "@/admin-side/services/payment";
 import { useRevalidatedData } from "@/hooks/useRevalidatedData";
+import { revalidateTag } from "next/cache";
 import React, { SetStateAction } from "react";
 import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
@@ -38,6 +39,7 @@ const UpdatePaymentForm = ({
         return;
       }
 
+      revalidateTag("allPayments");
       toast.success("Product updated successfully");
       reset();
       await revalidate("/payment");

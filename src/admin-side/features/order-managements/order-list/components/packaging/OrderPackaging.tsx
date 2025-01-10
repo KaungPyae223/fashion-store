@@ -1,6 +1,19 @@
-import React from "react";
+import Image from "next/image";
+import React, { useState } from "react";
 
-const OrderPackaging = ({ setCurrentStage }) => {
+const OrderPackaging = ({ setCurrentStage, data }) => {
+  const [checkedBoxes, setCheckedBoxes] = useState(
+    Array(data.length).fill(false)
+  );
+
+  const handleCheckboxChange = (index) => {
+    const updatedCheckedBoxes = [...checkedBoxes];
+    updatedCheckedBoxes[index] = !updatedCheckedBoxes[index];
+    setCheckedBoxes(updatedCheckedBoxes);
+  };
+
+  const allChecked = checkedBoxes.every((checked) => checked);
+
   return (
     <div className="py-9">
       <p className="text-xl text-center font-medium tracking-wide mb-3">
@@ -18,19 +31,20 @@ const OrderPackaging = ({ setCurrentStage }) => {
             </tr>
           </thead>
           <tbody>
-            <OrderProductTr />
-            <OrderProductTr />
-            <OrderProductTr />
-            <OrderProductTr />
-            <OrderProductTr />
-            <OrderProductTr />
-            <OrderProductTr />
-            <OrderProductTr />
+            {data.map((product, i) => (
+              <OrderProductTr
+                handleCheckboxChange={handleCheckboxChange}
+                index={i}
+                key={product.product_id}
+                product={product}
+              />
+            ))}
           </tbody>
         </table>
       </div>
       <div className="flex mt-6 flex-row items-center justify-end gap-3">
         <button
+          disabled={!allChecked}
           onClick={() => setCurrentStage(2)}
           className="px-9 py-2 disabled:opacity-50 bg-gray-800 text-white"
         >
@@ -41,25 +55,30 @@ const OrderPackaging = ({ setCurrentStage }) => {
   );
 };
 
-const OrderProductTr = () => {
+const OrderProductTr = ({ product, handleCheckboxChange, index }) => {
   return (
     <tr className="text-sm text-gray-800 border-b last:border-b-0">
-      <td className="py-3 text-end pe-6">1</td>
+      <td className="py-3 text-end pe-6">{product.product_id}</td>
       <td className="py-3 text-start px-6">
         {" "}
         <div className="flex items-center gap-3 font-medium">
-          <img
-            src="https://static.nike.com/a/images/t_PDP_1280_v1/f_auto,q_auto:eco/20547d52-3e1b-4c3d-b917-f0d7e0eb8bdf/custom-nike-air-force-1-low-by-you-shoes.png"
+          <Image
+            src={product.product_image}
             className="w-16 h-16 object-cover object-center"
+            width={100}
+            height={100}
             alt=""
           />
-          Nike AirForce 1
+          {product.product_name}
         </div>
       </td>
-      <td className="py-3 text-center px-6">XL</td>
-      <td className="py-3 px-6 text-end">1</td>
+      <td className="py-3 text-center px-6">{product.product_size}</td>
+      <td className="py-3 px-6 text-end">{product.product_qty}</td>
       <td className="py-3 ps-6 w-10 text-center">
-        <input type="checkbox" />
+        <input
+          onChange={() => handleCheckboxChange(index)}
+          type="checkbox"
+        />
       </td>
     </tr>
   );

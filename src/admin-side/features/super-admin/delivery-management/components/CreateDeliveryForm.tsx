@@ -2,6 +2,7 @@ import AdminInput from "@/admin-side/components/AdminInput";
 import { storeDeliver } from "@/admin-side/services/deliver";
 import FormErrorMessage from "@/customer-side/components/FormErrorMessage";
 import { useRevalidatedData } from "@/hooks/useRevalidatedData";
+import { revalidateTag } from "next/cache";
 import React, { SetStateAction } from "react";
 import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
@@ -22,14 +23,19 @@ const CreateDeliveryForm = ({
 
   const handleCreateDelivery = async (data) => {
     try {
-      const res = await storeDeliver(data.Name,data.Email,data.Phone,data.Address);
+      const res = await storeDeliver(
+        data.Name,
+        data.Email,
+        data.Phone,
+        data.Address
+      );
       const json = await res.json();
 
       if (res.status !== 201) {
         toast.error(json.message);
         return;
       }
-
+      revalidateTag("delivery");
       toast.success("Product created successfully");
       reset();
 

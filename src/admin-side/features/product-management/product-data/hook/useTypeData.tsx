@@ -23,7 +23,7 @@ export const useTypeData = () => {
   useEffect(() => {
     setFetchUrl(AddParamsToURL(baseUrl + "/type"));
     const queryParam = searchParams;
-    if (queryParam.get("category")) {
+    if (queryParam) {
       filterTypeRef.current.value = queryParam.get("q");
       filterCategoryRef.current.value = queryParam.get("category");
     }

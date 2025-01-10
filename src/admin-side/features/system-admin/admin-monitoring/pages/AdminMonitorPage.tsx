@@ -1,7 +1,22 @@
+"use client"
 import React from "react";
 import AdminMonitorContainer from "../components/AdminMonitorContainer";
+import { useAdminMonitoringData } from "../hooks/useAdminMonitoringData";
+import Loading from "@/admin-side/components/Loading";
+import AdminPagination from "@/admin-side/components/AdminPagimation";
+import NoData from "@/admin-side/components/NoData";
 
 const AdminMonitorPage = () => {
+  const {
+    handleFilter,
+    data,
+    isLoading,
+    filterAdminNameRef,
+    timeRef,
+    roleRef,
+    error,
+  } = useAdminMonitoringData();
+
   return (
     <div>
       <div className="flex flex-row justify-end border-b pb-6">
@@ -11,6 +26,7 @@ const AdminMonitorPage = () => {
               Admin Name
             </label>
             <input
+              ref={filterAdminNameRef}
               id="search"
               type="text"
               className="border border-gray-300  px-3 py-2 outline-none h-10 w-[250px]"
@@ -21,33 +37,34 @@ const AdminMonitorPage = () => {
               Time
             </label>
             <input
+              ref={timeRef}
               id="search"
               type="month"
               className="border border-gray-300  px-3 py-2 outline-none h-10"
             />
           </div>
-          <div className="flex flex-col gap-1 text-gray-800">
-            <label className="text-sm text-gray-700">Type</label>
-            <select className="border border-gray-300 bg-white  px-3 py-2 h-10 min-w-32 outline-none">
-              <option value={""}>All</option>
-              <option value={""}>Product</option>
-              <option value={""}>Colors</option>
-              <option value={""}>Deliveries</option>
-              <option value={""}>Blog</option>
-            </select>
-          </div>
+
           <div className="flex flex-col gap-1 text-gray-800">
             <label className="text-sm text-gray-700">Role</label>
-            <select className="border border-gray-300 bg-white  px-3 py-2 h-10 min-w-32 outline-none">
-              <option value={""}>All</option>
-              <option value={""}>&lt; 10000</option>
-              <option value={""}>100000 &lt; 500000</option>
-              <option value={""}>500000 &lt; 1000000</option>
-              <option value={""}>1000000 &gt;</option>
+            <select
+              ref={roleRef}
+              className="border border-gray-300 bg-white  px-3 py-2 h-10 min-w-32 outline-none"
+            >
+              <option value={"all"}>All</option>
+              <option value={"Product Management"}>Product Management</option>
+              <option value={"Customer Support"}>Customer Support</option>
+              <option value={"Order Management"}>Order Management</option>
+              <option value={"Super Admin"}>Super Admin</option>
+              <option value={"System Admin"}>System Admin</option>
+              <option value={"Blog Management"}>Blog Management</option>
+              <option value={"Retired"}>Retired</option>
             </select>
           </div>
 
-          <div className="flex flex-row h-10 mt-auto cursor-pointer justify-center items-center gap-2 p-3 text-sm  text-gray-700 border bg-gray-300 hover:border-gray-800 duration-300">
+          <div
+            onClick={handleFilter}
+            className="flex flex-row h-10 mt-auto cursor-pointer justify-center items-center gap-2 p-3 text-sm  text-gray-700 border bg-gray-300 hover:border-gray-800 duration-300"
+          >
             <svg
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
@@ -66,7 +83,17 @@ const AdminMonitorPage = () => {
           </div>
         </div>
       </div>
-      <AdminMonitorContainer />
+
+      {isLoading ? (
+        <Loading />
+      ) : data.data && data?.data.length ? (
+        <>
+          <AdminMonitorContainer activities={data.data} />
+          <AdminPagination meta={data?.meta} />
+        </>
+      ) : (
+        <NoData />
+      )}
     </div>
   );
 };

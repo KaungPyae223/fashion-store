@@ -11,9 +11,18 @@ import { AnimatePresence, motion } from "motion/react";
 import GenerateInvoice from "../components/packaging/GenerateInvoice";
 import SelectDelivery from "../components/packaging/SelectDelivery";
 import ReceiverInformation from "../components/packaging/ReceiverInformation";
+import Loading from "@/admin-side/components/Loading";
+import NoData from "@/admin-side/components/NoData";
+import { usePackagingData } from "../hooks/usePackagingData";
 
 const PackagingPage = ({ id }) => {
   const [currentStage, setCurrentStage] = useState(1);
+
+  const { data, error, isLoading } = usePackagingData();
+
+  const [select, setSelect] = useState<number | null>(null);
+
+
 
   return (
     <div className="mt-6">
@@ -43,51 +52,73 @@ const PackagingPage = ({ id }) => {
           stage={4}
         />
       </div>
-      <div className="w-[800px] mx-auto">
-        <AnimatePresence mode="wait">
-          {currentStage == 1 ? (
-            <motion.div
-              key={"OrderPackaging"}
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              transition={{ duration: 0.3, ease: "linear" }}
-            >
-              <OrderPackaging setCurrentStage={setCurrentStage} />
-            </motion.div>
-          ) : currentStage == 2 ? (
-            <motion.div
-              key={"GenerateInvoice"}
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              transition={{ duration: 0.3, ease: "linear" }}
-            >
-              <GenerateInvoice id={id} setCurrentStage={setCurrentStage} />
-            </motion.div>
-          ) : currentStage == 3 ? (
-            <motion.div
-              key={"SelectDelivery"}
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              transition={{ duration: 0.3, ease: "linear" }}
-            >
-              <SelectDelivery setCurrentStage={setCurrentStage} />
-            </motion.div>
-          ) : (
-            <motion.div
-              key={"ReceiverInformation"}
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              transition={{ duration: 0.3, ease: "linear" }}
-            >
-              <ReceiverInformation setCurrentStage={setCurrentStage} />
-            </motion.div>
-          )}
-        </AnimatePresence>
-      </div>
+
+      {isLoading ? (
+        <Loading />
+      ) : data?.order_data ? (
+        <div className="w-[800px] mx-auto">
+          <AnimatePresence mode="wait">
+            {currentStage == 1 ? (
+              <motion.div
+                key={"OrderPackaging"}
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                transition={{ duration: 0.3, ease: "linear" }}
+              >
+                <OrderPackaging
+                  data={data.order_products}
+                  setCurrentStage={setCurrentStage}
+                />
+              </motion.div>
+            ) : currentStage == 2 ? (
+              <motion.div
+                key={"GenerateInvoice"}
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                transition={{ duration: 0.3, ease: "linear" }}
+              >
+                <GenerateInvoice
+                  id={id}
+                  data={data}
+                  setCurrentStage={setCurrentStage}
+                />
+              </motion.div>
+            ) : currentStage == 3 ? (
+              <motion.div
+                key={"SelectDelivery"}
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                transition={{ duration: 0.3, ease: "linear" }}
+              >
+                <SelectDelivery
+                  select={select}
+                  setSelect={setSelect}
+                  setCurrentStage={setCurrentStage}
+                />
+              </motion.div>
+            ) : (
+              <motion.div
+                key={"ReceiverInformation"}
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                transition={{ duration: 0.3, ease: "linear" }}
+              >
+                <ReceiverInformation
+                  select={select}
+                  receiverInfo={data.order_data}
+                  setCurrentStage={setCurrentStage}
+                />
+              </motion.div>
+            )}
+          </AnimatePresence>
+        </div>
+      ) : (
+        <NoData />
+      )}
     </div>
   );
 };

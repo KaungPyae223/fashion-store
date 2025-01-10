@@ -1,6 +1,7 @@
 import AdminInput from "@/admin-side/components/AdminInput";
 import { storePayment } from "@/admin-side/services/payment";
 import { useRevalidatedData } from "@/hooks/useRevalidatedData";
+import { revalidateTag } from "next/cache";
 import React, { SetStateAction } from "react";
 import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
@@ -32,6 +33,7 @@ const PaymentCreateForm = ({
       toast.success("Product created successfully");
       reset();
 
+      revalidateTag("allPayments");
       await revalidate("/payment");
 
       setOpenModal(false);

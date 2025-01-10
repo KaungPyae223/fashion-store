@@ -2,7 +2,7 @@ import AdminPagination from "@/admin-side/components/AdminPagimation";
 import React from "react";
 import AdminTr from "./AdminTr";
 
-const AdminContainer = () => {
+const AdminContainer = ({ admins }) => {
   return (
     <div className="mt-6">
       <table className="table-auto w-full text-left text-sm border-spacing-y-4 border-spacing-x-0">
@@ -17,18 +17,12 @@ const AdminContainer = () => {
           </tr>
         </thead>
         <tbody>
-          <AdminTr />
-          <AdminTr />
-          <AdminTr />
-          <AdminTr />
-          <AdminTr />
-          <AdminTr />
-          <AdminTr />
-          <AdminTr />
-
+          {admins.map((admin) => (
+            <AdminTr key={admin.id} admin={admin} />
+            
+          ))}
         </tbody>
       </table>
-      <AdminPagination />
     </div>
   );
 };

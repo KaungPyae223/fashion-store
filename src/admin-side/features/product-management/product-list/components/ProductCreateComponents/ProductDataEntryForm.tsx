@@ -6,6 +6,7 @@ import React from "react";
 import { useForm } from "react-hook-form";
 
 const ProductDataEntryForm = ({ setStage }) => {
+  
   const {
     setProductData,
     product: { productData },

@@ -1,14 +1,14 @@
-'use client'
+"use client";
 import React from "react";
 import { motion } from "framer-motion";
+import Link from "next/link";
 
-const CarouselCard = () => {
+const CarouselCard = ({ data }) => {
   return (
     <div
       className="h-[80vh]"
       style={{
-        backgroundImage:
-          "url(https://images.unsplash.com/photo-1478118330274-ff72cf1161a7?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D)",
+        backgroundImage: `url(${data.image})`,
         backgroundSize: "cover",
         backgroundPosition: "center",
       }}
@@ -20,13 +20,11 @@ const CarouselCard = () => {
           transition={{ duration: 0.5, delay: 0.5 }}
           className="flex flex-col justify-center items-center"
         >
-          <h1 className="text-white text-4xl font-bold">New Collection</h1>
-          <p className="text-white text-lg">
-            Get your hands on the latest collection
-          </p>
-          <button className="bg-white text-black px-8 py-2 mt-4">
-            Shop Now
-          </button>
+          <h1 className="text-white text-4xl font-bold">{data.title}</h1>
+          <p className="text-white text-lg">{data.sub_title}</p>
+          <Link href={data.link} className="bg-white text-black px-8 py-2 mt-4">
+            {data.link_title}
+          </Link>
         </motion.div>
       </div>
     </div>

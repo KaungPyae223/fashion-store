@@ -1,11 +1,14 @@
+import { useFormatDate } from "@/hooks/useFormatDate";
 import React, { useRef } from "react";
 import { useReactToPrint } from "react-to-print";
 
-const GenerateInvoice = ({ id,setCurrentStage }) => {
+const GenerateInvoice = ({ id,setCurrentStage,data:{order_data,order_products} }) => {
   const contentRef = useRef();
   const reactToPrintFn = useReactToPrint({
     contentRef,
   });
+
+  const {formatDate} = useFormatDate();
 
   return (
     <div className="py-9">
@@ -21,7 +24,7 @@ const GenerateInvoice = ({ id,setCurrentStage }) => {
             Alexa
           </p>
           <p className="text-center border-y text-sm mx-auto border-gray-300 w-full py-0.5 my-1.5 text-gray-700">
-            24 June 2024
+            {formatDate(order_data.created_at)}
           </p>
           <p className="text-center text-sm text-gray-500">INV: {id}</p>
         </div>
@@ -38,29 +41,31 @@ const GenerateInvoice = ({ id,setCurrentStage }) => {
               </tr>
             </thead>
             <tbody>
-              <InvoiceTr />
-              <InvoiceTr />
-              <InvoiceTr />
-              <InvoiceTr />
+              {
+                order_products.map((product) => (
+                  <InvoiceTr key={product.product_id} product={product} />
+                ))
+              }
+              
               <tr>
                 <td colSpan={4} className="pt-3 text-end pe-6">
-                  Total Price
+                  Sub Total
                 </td>
-                <td className="pt-3 ps-6 text-end">15000 Ks</td>
+                <td className="pt-3 ps-6 text-end">{order_data.sub_total} Ks</td>
               </tr>
               <tr>
                 <td colSpan={4} className="py-2 text-end pe-6">
                   Tax
                 </td>
-                <td className="pt-1.5 ps-6 text-end">15000 Ks</td>
+                <td className="pt-1.5 ps-6 text-end">{order_data.tax} Ks</td>
               </tr>
               <tr>
                 <td colSpan={3}></td>
                 <td className="py-2 border-t w-32 text-nowrap text-end pe-6 font-medium">
-                  Total Amount
+                  Total Price
                 </td>
                 <td className="py-2 ps-6 border-t text-end  font-medium">
-                  15000 Ks
+                  {order_data.total_price} Ks
                 </td>
               </tr>
             </tbody>
@@ -107,14 +112,14 @@ const GenerateInvoice = ({ id,setCurrentStage }) => {
   );
 };
 
-const InvoiceTr = () => {
+const InvoiceTr = ({product}) => {
   return (
     <tr className="text-sm text-gray-600 border-b">
-      <td className="py-3 text-start pe-6">Nike AirForce 1</td>
-      <td className="py-3 text-center px-6">XL</td>
-      <td className="py-3 text-end px-6">5000 Ks</td>
-      <td className="py-3 px-6 text-end">1</td>
-      <td className="py-3 ps-6 text-end">5000 Ks</td>
+      <td className="py-3 text-start pe-6">{product.product_name}</td>
+      <td className="py-3 text-center px-6">{product.product_size}</td>
+      <td className="py-3 text-end px-6">{product.product_price} Ks</td>
+      <td className="py-3 px-6 text-end">{product.product_qty}</td>
+      <td className="py-3 ps-6 text-end">{product.product_total} Ks</td>
     </tr>
   );
 };

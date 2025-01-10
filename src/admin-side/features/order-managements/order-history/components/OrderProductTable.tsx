@@ -1,6 +1,7 @@
+import Image from "next/image";
 import React from "react";
 
-const OrderProductTable = () => {
+const OrderProductTable = ({products}) => {
   return (
     <div className="bg-white p-6">
       <table className="table-auto w-full text-left border-spacing-y-4 border-spacing-x-0">
@@ -16,37 +17,39 @@ const OrderProductTable = () => {
           </tr>
         </thead>
         <tbody>
-          <OrderProductTr />
-          <OrderProductTr />
-          <OrderProductTr />
-          <OrderProductTr />
-          <OrderProductTr />
-          <OrderProductTr />
+          {
+            products.map((product) => (
+              <OrderProductTr key={product.id} product={product}/>
+            ))
+          }
+         
         </tbody>
       </table>
     </div>
   );
 };
 
-const OrderProductTr = () => {
+const OrderProductTr = ({product}) => {
   return (
     <tr className="border-b last:border-b-0 text-sm">
-      <td className="text-end pe-6 py-3 w-12 text-nowrap">1</td>
+      <td className="text-end pe-6 py-3 w-12 text-nowrap">{product.id}</td>
       <td className="text-start px-2 py-3 ">
         <div className="flex items-center gap-4 font-medium text-base">
-          <img
-            src="https://static.nike.com/a/images/t_PDP_1280_v1/f_auto,q_auto:eco/20547d52-3e1b-4c3d-b917-f0d7e0eb8bdf/custom-nike-air-force-1-low-by-you-shoes.png"
+          <Image
+            src={product.cover_image}
             className="w-16 h-16 object-cover object-center"
+            width={100}
+            height={100}
             alt=""
           />
-          Nike AirForce 1
+          {product.product_name}
         </div>
       </td>
-      <td className="text-center py-3 px-2">US 10</td>
-      <td className="text-center py-3 px-2">Black</td>
-      <td className="text-end py-3 px-2">1</td>
-      <td className="text-end py-3 px-2">5000 Ks</td>
-      <td className="text-end py-3 px-2">5000 Ks</td>
+      <td className="text-center py-3 px-2">{product.product_size}</td>
+      <td className="text-center py-3 px-2">{product.product_color}</td>
+      <td className="text-end py-3 px-2">{product.product_qty}</td>
+      <td className="text-end py-3 px-2">{product.product_price} Ks</td>
+      <td className="text-end py-3 px-2">{product.total_price} Ks</td>
     </tr>
   );
 };
