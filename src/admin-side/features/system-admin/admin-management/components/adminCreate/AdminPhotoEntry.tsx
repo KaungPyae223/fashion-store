@@ -15,6 +15,7 @@ const AdminPhotoEntry = ({
     data: { adminPhoto },
   } = useAdminStore();
 
+
   const [coverImage, setCoverImage] = useState(adminPhoto);
 
   const [coverImageUploadModal, setCoverImageUploadModal] = useState();
@@ -31,7 +32,7 @@ const AdminPhotoEntry = ({
   return (
     <div>
       <Toaster />
-      <p className="text-2xl font-medium tracking-wide">Product Cover Image</p>
+      <p className="text-2xl font-medium tracking-wide">Admin Profile</p>
       <div className="mt-6">
         {coverImage?.preview ? (
           <Image

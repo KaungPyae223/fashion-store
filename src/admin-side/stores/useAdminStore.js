@@ -13,6 +13,9 @@ const useAdminStore = create((set) => ({
     adminPhoto: null,
     adminRole: null,
   },
+
+  setAdmin: (admin) => set({ data:admin }),
+
   setAdminImage: (image) =>
     set((state) => ({
       data: { ...state.data, adminPhoto: image },

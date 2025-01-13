@@ -1,3 +1,4 @@
+"use client"
 import React from "react";
 import { HomeTitle } from "./HomeTitle";
 import Container from "../../../components/Container";

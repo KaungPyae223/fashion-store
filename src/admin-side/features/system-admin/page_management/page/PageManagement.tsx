@@ -1,14 +1,23 @@
+"use client";
 import React, { useEffect, useState } from "react";
 import HomeCarouselController from "../components/HomeCarouselController";
 import AdminSubTitle from "@/admin-side/components/AdminSubTitle";
 import Link from "next/link";
-import { fetchAllAds, fetchAllCarousels } from "@/admin-side/services/page";
+import useSWR from "swr";
+import { fetchHome } from "@/customer-side/services/HomePage";
 
-const PageManagement = async () => {
-  const adsData = await fetchAllAds();
-  const ads = adsData.ads.split("/");
+const PageManagement = () => {
+  const url = process.env.NEXT_PUBLIC_BASE_URL + "/ads";
 
-  const carouselData = await fetchAllCarousels();
+  const [ads, setAds] = useState([]);
+
+  const { data, isLoading, error } = useSWR(url, fetchHome);
+
+  useEffect(() => {
+    if (!isLoading) {
+      setAds(data.ads.split("/"));
+    }
+  }, [isLoading]);
 
   return (
     <div>
@@ -35,9 +44,7 @@ const PageManagement = async () => {
           Update Ads
         </Link>
       </div>
-      <HomeCarouselController carouselData={carouselData} />
-
-      <hr></hr>
+      <HomeCarouselController  />
     </div>
   );
 };

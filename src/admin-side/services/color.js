@@ -6,8 +6,8 @@ export const storeColor = (color) => {
     }),
     headers: {
       "Content-Type": "application/json",
-      "Accept": "application/json",
-      Authorization: `Bearer 3BlHS7l6qKpEpCukKESpffk4Llg17LLfsGRUDEMT3ebb5733`,
+      Accept: "application/json",
+      Authorization: `Bearer ${getCookie("token")}`,
     },
   });
 };
@@ -20,8 +20,8 @@ export const updateColor = (id, color) => {
     }),
     headers: {
       "Content-Type": "application/json",
-      "Accept": "application/json",
-      Authorization: `Bearer 3BlHS7l6qKpEpCukKESpffk4Llg17LLfsGRUDEMT3ebb5733`,
+      Accept: "application/json",
+      Authorization: `Bearer ${getCookie("token")}`,
     },
   });
 };
@@ -31,7 +31,7 @@ export const deleteColor = (id) => {
     method: "DELETE",
     headers: {
       "Content-Type": "application/json",
-      Authorization: `Bearer 3BlHS7l6qKpEpCukKESpffk4Llg17LLfsGRUDEMT3ebb5733`,
+      Authorization: `Bearer ${getCookie("token")}`,
     },
   });
 };
@@ -39,7 +39,7 @@ export const deleteColor = (id) => {
 export const fetchColor = (url) =>
   fetch(url, {
     headers: {
-      Authorization: `Bearer 3BlHS7l6qKpEpCukKESpffk4Llg17LLfsGRUDEMT3ebb5733`,
+      Authorization: `Bearer ${getCookie("token")}`,
       Accept: "application/json",
     },
   }).then((res) => res.json());

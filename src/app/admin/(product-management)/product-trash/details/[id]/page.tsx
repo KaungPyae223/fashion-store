@@ -1,3 +1,4 @@
+import AdminCheck from "@/admin-side/components/AdminCheck";
 import AdminProductDetailsPage from "@/admin-side/features/product-management/product-list/page/AdminProductDetailsPage";
 import BreadCrumb from "@/customer-side/components/BreadCrumb";
 import Link from "next/link";
@@ -38,7 +39,9 @@ const page = ({ params: { id } }: { params: { id: string } }) => {
           />
         </div>
       </div>
-      <AdminProductDetailsPage id={id} />
+      <AdminCheck allow={"Product Management"}>
+        <AdminProductDetailsPage id={id} />
+      </AdminCheck>
     </div>
   );
 };

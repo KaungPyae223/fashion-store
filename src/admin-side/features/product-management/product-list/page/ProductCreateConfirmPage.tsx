@@ -1,7 +1,7 @@
 import BreadCrumb from "@/customer-side/components/BreadCrumb";
 import Link from "next/link";
 import React from "react";
-import ProductCreateConfirm from "../components/ProductCreateConfirm";
+import ProductCreateConfirm from "../components/ProductCreateComponents/ProductCreateConfirm";
 
 const ProductCreateConfirmPage = () => {
   return (

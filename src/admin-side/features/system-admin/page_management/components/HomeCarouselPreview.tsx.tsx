@@ -1,3 +1,4 @@
+import InformationContent from "@/admin-side/components/InformationContent";
 import CarouselCard from "@/customer-side/features/home/components/CarouselCard";
 import React from "react";
 
@@ -23,19 +24,6 @@ const HomeCarouselPreview = ({data,index}) => {
   );
 };
 
-const InformationContent = ({
-  data,
-  title,
-}: {
-  data: string;
-  title: string;
-}) => {
-  return (
-    <div className="text-sm  mt-0.5 flex flex-row gap-1.5">
-      <div className="font-medium text-gray-500">{title}:</div>{" "}
-      <div>{data}</div>
-    </div>
-  );
-};
+
 
 export default HomeCarouselPreview;

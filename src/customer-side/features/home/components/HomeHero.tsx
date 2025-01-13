@@ -1,7 +1,6 @@
 "use client";
 
 import React from "react";
-// Import Swiper styles
 import "swiper/css";
 import "swiper/css/navigation";
 
@@ -9,7 +8,7 @@ import { Autoplay, Pagination, Navigation } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
 import CarouselCard from "./CarouselCard";
 
-const HomeHero = () => {
+const HomeHero = ({ data }) => {
   return (
     <Swiper
       spaceBetween={0}
@@ -32,18 +31,11 @@ const HomeHero = () => {
       modules={[Autoplay, Pagination, Navigation]}
       className="mySwiper mb-6 relative"
     >
-      <SwiperSlide>
-        <CarouselCard />
-      </SwiperSlide>
-      <SwiperSlide>
-        <CarouselCard />
-      </SwiperSlide>
-      <SwiperSlide>
-        <CarouselCard />
-      </SwiperSlide>
-      <SwiperSlide>
-        <CarouselCard />
-      </SwiperSlide>
+      {data.map((el) => (
+        <SwiperSlide key={el.id}>
+          <CarouselCard data={el} />
+        </SwiperSlide>
+      ))}
 
       {/* Custom Navigation Buttons */}
       <div className="custom-navigation absolute top-1/2 px-12 left-0 right-0 flex justify-between z-50">

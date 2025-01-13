@@ -1,3 +1,4 @@
+import AdminCheck from "@/admin-side/components/AdminCheck";
 import AdminCreatePage from "@/admin-side/features/system-admin/admin-management/pages/AdminCreatePage";
 import BreadCrumb from "@/customer-side/components/BreadCrumb";
 import Link from "next/link";
@@ -38,7 +39,10 @@ const page = () => {
           />
         </div>
       </div>
-      <AdminCreatePage />
+
+      <AdminCheck allow={"System Admin"}>
+        <AdminCreatePage />
+      </AdminCheck>
     </div>
   );
 };

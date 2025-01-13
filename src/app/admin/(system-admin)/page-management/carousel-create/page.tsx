@@ -1,3 +1,4 @@
+import AdminCheck from "@/admin-side/components/AdminCheck";
 import CarouselCreatePage from "@/admin-side/features/system-admin/page_management/page/CarouselCreatePage";
 import HeaderAdsController from "@/admin-side/features/system-admin/page_management/page/HeaderAdsController";
 import BreadCrumb from "@/customer-side/components/BreadCrumb";
@@ -40,7 +41,9 @@ const page = () => {
           />
         </div>
       </div>
-      <CarouselCreatePage />
+      <AdminCheck allow={"System Admin"}>
+        <CarouselCreatePage />
+      </AdminCheck>
     </div>
   );
 };

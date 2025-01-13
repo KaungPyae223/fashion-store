@@ -1,12 +1,27 @@
 "use client";
-import React from "react";
+import React, { useEffect, useRef } from "react";
 import { motion } from "framer-motion";
 import Link from "next/link";
 
 const CarouselCard = ({ data }) => {
+  const carouselRef = useRef();
+
+  const Navigation = document.querySelector(".Navigation");
+
+  useEffect(() => {
+    if (Navigation) {
+      const windowHeight = window.innerHeight;
+      const carouselHeight = windowHeight - Navigation.clientHeight;
+
+      carouselRef.current.style.height = `${carouselHeight + 20}px`;
+    } else {
+      carouselRef.current.style.height = `80vh`;
+    }
+  }, []);
+
   return (
     <div
-      className="h-[80vh]"
+      ref={carouselRef}
       style={{
         backgroundImage: `url(${data.image})`,
         backgroundSize: "cover",

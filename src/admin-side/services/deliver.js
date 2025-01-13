@@ -9,13 +9,13 @@ export const storeDeliver = (name, email, phone, address) => {
     }),
     headers: {
       "Content-Type": "application/json",
-      "Accept": "application/json",
-      Authorization: `Bearer 3BlHS7l6qKpEpCukKESpffk4Llg17LLfsGRUDEMT3ebb5733`,
+      Accept: "application/json",
+      Authorization: `Bearer ${getCookie("token")}`,
     },
   });
 };
 
-export const updateDeliver = (id,name,email,phone,address,status) => {
+export const updateDeliver = (id, name, email, phone, address, status) => {
   return fetch(process.env.NEXT_PUBLIC_BASE_URL + "/deliver/" + id, {
     method: "PUT",
     body: JSON.stringify({
@@ -23,12 +23,12 @@ export const updateDeliver = (id,name,email,phone,address,status) => {
       email: email,
       phone: phone,
       address: address,
-      status:status
+      status: status,
     }),
     headers: {
       "Content-Type": "application/json",
-      "Accept" : "application/json",
-      Authorization: `Bearer 3BlHS7l6qKpEpCukKESpffk4Llg17LLfsGRUDEMT3ebb5733`,
+      Accept: "application/json",
+      Authorization: `Bearer ${getCookie("token")}`,
     },
   });
 };
@@ -38,8 +38,8 @@ export const deleteDeliver = (id) => {
     method: "DELETE",
     headers: {
       "Content-Type": "application/json",
-      "Accept": "application/json",
-      Authorization: `Bearer 3BlHS7l6qKpEpCukKESpffk4Llg17LLfsGRUDEMT3ebb5733`,
+      Accept: "application/json",
+      Authorization: `Bearer ${getCookie("token")}`,
     },
   });
 };
@@ -47,7 +47,7 @@ export const deleteDeliver = (id) => {
 export const fetchDeliveries = (url) =>
   fetch(url, {
     headers: {
-      Authorization: `Bearer 3BlHS7l6qKpEpCukKESpffk4Llg17LLfsGRUDEMT3ebb5733`,
+      Authorization: `Bearer ${getCookie("token")}`,
       Accept: "application/json",
     },
   }).then((res) => res.json());

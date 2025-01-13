@@ -1,6 +1,7 @@
 import Image from "next/image";
 import React from "react";
 import { useAdminConfirm } from "../../hooks/useAdminConfirm";
+import InformationContent from "@/admin-side/components/InformationContent";
 
 const AdminConfirm = ({
   setStage,
@@ -59,19 +60,6 @@ const AdminConfirm = ({
   );
 };
 
-const InformationContent = ({
-  data,
-  title,
-}: {
-  data: string;
-  title: string;
-}) => {
-  return (
-    <div className="text-sm  mt-0.5 flex flex-row gap-1.5">
-      <div className="font-medium text-gray-500">{title}:</div>{" "}
-      <div>{data}</div>
-    </div>
-  );
-};
+
 
 export default AdminConfirm;

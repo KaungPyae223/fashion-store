@@ -16,6 +16,7 @@ import Loading from "@/admin-side/components/Loading";
 import NoData from "@/admin-side/components/NoData";
 import { useFormatDate } from "@/hooks/useFormatDate";
 import { format } from "path";
+import InformationContent from "@/admin-side/components/InformationContent";
 
 const OrderDetailsPage = ({ id }) => {
   const baseUrl =
@@ -226,19 +227,6 @@ const OrderDetailsPage = ({ id }) => {
   }
 };
 
-const InformationContent = ({
-  data,
-  title,
-}: {
-  data: string;
-  title: string;
-}) => {
-  return (
-    <div className="text-sm  mt-0.5 flex flex-row gap-1.5">
-      <div className="font-medium text-gray-500">{title}:</div>{" "}
-      <div>{data}</div>
-    </div>
-  );
-};
+
 
 export default OrderDetailsPage;

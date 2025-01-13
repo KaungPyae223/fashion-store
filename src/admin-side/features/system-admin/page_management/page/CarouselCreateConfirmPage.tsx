@@ -3,6 +3,7 @@ import AdminSubTitle from "@/admin-side/components/AdminSubTitle";
 import CarouselCard from "@/customer-side/features/home/components/CarouselCard";
 import React from "react";
 import { useCarouselCreate } from "../hook/useCarouselCreate";
+import InformationContent from "@/admin-side/components/InformationContent";
 
 const CarouselCreateConfirmPage = () => {
   const {
@@ -53,19 +54,6 @@ const CarouselCreateConfirmPage = () => {
   );
 };
 
-const InformationContent = ({
-  data,
-  title,
-}: {
-  data: string;
-  title: string;
-}) => {
-  return (
-    <div className="text-sm  mt-0.5 flex flex-row gap-1.5">
-      <div className="font-medium text-gray-500">{title}:</div>{" "}
-      <div>{data}</div>
-    </div>
-  );
-};
+
 
 export default CarouselCreateConfirmPage;

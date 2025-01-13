@@ -67,7 +67,7 @@ const NavBar = () => {
 
   return (
     <div ref={containerRef}>
-      <div ref={navRef} className="duration-300 fixed w-full bg-white z-30">
+      <div ref={navRef} className="duration-300 Navigation fixed w-full bg-white z-30">
         <Noti />
         <NavBody
           setOpenCraft={setOpenCraft}

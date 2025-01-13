@@ -1,9 +1,23 @@
 import AdminSubTitle from "@/admin-side/components/AdminSubTitle";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import HomeCarouselPreview from "./HomeCarouselPreview.tsx";
 import Link from "next/link.js";
+import useSWR from "swr";
+import { fetchHome } from "@/customer-side/services/HomePage.js";
 
-const HomeCarouselController = ({ carouselData }) => {
+const HomeCarouselController = () => {
+  const url = process.env.NEXT_PUBLIC_BASE_URL + "/carousels";
+
+  const [carouselData, setCarousel] = useState([]);
+
+  const { data, isLoading, error } = useSWR(url, fetchHome);
+
+  useEffect(() => {
+    if (!isLoading) {
+      setCarousel(data);
+    }
+  }, [isLoading]);
+
   return (
     <div className="mt-6">
       <AdminSubTitle title={`Carousel ( ${carouselData.length} / 5 )`} />

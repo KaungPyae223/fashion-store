@@ -1,3 +1,4 @@
+import AdminCheck from "@/admin-side/components/AdminCheck";
 import CarouselCreateConfirmPage from "@/admin-side/features/system-admin/page_management/page/CarouselCreateConfirmPage";
 import BreadCrumb from "@/customer-side/components/BreadCrumb";
 import Link from "next/link";
@@ -42,7 +43,9 @@ const page = () => {
           />
         </div>
       </div>
-      <CarouselCreateConfirmPage />
+      <AdminCheck allow={"System Admin"}>
+        <CarouselCreateConfirmPage />
+      </AdminCheck>
     </div>
   );
 };

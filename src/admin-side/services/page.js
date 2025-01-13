@@ -12,33 +12,9 @@ export const storeCarousel = (data) => {
     body: formData,
     headers: {
       Accept: "application/json",
-      Authorization: `Bearer 6Is41MhZbTKtarHqYVvnxCp1rI7rTO4n6q3W1lQa00b8b1bd`,
+      Authorization: `Bearer ${getCookie("token")}`,
     },
   });
-};
-
-export const fetchAllAds = async () => {
-  const res = await fetch(process.env.NEXT_PUBLIC_BASE_URL + "/ads", {
-    headers: {
-      Accept: "application/json",
-    },
-    next: {
-      revalidate: 86400,
-      tags: ["allAds"],
-    },
-  });
-  const json = await res.json();
-  return json;
-};
-
-export const fetchAllCarousels = async () => {
-  const res = await fetch(process.env.NEXT_PUBLIC_BASE_URL + "/carousels", {
-    headers: {
-      Accept: "application/json",
-    },
-  });
-  const json = await res.json();
-  return json;
 };
 
 export const updateAds = (ads) => {
@@ -50,7 +26,15 @@ export const updateAds = (ads) => {
     headers: {
       "Content-Type": "application/json",
       Accept: "application/json",
-      Authorization: `Bearer 6Is41MhZbTKtarHqYVvnxCp1rI7rTO4n6q3W1lQa00b8b1bd`,
+      Authorization: `Bearer ${getCookie("token")}`,
     },
   });
 };
+
+export const fetchPage = async (url) =>
+  await fetch(url, {
+    headers: {
+      Authorization: `Bearer ${getCookie("token")}`,
+      Accept: "application/json",
+    },
+  }).then((res) => res.json());

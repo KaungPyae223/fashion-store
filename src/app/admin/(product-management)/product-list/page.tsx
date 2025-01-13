@@ -2,6 +2,7 @@ import PageTitle from "@/admin-side/components/PageTitle";
 import ProductListPage from "@/admin-side/features/product-management/product-list/page/ProductListPage";
 import React from "react";
 import ItemListAnimation from "@/assets/ItemListAnimation.json";
+import AdminCheck from "@/admin-side/components/AdminCheck";
 
 const page = () => {
   return (
@@ -11,7 +12,9 @@ const page = () => {
         subTitle="Manage the Alexa products"
         animate={ItemListAnimation}
       />
-      <ProductListPage />
+      <AdminCheck allow={"Product Management"}>
+        <ProductListPage />
+      </AdminCheck>
     </div>
   );
 };

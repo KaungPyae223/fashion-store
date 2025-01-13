@@ -1,10 +1,13 @@
+import AdminCheck from "@/admin-side/components/AdminCheck";
 import ProductCreatePage from "@/admin-side/features/product-management/product-list/page/ProductCreatePage";
 import React from "react";
 
 const page = () => {
   return (
     <div>
-      <ProductCreatePage />
+      <AdminCheck allow={"Product Management"}>
+        <ProductCreatePage />
+      </AdminCheck>
     </div>
   );
 };

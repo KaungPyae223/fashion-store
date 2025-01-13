@@ -1,6 +1,7 @@
+import AdminCheck from "@/admin-side/components/AdminCheck";
 import PageTitle from "@/admin-side/components/PageTitle";
 import PaymentManagementPage from "@/admin-side/features/super-admin/payment-management/page/PaymentManagementPage";
-import PaymentManagement from "@/assets/PaymentManagement.json"
+import PaymentManagement from "@/assets/PaymentManagement.json";
 import React from "react";
 
 const page = () => {
@@ -11,7 +12,9 @@ const page = () => {
         subTitle="Manage the payment information"
         animate={PaymentManagement}
       />
-      <PaymentManagementPage />
+      <AdminCheck allow={"Super Admin"}>
+        <PaymentManagementPage />
+      </AdminCheck>
     </div>
   );
 };

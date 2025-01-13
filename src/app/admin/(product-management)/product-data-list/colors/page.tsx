@@ -1,10 +1,13 @@
+import AdminCheck from "@/admin-side/components/AdminCheck";
 import ColorPage from "@/admin-side/features/product-management/product-data/page/ColorPage";
 import React from "react";
 
 const page = () => {
   return (
     <div>
-      <ColorPage />
+      <AdminCheck allow={"Product Management"}>
+        <ColorPage />
+      </AdminCheck>
     </div>
   );
 };

@@ -1,3 +1,4 @@
+import AdminCheck from "@/admin-side/components/AdminCheck";
 import CustomerListDetailsPage from "@/admin-side/features/customer-support/customer-list/pages/CustomerListDetailsPage";
 import BreadCrumb from "@/customer-side/components/BreadCrumb";
 import Link from "next/link";
@@ -38,7 +39,9 @@ const page = ({ params: { id } }: { params: { id: string } }) => {
           />
         </div>
       </div>
-      <CustomerListDetailsPage id={id} />
+      <AdminCheck allow={"Customer Support"}>
+        <CustomerListDetailsPage id={id} />
+      </AdminCheck>
     </div>
   );
 };

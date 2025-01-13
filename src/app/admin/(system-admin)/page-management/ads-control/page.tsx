@@ -1,3 +1,4 @@
+import AdminCheck from "@/admin-side/components/AdminCheck";
 import HeaderAdsController from "@/admin-side/features/system-admin/page_management/page/HeaderAdsController";
 import BreadCrumb from "@/customer-side/components/BreadCrumb";
 import Link from "next/link";
@@ -38,7 +39,9 @@ const page = () => {
           />
         </div>
       </div>
-      <HeaderAdsController />
+      <AdminCheck allow={"System Admin"}>
+        <HeaderAdsController />
+      </AdminCheck>
     </div>
   );
 };

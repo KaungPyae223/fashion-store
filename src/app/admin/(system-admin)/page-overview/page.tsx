@@ -1,3 +1,4 @@
+import AdminCheck from "@/admin-side/components/AdminCheck";
 import HomePage from "@/customer-side/features/home/page/HomePage";
 import React from "react";
 
@@ -20,7 +21,9 @@ const page = () => {
           </div>
         </div>
       </div>
-      <HomePage />
+      <AdminCheck allow={"System Admin"}>
+        <HomePage />
+      </AdminCheck>
     </div>
   );
 };

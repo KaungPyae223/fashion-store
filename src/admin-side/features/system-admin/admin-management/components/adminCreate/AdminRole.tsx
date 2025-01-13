@@ -30,7 +30,7 @@ const AdminRole = ({ setStage }) => {
 
   return (
     <div>
-      <p className="text-2xl font-medium tracking-wide">Admin Data Entry</p>
+      <p className="text-2xl font-medium tracking-wide">Admin Role Entry</p>
       <form onSubmit={handleSubmit(handleRole)} className="mt-6">
         <AdminSelect
           register={register}

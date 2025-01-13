@@ -1,46 +1,27 @@
 "use client";
-import React from "react";
-import NavNotificationText from "./NavNotificationText";
-import { motion } from "framer-motion";
+import React, { useEffect, useState } from "react";
+import NotiBar from "./NotiBar";
+import { fetchHome } from "@/customer-side/services/HomePage";
+import useSWR from "swr";
 
 const NavNotification = () => {
-  const NotiText: string[] = [
-    "Nike Air Force is available now",
-    "Sambas are available here",
-    "Winter fashions are for you",
-    "Sneaker Fair is in February 2025",
-    "Burmese hype is available now",
-    "Nike authentic reseller",
-    "Shop together with Alexa",
-  ];
+  const url = process.env.NEXT_PUBLIC_BASE_URL + "/ads";
+
+  const [NotiText, setNotiText] = useState([]);
+
+  const { data, isLoading, error } = useSWR(url, fetchHome);
+
+  useEffect(() => {
+    if (!isLoading) {
+      setNotiText(data.ads.split("/"));
+    }
+  }, [isLoading]);
 
   return (
     <div className="bg-black">
       <div className="flex py-2 w-full text-sm text-white overflow-hidden">
-        <motion.div
-          initial={{ x: "0%" }}
-          animate={{ x: "-100%" }}
-          transition={{
-            repeat: Infinity,
-            duration: 120,
-            ease: "linear",
-          }}
-          className="flex items-center gap-6 w-fit pe-6"
-        >
-          {NotiText.map((Text, i) => (
-            <NavNotificationText title={Text} key={i} />
-          ))}
-        </motion.div>
-        <motion.div
-          initial={{ x: "0%" }}
-          animate={{ x: "-100%" }}
-          transition={{ repeat: Infinity, duration: 120, ease: "linear" }}
-          className="flex items-center gap-6 w-fit pe-6"
-        >
-          {NotiText.map((Text, i) => (
-            <NavNotificationText title={Text} key={i} />
-          ))}
-        </motion.div>
+        <NotiBar NotiText={NotiText} />
+        <NotiBar NotiText={NotiText} />
       </div>
     </div>
   );

@@ -1,3 +1,4 @@
+import AdminCheck from "@/admin-side/components/AdminCheck";
 import PackagingPage from "@/admin-side/features/order-managements/order-list/page/PackagingPage";
 import BreadCrumb from "@/customer-side/components/BreadCrumb";
 import Link from "next/link";
@@ -38,7 +39,9 @@ const page = ({ params: { id } }: { params: { id: string } }) => {
           />
         </div>
       </div>
-      <PackagingPage id={id} />
+      <AdminCheck allow={"Order Management"}>
+        <PackagingPage id={id} />
+      </AdminCheck>
     </div>
   );
 };

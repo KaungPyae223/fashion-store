@@ -7,7 +7,7 @@ export const storePayment = (payment) => {
     headers: {
       "Content-Type": "application/json",
       Accept: "application/json",
-      Authorization: `Bearer 3BlHS7l6qKpEpCukKESpffk4Llg17LLfsGRUDEMT3ebb5733`,
+      Authorization: `Bearer ${getCookie("token")}`,
     },
   });
 };
@@ -22,19 +22,17 @@ export const updatePayment = (id, payment, status) => {
     headers: {
       "Content-Type": "application/json",
       Accept: "application/json",
-      Authorization: `Bearer 3BlHS7l6qKpEpCukKESpffk4Llg17LLfsGRUDEMT3ebb5733`,
+      Authorization: `Bearer ${getCookie("token")}`,
     },
   });
 };
-
-
 
 export const deletePayment = (id) => {
   return fetch(process.env.NEXT_PUBLIC_BASE_URL + "/payment/" + id, {
     method: "DELETE",
     headers: {
       "Content-Type": "application/json",
-      Authorization: `Bearer 3BlHS7l6qKpEpCukKESpffk4Llg17LLfsGRUDEMT3ebb5733`,
+      Authorization: `Bearer ${getCookie("token")}`,
     },
   });
 };
@@ -42,7 +40,7 @@ export const deletePayment = (id) => {
 export const fetchPayment = (url) =>
   fetch(url, {
     headers: {
-      Authorization: `Bearer 3BlHS7l6qKpEpCukKESpffk4Llg17LLfsGRUDEMT3ebb5733`,
+      Authorization: `Bearer ${getCookie("token")}`,
       Accept: "application/json",
     },
   }).then((res) => res.json());

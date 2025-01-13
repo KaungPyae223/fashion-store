@@ -11,6 +11,8 @@ const AdminManagementPage = () => {
   const { handleFilter, data, isLoading, filterAdminNameRef, roleRef, error } =
     useAdminData();
 
+    console.log(data);
+
   return (
     <div>
       <div className="flex flex-row justify-between border-b pb-6">
@@ -91,7 +93,7 @@ const AdminManagementPage = () => {
 
       {isLoading ? (
         <Loading />
-      ) : data.data && data?.data.length ? (
+      ) : data?.data && data?.data.length ? (
         <>
           <AdminContainer admins={data.data} />
           <AdminPagination meta={data?.meta} />

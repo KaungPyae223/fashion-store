@@ -1,12 +1,15 @@
-import DefaultPage from '@/admin-side/features/default/DefaultPage'
-import React from 'react'
+import AdminCheck from "@/admin-side/components/AdminCheck";
+import DefaultPage from "@/admin-side/features/default/DefaultPage";
+import React from "react";
 
 const page = () => {
   return (
     <div>
-      <DefaultPage />
+      <AdminCheck allow={"All"}>
+        <DefaultPage />
+      </AdminCheck>
     </div>
-  )
-}
+  );
+};
 
-export default page
+export default page;

@@ -1,14 +1,19 @@
+import AdminCheck from "@/admin-side/components/AdminCheck";
 import OrderDetailsPage from "@/admin-side/features/order-managements/order-history/page/OrderDetailsPage";
 import BreadCrumb from "@/customer-side/components/BreadCrumb";
 import Link from "next/link";
 import React from "react";
 
-const page = ({ params: { id,orderID } }: { params: { id: string,orderID:string } }) => {
+const page = ({
+  params: { id, orderID },
+}: {
+  params: { id: string; orderID: string };
+}) => {
   return (
     <div>
       <div className="flex flex-row justify-between items-center border-b pb-4">
         <Link
-          href={"/admin/customer-list/details/"+id}
+          href={"/admin/customer-list/details/" + id}
           className="flex flex-row items-center gap-3 py-3 px-6 cursor-pointer hover:border-gray-800 duration-300 border border-gray-300"
         >
           <svg
@@ -33,14 +38,18 @@ const page = ({ params: { id,orderID } }: { params: { id: string,orderID:string 
           <BreadCrumb
             previousSection={[
               { link: "/admin/customer-list", title: "Customer List" },
-              { link: "/admin/customer-list/details/"+id , title: "Customer Details" },
-
+              {
+                link: "/admin/customer-list/details/" + id,
+                title: "Customer Details",
+              },
             ]}
             title="Order Details"
           />
         </div>
       </div>
-      <OrderDetailsPage id={orderID} />
+      <AdminCheck allow={"Customer Support"}>
+        <OrderDetailsPage id={orderID} />
+      </AdminCheck>
     </div>
   );
 };

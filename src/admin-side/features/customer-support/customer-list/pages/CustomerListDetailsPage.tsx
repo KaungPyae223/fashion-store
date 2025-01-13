@@ -2,6 +2,7 @@ import React from "react";
 import { useCustomerDetailsData } from "../../customer-order/hooks/useCustomerDetailsData";
 import { useFormatDate } from "@/hooks/useFormatDate";
 import Link from "next/link";
+import InformationContent from "@/admin-side/components/InformationContent";
 
 const CustomerListDetailsPage = async ({ id }) => {
   const { getCustomerDetails } = useCustomerDetailsData();
@@ -97,19 +98,6 @@ const OrderTr = ({ order,id }) => {
   );
 };
 
-const InformationContent = ({
-  data,
-  title,
-}: {
-  data: string;
-  title: string;
-}) => {
-  return (
-    <div className="text-sm  mt-0.5 flex flex-row gap-1.5">
-      <div className="font-medium text-gray-500">{title}:</div>{" "}
-      <div>{data}</div>
-    </div>
-  );
-};
+
 
 export default CustomerListDetailsPage;

@@ -22,7 +22,7 @@ export const storeProduct = (data) => {
     body: formData,
     headers: {
       Accept: "application/json",
-      Authorization: `Bearer 3BlHS7l6qKpEpCukKESpffk4Llg17LLfsGRUDEMT3ebb5733`,
+      Authorization: `Bearer ${getCookie("token")}`,
     },
   });
 };
@@ -48,7 +48,7 @@ export const updateProduct = (data) => {
         headers: {
           "Content-Type": "application/json",
           Accept: "application/json",
-          Authorization: `Bearer 3BlHS7l6qKpEpCukKESpffk4Llg17LLfsGRUDEMT3ebb5733`,
+          Authorization: `Bearer ${getCookie("token")}`,
         },
       }
     );
@@ -69,7 +69,7 @@ export const updateProduct = (data) => {
           body: coverUpdateFormData,
           headers: {
             Accept: "application/json",
-            Authorization: `Bearer 3BlHS7l6qKpEpCukKESpffk4Llg17LLfsGRUDEMT3ebb5733`,
+            Authorization: `Bearer ${getCookie("token")}`,
           },
         }
       );
@@ -93,7 +93,7 @@ export const updateProduct = (data) => {
           body: coverUpdateFormData,
           headers: {
             Accept: "application/json",
-            Authorization: `Bearer 3BlHS7l6qKpEpCukKESpffk4Llg17LLfsGRUDEMT3ebb5733`,
+            Authorization: `Bearer ${getCookie("token")}`,
           },
         }
       );
@@ -108,7 +108,7 @@ export const updateProduct = (data) => {
 export const fetchProduct = (url) =>
   fetch(url, {
     headers: {
-      Authorization: `Bearer 3BlHS7l6qKpEpCukKESpffk4Llg17LLfsGRUDEMT3ebb5733`,
+      Authorization: `Bearer ${getCookie("token")}`,
       Accept: "application/json",
     },
   }).then((res) => res.json());
@@ -119,7 +119,7 @@ export const deleteProduct = (id) => {
     headers: {
       "Content-Type": "application/json",
       Accept: "application/json",
-      Authorization: `Bearer 3BlHS7l6qKpEpCukKESpffk4Llg17LLfsGRUDEMT3ebb5733`,
+      Authorization: `Bearer ${getCookie("token")}`,
     },
   });
 };
@@ -130,7 +130,7 @@ export const restoreProduct = (id) => {
     headers: {
       "Content-Type": "application/json",
       Accept: "application/json",
-      Authorization: `Bearer 3BlHS7l6qKpEpCukKESpffk4Llg17LLfsGRUDEMT3ebb5733`,
+      Authorization: `Bearer ${getCookie("token")}`,
     },
   });
 };
