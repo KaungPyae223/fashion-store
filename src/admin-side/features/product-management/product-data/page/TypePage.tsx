@@ -20,6 +20,7 @@ const TypePage = () => {
     setOpenModal,
     filterTypeRef,
     filterCategoryRef,
+    filterGenderRef,
     error,
   } = useTypeData();
 
@@ -100,11 +101,22 @@ const TypePage = () => {
               ref={filterCategoryRef}
               className="border border-gray-300 bg-white  px-3 py-2 h-10 min-w-32 outline-none"
             >
-              <option value={""}>All</option>
+              <option value={"all"}>All</option>
               <option value={"clothing"}>Clothing</option>
               <option value={"footwear"}>Footwears</option>
               <option value={"accessories"}>Accessories</option>
               <option value={"lifestyle"}>LifeStyles</option>
+            </select>
+          </div>
+          <div className="flex flex-col gap-1 text-gray-800">
+            <label className="text-sm text-gray-700">Gender</label>
+            <select
+              ref={filterGenderRef}
+              className="border border-gray-300 bg-white  px-3 py-2 h-10 min-w-32 outline-none"
+            >
+              <option value={"All"}>All</option>
+              <option value={"Men"}>Men</option>
+              <option value={"Women"}>Women</option>
             </select>
           </div>
           <div
@@ -133,7 +145,7 @@ const TypePage = () => {
         <Loading />
       ) : data.data && data?.data.length > 0 ? (
         <>
-          <TypeTable  types={data?.data} />
+          <TypeTable types={data?.data} />
           <AdminPagination meta={data?.meta} />
         </>
       ) : (
@@ -141,9 +153,7 @@ const TypePage = () => {
       )}
 
       <Modal openModal={openModal} setOpenModal={setOpenModal}>
-        <CreateTypeForm
-          setOpenModal={setOpenModal}
-        />
+        <CreateTypeForm setOpenModal={setOpenModal} />
       </Modal>
     </div>
   );

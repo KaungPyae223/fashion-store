@@ -17,6 +17,7 @@ const PasswordUpdateForm = ({
     reset,
   } = useForm();
 
+
   const handleCreateColor = async (data) => {
     try {
       const res = await updatePassword(data);

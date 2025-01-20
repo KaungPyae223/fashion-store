@@ -22,10 +22,9 @@ const CompleteShippingData = ({ shippingInformation, setCompleteForm }) => {
           <p className="mb-1">{shippingInformation.Phone}</p>
           <p className="mb-1">{shippingInformation.Email}</p>
           <p className="mb-1">{shippingInformation.Division}</p>
-          <p className="mb-1">{shippingInformation.City}</p>
-          <p className="mb-1">{shippingInformation.Township}</p>
+         
           <p className="mb-1">{shippingInformation.Address}</p>
-          <p className="mb-1">{shippingInformation.Zip_Code}</p>
+          
         </div>
         <div>
           <p

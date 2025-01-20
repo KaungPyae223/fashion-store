@@ -3,7 +3,11 @@ import { tailspin } from "ldrs";
 import { AnimatePresence, motion } from "motion/react";
 import { useForm, SubmitHandler } from "react-hook-form";
 import ValidOrNot from "./ValidOrNot";
+import { Register } from "@/customer-side/services/Register";
 import FormErrorMessage from "@/customer-side/components/FormErrorMessage";
+import reactUseCookie from "react-use-cookie";
+import { useRouter } from "next/navigation";
+import toast, { Toaster } from "react-hot-toast";
 
 interface CreateAccountInterface {
   email: string;
@@ -15,6 +19,9 @@ const CreateAccount = ({
   setTypeOfNavigation,
 }: CreateAccountInterface) => {
   tailspin.register();
+
+  const Router = useRouter();
+  const [Token, setToken] = reactUseCookie("user_token");
 
   const [validations, setValidations] = useState({
     hasUppercaseOrLowercase: false,
@@ -41,14 +48,22 @@ const CreateAccount = ({
 
   const [loading, isLoading] = useState<boolean>(false);
 
-  const handleCreateAccount: SubmitHandler<FormValues> = (data) => {
-    isLoading(true);
-    setTypeOfNavigation("CreateAccount");
-    setEmail(data.email);
+  const handleCreateAccount = async (data) => {
+    const res = await Register(data.name, data.email, data.password);
+
+    const json = await res.json();
+
+    if (json.token) {
+      setToken(json.token);
+      Router.back();
+    } else {
+      toast.error("Error in create account");
+    }
   };
 
   return (
     <form onSubmit={handleSubmit(handleCreateAccount)}>
+      <Toaster />
       <p className="uppercase text-xl text-center tracking-wider mb-10">
         create account
       </p>
@@ -92,7 +107,9 @@ const CreateAccount = ({
           })}
           className="border-b w-[380px] border-b-black py-2 outline-none"
         />
-        {errors.password && <FormErrorMessage message={errors.password.message} />}
+        {errors.password && (
+          <FormErrorMessage message={errors.password.message} />
+        )}
       </div>
 
       <div className="flex flex-col gap-3">
@@ -124,7 +141,7 @@ const CreateAccount = ({
                 initial={{ y: "100%" }}
                 animate={{ y: "0%" }}
                 key={"loading"}
-                transition={{ duration: 0.3, ease: "linear" }}
+                transition={{ duration: 0.3, ease: "easeOut" }}
               >
                 <l-tailspin size="15" stroke="2" speed="0.9" color="white" />
               </motion.div>
@@ -134,7 +151,7 @@ const CreateAccount = ({
                 initial={{ y: "0%" }}
                 animate={{ y: "0%" }}
                 exit={{ y: "-100%" }}
-                transition={{ duration: 0.3, ease: "linear" }}
+                transition={{ duration: 0.3, ease: "easeOut" }}
               >
                 create
               </motion.span>

@@ -12,14 +12,14 @@ const AuthenticationContainer = () => {
 
   return (
     <div className="flex-1 overflow-hidden flex justify-center items-center my-16">
-      <AnimatePresence>
+      <AnimatePresence mode="wait">
         {typeOfNavigation === "CheckEmail" ? (
           <motion.div
             key={"CheckEmail"}
-            initial={{ x: "100%" }}
+            initial={{ x: "0%" }}
             animate={{ x: "0%" }}
-            exit={{ x: "-100%" }}
-            transition={{ duration: 0.5, ease: "linear" }}
+            exit={{ x: "-140%" }}
+            transition={{ duration: 0.8, ease: "easeInOut" }}
           >
             <CheckEmail
               setTypeOfNavigation={setTypeOfNavigation}
@@ -31,8 +31,8 @@ const AuthenticationContainer = () => {
             key={"LogIn"}
             initial={{ x: "100%" }}
             animate={{ x: "0%" }}
-            exit={{ x: "-100%" }}
-            transition={{ duration: 0.5, ease: "linear" }}
+            exit={{ x: "-140%" }}
+            transition={{ duration: 0.8, ease: "easeInOut" }}
           >
             <SignIn setTypeOfNavigation={setTypeOfNavigation} email={email} />
           </motion.div>
@@ -41,8 +41,8 @@ const AuthenticationContainer = () => {
             key={"CreateAccount"}
             initial={{ x: "100%" }}
             animate={{ x: "0%" }}
-            exit={{ x: "-100%" }}
-            transition={{ duration: 0.5, ease: "linear" }}
+            exit={{ x: "-140%" }}
+            transition={{ duration: 0.8, ease: "easeInOut" }}
           >
             <CreateAccount
               setTypeOfNavigation={setTypeOfNavigation}

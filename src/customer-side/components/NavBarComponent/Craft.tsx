@@ -1,69 +1,32 @@
 "use client";
 import React, { SetStateAction } from "react";
 import CraftCard from "./CraftCard";
+import { PiFlowerLotusThin } from "react-icons/pi";
+import Lottie from "lottie-react";
+import CraftAnimation from "@/assets/CraftAnimation.json";
+import useCraftStore from "@/customer-side/stores/useCraftStore";
+import { useRouter } from "next/navigation";
 
 interface CraftInterface {
-    setOpenCraft:React.Dispatch<SetStateAction<boolean>>
+  setOpenCraft: React.Dispatch<SetStateAction<boolean>>;
 }
 
-const Craft = ({setOpenCraft}:CraftInterface) => {
-  interface CraftProduct {
-    productName: string;
-    color: string;
-    size: string;
-    quantity: number;
-    productPrice: number;
-    productImage: string;
-  }
+const Craft = ({ setOpenCraft }: CraftInterface) => {
+  const { data } = useCraftStore();
 
-  // Example CraftProducts array with 5 products
-  const CraftProducts: CraftProduct[] = [
-    {
-      productName: "Auralee Luster Plaiting Long Sleeve T-Shirt",
-      color: "Yellow",
-      size: "Large",
-      quantity: 1,
-      productPrice: 140000,
-      productImage:
-        "https://media.endclothing.com/media/f_auto,q_auto:eco,w_768/prodmedia/media/catalog/product/1/9/19-08-2024-BLR_A00P01GT-LMY_1_1.jpg",
-    },
-    {
-      productName: "Nike Air Max 90",
-      color: "White/Black",
-      size: "Medium",
-      quantity: 2,
-      productPrice: 120000,
-      productImage:
-        "https://media.endclothing.com/media/f_auto,q_auto:eco,w_768/prodmedia/media/catalog/product/1/9/19-08-2024-BLR_A00P01GT-LMY_1_1.jpg",
-    },
-    {
-      productName: "Carhartt WIP Chase Sweatshirt",
-      color: "Black",
-      size: "XL",
-      quantity: 1,
-      productPrice: 85000,
-      productImage:
-        "https://media.endclothing.com/media/f_auto,q_auto:eco,w_768/prodmedia/media/catalog/product/1/9/19-08-2024-BLR_A00P01GT-LMY_1_1.jpg",
-    },
-    {
-      productName: "Acne Studios Knit Beanie",
-      color: "Pink",
-      size: "One Size",
-      quantity: 3,
-      productPrice: 45000,
-      productImage:
-        "https://media.endclothing.com/media/f_auto,q_auto:eco,w_768/prodmedia/media/catalog/product/1/9/19-08-2024-BLR_A00P01GT-LMY_1_1.jpg",
-    },
-    {
-      productName: "Fear of God Essentials Hoodie",
-      color: "Gray",
-      size: "Small",
-      quantity: 2,
-      productPrice: 110000,
-      productImage:
-        "https://media.endclothing.com/media/f_auto,q_auto:eco,w_768/prodmedia/media/catalog/product/1/9/19-08-2024-BLR_A00P01GT-LMY_1_1.jpg",
-    },
-  ];
+  const router = useRouter();
+
+  const subTotal = data.reduce((total, product) => {
+    return total + product.unit_price * product.qty;
+  }, 0);
+
+  const routeOrder = () => {
+    if (data.length > 0) {
+      router.push("/order");
+    }
+  };
+
+  const tax = Math.ceil(subTotal * 0.05);
 
   return (
     <div className="h-screen flex flex-col z-50 bg-white w-[390px]">
@@ -87,33 +50,56 @@ const Craft = ({setOpenCraft}:CraftInterface) => {
         </div>
 
         <p className="uppercase tracking-wider font-medium gap-6 text-sm">
-          Your Craft (2)
+          Your Craft ({data.length})
         </p>
 
         <div></div>
       </div>
       <div className="flex-1 overflow-y-auto px-5">
-        {CraftProducts.map((product, index) => (
-          <CraftCard product={product} key={index} />
-        ))}
+        {data.length > 0 ? (
+          <ProductGenerate CraftProducts={data} />
+        ) : (
+          <NoCraftData />
+        )}
       </div>
       <div className="mt-auto p-5 border-t">
         <div className="flex items-center mb-1 text-sm justify-between">
           <p>Subtotal:</p>
-          <p>190000 Ks</p>
+          <p>{subTotal} Ks</p>
         </div>
         <div className="flex items-center mb-3 text-sm justify-between">
           <p>Tax:</p>
-          <p>19000 Ks</p>
+          <p>{tax} Ks</p>
         </div>
         <div className="flex items-center font-medium mb-6 justify-between">
           <p>Total:</p>
-          <p>19000 Ks</p>
+          <p>{subTotal + tax} Ks</p>
         </div>
-        <div className="p-3 bg-black text-white flex items-center justify-center font-medium cursor-pointer">
+        <div
+          onClick={routeOrder}
+          className="p-3 bg-black text-white flex items-center justify-center font-medium cursor-pointer"
+        >
           Make Order
         </div>
       </div>
+    </div>
+  );
+};
+
+const ProductGenerate = ({ CraftProducts }) => {
+  return (
+    <>
+      {CraftProducts.map((product) => (
+        <CraftCard product={product} key={product.id + product.size} />
+      ))}
+    </>
+  );
+};
+
+const NoCraftData = () => {
+  return (
+    <div>
+      <Lottie animationData={CraftAnimation} />
     </div>
   );
 };

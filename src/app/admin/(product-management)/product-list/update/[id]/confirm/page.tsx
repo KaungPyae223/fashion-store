@@ -1,11 +1,11 @@
 import AdminCheck from "@/admin-side/components/AdminCheck";
-import AdminProductDetailsPage from "@/admin-side/features/product-management/product-list/page/AdminProductDetailsPage";
 import React from "react";
+import ProductUpdateConfirmPage from "@/admin-side/features/product-management/product-list/page/ProductUpdateConfirmPage";
 
 const page = ({ params: { id } }: { params: { id: string } }) => {
   return (
     <AdminCheck allow={"Product Management"}>
-      <AdminProductDetailsPage id={id} />
+      <ProductUpdateConfirmPage id={id} />
     </AdminCheck>
   );
 };

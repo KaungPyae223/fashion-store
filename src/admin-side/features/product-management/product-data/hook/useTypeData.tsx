@@ -19,6 +19,7 @@ export const useTypeData = () => {
 
   const filterTypeRef = useRef();
   const filterCategoryRef = useRef();
+  const filterGenderRef = useRef();
 
   useEffect(() => {
     setFetchUrl(AddParamsToURL(baseUrl + "/type"));
@@ -26,6 +27,7 @@ export const useTypeData = () => {
     if (queryParam) {
       filterTypeRef.current.value = queryParam.get("q");
       filterCategoryRef.current.value = queryParam.get("category");
+      filterGenderRef.current.value = queryParam.get("gender");
     }
   }, [searchParams]);
 
@@ -35,10 +37,12 @@ export const useTypeData = () => {
     updateParams({
       q: filterTypeRef.current.value,
       category: filterCategoryRef.current.value,
+      gender: filterGenderRef.current.value,
     });
   }, 500);
 
   return {
+    filterGenderRef,
     handleFilter,
     data,
     isLoading,

@@ -4,6 +4,8 @@ import { tailspin } from "ldrs";
 import { AnimatePresence, motion } from "motion/react";
 import { useForm } from "react-hook-form";
 import FormErrorMessage from "../../../components/FormErrorMessage";
+import { fetchHome } from "@/customer-side/services/HomePage";
+import toast, { Toaster } from "react-hot-toast";
 
 interface CheckEmailInterface {
   setEmail: React.Dispatch<React.SetStateAction<string>>;
@@ -19,16 +21,34 @@ const CheckEmail = ({ setEmail, setTypeOfNavigation }: CheckEmailInterface) => {
     formState: { errors },
   } = useForm();
 
-  const [loading, isLoading] = useState<boolean>(false);
+  const [loading, setLoading] = useState<boolean>(false);
 
-  const handleCheckEmail = (data) => {
-    isLoading(true);
-    setTypeOfNavigation("CreateAccount");
-    setEmail(data.email);
+  const handleCheckEmail = async (formData) => {
+    setLoading(true);
+
+    const data = await fetchHome(
+      process.env.NEXT_PUBLIC_BASE_URL + "/check-email?email=" + formData.email
+    );
+
+    console.log(data);
+
+    if (data.status == "admin") {
+      toast.error("This is an admin account");
+      setLoading(false);
+      return;
+    } else if (data.status == "logIn") {
+      setTypeOfNavigation("LogIn");
+      setEmail(formData.email);
+    } else {
+      setTypeOfNavigation("CreateAccount");
+      setEmail(formData.email);
+    }
   };
 
   return (
     <form onSubmit={handleSubmit(handleCheckEmail)}>
+      <Toaster />
+
       <p className="uppercase text-xl text-center tracking-wider mb-10">
         check email
       </p>
@@ -56,7 +76,7 @@ const CheckEmail = ({ setEmail, setTypeOfNavigation }: CheckEmailInterface) => {
                 initial={{ y: "100%" }}
                 animate={{ y: "0%" }}
                 key={"loading"}
-                transition={{ duration: 0.3, ease: "linear" }}
+                transition={{ duration: 0.5, ease: "easeOut" }}
               >
                 <l-tailspin size="15" stroke="2" speed="0.9" color="white" />
               </motion.div>
@@ -66,7 +86,7 @@ const CheckEmail = ({ setEmail, setTypeOfNavigation }: CheckEmailInterface) => {
                 initial={{ y: "0%" }}
                 animate={{ y: "0%" }}
                 exit={{ y: "-100%" }}
-                transition={{ duration: 0.3, ease: "linear" }}
+                transition={{ duration: 0.5, ease: "easeOut" }}
               >
                 Continue
               </motion.span>

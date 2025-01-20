@@ -1,6 +1,7 @@
 import NavBar from "@/customer-side/components/NavBar";
 import Footer from "@/customer-side/components/Footer";
 import "../../styles/globals.css";
+import { Toaster } from "react-hot-toast";
 
 export const metadata = {
   title: "Next.js",
@@ -15,6 +16,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className="flex flex-col min-h-screen">
+        <Toaster />
         <header>
           <NavBar />
         </header>

@@ -1,13 +1,14 @@
 "use client";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { usePathname, useRouter } from "next/navigation";
 import Link from "next/link";
-import reactUseCookie, { getCookie } from "react-use-cookie";
+import reactUseCookie, { getCookie, removeCookie } from "react-use-cookie";
 import Image from "next/image";
 import useSWR from "swr";
-import { fetchAdmin } from "../services/admin";
+import { fetchAdmin, logOut } from "../services/admin";
 import useAdminProfileStore from "../stores/useAdminProfileStore";
 import NavContainer from "./NavComponent/NavContainer";
+import toast from "react-hot-toast";
 
 const AdminNav = () => {
   const pathName = usePathname();
@@ -26,11 +27,16 @@ const AdminNav = () => {
     fetchAdmin
   );
 
+  const [check, setCheck] = useState(true);
+
+  
   useEffect(() => {
     if (!isLoading) {
-      if (data) {
+      if (data?.admin) {
         setAdmin(data.admin);
+        setCheck(false);
       } else {
+        toast.error(data.message);
         router.push("/admin-log-in");
       }
     }
@@ -40,18 +46,39 @@ const AdminNav = () => {
     <div className="h-screen overflow-y-auto scrollbar-hide p-5 w-[300px] shadow flex flex-col">
       <p className="text-4xl font-bold text-center">Alexa</p>
 
-      {!isLoading && (
+      {!isLoading && !check && (
         <>
           <NavContainer role={data.admin.role} pathName={pathName} />
 
-          <LogOutButton data={data} />
+          <ProfileSection data={data} />
         </>
       )}
     </div>
   );
 };
 
-const LogOutButton = ({ data }) => {
+const ProfileSection = ({ data }) => {
+  const router = useRouter();
+
+  const handleLogOut = async () => {
+    try {
+      const res = await logOut();
+      const json = await res.json();
+
+      if (res.status !== 200) {
+        toast.error(json.message);
+        return;
+      }
+
+      toast.success("Log Out Success");
+      removeCookie("token");
+
+      router.push("/admin-log-in");
+    } catch (error) {
+      console.error("Error:", error);
+    }
+  };
+
   return (
     <div className="mt-auto pt-20">
       <Link
@@ -71,7 +98,10 @@ const LogOutButton = ({ data }) => {
         </div>
       </Link>
       <hr></hr>
-      <div className="flex flex-row items-center gap-3 mt-3 text-gray-500 hover:text-gray-700 duration-300 cursor-pointer py-3 rounded">
+      <div
+        onClick={handleLogOut}
+        className="flex flex-row items-center gap-3 mt-3 text-gray-500 hover:text-gray-700 duration-300 cursor-pointer py-3 rounded"
+      >
         <svg
           xmlns="http://www.w3.org/2000/svg"
           fill="none"

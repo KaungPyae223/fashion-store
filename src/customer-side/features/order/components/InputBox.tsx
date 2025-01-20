@@ -25,7 +25,7 @@ const InputBox = ({ register, errors, inputName, required }) => {
           id={inputName}
           type="text"
           {...register(inputName, RequiredMessage)}
-          className="mt-4 outline-none pb-3 border-b text-lg border-b-gray-300 w-full"
+          className="mt-4 outline-none pb-3 text-lg border-b border-b-gray-300 w-full"
         />
         {errors[inputName] && (
           <FormErrorMessage message={errors[inputName].message} />

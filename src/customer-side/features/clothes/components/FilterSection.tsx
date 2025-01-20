@@ -1,98 +1,106 @@
 "use client";
 import FilterContainer from "@/customer-side/components/FilterContainer";
-import FilterRadioBox from "@/customer-side/components/FilterRadioBox";
-import SectionSubTitle from "@/customer-side/components/SectionSubTitle";
 import SectionTitle from "@/customer-side/components/SectionTitle";
+import { fetchHome } from "@/customer-side/services/HomePage";
 import { useSearchParams } from "next/navigation";
 import React, { useEffect, useState } from "react";
+import { throttle } from "lodash";
+import useSWR from "swr";
+import useUpdateParams from "@/hooks/useUpdateParams";
+import PriceRangeContainer from "@/customer-side/components/PriceRangeContainer";
 
 const FilterSection = () => {
+  const updateParams = useUpdateParams();
+
   const searchParams = useSearchParams();
   const gender = searchParams.get("gender");
 
-  const [brands, setBrand] = useState<string>("All");
-  const [types, setType] = useState<string>("All");
+  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL;
 
-  const brandNames: string[] = [
-    "All",
-    "Giordano",
-    "I Max",
-    "Nike",
-    "North The Face",
-    "Victor",
-    "Lacoste",
-    "Zara",
-    "Polo",
-  ];
+  const [fetchUrl, setFetchUrl] = useState(baseUrl + "/filter-data/1");
 
-  const [typesName, setTypesName] = useState<string[]>([]);
+  const { data, isLoading, error } = useSWR(fetchUrl, fetchHome);
+
+  const [brand, setBrand] = useState<string>("All");
+  const [type, setType] = useState<string>("All");
+  const [color, setColor] = useState<string>("All");
+  const [minPrice, setMinPrice] = useState<number>(0);
+  const [maxPrice, setMaxPrice] = useState<number>(500000);
+
+  const [size, SetSizes] = useState<string>("All");
 
   useEffect(() => {
     setType("All");
-    gender === "Women"
-      ? setTypesName([
-          "All",
-          "Jacket",
-          "T-Shirt",
-          "Trouser",
-          "Short-Skirts",
-          "Skirts",
-          "Dress",
-        ])
-      : setTypesName(["All", "Jacket", "T-Shirt", "Trouser"]);
+
+    setFetchUrl(`${baseUrl}/filter-data/1?gender=${gender ? gender : "All"}`);
   }, [gender]);
 
-  const [color, setColor] = useState<string[]>([]);
+  useEffect(() => {
+    
+    setFetchUrl(`${baseUrl}/filter-data/1?gender=${gender ? gender : "All"}`);
 
-  const ColorsName: string[] = [
-    "All",
-    "White",
-    "Black",
-    "Green",
-    "Red",
-    "Blue",
-  ];
+    if (searchParams.get("brand")) {
+      setBrand(searchParams.get("brand"));
+      setType(searchParams.get("type"));
+      setColor(searchParams.get("color"));
+      SetSizes(searchParams.get("size"));
+      setMinPrice(parseInt(searchParams.get("min_price")));
+      setMaxPrice(parseInt(searchParams.get("max_price")));
+    }
 
-  const [price, setPrice] = useState<string[]>([]);
+  }, [searchParams]);
 
-  const PrinceRanges: string[] = [
-    "All",
-    "< 50000",
-    "50000 <= 100000",
-    "100000 <= 500000",
-    "> 500000",
-  ];
-
-  const [Sizes, SetSizes] = useState<string[]>([]);
-
-  const SizeName: string[] = ["All", "Small", "Medium", "Large"];
+  const handleFilter = throttle(() => {
+    updateParams({
+      brand: brand,
+      type: type,
+      color: color,
+      size: size,
+      min_price: minPrice.toString(),
+      max_price: maxPrice.toString(),
+    });
+  }, 500);
 
   return (
     <div>
       <SectionTitle title="filter" />
-      <section className="w-full bg-white divide-y divide-slate-200 shadow-slate-200">
-        <FilterContainer
-          title="Brands"
-          setState={setBrand}
-          items={brandNames}
-        />
-        <FilterContainer title="Types" setState={setType} items={typesName} />
-        <FilterContainer
-          title="Colors"
-          setState={setColor}
-          items={ColorsName}
-        />
-        <FilterContainer title="Sizes" setState={SetSizes} items={SizeName} />
-        <FilterContainer
-          title="Price Range"
-          setState={setPrice}
-          items={PrinceRanges}
-          columns={1}
-        />
-      </section>
-      <div className="uppercase mt-8 bg-gray-900 px-4 py-3 flex cursor-pointer justify-center text-white">
-        Filter
-      </div>
+      {!isLoading && (
+        <>
+          <section className="w-full bg-white divide-y divide-slate-200 shadow-slate-200">
+            <FilterContainer
+              title="Brands"
+              setState={setBrand}
+              items={data.brands}
+              value={brand}
+            />
+            <FilterContainer
+              title="Types"
+              setState={setType}
+              items={data.types}
+              value={type}
+            />
+            <FilterContainer
+              title="Colors"
+              setState={setColor}
+              items={data.colors}
+              value={color}
+            />
+            <FilterContainer
+              title="Sizes"
+              setState={SetSizes}
+              items={data.sizes}
+              value={size}
+            />
+            <PriceRangeContainer minPrice={minPrice} setMinPrice={setMinPrice} maxPrice={maxPrice} setMaxPrice={setMaxPrice} />
+          </section>
+          <div
+            onClick={handleFilter}
+            className="uppercase mt-8 bg-gray-900 px-4 py-3 flex cursor-pointer justify-center text-white"
+          >
+            Filter
+          </div>
+        </>
+      )}
     </div>
   );
 };

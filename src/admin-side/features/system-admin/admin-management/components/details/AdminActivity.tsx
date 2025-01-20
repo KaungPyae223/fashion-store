@@ -8,14 +8,14 @@ import useSWR from "swr";
 import AdminDetailsActivityContainer from "./AdminDetailsActivityContainer";
 import DetailsPagination from "@/admin-side/components/DetailsPagination";
 
-const AdminActivity = ({ id }: { id: string }) => {
+const AdminActivity = () => {
   const baseUrl = process.env.NEXT_PUBLIC_BASE_URL;
 
   const [page, setPage] = useState(`1`);
   const [time, setTime] = useState(``);
 
   const { data, isLoading, error } = useSWR(
-    `${baseUrl}/admin-monitoring/${id}?page=${page}&time=${time}`,
+    `${baseUrl}/admin-activity?page=${page}&time=${time}`,
     fetchAdmin
   );
 

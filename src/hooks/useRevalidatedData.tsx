@@ -6,12 +6,25 @@ export const useRevalidatedData = () => {
   const addParamsToURL = useAddParamsToURL();
   const baseURL = process.env.NEXT_PUBLIC_BASE_URL;
 
-  const revalidate = useCallback(async (path) => {
-    const fetchUrl = addParamsToURL(baseURL + path);
+  const revalidate = useCallback(
+    async (path) => {
+      const fetchUrl = addParamsToURL(baseURL + path);
 
-    // Revalidate the data
-    await mutate(fetchUrl);
-  }, [addParamsToURL, baseURL]);
+      // Revalidate the data
+      await mutate(fetchUrl);
+    },
+    [addParamsToURL, baseURL]
+  );
 
-  return { revalidate };
+  const revalidateWithoutParam = useCallback(
+    async (path) => {
+      const fetchUrl = baseURL + path;
+
+      // Revalidate the data
+      await mutate(fetchUrl);
+    },
+    [baseURL]
+  );
+
+  return { revalidate, revalidateWithoutParam };
 };

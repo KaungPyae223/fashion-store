@@ -35,7 +35,7 @@ const ProductDetailsImagesEntry = ({ setStage }) => {
             Product details image ({detailImages?.length ?? 0}/4) *
           </label>
           {detailImages?.length ? (
-            <div className="flex flex-wrap justify-start">
+            <div className="flex flex-wrap max-w-[700px] justify-start">
               {detailImages?.map((el, i) => (
                 <Image
                   width={500}

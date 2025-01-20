@@ -5,8 +5,8 @@ import ProfileAdminData from "../components/ProfileAdminData";
 const AdminProfilePage = () => {
   return (
     <div className="mt-6">
-      <ProfileAdminData id={1} />
-      <AdminActivity id={1} />
+      <ProfileAdminData />
+      <AdminActivity />
     </div>
   );
 };

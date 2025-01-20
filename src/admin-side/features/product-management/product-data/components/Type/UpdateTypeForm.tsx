@@ -22,6 +22,7 @@ const UpdateTypeForm = ({
     defaultValues: {
       Type: oldData.type,
       Category: oldData.category_id,
+      Gender: oldData.gender,
     },
   });
 
@@ -29,11 +30,11 @@ const UpdateTypeForm = ({
 
   const handleUpdateType = async (data) => {
     try {
-      const res = await updateType(oldData.id, data.Category, data.Type);
+      const res = await updateType(oldData.id, data.Category, data.Type,data.Gender);
 
       const json = await res.json();
 
-      if(res.status != 200){
+      if (res.status != 200) {
         toast.error(json.message);
         return;
       }
@@ -70,6 +71,17 @@ const UpdateTypeForm = ({
               { id: "2", name: "Footwears" },
               { id: "3", name: "Accessories" },
               { id: "4", name: "Life Styles" },
+            ]}
+          />
+          <AdminSelect
+            register={register}
+            errors={errors}
+            inputName={"Gender"}
+            required={true}
+            data={[
+              { id: "All", name: "All" },
+              { id: "Men", name: "Man" },
+              { id: "Women", name: "Woman" },
             ]}
           />
           <div className="flex flex-row justify-end gap-3 mt-8">

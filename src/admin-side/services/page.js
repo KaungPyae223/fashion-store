@@ -1,3 +1,5 @@
+import { getCookie } from "react-use-cookie";
+
 export const storeCarousel = (data) => {
   const formData = new FormData();
 

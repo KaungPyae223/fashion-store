@@ -1,3 +1,5 @@
+import { getCookie } from "react-use-cookie";
+
 export const answerQuestion = (id, answer) => {
   return fetch(process.env.NEXT_PUBLIC_BASE_URL + "/answer-question", {
     method: "PUT",

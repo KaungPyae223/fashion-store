@@ -1,3 +1,5 @@
+import { getCookie } from "react-use-cookie";
+
 export const storeColor = (color) => {
   return fetch(process.env.NEXT_PUBLIC_BASE_URL + "/color", {
     method: "POST",

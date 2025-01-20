@@ -14,10 +14,6 @@ const DefaultPage = () => {
       <div>
         <Lottie animationData={AdminWelcome} className="h-72" />
         <div className="mt-6 flex flex-row gap-6 items-center justify-center">
-          <img
-            src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcREO17hg6KvLlweeZWN0LCEdi-OXM9qGpbQ9w&s"
-            className="w-16 h-16 object-cover rounded-full"
-          />
           <div>
             <h1 className="text-2xl font-bold">Welcome to Admin Panel</h1>
             <p className="text-gray-500 mt-2">

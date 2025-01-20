@@ -8,9 +8,24 @@ import DoMention from "../components/DoMention";
 import DoNotMention from "../components/DoNotMention";
 import { useForm } from "react-hook-form";
 import FormErrorMessage from "@/customer-side/components/FormErrorMessage";
+import useSWR from "swr";
+import { fetchHome } from "@/customer-side/services/HomePage";
+import Image from "next/image";
+import { getCookie } from "react-use-cookie";
 
 const ReviewPage = ({ id }: { id: string }) => {
+  const { data, isLoading, error } = useSWR(
+    process.env.NEXT_PUBLIC_BASE_URL + "/rating-data/" + id,
+    fetchHome
+  );
+
   const Router = useRouter();
+
+  const user_token = getCookie("user_token");
+
+  if (!user_token) {
+    Router.push("/authentication");
+  }
 
   const routeBack = () => {
     Router.back();
@@ -31,7 +46,7 @@ const ReviewPage = ({ id }: { id: string }) => {
   return (
     <div className="py-10">
       <Container>
-        <div className=" pb-3 border-b col-span-12 flex items-center justify-between">
+        <div className=" pb-3 border-b col-span-full flex items-center justify-between">
           <div
             onClick={routeBack}
             className="flex flex-1 text-xl flex-row gap-3 items-center cursor-pointer"
@@ -57,16 +72,22 @@ const ReviewPage = ({ id }: { id: string }) => {
             Review
           </p>
         </div>
-        <div className="col-span-12 w-fit mx-auto pb-6">
-          <div className="flex flex-row gap-5 items-center justify-center border-b px-6 pb-6">
-            <img
-              className="max-h-[150px] "
-              src="https://cdn.shopify.com/s/files/1/0022/4008/6074/files/V2013HAN_FA24_M_ECOMM_fleece_FRONT_2.jpg?v=1730834629&width=2000&height=2500&crop=center"
-            />
-            <p className="text-xl font-medium tracking-wider">
-              Fear of God ESSENTIALS Core Logo Fleece Hoodie
-            </p>
-          </div>
+        <div className="col-span-full w-fit mx-auto pb-6">
+          {!isLoading && !error && (
+            <div className="flex flex-row gap-5 items-center justify-center border-b px-6 pb-6">
+              <Image
+                width={200}
+                height={250}
+                alt="Product Image"
+                className="max-h-[100px] object-cover object-center w-auto"
+                src={data?.photo}
+              />
+              <p className="text-xl font-medium tracking-wider">
+                {data?.title}
+              </p>
+            </div>
+          )}
+
           <div className="px-6 py-6 border-b">
             <SectionTitle title="Rate Product" />
             <div className="flex flex-row mt-6 mb-3">
@@ -109,7 +130,7 @@ const ReviewPage = ({ id }: { id: string }) => {
             className="px-6 py-6 border-b"
           >
             <SectionTitle title="Write a Quick Review" />
-            <div className="grid grid-cols-2 my-6">
+            <div className="grid grid-cols-2 gap-3 my-6">
               <div>
                 <p className="font-medium">Do Mention:</p>
                 <div className="text-sm mt-3">
@@ -141,7 +162,7 @@ const ReviewPage = ({ id }: { id: string }) => {
               rows={6}
               className={`${
                 errors.feedback ? "border-red-500" : ""
-              } resize-none outline-none border p-3 text-sm w-full`}
+              } resize-y outline-none border p-3 text-sm w-full`}
             ></textarea>
             {errors.feedback && (
               <FormErrorMessage message={errors.feedback.message} />

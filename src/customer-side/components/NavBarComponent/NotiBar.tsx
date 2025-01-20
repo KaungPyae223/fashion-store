@@ -11,7 +11,7 @@ const NotiBar = ({ NotiText }) => {
       transition={{
         repeat: Infinity,
         duration: 120,
-        ease: "linear",
+        ease: "easeOut",
       }}
       className="flex items-center gap-6 w-fit pe-6"
     >

@@ -19,13 +19,13 @@ const NavBar = () => {
 
   // Handle body scroll locking for the craft section
   useEffect(() => {
-    if (openCraft) {
+    if (openCraft || openSearchSection) {
       document.body.classList.add("no-scroll");
     } else {
       document.body.classList.remove("no-scroll");
     }
     return () => document.body.classList.remove("no-scroll");
-  }, [openCraft]);
+  }, [openCraft,openSearchSection]);
 
   // Handle scroll behavior
   const handleScroll = () => {
@@ -33,7 +33,10 @@ const NavBar = () => {
 
     const currentScroll = window.scrollY;
 
-    if (currentScroll > previousScroll && currentScroll > navRef.current.offsetHeight) {
+    if (
+      currentScroll > previousScroll &&
+      currentScroll > navRef.current.offsetHeight
+    ) {
       navRef.current.classList.add("-translate-y-full");
     } else {
       navRef.current.classList.remove("-translate-y-full");
@@ -42,23 +45,21 @@ const NavBar = () => {
     setPreviousScroll(currentScroll);
   };
 
-  
   useEffect(() => {
     window.addEventListener("scroll", handleScroll);
 
     return () => {
       window.removeEventListener("scroll", handleScroll);
     };
-  }, [previousScroll]); 
+  }, [previousScroll]);
 
   // Adjust container height based on nav height
   useEffect(() => {
     if (navRef.current && containerRef.current) {
       containerRef.current.style.height = `${navRef.current.offsetHeight}px`;
     }
-  }, []); 
+  }, []);
 
-  
   const pathName = usePathname();
 
   useEffect(() => {
@@ -67,7 +68,10 @@ const NavBar = () => {
 
   return (
     <div ref={containerRef}>
-      <div ref={navRef} className="duration-300 Navigation fixed w-full bg-white z-30">
+      <div
+        ref={navRef}
+        className="duration-300 Navigation fixed w-full bg-white z-30"
+      >
         <Noti />
         <NavBody
           setOpenCraft={setOpenCraft}
@@ -83,7 +87,7 @@ const NavBar = () => {
             animate={{ y: "0%", opacity: 1 }}
             exit={{ opacity: 0 }}
             key="search-section"
-            transition={{ duration: 0.3, ease: "linear" }}
+            transition={{ duration: 0.3, ease: "easeOut" }}
             className="w-screen h-screen bg-white fixed top-0 left-0 z-50"
           >
             <SearchSection setOpenSearchSection={setOpenSearchSection} />
@@ -105,7 +109,7 @@ const NavBar = () => {
               animate={{ x: "0%" }}
               exit={{ x: "100%" }}
               key="Craft-slider"
-              transition={{ duration: 0.3, ease: "linear" }}
+              transition={{ duration: 0.3, ease: "easeOut" }}
               className="w-fit h-screen  fixed top-0 right-0 z-50"
             >
               <Craft setOpenCraft={setOpenCraft} />

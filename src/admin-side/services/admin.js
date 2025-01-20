@@ -1,6 +1,5 @@
 import { getCookie } from "react-use-cookie";
 
-
 export const storeAdmin = (data) => {
   const formData = new FormData();
 
@@ -30,6 +29,16 @@ export const updatePassword = (data) => {
     }),
     headers: {
       "Content-Type": "application/json",
+      Accept: "application/json",
+      Authorization: `Bearer ${getCookie("token")}`,
+    },
+  });
+};
+
+export const logOut = () => {
+  return fetch(process.env.NEXT_PUBLIC_BASE_URL + "/logout", {
+    method: "POST",
+    headers: {
       Accept: "application/json",
       Authorization: `Bearer ${getCookie("token")}`,
     },

@@ -28,7 +28,6 @@ const ProductDataUpdateForm = ({ setStage }) => {
   });
 
   const handleStoreProductData = (data) => {
-
     const addProductData = {
       Name: data.Name,
       Price: data.Price,
@@ -38,6 +37,10 @@ const ProductDataUpdateForm = ({ setStage }) => {
     };
 
     if (productData.CategoryID !== data.Category) {
+      resetProductProperties();
+    }
+
+    if (productData.Gender !== data.Gender) {
       resetProductProperties();
     }
 

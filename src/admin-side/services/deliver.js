@@ -1,3 +1,5 @@
+import { getCookie } from "react-use-cookie";
+
 export const storeDeliver = (name, email, phone, address) => {
   return fetch(process.env.NEXT_PUBLIC_BASE_URL + "/deliver", {
     method: "POST",

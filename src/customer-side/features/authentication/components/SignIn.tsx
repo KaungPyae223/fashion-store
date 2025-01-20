@@ -1,21 +1,44 @@
-'use client'
-import React, { useState } from "react";
+"use client";
+import React, { useRef, useState } from "react";
 import { tailspin } from "ldrs";
 import { AnimatePresence, motion } from "motion/react";
+import { useRouter } from "next/navigation";
+import reactUseCookie from "react-use-cookie";
+import toast from "react-hot-toast";
+import { login } from "@/admin-side/services/login";
 
 interface SignInInterface {
   email: string;
-  setTypeOfNavigation: React.Dispatch<React.SetStateAction<string>>;
 }
 
-const SignIn = ({ email, setTypeOfNavigation }: SignInInterface) => {
+const SignIn = ({ email }: SignInInterface) => {
   tailspin.register();
+  const Router = useRouter();
 
   const [loading, isLoading] = useState<boolean>(false);
+  const [Token, setToken] = reactUseCookie("user_token");
 
-  const handleCheckEmail = () => {
+  const passwordRef = useRef();
+
+  const handleSignIn = async () => {
     isLoading(true);
-    setTypeOfNavigation("SignIn");
+
+    const logInData = {
+      email: email,
+      password: passwordRef.current.value,
+    };
+
+    const res = await login(logInData);
+    const json = await res.json();
+
+    if (json.status === 200) {
+      toast.success("Log In Successful");
+      setToken(json.token);
+
+      Router.back();
+    } else {
+      toast.error(json.message);
+    }
   };
 
   return (
@@ -27,7 +50,7 @@ const SignIn = ({ email, setTypeOfNavigation }: SignInInterface) => {
         <p className="uppercase font-medium text-sm">email address</p>
         <input
           type="email"
-          value={emailRef.current?.value}
+          value={email}
           disabled
           className="border-b w-[380px] border-b-black py-2 outline-none"
         />
@@ -36,13 +59,14 @@ const SignIn = ({ email, setTypeOfNavigation }: SignInInterface) => {
         <p className="uppercase font-medium text-sm">password</p>
         <input
           type="password"
+          ref={passwordRef}
           className="border-b w-[380px] border-b-black py-2 outline-none"
         />
       </div>
 
       <div className="flex justify-center mt-8">
         <div
-          onClick={handleCheckEmail}
+          onClick={handleSignIn}
           className="h-11 w-48 flex items-center justify-center bg-green-900 text-white cursor-pointer"
         >
           <AnimatePresence mode="wait">
@@ -51,7 +75,7 @@ const SignIn = ({ email, setTypeOfNavigation }: SignInInterface) => {
                 initial={{ y: "100%" }}
                 animate={{ y: "0%" }}
                 key={"loading"}
-                transition={{ duration: 0.3, ease: "linear" }}
+                transition={{ duration: 0.3, ease: "easeOut" }}
               >
                 <l-tailspin size="15" stroke="2" speed="0.9" color="white" />
               </motion.div>
@@ -61,7 +85,7 @@ const SignIn = ({ email, setTypeOfNavigation }: SignInInterface) => {
                 initial={{ y: "0%" }}
                 animate={{ y: "0%" }}
                 exit={{ y: "-100%" }}
-                transition={{ duration: 0.3, ease: "linear" }}
+                transition={{ duration: 0.3, ease: "easeOut" }}
               >
                 Sign In
               </motion.span>

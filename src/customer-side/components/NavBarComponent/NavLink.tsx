@@ -1,26 +1,37 @@
 "use client";
 import Link from "next/link";
 import React from "react";
-import { usePathname } from "next/navigation";
-import useAddParamsToURL from "@/hooks/useAddParamsToURL";
+import { usePathname, useSearchParams } from "next/navigation";
 
 const NavLink = () => {
   const pathName = usePathname();
 
-  const AddParamsToURL = useAddParamsToURL();
+  const searchParams = useSearchParams();
+
+  const changePage = (url) => {
+    const gender = searchParams.get("gender");
+
+    if (gender) {
+      return `${url}?gender=${gender}`;
+    } else {
+      return url;
+    }
+  };
 
   return (
     <div className="py-3 flex items-center justify-center gap-6 border">
       <Link
-        href={AddParamsToURL("/")}
+        href={changePage("/")}
         className={
-          pathName == "/" ? "border-b border-b-gray-800" : "text-gray-500"
+          pathName == "/" || pathName.startsWith("/details")
+            ? "border-b border-b-gray-800"
+            : "text-gray-500"
         }
       >
         Home
       </Link>
       <Link
-        href={AddParamsToURL("/clothing")}
+        href={changePage("/clothing")}
         className={
           pathName.startsWith("/clothing")
             ? "border-b border-b-gray-800"
@@ -30,7 +41,7 @@ const NavLink = () => {
         Clothing
       </Link>
       <Link
-        href={AddParamsToURL("/brands")}
+        href={changePage("/brands")}
         className={
           pathName.startsWith("/brands")
             ? "border-b border-b-gray-800"
@@ -40,7 +51,7 @@ const NavLink = () => {
         Brands
       </Link>
       <Link
-        href={AddParamsToURL("/footwears")}
+        href={changePage("/footwears")}
         className={
           pathName.startsWith("/footwears")
             ? "border-b border-b-gray-800"
@@ -50,7 +61,7 @@ const NavLink = () => {
         Footwear
       </Link>
       <Link
-        href={AddParamsToURL("/accessories")}
+        href={changePage("/accessories")}
         className={
           pathName.startsWith("/accessories")
             ? "border-b border-b-gray-800"
@@ -60,7 +71,7 @@ const NavLink = () => {
         Accessories
       </Link>
       <Link
-        href={AddParamsToURL("/life-style")}
+        href={changePage("/life-style")}
         className={
           pathName.startsWith("/life-style")
             ? "border-b border-b-gray-800"
@@ -70,7 +81,7 @@ const NavLink = () => {
         Lifestyle
       </Link>
       <Link
-        href={AddParamsToURL("/blogs")}
+        href={changePage("/blogs")}
         className={
           pathName.startsWith("/blogs")
             ? "border-b border-b-gray-800"
@@ -80,7 +91,7 @@ const NavLink = () => {
         Blogs
       </Link>
       <Link
-        href={AddParamsToURL("/supports")}
+        href={changePage("/supports")}
         className={
           pathName.startsWith("/supports")
             ? "border-b border-b-gray-800"

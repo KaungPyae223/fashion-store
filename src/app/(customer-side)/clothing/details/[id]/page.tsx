@@ -10,6 +10,7 @@ const page = ({ params: { id } }: { params: { id: string } }) => {
       ]}
       id={id}
     />
+    
   );
 };
 

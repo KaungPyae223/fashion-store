@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import React from "react";
 import { HomeTitle } from "./HomeTitle";
 import Container from "../../../components/Container";
@@ -44,7 +44,7 @@ const HomeBlog = () => {
     <div className="pt-16 pb-6 mb-12">
       <Container>
         <HomeTitle title="Blogs" link="/blogs" />
-        <div className="col-span-12 grid grid-cols-3 gap-x-8">
+        <div className="col-span-full grid grid-cols-3 gap-x-8">
           {blogs.map((blog, i) => (
             <BlogCard
               img={blog.img}

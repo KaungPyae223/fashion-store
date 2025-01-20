@@ -96,7 +96,7 @@ const BrandContainer = () => {
   return (
     <div className="py-10">
       <Container>
-        <div className="col-span-12">
+        <div className="col-span-full">
           <SectionTitle title="available brands" />
           <div className="grid grid-cols-4 gap-x-3 gap-y-6">
             {brands.map((brand, i) => (

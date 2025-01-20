@@ -1,29 +1,46 @@
+"use client"
+import Loading from "@/admin-side/components/Loading";
+import NoData from "@/admin-side/components/NoData";
 import SectionSubTitle from "@/customer-side/components/SectionSubTitle";
+import { fetchCustomer } from "@/customer-side/services/HomePage";
+import { useFormatDate } from "@/hooks/useFormatDate";
 import React from "react";
+import useSWR from "swr";
 
 const QuestionsHistory = () => {
+  const { error, isLoading, data } = useSWR(
+    process.env.NEXT_PUBLIC_BASE_URL + `/customer-question-history`,
+    fetchCustomer
+  );
 
 
-  const History:{question:string,time:string}[] = [
-    {question:"When do I get my order?",time:"21 December 2024"},
-    {question:"Can I change my order?",time:"19 December 2024"},
-  ]
-
-  const HistoryQuestions = (question: string, time: string) => {
-    return (
-      <div className="py-5 border-b">
-        <p className="text-lg text-gray-700">{question}</p>
-        <p className="text-xs text-gray-500 my-1">{time}</p>
-      </div>
-    );
-  };
-
-  return (
+  return isLoading ? (
+    <Loading />
+  ) : data.data.length > 0 ? (
     <div className="mt-10">
       <SectionSubTitle title="History" />
-      {
-        History.map((el) => (HistoryQuestions(el.question,el.time)))
-      }
+      {data?.data.map((el) => (
+        <HistoryQuestions key={el.id} question={el.question} time={el.time} />
+      ))}
+    </div>
+  ) : (
+    <NoData />
+  );
+};
+
+const HistoryQuestions = ({
+  question,
+  time,
+}: {
+  question: string;
+  time: string;
+}) => {
+  const { formatDate } = useFormatDate();
+
+  return (
+    <div className="py-5 border-b">
+      <p className="text-lg text-gray-700">{question}</p>
+      <p className="text-xs text-gray-500 my-1">{formatDate(time)}</p>
     </div>
   );
 };

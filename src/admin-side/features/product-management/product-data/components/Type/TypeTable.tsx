@@ -12,6 +12,7 @@ const TypeTable = ({ types }) => {
         <thead>
           <tr className="text-sm text-gray-400">
             <th className="text-start ps-4 px-2">Type</th>
+            <th className="text-start px-2">Relative Gender</th>
             <th className="text-start px-2">Relative Category</th>
             <th className="text-start px-2">Relative Brands</th>
             <th className="text-end px-2">Total Products</th>
@@ -59,6 +60,7 @@ const TypeTr = ({ type }) => {
             <p className="font-medium text-base text-start">{type.type}</p>
           </div>
         </td>
+        <td className="px-2 text-start">{type.gender}</td>
         <td className="px-2 text-start">{type.relative_category}</td>
         <td className="px-2 text-start">
           <div className="flex flex-row gap-2">

@@ -41,6 +41,10 @@ const ProductDataEntryForm = ({ setStage }) => {
       resetProductProperties();
     }
 
+    if (productData.Gender !== data.Gender) {
+      resetProductProperties();
+    }
+
     setProductData(addProductData);
 
     setStage(2);

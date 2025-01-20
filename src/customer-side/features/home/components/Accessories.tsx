@@ -36,7 +36,7 @@ const Accessories = () => {
     <div className="pt-16 pb-6 mb-12">
       <Container>
         <HomeTitle title="Accessories" link="accessories" />
-        <div className="col-span-12 grid grid-cols-3 gap-x-6">
+        <div className="col-span-full grid grid-cols-3 gap-x-6">
           {Accessories.map((accessory, i) => (
             <ProductCard
               key={i}

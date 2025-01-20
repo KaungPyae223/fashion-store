@@ -1,31 +1,55 @@
 import ProductImage from "@/customer-side/features/product-details/components/ProductImage";
+import useCraftStore from "@/customer-side/stores/useCraftStore";
+import Image from "next/image";
 import React from "react";
 
 interface CraftProduct {
   product: {
-    productName: string;
+    id: string;
+    name: string;
     color: string;
     size: string;
-    quantity: number;
-    productPrice: number;
+    qty: number;
+    unit_price: number;
     productImage: string;
   };
 }
 
 const CraftCard = ({
-  product: { productName, color, size, quantity, productPrice, productImage },
+  product: { id, name, color, size, qty, unit_price, image },
 }: CraftProduct) => {
+  const { decreaseQty, increaseQty,removeProduct } = useCraftStore();
+
+  const Product = {
+    id: id,
+    size: size,
+  };
+
+  const handleIncreaseQty = () => {
+    increaseQty(Product);
+  };
+
+  const handleDecreaseQty = () => {
+    decreaseQty(Product);
+  };
+
+  const handleRemoveProduct = () => {
+    removeProduct(Product);
+  };
+
   return (
     <div className="flex flex-row gap-3 border-b py-5 w-full">
-      <img
-        alt={"Hello World"}
+      <Image
+        alt={name + "image"}
+        height={120}
+        width={200}
         className="w-[80px] h-fit object-cover object-center"
-        src={productImage}
+        src={image}
       />
       <div className="flex-1">
         <div className="flex flex-row justify-between gap-5">
-          <p className="text-sm font-medium flex-1">{productName}</p>
-          <div>
+          <p className="text-sm font-medium flex-1">{name}</p>
+          <div onClick={handleRemoveProduct}>
             <svg
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
@@ -46,7 +70,10 @@ const CraftCard = ({
         <p className="text-sm">{size}</p>
         <div className="mt-4 flex flex-row items-center justify-between">
           <div className="flex flex-row items-center gap-x-2">
-            <div className="p-1 bg-gray-100 cursor-pointer">
+            <div
+              onClick={handleDecreaseQty}
+              className="p-1 bg-gray-100 cursor-pointer"
+            >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 fill="none"
@@ -62,8 +89,11 @@ const CraftCard = ({
                 />
               </svg>
             </div>
-            <p className="text-sm font-medium">{quantity}</p>
-            <div className="p-1 bg-gray-100 cursor-pointer">
+            <p className="text-sm font-medium">{qty}</p>
+            <div
+              onClick={handleIncreaseQty}
+              className="p-1 bg-gray-100 cursor-pointer"
+            >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 fill="none"
@@ -80,9 +110,7 @@ const CraftCard = ({
               </svg>
             </div>
           </div>
-          <div className="text-sm font-semibold">
-            {productPrice * quantity} Ks
-          </div>
+          <div className="text-sm font-semibold">{unit_price * qty} Ks</div>
         </div>
       </div>
     </div>

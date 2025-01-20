@@ -1,3 +1,5 @@
+import { getCookie } from "react-use-cookie";
+
 export const storeSize = (category_id, size) => {
   return fetch(process.env.NEXT_PUBLIC_BASE_URL + "/size", {
     method: "POST",

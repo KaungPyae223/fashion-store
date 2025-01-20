@@ -12,7 +12,7 @@ export const HomeTitle = ({ title, link }: HomeTitleInterface) => {
   const AddParamsToURL = useAddParamsToURL();
 
   return (
-    <div className="col-span-12 mb-3 flex items-center justify-between">
+    <div className="col-span-full mb-3 flex items-center justify-between">
       <p className="text-2xl font-medium">{title}</p>
       {link && (
         <Link

@@ -89,38 +89,38 @@ const ProductListPage = () => {
             </select>
           </div>
 
-          {!FilterData.isLoading && typeData && (
-            <>
-              <div className="flex flex-col gap-1 text-gray-800">
-                <label className="text-sm text-gray-700">Brand</label>
-                <select
-                  ref={brandFilterRef}
-                  className="border border-gray-300 bg-white  px-3 py-2 h-10 min-w-32 outline-none"
-                >
-                  <option value={""}>All</option>
-                  {FilterData.data.brands.map((el) => (
-                    <option value={el.name} key={el.name}>
-                      {el.name}
-                    </option>
-                  ))}
-                </select>
-              </div>
-              <div className="flex flex-col gap-1 text-gray-800">
-                <label className="text-sm text-gray-700">Type</label>
-                <select
-                  ref={typeFilterRef}
-                  className="border border-gray-300 bg-white  px-3 py-2 h-10 min-w-32 outline-none"
-                >
-                  <option value={""}>All</option>
-                  {typeData.map((el) => (
-                    <option value={el.name} key={el.name}>
-                      {el.name}
-                    </option>
-                  ))}
-                </select>
-              </div>
-            </>
-          )}
+          <div className="flex flex-col gap-1 text-gray-800">
+            <label className="text-sm text-gray-700">Brand</label>
+            <select
+              ref={brandFilterRef}
+              className="border border-gray-300 bg-white  px-3 py-2 h-10 min-w-32 outline-none"
+            >
+              <option value={""}>All</option>
+              {!FilterData.isLoading &&
+                typeData &&
+                FilterData.data.brands.map((el) => (
+                  <option value={el.name} key={el.name}>
+                    {el.name}
+                  </option>
+                ))}
+            </select>
+          </div>
+          <div className="flex flex-col gap-1 text-gray-800">
+            <label className="text-sm text-gray-700">Type</label>
+            <select
+              ref={typeFilterRef}
+              className="border border-gray-300 bg-white  px-3 py-2 h-10 min-w-32 outline-none"
+            >
+              <option value={""}>All</option>
+              {!FilterData.isLoading &&
+                typeData &&
+                typeData.map((el) => (
+                  <option value={el.name} key={el.name}>
+                    {el.name}
+                  </option>
+                ))}
+            </select>
+          </div>
 
           <div
             onClick={handleFilter}

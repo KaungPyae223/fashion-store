@@ -4,9 +4,29 @@ import { useRouter } from "next/navigation";
 import React from "react";
 import OrderInformationInput from "../components/OrderInformationInput";
 import OrderSummary from "../components/OrderSummary";
+import { getCookie } from "react-use-cookie";
+import useCraftStore from "@/customer-side/stores/useCraftStore";
 
 const OrderPage = () => {
   const Router = useRouter();
+
+  const token = getCookie("user_token");
+
+  const { data } = useCraftStore();
+
+  const subTotal = data.reduce((total, product) => {
+    return total + product.unit_price * product.qty;
+  }, 0);
+
+  const tax = Math.ceil(subTotal * 0.05);
+
+  if (!token) {
+    Router.push("/authentication");
+  }
+
+  if (data.length == 0) {
+    Router.push("/");
+  }
 
   const routeBack = () => {
     Router.back();
@@ -15,7 +35,7 @@ const OrderPage = () => {
   return (
     <div className="py-10">
       <Container>
-        <div className=" pb-3 border-b col-span-12 flex items-center justify-between">
+        <div className=" pb-3 border-b col-span-full flex items-center justify-between">
           <div
             onClick={routeBack}
             className="flex flex-1 text-xl flex-row gap-3 items-center cursor-pointer"
@@ -43,7 +63,7 @@ const OrderPage = () => {
         </div>
         <div className="grid col-span-full grid-cols-2 mt-3 gap-20">
           <OrderInformationInput />
-          <OrderSummary />
+          <OrderSummary subTotal={subTotal} tax={tax} data={data} />
         </div>
       </Container>
     </div>

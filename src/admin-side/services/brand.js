@@ -1,3 +1,5 @@
+import { getCookie } from "react-use-cookie";
+
 export const storeBrand = (brand, photo) => {
   const formData = new FormData();
 

@@ -1,3 +1,5 @@
+import { getCookie } from "react-use-cookie";
+
 export const storePayment = (payment) => {
   return fetch(process.env.NEXT_PUBLIC_BASE_URL + "/payment", {
     method: "POST",

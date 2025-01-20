@@ -48,7 +48,7 @@ const ShippingInformationForm = ({
             {...register("Name", { required: "Name is required" })}
             type="text"
             id="Name"
-            className="mt-4 outline-none pb-3 border-b text-lg border-b-gray-300 w-full"
+            className="mt-4 outline-none pb-3 text-lg border-b border-b-gray-300 w-full"
           />
           {errors.Name && <FormErrorMessage message={errors.Name.message} />}
         </div>
@@ -64,30 +64,6 @@ const ShippingInformationForm = ({
           inputName="Email"
           required={true}
         />
-        <InputBox
-          register={register}
-          errors={errors}
-          inputName="Division"
-          required={true}
-        />
-        <InputBox
-          register={register}
-          errors={errors}
-          inputName="City"
-          required={true}
-        />
-        <InputBox
-          register={register}
-          errors={errors}
-          inputName="Township"
-          required={true}
-        />
-        <InputBox
-          register={register}
-          errors={errors}
-          inputName="Zip_Code"
-          required={false}
-        />
         <div className="mb-6">
           <div className="flex flex-row justify-between items-center">
             <label
@@ -101,11 +77,28 @@ const ShippingInformationForm = ({
             {...register("Address", { required: "Address is required" })}
             rows={4}
             id="Address"
-            className="mt-4 resize-none outline-none pb-3 border-b text-lg border-b-gray-300 w-full"
+            className="mt-4 resize-y outline-none text-lg pb-3 border-b border-b-gray-300 w-full"
           ></textarea>
-          {errors.Name && <FormErrorMessage message={errors.Name.message} />}
+          {errors.Address && <FormErrorMessage message={errors.Name.message} />}
+        </div>
+        <div className="mb-6">
+          <div className="flex flex-row justify-between items-center">
+            <label
+              htmlFor="Note"
+              className="font-medium uppercase tracking-wider text-sm"
+            >
+              Note
+            </label>
+          </div>
+          <textarea
+            {...register("Note")}
+            rows={1}
+            id="Note"
+            className="mt-4 resize-y outline-none text-lg pb-3 border-b border-b-gray-300 w-full"
+          ></textarea>
         </div>
       </div>
+
       <div className="grid grid-cols-2 gap-3 px-7 pb-7">
         <div
           onClick={() => reset()}

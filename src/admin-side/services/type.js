@@ -1,9 +1,12 @@
-export const storeType = (category_id, type) => {
+import { getCookie } from "react-use-cookie";
+
+export const storeType = (category_id, type, gender) => {
   return fetch(process.env.NEXT_PUBLIC_BASE_URL + "/type", {
     method: "POST",
     body: JSON.stringify({
       category_id: category_id,
       type: type,
+      gender: gender,
     }),
     headers: {
       "Content-Type": "application/json",
@@ -24,12 +27,13 @@ export const deleteType = (id) => {
   });
 };
 
-export const updateType = (id, category_id, type) => {
+export const updateType = (id, category_id, type, gender) => {
   return fetch(process.env.NEXT_PUBLIC_BASE_URL + "/type/" + id, {
     method: "PUT",
     body: JSON.stringify({
       category_id: category_id,
       type: type,
+      gender: gender,
     }),
     headers: {
       "Content-Type": "application/json",

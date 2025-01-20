@@ -32,15 +32,14 @@ const CreateBrandForm = ({
     }
 
     try {
-      const res = await storeBrand(data.Brand, productImage.file);
+      const res = await storeBrand(data.Brand, brandImage.file);
       const json = await res.json();
 
       if (res.status !== 201) {
         toast.error(json.message);
-        await revalidate("/brand");
         return;
       }
-
+      await revalidate("/brand");
       toast.success("Product created successfully");
       reset();
 

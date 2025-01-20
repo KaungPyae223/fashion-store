@@ -3,6 +3,7 @@ import FilterRadioBox from "./FilterRadioBox";
 import { AnimatePresence, motion } from "motion/react";
 
 interface FilterContainerInterface {
+  value: string;
   title: string;
   setState: React.Dispatch<React.SetStateAction<string>>;
   items: string[];
@@ -14,6 +15,7 @@ const FilterContainer = ({
   setState,
   items,
   columns,
+  value,
 }: FilterContainerInterface) => {
   const [isOpen, setExpanded] = useState<boolean>(false);
 
@@ -70,6 +72,7 @@ const FilterContainer = ({
             >
               {items.map((item) => (
                 <FilterRadioBox
+                  value={value}
                   key={item}
                   title={item}
                   name={title}

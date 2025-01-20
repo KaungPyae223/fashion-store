@@ -1,7 +1,7 @@
 import useProductStore from "@/admin-side/stores/useProductStore";
 import { useEffect, useRef, useState } from "react";
 import { useForm } from "react-hook-form";
-import {fetchProduct} from "../../../../services/product"
+import { fetchProduct } from "../../../../services/product";
 import toast from "react-hot-toast";
 import useSWR from "swr";
 
@@ -25,11 +25,8 @@ export const useProductPropertiesEntry = (setStage) => {
 
   const [size, setSize] = useState(JSON.parse(productProperties.Size));
 
- 
-
   const [nextStage, setNextStage] = useState(0);
 
-  
   const SizeRef = useRef();
 
   const AddSize = () => {
@@ -49,7 +46,12 @@ export const useProductPropertiesEntry = (setStage) => {
 
   const baseUrl = process.env.NEXT_PUBLIC_BASE_URL;
 
-  const fetchURL = baseUrl + "/product/properties/" + productData.CategoryID;
+  const fetchURL =
+    baseUrl +
+    "/product/properties?category=" +
+    productData.CategoryID +
+    "&gender=" +
+    productData.Gender;
 
   const { data, isLoading, error } = useSWR(fetchURL, fetchProduct);
 
@@ -70,7 +72,6 @@ export const useProductPropertiesEntry = (setStage) => {
 
     setStage(nextStage);
   };
-
 
   const brandData = data?.brands.map((el) => {
     return {

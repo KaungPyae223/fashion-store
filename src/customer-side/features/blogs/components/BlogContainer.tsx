@@ -114,7 +114,7 @@ const BlogContainer = () => {
   return (
     <div className="py-10">
       <Container>
-        <div className="col-span-12 grid grid-cols-3 gap-8">
+        <div className="col-span-full grid grid-cols-3 gap-8">
           {blogs.map((blog, i) => (
             <BlogCard
               img={blog.img}

@@ -8,37 +8,25 @@ import Image from "next/image";
 import React, { useState } from "react";
 import useSWR from "swr";
 import PasswordUpdateForm from "./PasswordUpdateForm";
+import useAdminProfileStore from "@/admin-side/stores/useAdminProfileStore";
 
-const ProfileAdminData = ({ id }: { id: string }) => {
-  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL;
+const ProfileAdminData = () => {
+  const { adminData } = useAdminProfileStore();
 
-  const url = `${baseUrl}/admin/${id}`;
-
-  const { data, isLoading, error } = useSWR(url, fetchAdmin);
+  console.log(adminData);
 
   return (
-    <div>
-      {isLoading ? (
-        <Loading />
-      ) : data.data ? (
-        <>
-          <AdminDetails data={data.data} />
-        </>
-      ) : (
-        <NoData />
-      )}
-    </div>
+    <div>{!adminData ? <Loading /> : <AdminDetails data={adminData} />}</div>
   );
 };
 
 const AdminDetails = ({ data }) => {
-
   const [openModal, setOpenModal] = useState(false);
 
   return (
     <div className="flex flex-row gap-6">
       <Image
-        src={data.photo}
+        src={data.admin.photo}
         alt={data.name + " image"}
         width={300}
         height={300}
@@ -50,7 +38,10 @@ const AdminDetails = ({ data }) => {
         <InformationContent data={data.phone} title="phone" />
         <InformationContent data={data.address} title="address" />
         <InformationContent data={data.role} title="role" />
-        <div onClick={() => setOpenModal(true)} className="mt-3 py-1.5 px-6 text-sm cursor-pointer bg-gray-800 w-fit text-white">
+        <div
+          onClick={() => setOpenModal(true)}
+          className="mt-3 py-1.5 px-6 text-sm cursor-pointer bg-gray-800 w-fit text-white"
+        >
           Password Change
         </div>
       </div>

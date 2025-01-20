@@ -37,7 +37,7 @@ const Type = () => {
     <div className="py-16 mb-6 bg-[#F8F8F8]">
       <Container>
         <HomeTitle title="Categories" />
-        <div className="col-span-12 grid grid-cols-4 gap-6">
+        <div className="col-span-full grid grid-cols-4 gap-6">
           {brands.map((brand, i) => (
             <HomeBrandTypeCard
               key={i}

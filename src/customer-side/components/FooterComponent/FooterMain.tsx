@@ -1,7 +1,7 @@
 import React from "react";
 import Container from "../Container";
 import FooterLink from "./FooterLink";
-import { HiHome,HiPhone, HiEnvelope, HiClock } from "react-icons/hi2";
+import { HiHome, HiPhone, HiEnvelope, HiClock } from "react-icons/hi2";
 
 const FooterMain = () => {
   const abut: string[] = [
@@ -24,18 +24,14 @@ const FooterMain = () => {
     "Privacy Policy",
     "Other Policies",
   ];
- 
-
-  
 
   return (
     <Container>
-      <div className="col-span-12 flex justify-between py-12">
+      <div className="col-span-full flex justify-between py-12">
         <div className="flex flex-row gap-44">
           <FooterLink title="About" links={abut} />
           <FooterLink title="Customer Service" links={customerServices} />
           <FooterLink title="Policies" links={policies} />
-          
         </div>
 
         <div>
@@ -53,7 +49,6 @@ const FooterMain = () => {
             <div className="flex flex-row items-center gap-3 text-sm text-gray-500">
               <HiClock /> Available Mon–Fri, 9 AM–5 PM (EST)
             </div>
-            
           </div>
         </div>
       </div>

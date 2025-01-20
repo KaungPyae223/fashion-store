@@ -1,14 +1,13 @@
+import { fetchCustomer } from "@/admin-side/services/customer";
 import React from "react";
 import { FcCheckmark } from "react-icons/fc";
+import useSWR from "swr";
 
 const PaymentChoose = ({ setPaymentID, setCompleteForm, completeForm }) => {
-  const Deliveries: { name: string; id: number }[] = [
-    { name: "KBZ Pay", id: 1 },
-    { name: "Aya Pay", id: 2 },
-    { name: "Citizen Pay", id: 3 },
-    { name: "UAB Pay", id: 4 },
-    { name: "Pay On Arrive", id: 5 },
-  ];
+  const { isLoading, data } = useSWR(
+    process.env.NEXT_PUBLIC_BASE_URL + "/available-payments",
+    fetchCustomer
+  );
 
   const onPaymentChoose = (event) => {
     setPaymentID(event.target.value);
@@ -30,14 +29,15 @@ const PaymentChoose = ({ setPaymentID, setCompleteForm, completeForm }) => {
         <p className="font-semibold uppercase tracking-widest">Payment</p>
       </div>
       <div className="p-7">
-        {Deliveries.map((delivery) => (
-          <DeliveryRadio
-            label={delivery.name}
-            id={delivery.id}
-            key={delivery.id}
-            onPaymentChoose={onPaymentChoose}
-          />
-        ))}
+        {!isLoading &&
+          data.map((payment) => (
+            <DeliveryRadio
+              label={payment.name}
+              id={payment.id}
+              key={payment.id}
+              onPaymentChoose={onPaymentChoose}
+            />
+          ))}
       </div>
     </div>
   );

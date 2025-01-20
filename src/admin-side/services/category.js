@@ -1,3 +1,5 @@
+import { getCookie } from "react-use-cookie";
+
 export const fetchCategory = (url) =>
   fetch(url, {
     headers: {

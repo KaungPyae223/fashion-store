@@ -8,14 +8,31 @@ import EditPassword from "./EditPassword";
 import OrderInformation from "./OrderInformation";
 import OrderHistory from "./OrderHistory";
 import { AnimatePresence, motion } from "motion/react";
+import { getCookie } from "react-use-cookie";
+import { useRouter } from "next/navigation";
+import { fetchCustomer } from "@/customer-side/services/HomePage";
+import useSWR from "swr";
 
 const ProfileSectionContainer = () => {
   const [section, setSection] = useState<string>("ProfileData");
 
-  return (
+  const router = useRouter();
+
+  const userToken = getCookie("user_token");
+
+  if (!userToken) {
+    router.push("/authentication");
+  }
+
+  const { isLoading, data, error } = useSWR(
+    process.env.NEXT_PUBLIC_BASE_URL + "/customer-data",
+    fetchCustomer
+  );
+
+  return !isLoading && (
     <div className="py-10">
       <Container>
-        <div className="col-span-4 pe-12 min-h-screen flex flex-col">
+        <div className="col-span-4 pe-12 flex flex-col">
           <SectionTitle title="Profile Page" />
           <div
             onClick={() => setSection("ProfileData")}
@@ -57,12 +74,9 @@ const ProfileSectionContainer = () => {
           >
             <p>Order History</p>
           </div>
-          <div
-            className={`border-t mt-auto flex items-center justify-center text-lg cursor-pointer py-4 pr-8 tracking-wider font-medium`}
-          >
-            <p>Log Out</p>
-          </div>
+         
         </div>
+
         <div className="col-span-8">
           <AnimatePresence mode="wait">
             {section === "ProfileData" ? (
@@ -70,7 +84,7 @@ const ProfileSectionContainer = () => {
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 exit={{ opacity: 0 }}
-                transition={{ ease: "linear", duration: 0.3 }}
+                transition={{ ease: "easeOut", duration: 0.3 }}
                 key={"ProfileData"}
               >
                 <ProfileData />
@@ -80,17 +94,17 @@ const ProfileSectionContainer = () => {
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 exit={{ opacity: 0 }}
-                transition={{ ease: "linear", duration: 0.3 }}
+                transition={{ ease: "easeOut", duration: 0.3 }}
                 key={"EditProfile"}
               >
-                <EditProfile />
+                <EditProfile data={data} />
               </motion.div>
             ) : section === "EditPassword" ? (
               <motion.div
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 exit={{ opacity: 0 }}
-                transition={{ ease: "linear", duration: 0.3 }}
+                transition={{ ease: "easeOut", duration: 0.3 }}
                 key={"EditPassword"}
               >
                 <EditPassword />
@@ -100,7 +114,7 @@ const ProfileSectionContainer = () => {
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 exit={{ opacity: 0 }}
-                transition={{ ease: "linear", duration: 0.3 }}
+                transition={{ ease: "easeOut", duration: 0.3 }}
                 key={"OrderInformation"}
               >
                 <OrderInformation />
@@ -110,7 +124,7 @@ const ProfileSectionContainer = () => {
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 exit={{ opacity: 0 }}
-                transition={{ ease: "linear", duration: 0.3 }}
+                transition={{ ease: "easeOut", duration: 0.3 }}
                 key={"OrderHistory"}
               >
                 <OrderHistory />

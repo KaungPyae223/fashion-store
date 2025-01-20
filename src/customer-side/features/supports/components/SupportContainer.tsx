@@ -6,10 +6,13 @@ import FAQSection from "./FAQSection";
 import ContactSupportTeamSection from "./ContactSupportTeamSection";
 import SupportTeamFeedBackSection from "./SupportTeamFeedBackSection";
 import { AnimatePresence, motion } from "motion/react";
-import { line } from "motion/react-client";
+import { getCookie } from "react-use-cookie";
+import Token from "./Token";
 
 export const SupportContainer = () => {
   const [section, setSection] = useState<string>("FAQ");
+
+  const userToken = getCookie("user_token");
 
   return (
     <div className="py-10">
@@ -48,7 +51,7 @@ export const SupportContainer = () => {
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 exit={{ opacity: 0 }}
-                transition={{ ease: "linear", duration: 0.3 }}
+                transition={{ ease: "easeOut", duration: 0.3 }}
                 key={"FAQ"}
               >
                 <FAQSection />
@@ -58,20 +61,21 @@ export const SupportContainer = () => {
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 exit={{ opacity: 0 }}
-                transition={{ ease: "linear", duration: 0.3 }}
+                transition={{ ease: "easeOut", duration: 0.3 }}
                 key={"CST"}
               >
-                <ContactSupportTeamSection />
+                {!userToken ? <ContactSupportTeamSection /> : <Token />}
               </motion.div>
             ) : (
               <motion.div
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 exit={{ opacity: 0 }}
-                transition={{ ease: "linear", duration: 0.3 }}
+                transition={{ ease: "easeOut", duration: 0.3 }}
                 key={"STF"}
               >
-                <SupportTeamFeedBackSection />
+                 {userToken ? <SupportTeamFeedBackSection /> : <Token />}
+                
               </motion.div>
             )}
           </AnimatePresence>

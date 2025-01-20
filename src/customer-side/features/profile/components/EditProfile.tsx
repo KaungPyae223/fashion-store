@@ -3,18 +3,46 @@ import SectionTitle from "@/customer-side/components/SectionTitle";
 import React from "react";
 import { useForm } from "react-hook-form";
 import ProfileEditInput from "./ProfileEditInput";
+import { updateCustomer } from "@/customer-side/services/Customer";
+import toast, { Toaster } from "react-hot-toast";
+import { useRevalidatedData } from "@/hooks/useRevalidatedData";
 
-const EditProfile = () => {
+const EditProfile = ({ data }) => {
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm();
+  } = useForm({
+    defaultValues: {
+      Name: data.name,
+      Phone: data.phone,
+      address: data.address,
+    },
+  });
 
-  const handleProfileDataChange = (data) => {};
+  const { revalidate } = useRevalidatedData();
+
+  const handleProfileDataChange = async (data) => {
+    const updateData = {
+      name: data.Name,
+      phone: data.Phone,
+      address: data.address,
+      password: data.Password,
+    };
+
+    const res = await updateCustomer(updateData);
+
+    if (res.status === 200) {
+      await revalidate("/customer-data");
+      toast.success("Profile updated successfully");
+    } else {
+      toast.error("An error occurred while updating the profile.");
+    }
+  };
 
   return (
     <div>
+      <Toaster />
       <SectionTitle title="Edit Profile" />
       <form
         className="max-w-[400px]"
@@ -25,36 +53,14 @@ const EditProfile = () => {
           register={register}
           errors={errors}
           required={true}
-          defaultValue="Kaung Pyae"
         />
         <ProfileEditInput
-          inputName="Email"
+          inputName="Phone"
           register={register}
           errors={errors}
           required={true}
-          defaultValue="kaungpyaeaung8123@gmail.com"
         />
-        <ProfileEditInput
-          inputName="City"
-          register={register}
-          errors={errors}
-          required={true}
-          defaultValue="Yangon"
-        />
-        <ProfileEditInput
-          inputName="Township"
-          register={register}
-          errors={errors}
-          required={true}
-          defaultValue="Kyee Myint Daing"
-        />
-        <ProfileEditInput
-          inputName="Zip Code"
-          register={register}
-          errors={errors}
-          required={false}
-          defaultValue="123456"
-        />
+
         <div className="mb-6 ">
           <p className="uppercase font-medium text-sm">Address *</p>
           <textarea
@@ -62,10 +68,8 @@ const EditProfile = () => {
             {...register("address", {
               required: "Address is required",
             })}
-            className="border-b w-full resize-none border-b-black py-2 outline-none"
-          >
-            No.123 Inya Road, Yangon Kyee Myint Daing
-          </textarea>
+            className="border-b w-full resize-y border-b-black py-2 outline-none"
+          ></textarea>
           {errors.address && (
             <FormErrorMessage message={errors.address.message} />
           )}
@@ -75,7 +79,6 @@ const EditProfile = () => {
           register={register}
           errors={errors}
           required={true}
-          defaultValue=""
         />
         <button
           type="submit"
