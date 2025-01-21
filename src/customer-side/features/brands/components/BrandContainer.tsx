@@ -1,116 +1,46 @@
+"use client";
 import Container from "@/customer-side/components/Container";
 import SectionTitle from "@/customer-side/components/SectionTitle";
 import React from "react";
 import HomeBrandTypeCard from "../../../components/HomeBrandTypeCard";
+import { fetchHome } from "@/customer-side/services/HomePage";
+import useSWR from "swr";
+import useAddParamsToURL from "@/hooks/useAddParamsToURL";
+import Loading from "@/admin-side/components/Loading";
+import NoData from "@/admin-side/components/NoData";
+import AdminPagination from "@/admin-side/components/AdminPagimation";
 
 const BrandContainer = () => {
-  interface BrandInterface {
-    img: string;
-    title: string;
-    link: string;
-  }
+  const AddParamsToURL = useAddParamsToURL();
 
-  const brands: BrandInterface[] = [
-    {
-      img: "https://miro.medium.com/v2/resize:fit:828/format:webp/1*7MJoxgoEQBW-IMEMklTdVg.jpeg",
-      title: "Nike",
-      link: "/",
-    },
-    {
-      img: "https://standfirst-designweek-production.imgix.net/uploads/2019/06/27172619/3_adidas_originals.jpg?fit=crop&crop=faces&q=80&auto=compress,format&w=750&h=527&dpr=1.25",
-      title: "Adidas",
-      link: "/",
-    },
-    {
-      img: "https://www.logo.wine/a/logo/Louis_Vuitton/Louis_Vuitton-Logo.wine.svg",
-      title: "Louis Vuitton",
-      link: "/",
-    },
-    {
-      img: "https://miro.medium.com/v2/resize:fit:828/format:webp/1*7MJoxgoEQBW-IMEMklTdVg.jpeg",
-      title: "Nike",
-      link: "/",
-    },
-    {
-      img: "https://miro.medium.com/v2/resize:fit:828/format:webp/1*7MJoxgoEQBW-IMEMklTdVg.jpeg",
-      title: "Nike",
-      link: "/",
-    },
-    {
-      img: "https://standfirst-designweek-production.imgix.net/uploads/2019/06/27172619/3_adidas_originals.jpg?fit=crop&crop=faces&q=80&auto=compress,format&w=750&h=527&dpr=1.25",
-      title: "Adidas",
-      link: "/",
-    },
-    {
-      img: "https://www.logo.wine/a/logo/Louis_Vuitton/Louis_Vuitton-Logo.wine.svg",
-      title: "Louis Vuitton",
-      link: "/",
-    },
-    {
-      img: "https://miro.medium.com/v2/resize:fit:828/format:webp/1*7MJoxgoEQBW-IMEMklTdVg.jpeg",
-      title: "Nike",
-      link: "/",
-    },
-    {
-      img: "https://miro.medium.com/v2/resize:fit:828/format:webp/1*7MJoxgoEQBW-IMEMklTdVg.jpeg",
-      title: "Nike",
-      link: "/",
-    },
-    {
-      img: "https://standfirst-designweek-production.imgix.net/uploads/2019/06/27172619/3_adidas_originals.jpg?fit=crop&crop=faces&q=80&auto=compress,format&w=750&h=527&dpr=1.25",
-      title: "Adidas",
-      link: "/",
-    },
-    {
-      img: "https://www.logo.wine/a/logo/Louis_Vuitton/Louis_Vuitton-Logo.wine.svg",
-      title: "Louis Vuitton",
-      link: "/",
-    },
-    {
-      img: "https://miro.medium.com/v2/resize:fit:828/format:webp/1*7MJoxgoEQBW-IMEMklTdVg.jpeg",
-      title: "Nike",
-      link: "/",
-    },
-    {
-      img: "https://miro.medium.com/v2/resize:fit:828/format:webp/1*7MJoxgoEQBW-IMEMklTdVg.jpeg",
-      title: "Nike",
-      link: "/",
-    },
-    {
-      img: "https://standfirst-designweek-production.imgix.net/uploads/2019/06/27172619/3_adidas_originals.jpg?fit=crop&crop=faces&q=80&auto=compress,format&w=750&h=527&dpr=1.25",
-      title: "Adidas",
-      link: "/",
-    },
-    {
-      img: "https://www.logo.wine/a/logo/Louis_Vuitton/Louis_Vuitton-Logo.wine.svg",
-      title: "Louis Vuitton",
-      link: "/",
-    },
-    {
-      img: "https://miro.medium.com/v2/resize:fit:828/format:webp/1*7MJoxgoEQBW-IMEMklTdVg.jpeg",
-      title: "Nike",
-      link: "",
-    },
-  ];
+  const { isLoading, error, data } = useSWR(
+    AddParamsToURL(process.env.NEXT_PUBLIC_BASE_URL + "/all-brands"),
+    fetchHome
+  );
 
-  return (
+  return isLoading ? (
+    <Loading />
+  ) : data.data && data?.data.length ? (
     <div className="py-10">
       <Container>
         <div className="col-span-full">
           <SectionTitle title="available brands" />
           <div className="grid grid-cols-4 gap-x-3 gap-y-6">
-            {brands.map((brand, i) => (
+            {data.data.map((brand) => (
               <HomeBrandTypeCard
-                key={i}
+                key={brand.id}
                 img={brand.img}
-                link={`/brands/${brand.title}`}
-                title={brand.title}
+                link={`/brands/${brand.name}`}
+                title={brand.name}
               />
             ))}
           </div>
+          <AdminPagination meta={data?.meta} />
         </div>
       </Container>
     </div>
+  ) : (
+    <NoData />
   );
 };
 

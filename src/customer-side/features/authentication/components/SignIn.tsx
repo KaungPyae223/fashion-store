@@ -1,45 +1,15 @@
 "use client";
-import React, { useRef, useState } from "react";
-import { tailspin } from "ldrs";
+import React from "react";
+
 import { AnimatePresence, motion } from "motion/react";
-import { useRouter } from "next/navigation";
-import reactUseCookie from "react-use-cookie";
-import toast from "react-hot-toast";
-import { login } from "@/admin-side/services/login";
+import { useSignIn } from "../hooks/useSignIn";
 
 interface SignInInterface {
   email: string;
 }
 
 const SignIn = ({ email }: SignInInterface) => {
-  tailspin.register();
-  const Router = useRouter();
-
-  const [loading, isLoading] = useState<boolean>(false);
-  const [Token, setToken] = reactUseCookie("user_token");
-
-  const passwordRef = useRef();
-
-  const handleSignIn = async () => {
-    isLoading(true);
-
-    const logInData = {
-      email: email,
-      password: passwordRef.current.value,
-    };
-
-    const res = await login(logInData);
-    const json = await res.json();
-
-    if (json.status === 200) {
-      toast.success("Log In Successful");
-      setToken(json.token);
-
-      Router.back();
-    } else {
-      toast.error(json.message);
-    }
-  };
+  const { handleSignIn, loading, passwordRef } = useSignIn();
 
   return (
     <div>

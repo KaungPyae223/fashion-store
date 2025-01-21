@@ -3,16 +3,16 @@ import React from "react";
 import BrandProductFilterSection from "./BrandProductsFilterSection";
 import BrandProductsDisplaySection from "./BrandProductsDisplaySection";
 
-const BrandClothesContainer = () => {
+const BrandClothesContainer = ({filterData,name}) => {
   return (
     <div className="py-10">
       <Container>
         <div className="col-span-3">
-          <BrandProductFilterSection />
+          <BrandProductFilterSection filterData={filterData} />
         </div>
 
         <div className="col-span-9">
-          <BrandProductsDisplaySection />
+          <BrandProductsDisplaySection name={name} />
         </div>
       </Container>
     </div>

@@ -1,106 +1,65 @@
+import AdminPagination from "@/admin-side/components/AdminPagimation";
+import Loading from "@/admin-side/components/Loading";
+import NoData from "@/admin-side/components/NoData";
 import Pagination from "@/customer-side/components/Pagination";
 import ProductCard from "@/customer-side/components/ProductCard";
 import SectionTitle from "@/customer-side/components/SectionTitle";
-import React from "react";
+import { fetchHome } from "@/customer-side/services/HomePage";
+import useAddParamsToURL from "@/hooks/useAddParamsToURL";
+import { useSearchParams } from "next/navigation";
+import React, { useEffect, useState } from "react";
+import useSWR from "swr";
 
-const BrandProductsDisplaySection = () => {
-  interface Product {
-    img: string;
-    title: string;
-    color: string;
-    amount: string;
-  }
+const BrandProductsDisplaySection = ({ name }) => {
+  const searchParams = useSearchParams();
+  const AddParamsToURL = useAddParamsToURL();
 
-  const Producs: Product[] = [
-    {
-      img: "https://www.sans-sans.com.sg/wp-content/uploads/51-2815-SK-SKIRT-STREEL-BLUE.jpg",
-      title: "Sisburma Mora Skirt",
-      color: "Black",
-      amount: "32000",
-    },
-    {
-      img: "https://down-sg.img.susercontent.com/file/e9056de381f72e15f4546f89976b0a32.webp",
-      title: "Korea Dress",
-      color: "White",
-      amount: "45000",
-    },
-    {
-      img: "https://i.ebayimg.com/images/g/orcAAOSwdGFYu4ls/s-l1600.webp",
-      title: "Korea Traditional Dress",
-      color: "Black",
-      amount: "24000",
-    },
-    {
-      img: "https://louisphilippe.abfrl.in/blog/wp-content/uploads/2022/06/Pink-Shirt-For-Men.png",
-      title: "Men Suit",
-      color: "White",
-      amount: "30000",
-    },
-    {
-      img: "https://louisphilippe.abfrl.in/blog/wp-content/uploads/2022/06/Cream-Kurta-And-Pyjama-For-Men.png",
-      title: "India Traditional Dress",
-      color: "White",
-      amount: "42000",
-    },
-    {
-      img: "https://www.sans-sans.com.sg/wp-content/uploads/51-2815-SK-SKIRT-STREEL-BLUE.jpg",
-      title: "Sisburma Mora Skirt",
-      color: "Black",
-      amount: "32000",
-    },
-    {
-      img: "https://down-sg.img.susercontent.com/file/e9056de381f72e15f4546f89976b0a32.webp",
-      title: "Korea Dress",
-      color: "White",
-      amount: "45000",
-    },
-    {
-      img: "https://i.ebayimg.com/images/g/orcAAOSwdGFYu4ls/s-l1600.webp",
-      title: "Korea Traditional Dress",
-      color: "Black",
-      amount: "24000",
-    },
-    {
-      img: "https://louisphilippe.abfrl.in/blog/wp-content/uploads/2022/06/Pink-Shirt-For-Men.png",
-      title: "Men Suit",
-      color: "White",
-      amount: "30000",
-    },
-    {
-      img: "https://louisphilippe.abfrl.in/blog/wp-content/uploads/2022/06/Cream-Kurta-And-Pyjama-For-Men.png",
-      title: "India Traditional Dress",
-      color: "White",
-      amount: "42000",
-    },
-    {
-      img: "https://louisphilippe.abfrl.in/blog/wp-content/uploads/2022/06/Cream-Kurta-And-Pyjama-For-Men.png",
-      title: "India Traditional Dress",
-      color: "White",
-      amount: "42000",
-    },
-    {
-      img: "https://louisphilippe.abfrl.in/blog/wp-content/uploads/2022/06/Cream-Kurta-And-Pyjama-For-Men.png",
-      title: "India Traditional Dress",
-      color: "White",
-      amount: "42000",
-    },
-  ];
+  const [fetchURL, setFetchUrl] = useState(
+    AddParamsToURL(process.env.NEXT_PUBLIC_BASE_URL + "/brand-products/" + name)
+  );
+
+  const { data, isLoading } = useSWR(fetchURL, fetchHome);
+
+  useEffect(() => {
+    setFetchUrl(
+      AddParamsToURL(
+        process.env.NEXT_PUBLIC_BASE_URL + "/brand-products/" + name
+      )
+    );
+  }, [searchParams]);
 
   return (
-    <div>
-      <SectionTitle title="products" />
-      <div className="grid grid-cols-4 gap-x-3 gap-y-6">
-        {Producs.map((product, i) => (
-          <ProductCard
-            key={i}
-            img={product.img}
-            title={product.title}
-            color={product.color}
-            amount={product.amount}
-          />
-        ))}
+    !isLoading && (
+      <div>
+        <SectionTitle title="products" />
+        {isLoading ? (
+          <Loading />
+        ) : data.data && data?.data.length ? (
+          <>
+            <ProductsContainer products={data.data} />
+            <AdminPagination meta={data?.meta} />
+          </>
+        ) : (
+          <NoData />
+        )}
       </div>
-      <Pagination />
+    )
+  );
+};
+
+const ProductsContainer = ({ products }) => {
+  return (
+    <div className="grid grid-cols-4 gap-x-3 gap-y-6">
+      {products.map((product) => (
+        <ProductCard
+          key={product.id}
+          img={product.cover_photo}
+          title={product.name}
+          color={product.color}
+          amount={product.price}
+          href={"/clothing/details/" + product.id}
+        />
+      ))}
     </div>
   );
 };

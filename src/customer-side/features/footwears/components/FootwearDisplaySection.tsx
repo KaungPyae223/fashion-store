@@ -1,70 +1,63 @@
-import Pagination from "@/customer-side/components/Pagination";
+"use client";
+import AdminPagination from "@/admin-side/components/AdminPagimation";
+import Loading from "@/admin-side/components/Loading";
+import NoData from "@/admin-side/components/NoData";
 import ProductCard from "@/customer-side/components/ProductCard";
 import SectionTitle from "@/customer-side/components/SectionTitle";
-import React from "react";
+import { fetchHome } from "@/customer-side/services/HomePage";
+import useAddParamsToURL from "@/hooks/useAddParamsToURL";
+import { useSearchParams } from "next/navigation";
+import React, { useEffect, useState } from "react";
+import useSWR from "swr";
 
 const FootwearDisplaySection = () => {
-  interface footwear {
-    img: string;
-    title: string;
-    color: string;
-    amount: string;
-  }
+  const searchParams = useSearchParams();
 
-  const footwears: footwear[] = [
-    {
-      img: "https://static.nike.com/a/images/t_PDP_1728_v1/f_auto,q_auto:eco/62819db5-c5c6-4757-930b-9a305b2d628d/NIKE+DUNK+LOW+RETRO.png",
-      title: "Nike Dunk Low Retro",
-      color: "Pink",
-      amount: "230000",
-    },
-    {
-      img: "https://static.nike.com/a/images/t_PDP_1728_v1/f_auto,q_auto:eco/ee277c7b-7765-4b8a-bbc6-3393ea7c0631/AIR+MAX+270.png",
-      title: "Nike Air Max 270",
-      color: "Yellow",
-      amount: "550000",
-    },
-    {
-      img: "https://static.nike.com/a/images/t_PDP_1728_v1/f_auto,q_auto:eco/pdg9dvv1nliv7ydhck1r/NIKE+FREE+RN+2018.png",
-      title: "Nike Free Run 2018",
-      color: "White",
-      amount: "195000",
-    },
-    {
-      img: "https://static.nike.com/a/images/t_PDP_1728_v1/f_auto,q_auto:eco/62819db5-c5c6-4757-930b-9a305b2d628d/NIKE+DUNK+LOW+RETRO.png",
-      title: "Nike Dunk Low Retro",
-      color: "Pink",
-      amount: "230000",
-    },
-    {
-      img: "https://static.nike.com/a/images/t_PDP_1728_v1/f_auto,q_auto:eco/ee277c7b-7765-4b8a-bbc6-3393ea7c0631/AIR+MAX+270.png",
-      title: "Nike Air Max 270",
-      color: "Yellow",
-      amount: "550000",
-    },
-    {
-      img: "https://static.nike.com/a/images/t_PDP_1728_v1/f_auto,q_auto:eco/pdg9dvv1nliv7ydhck1r/NIKE+FREE+RN+2018.png",
-      title: "Nike Free Run 2018",
-      color: "White",
-      amount: "195000",
-    },
-  ];
+  const AddParamsToURL = useAddParamsToURL();
+
+  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL;
+
+  const [fetchUrl, setFetchUrl] = useState(
+    AddParamsToURL(baseUrl + "/customer-product/1")
+  );
+
+  const { data, isLoading, error } = useSWR(fetchUrl, fetchHome);
+
+  useEffect(() => {
+    setFetchUrl(AddParamsToURL(baseUrl + "/customer-product/2"));
+  }, [searchParams]);
 
   return (
     <div>
       <SectionTitle title="footwears" />
-      <div className="grid grid-cols-3 gap-x-3 gap-y-6">
-        {footwears.map((product, i) => (
-          <ProductCard
-            key={i}
-            img={product.img}
-            title={product.title}
-            color={product.color}
-            amount={product.amount}
-          />
-        ))}
-      </div>
-      <Pagination />
+
+      {isLoading ? (
+        <Loading />
+      ) : data.data && data?.data.length ? (
+        <>
+          <ProductsContainer products={data.data} />
+          <AdminPagination meta={data?.meta} />
+        </>
+      ) : (
+        <NoData />
+      )}
+    </div>
+  );
+};
+
+const ProductsContainer = ({ products }) => {
+  return (
+    <div className="grid grid-cols-3 gap-x-3 gap-y-6">
+      {products.map((product) => (
+        <ProductCard
+          key={product.id}
+          img={product.cover_photo}
+          title={product.name}
+          color={product.color}
+          amount={product.price}
+          href={"/footwear/details/" + product.id}
+        />
+      ))}
     </div>
   );
 };

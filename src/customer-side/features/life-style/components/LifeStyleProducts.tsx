@@ -1,106 +1,63 @@
-import Pagination from "@/customer-side/components/Pagination";
+"use client";
+import AdminPagination from "@/admin-side/components/AdminPagimation";
+import Loading from "@/admin-side/components/Loading";
+import NoData from "@/admin-side/components/NoData";
 import ProductCard from "@/customer-side/components/ProductCard";
 import SectionTitle from "@/customer-side/components/SectionTitle";
-import React from "react";
+import { fetchHome } from "@/customer-side/services/HomePage";
+import useAddParamsToURL from "@/hooks/useAddParamsToURL";
+import { useSearchParams } from "next/navigation";
+import React, { useEffect, useState } from "react";
+import useSWR from "swr";
 
 const LifeStyleProducts = () => {
-  interface ProductInterface {
-    img: string;
-    title: string;
-    color: string;
-    amount: string;
-  }
+  const searchParams = useSearchParams();
 
-  const Products: ProductInterface[] = [
-    {
-      img: "https://www.sans-sans.com.sg/wp-content/uploads/51-2815-SK-SKIRT-STREEL-BLUE.jpg",
-      title: "Sisburma Mora Skirt",
-      color: "Black",
-      amount: "32000",
-    },
-    {
-      img: "https://down-sg.img.susercontent.com/file/e9056de381f72e15f4546f89976b0a32.webp",
-      title: "Korea Dress",
-      color: "White",
-      amount: "45000",
-    },
-    {
-      img: "https://i.ebayimg.com/images/g/orcAAOSwdGFYu4ls/s-l1600.webp",
-      title: "Korea Traditional Dress",
-      color: "Black",
-      amount: "24000",
-    },
-    {
-      img: "https://louisphilippe.abfrl.in/blog/wp-content/uploads/2022/06/Pink-Shirt-For-Men.png",
-      title: "Men Suit",
-      color: "White",
-      amount: "30000",
-    },
-    {
-      img: "https://louisphilippe.abfrl.in/blog/wp-content/uploads/2022/06/Cream-Kurta-And-Pyjama-For-Men.png",
-      title: "India Traditional Dress",
-      color: "White",
-      amount: "42000",
-    },
-    {
-      img: "https://www.sans-sans.com.sg/wp-content/uploads/51-2815-SK-SKIRT-STREEL-BLUE.jpg",
-      title: "Sisburma Mora Skirt",
-      color: "Black",
-      amount: "32000",
-    },
-    {
-      img: "https://down-sg.img.susercontent.com/file/e9056de381f72e15f4546f89976b0a32.webp",
-      title: "Korea Dress",
-      color: "White",
-      amount: "45000",
-    },
-    {
-      img: "https://i.ebayimg.com/images/g/orcAAOSwdGFYu4ls/s-l1600.webp",
-      title: "Korea Traditional Dress",
-      color: "Black",
-      amount: "24000",
-    },
-    {
-      img: "https://louisphilippe.abfrl.in/blog/wp-content/uploads/2022/06/Pink-Shirt-For-Men.png",
-      title: "Men Suit",
-      color: "White",
-      amount: "30000",
-    },
-    {
-      img: "https://louisphilippe.abfrl.in/blog/wp-content/uploads/2022/06/Cream-Kurta-And-Pyjama-For-Men.png",
-      title: "India Traditional Dress",
-      color: "White",
-      amount: "42000",
-    },
-    {
-      img: "https://louisphilippe.abfrl.in/blog/wp-content/uploads/2022/06/Cream-Kurta-And-Pyjama-For-Men.png",
-      title: "India Traditional Dress",
-      color: "White",
-      amount: "42000",
-    },
-    {
-      img: "https://louisphilippe.abfrl.in/blog/wp-content/uploads/2022/06/Cream-Kurta-And-Pyjama-For-Men.png",
-      title: "India Traditional Dress",
-      color: "White",
-      amount: "42000",
-    },
-  ];
+  const AddParamsToURL = useAddParamsToURL();
+
+  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL;
+
+  const [fetchUrl, setFetchUrl] = useState(
+    AddParamsToURL(baseUrl + "/customer-product/1")
+  );
+
+  const { data, isLoading, error } = useSWR(fetchUrl, fetchHome);
+
+  useEffect(() => {
+    setFetchUrl(AddParamsToURL(baseUrl + "/customer-product/4"));
+  }, [searchParams]);
 
   return (
     <div>
-      <SectionTitle title="life style products" />
-      <div className="grid grid-cols-3 gap-x-3 gap-y-6">
-        {Products.map((product, i) => (
-          <ProductCard
-            key={i}
-            img={product.img}
-            title={product.title}
-            color={product.color}
-            amount={product.amount}
-          />
-        ))}
-      </div>
-      <Pagination />
+      <SectionTitle title="life style" />
+
+      {isLoading ? (
+        <Loading />
+      ) : data.data && data?.data.length ? (
+        <>
+          <ProductsContainer products={data.data} />
+          <AdminPagination meta={data?.meta} />
+        </>
+      ) : (
+        <NoData />
+      )}
+    </div>
+  );
+};
+
+const ProductsContainer = ({ products }) => {
+  return (
+    <div className="grid grid-cols-3 gap-x-3 gap-y-6">
+      {products.map((product) => (
+        <ProductCard
+          key={product.id}
+          img={product.cover_photo}
+          title={product.name}
+          color={product.color}
+          amount={product.price}
+          href={"/life-style/details/" + product.id}
+        />
+      ))}
     </div>
   );
 };

@@ -31,6 +31,12 @@ const NavBody = ({ setOpenSearchSection, setOpenCraft }: NavBodyInterface) => {
     setGender(newGender);
   };
 
+  const router = useRouter();
+
+  const RouteToWishList = () => {
+    router.push("/wishlist");
+  };
+
   return (
     <Container>
       <div className="col-span-full flex items-center justify-between py-3">
@@ -78,6 +84,7 @@ const NavBody = ({ setOpenSearchSection, setOpenCraft }: NavBodyInterface) => {
             strokeWidth={1}
             stroke="currentColor"
             className="size-6 cursor-pointer"
+            onClick={RouteToWishList}
           >
             <path
               strokeLinecap="round"
@@ -108,7 +115,7 @@ const NavBody = ({ setOpenSearchSection, setOpenCraft }: NavBodyInterface) => {
 };
 
 const CheckToken = () => {
-  const [Token, setToken] = reactUseCookie("user_token");
+  const [Token] = reactUseCookie("user_token");
   const [isClient, setIsClient] = useState(false);
 
   useEffect(() => {
