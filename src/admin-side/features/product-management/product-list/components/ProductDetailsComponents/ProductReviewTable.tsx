@@ -1,6 +1,12 @@
+"use client";
+import { deleteReview } from "@/admin-side/services/product";
+import { useFormatDate } from "@/hooks/useFormatDate";
+import { useRevalidatedData } from "@/hooks/useRevalidatedData";
 import React from "react";
 
-const ProductReviewTable = () => {
+const ProductReviewTable = ({ data, url }) => {
+
+  
   return (
     <div className="mt-6">
       <table className="table-auto w-full text-left border-spacing-y-4 border-spacing-x-0">
@@ -14,36 +20,42 @@ const ProductReviewTable = () => {
           </tr>
         </thead>
         <tbody>
-          <ReviewTr />
-          <ReviewTr />
-          <ReviewTr />
-          <ReviewTr />
-          <ReviewTr />
-          <ReviewTr />
-          <ReviewTr />
-          <ReviewTr />
-          <ReviewTr />
-          <ReviewTr />
+          {data.map((el) => (
+            <ReviewTr key={el.id} url={url} data={el} />
+          ))}
         </tbody>
       </table>
     </div>
   );
 };
 
-const ReviewTr = () => {
+const ReviewTr = ({ data, url }) => {
+  const { formatDate } = useFormatDate();
+  const { revalidate } = useRevalidatedData();
+
+  const deleteRating = async () => {
+    if (window.confirm("Sure to delete?")) {
+      const res = await deleteReview(data.id);
+
+      if (!res.ok) {
+        console.error(`Failed to delete review. Status: ${res.status}`);
+        alert("Failed to delete the review. Please try again.");
+        return;
+      }
+
+      await revalidate(url);
+    }
+  };
+
   return (
     <tr className="border-b hover:bg-gray-800 duration-300 hover:text-white">
       <td className="py-3 px-3 border-x">
         <div>
-          <p className="font-medium text-lg text-nowrap">Kaung Pyae Aung</p>
-          <p className="text-xs">kpaung123@gmail.com</p>
+          <p className="font-medium text-lg text-nowrap">{data.name}</p>
+          <p className="text-xs">{data.email}</p>
         </div>
       </td>
-      <td className="py-3 px-3 text-justify b border-e">
-        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Placeat aut
-        iure id non eos unde ea eveniet laborum et totam temporibus cumque,
-        dolores a maiores.
-      </td>
+      <td className="py-3 px-3 text-justify b border-e">{data.review}</td>
       <td className="px-3 py-3 border-e">
         <div className="flex flex-row items-center justify-center gap-1.5">
           <svg
@@ -58,20 +70,21 @@ const ReviewTr = () => {
               clipRule="evenodd"
             />
           </svg>
-          5
+          {data.rating}
         </div>
       </td>
       <td className="px-3 py-3 text-sm text-nowrap border-e">
-        23 February 2024
+        {formatDate(data.date)}
       </td>
       <td className="px-3 py-3 text-center border-e">
         <svg
+          onClick={deleteRating}
           xmlns="http://www.w3.org/2000/svg"
           fill="none"
           viewBox="0 0 24 24"
           strokeWidth={1.5}
           stroke="currentColor"
-          className="size-4 mx-auto"
+          className="size-4 mx-auto cursor-pointer"
         >
           <path
             strokeLinecap="round"

@@ -1,18 +1,41 @@
+import { deleteWishList } from "@/customer-side/services/Wishlist";
+import { useRevalidatedData } from "@/hooks/useRevalidatedData";
+import Image from "next/image";
 import Link from "next/link";
 import React from "react";
+import toast from "react-hot-toast";
 
 interface WishCardInterface {
   img: string;
   title: string;
   color: string;
   amount: string;
+  id: string;
+  product_id: string;
 }
 
-const WishCard = ({ img, title, color, amount }: WishCardInterface) => {
+const WishCard = ({
+  img,
+  title,
+  color,
+  amount,
+  id,
+  product_id,
+}: WishCardInterface) => {
+  const { revalidateWithoutParam } = useRevalidatedData();
+
+  const handleDeleteWishList = async () => {
+    await deleteWishList(id);
+
+    revalidateWithoutParam("/customer-wishlist");
+  };
+
   return (
     <div>
-      <Link href={"/"}>
-        <img
+      <div>
+        <Image
+          width={500}
+          height={500}
           alt={title}
           className="h-[300px] w-full object-cover object-center"
           src={img}
@@ -20,12 +43,18 @@ const WishCard = ({ img, title, color, amount }: WishCardInterface) => {
         <p className="mt-1">{title}</p>
         <p className="text-gray-500 text-sm">{color}</p>
         <p className="mt-1">{amount} Ks</p>
-      </Link>
+      </div>
       <div className="flex flex-row gap-3 mt-3">
-        <div className="uppercase cursor-pointer hover:border-black duration-300 flex flex-1 items-center justify-center tracking-wider border py-2 text-sm font-medium">
-          Add to card
-        </div>
-        <div className="p-2 cursor-pointer border">
+        <Link
+          href={"/wishlist/details/" + product_id}
+          className="uppercase cursor-pointer hover:border-black duration-300 flex flex-1 items-center justify-center tracking-wider border py-2 text-sm font-medium"
+        >
+          Details
+        </Link>
+        <div
+          onClick={handleDeleteWishList}
+          className="p-2 cursor-pointer border"
+        >
           <svg
             xmlns="http://www.w3.org/2000/svg"
             fill="none"

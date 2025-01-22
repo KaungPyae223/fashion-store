@@ -11,12 +11,12 @@ const ProductDetailsContainer = ({ data }) => {
     <div className="grid grid-cols-3 gap-6 mt-6">
       <ProductDetailsTable data={data} />
       <ProductSaleColumnChart data={data} />
-      <ProductAverageRating/>
-      <ProductCardContainer data={data}/>
+      <ProductAverageRating id={data.id} />
+      <ProductCardContainer data={data} />
       <ProductDetailsPreview data={data} />
-      <ProductReviews/>
+      <ProductReviews id={data.id} />
     </div>
-  )
+  );
 };
 
 export default ProductDetailsContainer;

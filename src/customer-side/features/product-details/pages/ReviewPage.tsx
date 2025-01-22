@@ -12,6 +12,8 @@ import useSWR from "swr";
 import { fetchHome } from "@/customer-side/services/HomePage";
 import Image from "next/image";
 import { getCookie } from "react-use-cookie";
+import toast, { Toaster } from "react-hot-toast";
+import { writeReview } from "@/customer-side/services/Review";
 
 const ReviewPage = ({ id }: { id: string }) => {
   const { data, isLoading, error } = useSWR(
@@ -37,14 +39,30 @@ const ReviewPage = ({ id }: { id: string }) => {
     formState: { errors },
   } = useForm();
 
-  const handleReview = (data) => {
-    console.log(data);
-  };
-
   const [rating, setRating] = useState<number>(0);
+
+  const handleReview = async (formData) => {
+    if (rating == 0) {
+      toast.error("Please Choose a Rating");
+    }
+
+    const reviewData = {
+      rating: rating,
+      comment: formData.feedback,
+      product_id: id,
+    };
+
+    const res = await writeReview(reviewData);
+    const json = await res.json();
+
+    if (json) {
+      Router.back();
+    }
+  };
 
   return (
     <div className="py-10">
+      <Toaster />
       <Container>
         <div className=" pb-3 border-b col-span-full flex items-center justify-between">
           <div

@@ -5,6 +5,9 @@ import SizeCard from "./SizeCard";
 import SectionSubTitle from "@/customer-side/components/SectionSubTitle";
 import Rating from "./Rating";
 import useCraftStore from "@/customer-side/stores/useCraftStore";
+import { getCookie } from "react-use-cookie";
+import { storeWishList } from "@/customer-side/services/Wishlist";
+import toast, { Toaster } from "react-hot-toast";
 
 const ProductData = ({ productData }) => {
   const { data, setStoreCraft } = useCraftStore();
@@ -26,8 +29,25 @@ const ProductData = ({ productData }) => {
     setStoreCraft(data);
   };
 
+  const handleWishList = async () => {
+    const user_id = getCookie("user_cookie");
+
+    if (!user_id) {
+      toast.error("Please Log In First");
+      return;
+    }
+
+    const res = await storeWishList(productData.id);
+    const json = await res.json();
+
+    if (json) {
+      toast.success("Save to Wish List");
+    }
+  };
+
   return (
     <div className="container grid grid-cols-3 gap-6 border-b pb-16 border-b-gray-200">
+      <Toaster />
       <div className="grid col-span-2 grid-cols-2 gap-1">
         {productData.detailsImage.map((el, i) => (
           <ProductImage key={i} image={el} />
@@ -60,7 +80,11 @@ const ProductData = ({ productData }) => {
             ))}
           </div>
         </div>
-        <button disabled={sizeName === "Select a size"} onClick={addCraft} className="uppercase disabled:opacity-50 tracking-wider py-3 w-[300px] flex justify-center cursor-pointer mt-6 font-medium bg-gray-900 hover:bg-gray-500 duration-300 text-white">
+        <button
+          disabled={sizeName === "Select a size"}
+          onClick={addCraft}
+          className="uppercase disabled:opacity-50 tracking-wider py-3 w-[300px] flex justify-center cursor-pointer mt-6 font-medium bg-gray-900 hover:bg-gray-500 duration-300 text-white"
+        >
           Add to craft
         </button>
         <div className="uppercase tracking-wider py-3 w-[300px] flex justify-center cursor-pointer mt-5 font-medium bg-slate-100 hover:text-gray-500 duration-300 text-gray-800">

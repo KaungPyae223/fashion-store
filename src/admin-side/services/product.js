@@ -136,3 +136,14 @@ export const restoreProduct = (id) => {
     },
   });
 };
+
+export const deleteReview = (id) => {
+  return fetch(process.env.NEXT_PUBLIC_BASE_URL + "/review/" + id, {
+    method: "DELETE",
+    headers: {
+      "Content-Type": "application/json",
+      Accept: "application/json",
+      Authorization: `Bearer ${getCookie("token")}`,
+    },
+  });
+};

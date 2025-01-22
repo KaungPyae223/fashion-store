@@ -2,16 +2,12 @@ import Image from "next/image";
 import Link from "next/link";
 import React from "react";
 
-interface HomeBrandTypeCardInterface {
-  img:string,
-  title:string,
-  link:string
-}
-
-const HomeBrandTypeCard = ({img,title,link}:HomeBrandTypeCardInterface) => {
+const HomeBrandTypeCard = ({ img, title, link }) => {
   return (
     <div>
-      <img
+      <Image
+        width={800}
+        height={800}
         alt={title}
         className="h-[350px] w-full object-cover"
         src={img}

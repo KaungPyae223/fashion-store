@@ -12,26 +12,28 @@ import HomeBlog from "@/customer-side/features/home/components/HomeBlog";
 import { fetchHome } from "@/customer-side/services/HomePage";
 import useSWR from "swr";
 import Loading from "@/admin-side/components/Loading";
+import { useSearchParams } from "next/navigation";
 
 const HomePage = () => {
-  const url = process.env.NEXT_PUBLIC_BASE_URL + "/home";
+  const gender = useSearchParams().get("gender");
+
+  const url = process.env.NEXT_PUBLIC_BASE_URL + "/home?gender=" + gender;
 
   const { data, isLoading, error } = useSWR(url, fetchHome);
 
-  
   if (isLoading) {
     return <Loading />;
   } else {
     return (
       <div className="bg-white">
         <HomeHero data={data.hero} />
-        <Latest />
-        <HomeBrand />
-        <Sneaker />
+        <Latest data={data.latest} />
+        <HomeBrand data={data.brand}/>
+        <Sneaker data={data.sneakers} />
         <Type />
-        <Trending />
-        <Accessories />
-        <LifeStyle />
+        <Trending data={data.trending} />
+        <Accessories data={data.accessories} />
+        <LifeStyle data={data.lifeStyle}  />
         <HomeBlog />
       </div>
     );
