@@ -13,6 +13,7 @@ const ProfileData = () => {
     fetchCustomer
   );
 
+  
   const router = useRouter();
 
   const handleLogOut = async () => {

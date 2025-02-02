@@ -60,13 +60,7 @@ const ProductDataUpdateForm = ({ setStage }) => {
           type={"text"}
           required={true}
         />
-        <AdminInput
-          register={register}
-          errors={errors}
-          inputName={"Price"}
-          type={"number"}
-          required={true}
-        />
+       
         <AdminSelect
           register={register}
           errors={errors}

@@ -13,10 +13,13 @@ const WishListContainer = () => {
     fetchCustomer
   );
 
+  console.log(data)
+
   return isLoading ? (
     <Loading />
   ) : data.length > 0 ? (
     <div className="mt-6 grid grid-cols-5 gap-6 gap-y-12">
+
       {data.map((data) => (
         <WishCard
           id={data.id}
@@ -24,6 +27,8 @@ const WishListContainer = () => {
           title={data.name}
           color={data.color}
           amount={data.price}
+          discount_price={data.discount_price}
+          discount_percent={data.discount_percent}
           key={data.id}
           product_id={data.product_id}
         />

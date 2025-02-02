@@ -30,7 +30,7 @@ const ProductData = ({ productData }) => {
   };
 
   const handleWishList = async () => {
-    const user_id = getCookie("user_cookie");
+    const user_id = getCookie("user_token");
 
     if (!user_id) {
       toast.error("Please Log In First");
@@ -40,8 +40,8 @@ const ProductData = ({ productData }) => {
     const res = await storeWishList(productData.id);
     const json = await res.json();
 
-    if (json) {
-      toast.success("Save to Wish List");
+    if (res.ok) {
+      toast.success(json.message);
     }
   };
 
@@ -87,7 +87,7 @@ const ProductData = ({ productData }) => {
         >
           Add to craft
         </button>
-        <div className="uppercase tracking-wider py-3 w-[300px] flex justify-center cursor-pointer mt-5 font-medium bg-slate-100 hover:text-gray-500 duration-300 text-gray-800">
+        <div onClick={handleWishList} className="uppercase tracking-wider py-3 w-[300px] flex justify-center cursor-pointer mt-5 font-medium bg-slate-100 hover:text-gray-500 duration-300 text-gray-800">
           Add to Wishlist
         </div>
         <div className="mt-16 mb-6 border-b border-gray-500">

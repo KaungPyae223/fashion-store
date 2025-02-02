@@ -16,7 +16,7 @@ const ProductCreateConfirm = () => {
     Type,
     Color,
     Size,
-    product
+    product,
   } = useProductCreateConfirm();
 
   return (
@@ -31,7 +31,8 @@ const ProductCreateConfirm = () => {
           img={product?.productCoverImage?.preview}
           title={product?.productData?.Name}
           color={Color.name}
-          amount={product?.productData?.Price}
+          href="/"
+          amount={product?.productPrice.SellPrice}
         />
       </div>
       <AdminSubTitle title="Product Details Sample" />
@@ -61,8 +62,17 @@ const ProductCreateConfirm = () => {
           </tr>
           <tr>
             <td className="px-2 pb-1 font-semibold">Price:</td>
-            <td className="pb-1">{product?.productData?.Price} Ks</td>
+            <td className="pb-1">{product?.productPrice?.Price} Ks</td>
           </tr>
+          <tr>
+            <td className="px-2 pb-1 font-semibold">Profit:</td>
+            <td className="pb-1">{product?.productPrice?.Profit} %</td>
+          </tr>
+          <tr>
+            <td className="px-2 pb-1 font-semibold">Sell Price:</td>
+            <td className="pb-1">{product?.productPrice?.SellPrice} Ks</td>
+          </tr>
+
           <tr>
             <td className="px-2 pb-1 font-semibold">Category:</td>
             <td className="pb-1">{category}</td>

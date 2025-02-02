@@ -21,7 +21,6 @@ const ProductDataEntryForm = ({ setStage }) => {
   } = useForm({
     defaultValues: {
       Name: productData.Name,
-      Price: productData.Price,
       Category: productData.CategoryID,
       Gender: productData.Gender,
       Description: productData.Description,
@@ -31,7 +30,6 @@ const ProductDataEntryForm = ({ setStage }) => {
   const handleStoreProductData = (data) => {
     const addProductData = {
       Name: data.Name,
-      Price: data.Price,
       CategoryID: data.Category,
       Gender: data.Gender,
       Description: data.Description,
@@ -59,13 +57,6 @@ const ProductDataEntryForm = ({ setStage }) => {
           errors={errors}
           inputName={"Name"}
           type={"text"}
-          required={true}
-        />
-        <AdminInput
-          register={register}
-          errors={errors}
-          inputName={"Price"}
-          type={"number"}
           required={true}
         />
         <AdminSelect

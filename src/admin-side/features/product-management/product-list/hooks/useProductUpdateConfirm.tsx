@@ -5,9 +5,7 @@ import { useState } from "react";
 import toast from "react-hot-toast";
 
 export const useProductUpdateConfirm = () => {
-  const { product} = useProductStore();
-
-  console.log(product);
+  const { product } = useProductStore();
 
   const Brand = JSON.parse(product?.productProperties?.Brand || "{}");
   const Type = JSON.parse(product?.productProperties?.Type || "{}");
@@ -20,7 +18,7 @@ export const useProductUpdateConfirm = () => {
 
   const productDetailsPreviewData = {
     detailsImage: detailsImages,
-    price: product?.productData?.Price,
+    price: product?.productPrice?.SellPrice,
     color: Color.name,
     title: product?.productData?.Name,
     rating: 5,
@@ -68,12 +66,13 @@ export const useProductUpdateConfirm = () => {
         name: product?.productData?.Name,
         cover_photo: product.productCoverImage.file,
         details_photos: DetailsImages,
-        price: product?.productData?.Price,
+        price: product?.productPrice?.Price,
+        profit_percent: product?.productPrice?.Profit,
         description: product?.productData?.Description,
         status: product.productStatus,
         gender: product.productData.Gender,
         size_id: Sizes.join(","),
-        id:product.productID
+        id: product.productID,
       };
 
       const res = await updateProduct(data);
@@ -84,9 +83,7 @@ export const useProductUpdateConfirm = () => {
         return;
       }
 
-      
-
-      toast.success("Product created successfully");
+      toast.success("Product updated successfully");
 
       router.push("/admin/product-list");
     } catch (error) {

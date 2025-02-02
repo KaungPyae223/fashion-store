@@ -1,3 +1,4 @@
+"use client";
 import React from "react";
 import Container from "@/customer-side/components/Container";
 import Image from "next/image";
@@ -15,6 +16,8 @@ const AuthenticationPage = () => {
           </div>
           <div className="col-span-6">
             <Image
+              width={600}
+              height={600}
               src={AuthImage}
               alt="Authentication UI"
               className="w-2/3 max-h-[450px] mx-auto object-cover"

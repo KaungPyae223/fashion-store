@@ -6,8 +6,7 @@ import React from "react";
 import toast from "react-hot-toast";
 
 const ProductListData = ({ product }) => {
-
-  const {revalidate} = useRevalidatedData();
+  const { revalidate } = useRevalidatedData();
   const handleDeleteBtn = async () => {
     if (window.confirm("Are you sure to delete")) {
       try {
@@ -28,7 +27,11 @@ const ProductListData = ({ product }) => {
   };
 
   return (
-    <tr className="text-gray-800 bg-white border-y-[12px] border-y-gray-100">
+    <tr
+      className={`text-gray-800 ${
+        product.totalQty === 0 ? "bg-red-200" : "bg-white"
+      }  border-y-[12px] border-y-gray-100`}
+    >
       <td className="p-2 border-spacing-0">
         <div className="flex flex-row gap-3 items-center">
           <Image
@@ -64,7 +67,18 @@ const ProductListData = ({ product }) => {
       <td className="text-start px-2 text-gray-800">{product.brand}</td>
       <td className="text-start px-2 text-gray-800">{product.type}</td>
       <td className="text-center px-2 text-gray-800">{product.gender}</td>
-      <td className="text-end px-2 text-gray-800">{product.price} Ks</td>
+      <td className="text-end px-2 text-gray-800">
+        {product.original_price} Ks
+      </td>
+      <td className="text-end px-2 text-gray-800">
+        {product.profit_percent} %
+      </td>
+      <td className="text-end px-2 text-gray-800">
+        {product.discount_price} Ks
+      </td>
+      <td className="text-end px-2 text-gray-800">{product.sell_price} Ks</td>
+      <td className="text-end px-2 text-gray-800">{product.totalQty}</td>
+
       <td className=" text-gray-800 px-2 text-center">
         {product.status === "public" ? (
           <div className="py-0.5 px-3 inline mx-auto text-xs rounded-full bg-green-400 text-gray-700">
@@ -76,78 +90,25 @@ const ProductListData = ({ product }) => {
           </div>
         )}
       </td>
-      <td className=" text-gray-800 px-2 text-center">
-        <div className="flex flex-row gap-2 items-center">
-          <div className="flex flex-row gap-0.5 text-gray-600">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 16 16"
-              fill="currentColor"
-              className="size-4"
-            >
-              <path
-                fillRule="evenodd"
-                d="M8 1.75a.75.75 0 0 1 .692.462l1.41 3.393 3.664.293a.75.75 0 0 1 .428 1.317l-2.791 2.39.853 3.575a.75.75 0 0 1-1.12.814L7.998 12.08l-3.135 1.915a.75.75 0 0 1-1.12-.814l.852-3.574-2.79-2.39a.75.75 0 0 1 .427-1.318l3.663-.293 1.41-3.393A.75.75 0 0 1 8 1.75Z"
-                clipRule="evenodd"
-              />
-            </svg>
-
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 16 16"
-              fill="currentColor"
-              className="size-4"
-            >
-              <path
-                fillRule="evenodd"
-                d="M8 1.75a.75.75 0 0 1 .692.462l1.41 3.393 3.664.293a.75.75 0 0 1 .428 1.317l-2.791 2.39.853 3.575a.75.75 0 0 1-1.12.814L7.998 12.08l-3.135 1.915a.75.75 0 0 1-1.12-.814l.852-3.574-2.79-2.39a.75.75 0 0 1 .427-1.318l3.663-.293 1.41-3.393A.75.75 0 0 1 8 1.75Z"
-                clipRule="evenodd"
-              />
-            </svg>
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 16 16"
-              fill="currentColor"
-              className="size-4"
-            >
-              <path
-                fillRule="evenodd"
-                d="M8 1.75a.75.75 0 0 1 .692.462l1.41 3.393 3.664.293a.75.75 0 0 1 .428 1.317l-2.791 2.39.853 3.575a.75.75 0 0 1-1.12.814L7.998 12.08l-3.135 1.915a.75.75 0 0 1-1.12-.814l.852-3.574-2.79-2.39a.75.75 0 0 1 .427-1.318l3.663-.293 1.41-3.393A.75.75 0 0 1 8 1.75Z"
-                clipRule="evenodd"
-              />
-            </svg>
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 16 16"
-              fill="currentColor"
-              className="size-4"
-            >
-              <path
-                fillRule="evenodd"
-                d="M8 1.75a.75.75 0 0 1 .692.462l1.41 3.393 3.664.293a.75.75 0 0 1 .428 1.317l-2.791 2.39.853 3.575a.75.75 0 0 1-1.12.814L7.998 12.08l-3.135 1.915a.75.75 0 0 1-1.12-.814l.852-3.574-2.79-2.39a.75.75 0 0 1 .427-1.318l3.663-.293 1.41-3.393A.75.75 0 0 1 8 1.75Z"
-                clipRule="evenodd"
-              />
-            </svg>
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 16 16"
-              fill="none"
-              stroke="currentColor"
-              className="size-4"
-            >
-              <path
-                fillRule="evenodd"
-                d="M8 1.75a.75.75 0 0 1 .692.462l1.41 3.393 3.664.293a.75.75 0 0 1 .428 1.317l-2.791 2.39.853 3.575a.75.75 0 0 1-1.12.814L7.998 12.08l-3.135 1.915a.75.75 0 0 1-1.12-.814l.852-3.574-2.79-2.39a.75.75 0 0 1 .427-1.318l3.663-.293 1.41-3.393A.75.75 0 0 1 8 1.75Z"
-                clipRule="evenodd"
-              />
-            </svg>
-          </div>
-          <span className="text-gray-500">(3.9)</span>
-        </div>
-      </td>
 
       <td className="px-2">
         <div className="flex flex-row justify-center items-center gap-3">
+          <Link href={"/admin/product-list/quantity/" + product.id}>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              strokeWidth={1.1}
+              stroke="currentColor"
+              className="size-4 cursor-pointer"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                d="M3.75 6A2.25 2.25 0 0 1 6 3.75h2.25A2.25 2.25 0 0 1 10.5 6v2.25a2.25 2.25 0 0 1-2.25 2.25H6a2.25 2.25 0 0 1-2.25-2.25V6ZM3.75 15.75A2.25 2.25 0 0 1 6 13.5h2.25a2.25 2.25 0 0 1 2.25 2.25V18a2.25 2.25 0 0 1-2.25 2.25H6A2.25 2.25 0 0 1 3.75 18v-2.25ZM13.5 6a2.25 2.25 0 0 1 2.25-2.25H18A2.25 2.25 0 0 1 20.25 6v2.25A2.25 2.25 0 0 1 18 10.5h-2.25a2.25 2.25 0 0 1-2.25-2.25V6ZM13.5 15.75a2.25 2.25 0 0 1 2.25-2.25H18a2.25 2.25 0 0 1 2.25 2.25V18A2.25 2.25 0 0 1 18 20.25h-2.25A2.25 2.25 0 0 1 13.5 18v-2.25Z"
+              />
+            </svg>
+          </Link>
           <Link href={"/admin/product-list/update/" + product.id}>
             <svg
               xmlns="http://www.w3.org/2000/svg"

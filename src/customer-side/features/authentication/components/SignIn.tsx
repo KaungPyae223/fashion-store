@@ -9,7 +9,7 @@ interface SignInInterface {
 }
 
 const SignIn = ({ email }: SignInInterface) => {
-  const { handleSignIn, loading, passwordRef } = useSignIn();
+  const { handleSignIn, loading, passwordRef } = useSignIn(email);
 
   return (
     <div>
@@ -47,7 +47,13 @@ const SignIn = ({ email }: SignInInterface) => {
                 key={"loading"}
                 transition={{ duration: 0.3, ease: "easeOut" }}
               >
-                <l-tailspin size="15" stroke="2" speed="0.9" color="white" />
+                <div
+                  className="animate-spin inline-block size-5 border-[3px] border-current border-t-transparent text-white rounded-full"
+                  role="status"
+                  aria-label="loading"
+                >
+                  <span className="sr-only">Loading...</span>
+                </div>
               </motion.div>
             ) : (
               <motion.span

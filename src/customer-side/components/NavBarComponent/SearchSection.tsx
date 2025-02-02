@@ -51,7 +51,10 @@ const SearchSection = ({ setOpenSearchSection }: SearchSectionInterface) => {
   const searchRef = useRef("");
 
   const changeSearchRoute = () => {
+    if (searchRef.current.value === "") return;
+
     router.push("/search/" + searchRef.current.value);
+    setOpenSearchSection(false);
   };
 
   return (
@@ -111,7 +114,7 @@ const SearchSection = ({ setOpenSearchSection }: SearchSectionInterface) => {
         <Container>
           <div className="col-span-3">
             <SearchTitle title="Recently Search" />
-            <SearchTitleList searchHistory={searchHistory} />
+            <SearchTitleList setOpenSearchSection={setOpenSearchSection} searchHistory={searchHistory} />
           </div>
           <div className="col-span-9">
             <SearchTitle title="Relative Products" />

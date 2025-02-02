@@ -26,10 +26,14 @@ const ProductUpdatePage = ({ id }: { id: string }) => {
           productID: data.data.id,
           productData: {
             Name: data.data.name,
-            Price: data.data.price,
             CategoryID: data.data.category_id,
             Gender: data.data.gender,
             Description: data.data.description,
+          },
+          productPrice: {
+            Price: data.data.price,
+            Profit: data.data.profit_percent,
+            SellPrice: data.data.sell_price,
           },
           productProperties: {
             Brand: JSON.stringify(data.data.brand),

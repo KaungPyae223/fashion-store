@@ -1,14 +1,12 @@
+"use client";
 import reactUseCookie from "react-use-cookie";
 import { useRouter } from "next/navigation";
 import toast from "react-hot-toast";
-import { Register } from "@/customer-side/services/Register";
+import { registerAccount } from "@/customer-side/services/Register";
 import { useForm } from "react-hook-form";
-import { tailspin } from "ldrs";
 import { useState } from "react";
 
-export const useCreateAccount = () => {
-  tailspin.register();
-
+export const useCreateAccount = (email: string) => {
   const Router = useRouter();
   const [Token, setToken] = reactUseCookie("user_token");
 
@@ -33,13 +31,19 @@ export const useCreateAccount = () => {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm();
+  } = useForm({
+    defaultValues: {
+      email: email,
+    },
+  });
 
   const [loading, isLoading] = useState<boolean>(false);
 
   const handleCreateAccount = async (data) => {
+    console.log(data);
+
     isLoading(true);
-    const res = await Register(data.name, data.email, data.password);
+    const res = await registerAccount(data.name, data.email, data.password);
 
     const json = await res.json();
 
@@ -47,7 +51,8 @@ export const useCreateAccount = () => {
       setToken(json.token);
       Router.back();
     } else {
-      toast.error("Error in create account");
+      toast.error(json.message);
+      isLoading(false);
     }
   };
 

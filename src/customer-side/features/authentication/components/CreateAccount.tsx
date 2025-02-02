@@ -8,23 +8,18 @@ import { useCreateAccount } from "../hooks/useCreateAccount";
 
 interface CreateAccountInterface {
   email: string;
-  setTypeOfNavigation: React.Dispatch<React.SetStateAction<string>>;
 }
 
-const CreateAccount = ({
-  email,
-  setTypeOfNavigation,
-}: CreateAccountInterface) => {
+const CreateAccount = ({ email }: CreateAccountInterface) => {
   const {
     handleCreateAccount,
     handleSubmit,
     register,
     errors,
     loading,
-    
     handlePasswordChange,
     validations,
-  } = useCreateAccount();
+  } = useCreateAccount(email);
 
   return (
     <form onSubmit={handleSubmit(handleCreateAccount)}>
@@ -36,7 +31,8 @@ const CreateAccount = ({
         <p className="uppercase font-medium text-sm">email address</p>
         <input
           type="email"
-          value={email}
+          {...register("email")}
+          
           disabled
           className="border-b w-[380px] border-b-black py-2 outline-none"
         />
@@ -108,7 +104,13 @@ const CreateAccount = ({
                 key={"loading"}
                 transition={{ duration: 0.3, ease: "easeOut" }}
               >
-                <l-tailspin size="15" stroke="2" speed="0.9" color="white" />
+                <div
+                  className="animate-spin inline-block size-5 border-[3px] border-current border-t-transparent text-white rounded-full"
+                  role="status"
+                  aria-label="loading"
+                >
+                  <span className="sr-only">Loading...</span>
+                </div>
               </motion.div>
             ) : (
               <motion.span

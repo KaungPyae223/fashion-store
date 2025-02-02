@@ -4,9 +4,8 @@ import { IoMdPhotos } from "react-icons/io";
 import { AiFillProduct } from "react-icons/ai";
 import { SiInstatus } from "react-icons/si";
 import { FaDatabase } from "react-icons/fa6";
-import { FaImage } from "react-icons/fa6";
+import { FaImage,FaDollarSign } from "react-icons/fa6";
 
-import { IoMdCheckmark } from "react-icons/io";
 import ProductDataEntryForm from "./ProductDataEntryForm";
 import { AnimatePresence, motion } from "motion/react";
 import ProductPropertiesEntry from "./ProductPropertiesEntry";
@@ -14,6 +13,7 @@ import ProductProfileImageEntry from "./ProductCoverImageEntry";
 import ProductDetailsImagesEntry from "./ProductDetailsImagesEntry";
 import ProductStatusEntry from "./ProductStatusEntry";
 import StageStatus from "../StageStatus";
+import ProductPriceEntry from "./ProductPriceEntry";
 
 const ProductCreateForm = () => {
   const [stage, setStage] = useState(1);
@@ -42,6 +42,14 @@ const ProductCreateForm = () => {
             <StageStatus
               currentStage={stage}
               stage={3}
+              icon={<FaDollarSign className="size-5" />}
+              title={"Product Price"}
+            />
+          </div>
+          <div className="mb-14 ml-6 flex items-center">
+            <StageStatus
+              currentStage={stage}
+              stage={4}
               icon={<FaImage className="size-5" />}
               title={"Product Profile Image"}
             />
@@ -49,7 +57,7 @@ const ProductCreateForm = () => {
           <div className="mb-14 ml-6 flex items-center">
             <StageStatus
               currentStage={stage}
-              stage={4}
+              stage={5}
               icon={<IoMdPhotos className="size-5" />}
               title={"Product Details Images"}
             />
@@ -57,7 +65,7 @@ const ProductCreateForm = () => {
           <div className="mb-14 ml-6 flex items-center">
             <StageStatus
               currentStage={stage}
-              stage={5}
+              stage={6}
               icon={<SiInstatus className="size-5" />}
               title={"Product Status"}
             />
@@ -95,9 +103,19 @@ const ProductCreateForm = () => {
               exit={{ opacity: 0 }}
               transition={{ duration: 0.3, ease: "linear" }}
             >
-              <ProductProfileImageEntry setStage={setStage} />
+              <ProductPriceEntry setStage={setStage} />
             </motion.div>
           ) : stage == 4 ? (
+            <motion.div
+              key={"ProductProfileEntry"}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.3, ease: "linear" }}
+            >
+              <ProductProfileImageEntry setStage={setStage} />
+            </motion.div>
+          ) : stage == 5 ? (
             <motion.div
               key={"ProductDetailsEntry"}
               initial={{ opacity: 0 }}

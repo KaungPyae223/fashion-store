@@ -22,6 +22,8 @@ const LifeStyle = ({ data }) => {
         <div className="col-span-6 grid grid-cols-2 gap-3">
           {data.map((product) => (
             <ProductCard
+              discount_percent={product.discount_percent}
+              discount_price={product.discount_price}
               key={product.id}
               href={"/life-style/details/" + product.id}
               img={product.img}

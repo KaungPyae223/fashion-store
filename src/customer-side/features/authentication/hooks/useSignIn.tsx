@@ -2,11 +2,10 @@ import { useRouter } from "next/navigation";
 import reactUseCookie from "react-use-cookie";
 import toast from "react-hot-toast";
 import { login } from "@/admin-side/services/login";
-import { tailspin } from "ldrs";
+
 import { useRef, useState } from "react";
 
-export const useSignIn = () => {
-  tailspin.register();
+export const useSignIn = (email: string) => {
   const Router = useRouter();
 
   const [loading, isLoading] = useState<boolean>(false);

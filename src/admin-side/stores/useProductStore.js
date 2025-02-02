@@ -4,10 +4,14 @@ const useProductStore = create((set) => ({
   product: {
     productData: {
       Name: null,
-      Price: null,
       CategoryID: null,
       Gender: null,
       Description: null,
+    },
+    productPrice: {
+      Price: null,
+      Profit: null,
+      SellPrice: 0,
     },
     productProperties: {
       Brand: null,
@@ -60,15 +64,24 @@ const useProductStore = create((set) => ({
       product: { ...state.product, productStatus: productStatus },
     })),
 
+  setProductPrice: (productPrice) =>
+    set((state) => ({
+      product: { ...state.product, productPrice: productPrice },
+    })),
+
   setResetProductStore: () =>
     set({
       product: {
         productData: {
           Name: null,
-          Price: null,
           CategoryID: null,
           Gender: null,
           Description: null,
+        },
+        productPrice: {
+          Price: null,
+          Profit: null,
+          SellPrice: 0,
         },
         productProperties: {
           Brand: null,

@@ -11,8 +11,9 @@ const NavNotification = () => {
 
   const { data, isLoading, error } = useSWR(url, fetchHome);
 
+  
   useEffect(() => {
-    if (!isLoading & data) {
+    if (!isLoading) {
       setNotiText(data.ads.split("/"));
     }
   }, [isLoading]);

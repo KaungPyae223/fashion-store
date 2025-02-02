@@ -12,6 +12,8 @@ const Latest = ({ data }) => {
         <div className="col-span-full grid grid-cols-5 gap-x-3 gap-y-6">
           {data.map((product) => (
             <ProductCard
+              discount_percent={product.discount_percent}
+              discount_price={product.discount_price}
               key={product.id}
               img={product.img}
               title={product.title}

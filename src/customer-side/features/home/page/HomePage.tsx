@@ -17,7 +17,12 @@ import { useSearchParams } from "next/navigation";
 const HomePage = () => {
   const gender = useSearchParams().get("gender");
 
-  const url = process.env.NEXT_PUBLIC_BASE_URL + "/home?gender=" + gender;
+  const url = `${process.env.NEXT_PUBLIC_BASE_URL}/home?gender= ${
+    gender ? gender : ""
+  }
+    `;
+
+  
 
   const { data, isLoading, error } = useSWR(url, fetchHome);
 
@@ -26,14 +31,14 @@ const HomePage = () => {
   } else {
     return (
       <div className="bg-white">
-        <HomeHero data={data.hero} />
-        <Latest data={data.latest} />
-        <HomeBrand data={data.brand}/>
-        <Sneaker data={data.sneakers} />
+        {data?.hero && <HomeHero data={data.hero} />}
+        {data?.latest && <Latest data={data.latest} />}
+        {data?.brand && <HomeBrand data={data.brand} />}
+        {data?.sneakers && <Sneaker data={data.sneakers} />}
         <Type />
-        <Trending data={data.trending} />
-        <Accessories data={data.accessories} />
-        <LifeStyle data={data.lifeStyle}  />
+        {data?.trending && <Trending data={data.trending} />}
+        {data?.accessories && <Accessories data={data.accessories} />}
+        {data?.lifeStyle && <LifeStyle data={data.lifeStyle} />}
         <HomeBlog />
       </div>
     );

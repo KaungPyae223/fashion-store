@@ -51,12 +51,14 @@ const ProductsContainer = ({ products }) => {
       {products.map((product) => (
         <ProductCard
           key={product.id}
+          discount_percent={product.discount_percent}
+          discount_price={product.discount_price}
           img={product.cover_photo}
           title={product.name}
           color={product.color}
           amount={product.price}
           href={"/footwear/details/" + product.id}
-        />
+        />  
       ))}
     </div>
   );

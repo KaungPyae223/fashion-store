@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { IoMdPhotos } from "react-icons/io";
 import { AiFillProduct } from "react-icons/ai";
 import { SiInstatus } from "react-icons/si";
-import { FaDatabase } from "react-icons/fa6";
+import { FaDatabase, FaDollarSign } from "react-icons/fa6";
 import { FaImage } from "react-icons/fa6";
 import StageStatus from "../StageStatus";
 import { AnimatePresence, motion } from "motion/react";
@@ -11,6 +11,7 @@ import ProductPropertiesUpdateForm from "./ProductPropertiesUpdateForm";
 import ProductCoverImageUpdate from "./ProductCoverImageUpdate";
 import ProductDetailsImagesUpdate from "./ProductDeatailsImageUpdate";
 import ProductStatusUpdate from "./ProductStatusUpdate";
+import ProductPriceUpdate from "./ProductPriceUpdate";
 
 const ProductUpdateForm = () => {
   const [stage, setStage] = useState(1);
@@ -39,6 +40,14 @@ const ProductUpdateForm = () => {
             <StageStatus
               currentStage={stage}
               stage={3}
+              icon={<FaDollarSign className="size-5" />}
+              title={"Product Price"}
+            />
+          </div>
+          <div className="mb-14 ml-6 flex items-center">
+            <StageStatus
+              currentStage={stage}
+              stage={4}
               icon={<FaImage className="size-5" />}
               title={"Product Profile Image"}
             />
@@ -46,7 +55,7 @@ const ProductUpdateForm = () => {
           <div className="mb-14 ml-6 flex items-center">
             <StageStatus
               currentStage={stage}
-              stage={4}
+              stage={5}
               icon={<IoMdPhotos className="size-5" />}
               title={"Product Details Images"}
             />
@@ -54,7 +63,7 @@ const ProductUpdateForm = () => {
           <div className="mb-14 ml-6 flex items-center">
             <StageStatus
               currentStage={stage}
-              stage={5}
+              stage={6}
               icon={<SiInstatus className="size-5" />}
               title={"Product Status"}
             />
@@ -84,7 +93,17 @@ const ProductUpdateForm = () => {
             >
               <ProductPropertiesUpdateForm setStage={setStage} />
             </motion.div>
-          ) :  stage == 3 ?  (
+          ) : stage == 3 ? (
+            <motion.div
+              key={"ProductProfileEntry"}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.3, ease: "linear" }}
+            >
+              <ProductPriceUpdate setStage={setStage} />
+            </motion.div>
+          ) : stage == 4 ? (
             <motion.div
               key={"ProductCoverImageUpdate"}
               initial={{ opacity: 0 }}
@@ -94,7 +113,7 @@ const ProductUpdateForm = () => {
             >
               <ProductCoverImageUpdate setStage={setStage} />
             </motion.div>
-          ) : stage == 4 ? (
+          ) : stage == 5 ? (
             <motion.div
               key={"ProductDetailsImageUpdate"}
               initial={{ opacity: 0 }}
@@ -104,7 +123,7 @@ const ProductUpdateForm = () => {
             >
               <ProductDetailsImagesUpdate setStage={setStage} />
             </motion.div>
-          ):(
+          ) : (
             <motion.div
               key={"ProductDetailsImageUpdate"}
               initial={{ opacity: 0 }}

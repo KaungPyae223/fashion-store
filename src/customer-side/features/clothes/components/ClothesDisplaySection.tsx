@@ -46,11 +46,15 @@ const ClothesDisplaySection = () => {
 };
 
 const ProductsContainer = ({ products }) => {
+
+  
   return (
     <div className="grid grid-cols-4 gap-x-3 gap-y-6">
       {products.map((product) => (
         <ProductCard
           key={product.id}
+          discount_percent={product.discount_percent}
+          discount_price={product.discount_price}
           img={product.cover_photo}
           title={product.name}
           color={product.color}

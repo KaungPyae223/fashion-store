@@ -6,13 +6,16 @@ const SearchProducts = ({ data, q }) => {
     <div className="grid grid-cols-4 gap-3">
       {data.map((SearchProduct) => (
         <SearchProductCard
+          discount_percent={SearchProduct.discount_percent}
+          discount_price={SearchProduct.discount_price}
           q={q}
           id={SearchProduct.id}
           key={SearchProduct.id}
           img={SearchProduct.cover_photo}
           brand={SearchProduct.brand}
           title={SearchProduct.name}
-          amount={SearchProduct.amount}
+          amount={SearchProduct.price}
+          
         />
       ))}
     </div>

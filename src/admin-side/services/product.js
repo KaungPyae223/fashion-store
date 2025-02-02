@@ -1,6 +1,7 @@
 import { getCookie } from "react-use-cookie";
 
 export const storeProduct = (data) => {
+
   const formData = new FormData();
 
   formData.append("type_id", data.type_id);
@@ -14,7 +15,9 @@ export const storeProduct = (data) => {
   formData.append("status", data.status);
   formData.append("gender", data.gender);
   formData.append("size_id", data.size_id);
+  formData.append("profit_percent", parseInt(data.profit_percent));
 
+  
   data.details_photos.forEach((file, index) => {
     formData.append(`details_photos[${index}]`, file);
   });
@@ -42,6 +45,7 @@ export const updateProduct = (data) => {
           color_id: data.color_id,
           name: data.name,
           price: data.price,
+          profit_percent: data.profit_percent,
           description: data.description,
           status: data.status,
           gender: data.gender,

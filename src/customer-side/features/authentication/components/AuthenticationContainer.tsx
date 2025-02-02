@@ -34,7 +34,7 @@ const AuthenticationContainer = () => {
             exit={{ x: "-140%" }}
             transition={{ duration: 0.8, ease: "easeInOut" }}
           >
-            <SignIn setTypeOfNavigation={setTypeOfNavigation} email={email} />
+            <SignIn email={email} />
           </motion.div>
         ) : (
           <motion.div
@@ -44,10 +44,7 @@ const AuthenticationContainer = () => {
             exit={{ x: "-140%" }}
             transition={{ duration: 0.8, ease: "easeInOut" }}
           >
-            <CreateAccount
-              setTypeOfNavigation={setTypeOfNavigation}
-              email={email}
-            />
+            <CreateAccount email={email} />
           </motion.div>
         )}
       </AnimatePresence>

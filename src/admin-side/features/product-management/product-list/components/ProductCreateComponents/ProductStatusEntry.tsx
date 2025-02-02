@@ -25,8 +25,8 @@ const ProductStatusEntry = ({ setStage }) => {
   const handleStatus = (data, stage) => {
     setProductStatus(data.Status);
 
-    if (stage == 4) {
-      setStage(4);
+    if (stage == 5) {
+      setStage(5);
     } else {
       router.push("/admin/product-list/create/confirm");
     }
@@ -49,7 +49,7 @@ const ProductStatusEntry = ({ setStage }) => {
 
         <div className="flex flex-row items-center justify-end w-[400px] gap-3">
           <button
-            onClick={() => setStage(4)}
+            onClick={() => setStage(5)}
             className="px-9 py-2 border border-gray-800 "
           >
             Back

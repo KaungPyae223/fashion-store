@@ -50,6 +50,8 @@ const ProductsContainer = ({ products }) => {
     <div className="grid grid-cols-3 gap-x-3 gap-y-6">
       {products.map((product) => (
         <ProductCard
+          discount_percent={product.discount_percent}
+          discount_price={product.discount_price}
           key={product.id}
           img={product.cover_photo}
           title={product.name}

@@ -1,4 +1,4 @@
-export const Register = (name, email,password) => {
+export const registerAccount = (name, email,password) => {
   return fetch(process.env.NEXT_PUBLIC_BASE_URL + "/register", {
     method: "POST",
     body: JSON.stringify({
@@ -12,3 +12,5 @@ export const Register = (name, email,password) => {
     },
   });
 };
+
+

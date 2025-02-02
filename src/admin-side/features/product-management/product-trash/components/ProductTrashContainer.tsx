@@ -2,7 +2,7 @@ import AdminPagination from "@/admin-side/components/AdminPagimation";
 import React from "react";
 import ProductTrashData from "./ProductTrashData";
 
-const ProductTrashContainer = ({products}) => {
+const ProductTrashContainer = ({ products }) => {
   return (
     <div className="mt-6">
       <table className="table-auto w-full text-left text-sm border-spacing-y-4 border-spacing-x-0">
@@ -15,20 +15,20 @@ const ProductTrashContainer = ({products}) => {
             <th className="text-start px-2">Type</th>
             <th className="text-center px-2">Gender</th>
             <th className="text-end px-2">Price</th>
-            <th className="px-4 text-start">Rating</th>
+            <th className="text-end px-2">Profit</th>
+            <th className="text-end px-2">Discount</th>
+            <th className="text-end px-2">Sell</th>
+            <th className="text-end px-2">Stock</th>
+            <th className="px-2 text-center">Status</th>
             <th className="px-2 text-center">Action</th>
           </tr>
         </thead>
         <tbody>
-          {
-            products.map((product) => (
-              <ProductTrashData key={product.id} product={product} />
-            ))
-          }
-          
+          {products.map((product) => (
+            <ProductTrashData key={product.id} product={product} />
+          ))}
         </tbody>
       </table>
-      
     </div>
   );
 };

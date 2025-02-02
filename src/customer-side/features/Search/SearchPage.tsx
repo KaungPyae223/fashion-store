@@ -39,6 +39,8 @@ const SearchPage = ({ q }) => {
     fetchHome
   );
 
+  console.log(data);
+
   return (
     <div>
       <p className="text-xl text-center my-20 tracking-wide">
@@ -53,12 +55,14 @@ const SearchPage = ({ q }) => {
             {data.data.map((SearchProduct) => (
               <SearchProductCard
                 q={q}
+                discount_percent={SearchProduct.discount_percent}
+                discount_price={SearchProduct.discount_price}
                 id={SearchProduct.id}
                 key={SearchProduct.id}
                 img={SearchProduct.cover_photo}
                 brand={SearchProduct.brand}
                 title={SearchProduct.name}
-                amount={SearchProduct.amount}
+                amount={SearchProduct.price}
               />
             ))}
           </div>

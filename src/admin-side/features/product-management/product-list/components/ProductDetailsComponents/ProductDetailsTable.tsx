@@ -1,6 +1,6 @@
 import React from "react";
 
-const ProductDetailsTable = ({data}) => {
+const ProductDetailsTable = ({ data }) => {
   return (
     <div className="p-5 bg-white">
       <p className="text-xl tracking-wider font-medium">{data.name} Info</p>
@@ -26,7 +26,19 @@ const ProductDetailsTable = ({data}) => {
               </td>
             </tr>
             <tr>
-              <td className="pe-2 pb-1 font-semibold">Price:</td>
+              <td className="pe-2 pb-1 font-semibold">Original Price:</td>
+              <td className="pb-1">{data.original_price} Ks</td>
+            </tr>
+            <tr>
+              <td className="pe-2 pb-1 font-semibold">Profit Percent:</td>
+              <td className="pb-1">{data.profit_percent} %</td>
+            </tr>
+            <tr>
+              <td className="pe-2 pb-1 font-semibold">Discount:</td>
+              <td className="pb-1">{data.discount_price} Ks</td>
+            </tr>
+            <tr>
+              <td className="pe-2 pb-1 font-semibold">Sell Price:</td>
               <td className="pb-1">{data.price} Ks</td>
             </tr>
             <tr>

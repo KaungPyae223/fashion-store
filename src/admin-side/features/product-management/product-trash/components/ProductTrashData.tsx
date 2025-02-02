@@ -33,9 +33,9 @@ const ProductTrashData = ({ product }) => {
         <div className="flex flex-row gap-3 items-center">
           <Image
             alt={product.name + " image"}
+            className="w-[70px] h-[70px] object-cover"
             width={70}
             height={70}
-            className="w-[70px] h-[70px] object-cover"
             src={product.cover_image}
           />
           <div>
@@ -64,77 +64,29 @@ const ProductTrashData = ({ product }) => {
       <td className="text-start px-2 text-gray-800">{product.brand}</td>
       <td className="text-start px-2 text-gray-800">{product.type}</td>
       <td className="text-center px-2 text-gray-800">{product.gender}</td>
-      <td className="text-end px-2 text-gray-800">{product.price} Ks</td>
-
-      <td className=" text-gray-800 px-4 text-center">
-        <div className="flex flex-row gap-2 items-center">
-          <div className="flex flex-row gap-0.5 text-gray-600">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 16 16"
-              fill="currentColor"
-              className="size-4"
-            >
-              <path
-                fillRule="evenodd"
-                d="M8 1.75a.75.75 0 0 1 .692.462l1.41 3.393 3.664.293a.75.75 0 0 1 .428 1.317l-2.791 2.39.853 3.575a.75.75 0 0 1-1.12.814L7.998 12.08l-3.135 1.915a.75.75 0 0 1-1.12-.814l.852-3.574-2.79-2.39a.75.75 0 0 1 .427-1.318l3.663-.293 1.41-3.393A.75.75 0 0 1 8 1.75Z"
-                clipRule="evenodd"
-              />
-            </svg>
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 16 16"
-              fill="currentColor"
-              className="size-4"
-            >
-              <path
-                fillRule="evenodd"
-                d="M8 1.75a.75.75 0 0 1 .692.462l1.41 3.393 3.664.293a.75.75 0 0 1 .428 1.317l-2.791 2.39.853 3.575a.75.75 0 0 1-1.12.814L7.998 12.08l-3.135 1.915a.75.75 0 0 1-1.12-.814l.852-3.574-2.79-2.39a.75.75 0 0 1 .427-1.318l3.663-.293 1.41-3.393A.75.75 0 0 1 8 1.75Z"
-                clipRule="evenodd"
-              />
-            </svg>
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 16 16"
-              fill="currentColor"
-              className="size-4"
-            >
-              <path
-                fillRule="evenodd"
-                d="M8 1.75a.75.75 0 0 1 .692.462l1.41 3.393 3.664.293a.75.75 0 0 1 .428 1.317l-2.791 2.39.853 3.575a.75.75 0 0 1-1.12.814L7.998 12.08l-3.135 1.915a.75.75 0 0 1-1.12-.814l.852-3.574-2.79-2.39a.75.75 0 0 1 .427-1.318l3.663-.293 1.41-3.393A.75.75 0 0 1 8 1.75Z"
-                clipRule="evenodd"
-              />
-            </svg>
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 16 16"
-              fill="currentColor"
-              className="size-4"
-            >
-              <path
-                fillRule="evenodd"
-                d="M8 1.75a.75.75 0 0 1 .692.462l1.41 3.393 3.664.293a.75.75 0 0 1 .428 1.317l-2.791 2.39.853 3.575a.75.75 0 0 1-1.12.814L7.998 12.08l-3.135 1.915a.75.75 0 0 1-1.12-.814l.852-3.574-2.79-2.39a.75.75 0 0 1 .427-1.318l3.663-.293 1.41-3.393A.75.75 0 0 1 8 1.75Z"
-                clipRule="evenodd"
-              />
-            </svg>
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 16 16"
-              fill="none"
-              stroke="currentColor"
-              className="size-4"
-            >
-              <path
-                fillRule="evenodd"
-                d="M8 1.75a.75.75 0 0 1 .692.462l1.41 3.393 3.664.293a.75.75 0 0 1 .428 1.317l-2.791 2.39.853 3.575a.75.75 0 0 1-1.12.814L7.998 12.08l-3.135 1.915a.75.75 0 0 1-1.12-.814l.852-3.574-2.79-2.39a.75.75 0 0 1 .427-1.318l3.663-.293 1.41-3.393A.75.75 0 0 1 8 1.75Z"
-                clipRule="evenodd"
-              />
-            </svg>
-          </div>
-          <span className="text-gray-500">(3.9)</span>
-        </div>
+      <td className="text-end px-2 text-gray-800">
+        {product.original_price} Ks
       </td>
+      <td className="text-end px-2 text-gray-800">
+        {product.profit_percent} %
+      </td>
+      <td className="text-end px-2 text-gray-800">
+        {product.discount_price} Ks
+      </td>
+      <td className="text-end px-2 text-gray-800">{product.sell_price} Ks</td>
+      <td className="text-end px-2 text-gray-800">{product.totalQty}</td>
 
+      <td className=" text-gray-800 px-2 text-center">
+        {product.status === "public" ? (
+          <div className="py-0.5 px-3 inline mx-auto text-xs rounded-full bg-green-400 text-gray-700">
+            Public
+          </div>
+        ) : (
+          <div className="py-0.5 px-3 inline mx-auto text-xs rounded-full bg-red-600 text-white">
+            Private
+          </div>
+        )}
+      </td>
       <td className="px-2">
         <div className="flex flex-row justify-center items-center gap-3">
           <Link href={"/admin/product-trash/details/" + product.id}>

@@ -62,14 +62,14 @@ const ProductDetailsImagesEntry = ({ setStage }) => {
 
       <div className="flex mt-6 flex-row items-center justify-end gap-3">
         <button
-          onClick={() => handleDetailsImageUpload(3)}
+          onClick={() => handleDetailsImageUpload(4)}
           className="px-9 py-2 border border-gray-800 "
         >
           Back
         </button>
 
         <button
-          onClick={() => handleDetailsImageUpload(5)}
+          onClick={() => handleDetailsImageUpload(6)}
           className="px-9 py-2 bg-gray-800 text-white"
         >
           Next

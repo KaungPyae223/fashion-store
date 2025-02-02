@@ -66,14 +66,14 @@ const ProductCoverImageEntry = ({ setStage }) => {
       />
       <div className="flex mt-6 flex-row items-center justify-end w-[400px] gap-3">
         <button
-          onClick={() => handleCoverImageUpload(2)}
+          onClick={() => handleCoverImageUpload(3)}
           className="px-9 py-2 border border-gray-800 "
         >
           Back
         </button>
 
         <button
-          onClick={() => handleCoverImageUpload(4)}
+          onClick={() => handleCoverImageUpload(5)}
           className="px-9 py-2 bg-gray-800 text-white"
         >
           Next

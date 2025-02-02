@@ -9,8 +9,10 @@ const Sneaker = ({ data }) => {
       <Container>
         <HomeTitle title="New Sneakers" link="footwears" />
         <div className="col-span-full grid grid-cols-3 gap-x-6">
-          {data.map((sneaker, i) => (
+          {data.map((sneaker) => (
             <ProductCard
+              discount_percent={sneaker.discount_percent}
+              discount_price={sneaker.discount_price}
               key={sneaker.id}
               img={sneaker.img}
               title={sneaker.title}

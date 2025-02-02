@@ -36,7 +36,7 @@ const BrandProductsDisplaySection = ({ name }) => {
           <Loading />
         ) : data.data && data?.data.length ? (
           <>
-            <ProductsContainer products={data.data} />
+            <ProductsContainer products={data.data} name={name} />
             <AdminPagination meta={data?.meta} />
           </>
         ) : (
@@ -47,17 +47,19 @@ const BrandProductsDisplaySection = ({ name }) => {
   );
 };
 
-const ProductsContainer = ({ products }) => {
+const ProductsContainer = ({ products, name }) => {
   return (
     <div className="grid grid-cols-4 gap-x-3 gap-y-6">
       {products.map((product) => (
         <ProductCard
           key={product.id}
+          discount_percent={product.discount_percent}
+          discount_price={product.discount_price}
           img={product.cover_photo}
           title={product.name}
           color={product.color}
           amount={product.price}
-          href={"/clothing/details/" + product.id}
+          href={"/brands/" + name + "/details/" + product.id}
         />
       ))}
     </div>

@@ -1,22 +1,29 @@
-"use client"
-import { fetchAllAds, updateAds } from "@/admin-side/services/page";
+"use client";
+import { updateAds } from "@/admin-side/services/page";
+import { fetchHome } from "@/customer-side/services/HomePage";
+import { useRevalidatedData } from "@/hooks/useRevalidatedData";
 import { useRouter } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import toast from "react-hot-toast";
+import useSWR from "swr";
 
 export const useAdsController = () => {
-  const [ads, setAds] = useState([]);
   const router = useRouter();
 
-  useEffect(() => {
-    const fetchAds = async () => {
-      const adsData = await fetchAllAds();
-      const ads = adsData.ads.split("/");
-      setAds(ads);
-    };
+  const {revalidateWithoutParam} = useRevalidatedData();
 
-    fetchAds();
-  }, []);
+  const url = process.env.NEXT_PUBLIC_BASE_URL + "/ads";
+
+  const [ads, setAds] = useState([]);
+
+  
+  const { data, isLoading, error } = useSWR(url, fetchHome);
+
+  useEffect(() => {
+    if (!isLoading) {
+      setAds(data.ads.split("/"));
+    }
+  }, [isLoading]);
 
   const HeaderAdsRef = useRef();
 
@@ -28,6 +35,7 @@ export const useAdsController = () => {
     if (ads.includes(HeaderAdsRef.current.value)) return;
 
     setAds([...ads, HeaderAdsRef.current.value]);
+    HeaderAdsRef.current.value = "";
   };
 
   const removeHeaderAds = (headerAds) => {
@@ -47,8 +55,10 @@ export const useAdsController = () => {
           toast.error(json.message);
           return;
         }
+        await revalidateWithoutParam("/ads");
         toast.success("Ads updated successfully");
         router.push("/admin/page-management");
+        
       } catch (error) {
         toast.error("An error occurred while updating the ads.");
         console.error("Error:", error);

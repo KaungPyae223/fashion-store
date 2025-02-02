@@ -16,7 +16,7 @@ const ProductUpdateConfirm = () => {
     Type,
     Color,
     Size,
-    product
+    product,
   } = useProductUpdateConfirm();
 
   return (
@@ -28,10 +28,11 @@ const ProductUpdateConfirm = () => {
         }  bg-white p-3 mt-4 mb-9`}
       >
         <ProductCard
+          href="/"
           img={product?.productCoverImage?.preview}
           title={product?.productData?.Name}
           color={Color.name}
-          amount={product?.productData?.Price}
+          amount={product?.productPrice?.SellPrice}
         />
       </div>
       <AdminSubTitle title="Product Details Sample" />
@@ -61,8 +62,17 @@ const ProductUpdateConfirm = () => {
           </tr>
           <tr>
             <td className="px-2 pb-1 font-semibold">Price:</td>
-            <td className="pb-1">{product?.productData?.Price} Ks</td>
+            <td className="pb-1">{product?.productPrice?.Price} Ks</td>
           </tr>
+          <tr>
+            <td className="px-2 pb-1 font-semibold">Profit:</td>
+            <td className="pb-1">{product?.productPrice?.Profit} %</td>
+          </tr>
+          <tr>
+            <td className="px-2 pb-1 font-semibold">Sell Price:</td>
+            <td className="pb-1">{product?.productPrice?.SellPrice} Ks</td>
+          </tr>
+
           <tr>
             <td className="px-2 pb-1 font-semibold">Category:</td>
             <td className="pb-1">{category}</td>

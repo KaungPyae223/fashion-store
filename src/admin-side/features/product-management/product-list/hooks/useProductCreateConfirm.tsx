@@ -5,9 +5,7 @@ import { useState } from "react";
 import toast from "react-hot-toast";
 
 export const useProductCreateConfirm = () => {
-  const { product} = useProductStore();
-
-  console.log(product);
+  const { product } = useProductStore();
 
   const Brand = JSON.parse(product?.productProperties?.Brand || "{}");
   const Type = JSON.parse(product?.productProperties?.Type || "{}");
@@ -20,7 +18,7 @@ export const useProductCreateConfirm = () => {
 
   const productDetailsPreviewData = {
     detailsImage: detailsImages,
-    price: product?.productData?.Price,
+    price: product?.productPrice?.SellPrice,
     color: Color.name,
     title: product?.productData?.Name,
     rating: 5,
@@ -68,12 +66,14 @@ export const useProductCreateConfirm = () => {
         name: product?.productData?.Name,
         cover_photo: product.productCoverImage.file,
         details_photos: DetailsImages,
-        price: product?.productData?.Price,
+        price: product?.productPrice?.Price,
+        profit_percent: product?.productPrice?.Profit,
         description: product?.productData?.Description,
         status: product.productStatus,
         gender: product.productData.Gender,
         size_id: Sizes.join(","),
       };
+
 
       const res = await storeProduct(data);
       const json = await res.json();
@@ -83,10 +83,8 @@ export const useProductCreateConfirm = () => {
         return;
       }
 
-      
-
       toast.success("Product created successfully");
-
+      
       router.push("/admin/product-list");
     } catch (error) {
       toast.error("An error occurred while creating the product.");

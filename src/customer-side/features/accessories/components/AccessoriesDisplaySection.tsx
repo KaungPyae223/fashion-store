@@ -2,7 +2,6 @@
 import AdminPagination from "@/admin-side/components/AdminPagimation";
 import Loading from "@/admin-side/components/Loading";
 import NoData from "@/admin-side/components/NoData";
-import Pagination from "@/customer-side/components/Pagination";
 import ProductCard from "@/customer-side/components/ProductCard";
 import SectionTitle from "@/customer-side/components/SectionTitle";
 import { fetchHome } from "@/customer-side/services/HomePage";
@@ -52,6 +51,8 @@ const ProductsContainer = ({ products }) => {
       {products.map((product) => (
         <ProductCard
           key={product.id}
+          discount_percent={product.discount_percent}
+          discount_price={product.discount_price}
           img={product.cover_photo}
           title={product.name}
           color={product.color}
