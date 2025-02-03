@@ -8,7 +8,7 @@ const Sneaker = ({ data }) => {
     <div className="pt-16 pb-6 mb-12">
       <Container>
         <HomeTitle title="New Sneakers" link="footwears" />
-        <div className="col-span-full grid grid-cols-3 gap-x-6">
+        <div className="col-span-full grid grid-cols-3 gap-6">
           {data.map((sneaker) => (
             <ProductCard
               discount_percent={sneaker.discount_percent}

@@ -9,6 +9,7 @@ const ProductTrashContainer = ({ products }) => {
         <thead>
           <tr className="text-sm text-gray-400">
             <th className="text-start px-2">Product Data</th>
+            <th className="text-start px-2">Color</th>
 
             <th className="text-start px-2">Category</th>
             <th className="text-start px-2">Brand</th>

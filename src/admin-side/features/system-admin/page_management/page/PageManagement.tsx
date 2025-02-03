@@ -5,6 +5,7 @@ import AdminSubTitle from "@/admin-side/components/AdminSubTitle";
 import Link from "next/link";
 import useSWR from "swr";
 import { fetchHome } from "@/customer-side/services/HomePage";
+import useCarouselStore from "@/admin-side/stores/useCarouselStore";
 
 const PageManagement = () => {
   const url = process.env.NEXT_PUBLIC_BASE_URL + "/ads";
@@ -12,6 +13,12 @@ const PageManagement = () => {
   const [ads, setAds] = useState([]);
 
   const { data, isLoading, error } = useSWR(url, fetchHome);
+
+  const { setResetData } = useCarouselStore();
+
+  useEffect(() => {
+    setResetData();
+  }, []);
 
   useEffect(() => {
     if (!isLoading) {
@@ -44,7 +51,7 @@ const PageManagement = () => {
           Update Ads
         </Link>
       </div>
-      <HomeCarouselController  />
+      <HomeCarouselController />
     </div>
   );
 };

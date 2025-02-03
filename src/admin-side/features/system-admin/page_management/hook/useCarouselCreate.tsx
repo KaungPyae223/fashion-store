@@ -7,7 +7,7 @@ import toast from "react-hot-toast";
 
 export const useCarouselCreate = () => {
   const [confirmText, setConfirmText] = useState<string>("");
-  const { data, setResetData } = useCarouselStore();
+  const { data } = useCarouselStore();
   const router = useRouter();
 
   const carouselCardData = {
@@ -32,7 +32,7 @@ export const useCarouselCreate = () => {
         toast.error(json.message);
         return;
       }
-      setResetData();
+      
       toast.success("Carousel created successfully");
       router.push("/admin/page-management");
     } catch (error) {

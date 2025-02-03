@@ -36,18 +36,13 @@ const ProductListData = ({ product }) => {
         <div className="flex flex-row gap-3 items-center">
           <Image
             alt={product.name + " image"}
-            className="w-[70px] h-[70px] object-cover"
+            className="min-w-[70px] max-w-[70px] min-h-[70px] max-h-[70px] object-cover"
             width={70}
             height={70}
             src={product.cover_image}
           />
           <div>
-            <div className="flex flex-row items-center gap-2">
-              <p className="font-medium text-base text-start">{product.name}</p>
-              <p className="text-gray-600 border-gray-300 text-xs px-3 py-0.5 border rounded-full">
-                {product.color}
-              </p>
-            </div>
+            <p className="font-medium text-base text-start">{product.name}</p>
 
             <div className="flex mt-2 flex-wrap justify-start gap-1">
               {product.sizes.map((size) => (
@@ -62,21 +57,28 @@ const ProductListData = ({ product }) => {
           </div>
         </div>
       </td>
+      <td className="text-start px-2 text-gray-800">
+        <p className="text-gray-600 w-fit border-gray-300 text-xs px-3 py-0.5 border rounded-full">
+          {product.color}
+        </p>
+      </td>
 
       <td className="text-start px-2 text-gray-800">{product.category}</td>
       <td className="text-start px-2 text-gray-800">{product.brand}</td>
       <td className="text-start px-2 text-gray-800">{product.type}</td>
       <td className="text-center px-2 text-gray-800">{product.gender}</td>
-      <td className="text-end px-2 text-gray-800">
+      <td className="text-end px-2 text-nowrap text-gray-800">
         {product.original_price} Ks
       </td>
       <td className="text-end px-2 text-gray-800">
         {product.profit_percent} %
       </td>
-      <td className="text-end px-2 text-gray-800">
+      <td className="text-end px-2 text-nowrap text-gray-800">
         {product.discount_price} Ks
       </td>
-      <td className="text-end px-2 text-gray-800">{product.sell_price} Ks</td>
+      <td className="text-end px-2 text-nowrap text-gray-800">
+        {product.sell_price} Ks
+      </td>
       <td className="text-end px-2 text-gray-800">{product.totalQty}</td>
 
       <td className=" text-gray-800 px-2 text-center">
