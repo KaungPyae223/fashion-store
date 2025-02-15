@@ -8,15 +8,17 @@ const Accessories = ({ data }) => {
     <div className="pt-16 pb-6 mb-12">
       <Container>
         <HomeTitle title="Accessories" link="accessories" />
-        <div className="col-span-full grid grid-cols-3 gap-x-6">
+        <div className="col-span-full grid grid-cols-4 gap-6">
           {data.map((accessory) => (
             <ProductCard
+              discount_percent={accessory.discount_percent}
+              discount_price={accessory.discount_price}
               key={accessory.id}
               img={accessory.img}
               title={accessory.title}
-              amount={accessory.amount}
               color={accessory.color}
-              href={"/accessories/details/" + accessory.id}
+              amount={accessory.amount}
+              href={"/details/" + accessory.id}
             />
           ))}
         </div>

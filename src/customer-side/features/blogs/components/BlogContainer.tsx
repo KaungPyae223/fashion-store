@@ -118,7 +118,6 @@ const BlogContainer = () => {
           {blogs.map((blog, i) => (
             <BlogCard
               img={blog.img}
-              description={blog.description}
               link={blog.link}
               date={blog.date}
               title={blog.title}

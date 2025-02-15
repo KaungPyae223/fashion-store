@@ -57,7 +57,7 @@ const ProductsContainer = ({ products }) => {
           title={product.name}
           color={product.color}
           amount={product.price}
-          href={"/footwear/details/" + product.id}
+          href={"/footwears/details/" + product.id}
         />  
       ))}
     </div>

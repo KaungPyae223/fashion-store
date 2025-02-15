@@ -14,6 +14,7 @@ export const SupportContainer = () => {
 
   const userToken = getCookie("user_token");
 
+  
   return (
     <div className="py-10">
       <Container>
@@ -64,7 +65,7 @@ export const SupportContainer = () => {
                 transition={{ ease: "easeOut", duration: 0.3 }}
                 key={"CST"}
               >
-                {!userToken ? <ContactSupportTeamSection /> : <Token />}
+                {userToken ? <ContactSupportTeamSection /> : <Token />}
               </motion.div>
             ) : (
               <motion.div

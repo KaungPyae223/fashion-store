@@ -23,8 +23,11 @@ const SearchProductCard = ({
   discount_price,
   q,
 }: SearchProductCardInterface) => {
+
+  const search = q ? q : title;
+
   return (
-    <Link href={"/search/" + q + "/details/" + id} className="relative">
+    <Link href={"/search/" + search + "/details/" + id} className="relative">
       <Image
         width={500}
         height={500}
