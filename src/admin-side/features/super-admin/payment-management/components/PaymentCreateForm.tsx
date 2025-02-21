@@ -33,7 +33,7 @@ const PaymentCreateForm = ({
       toast.success("Product created successfully");
       reset();
 
-      revalidateTag("allPayments");
+
       await revalidate("/payment");
 
       setOpenModal(false);

@@ -16,9 +16,19 @@ interface CraftProduct {
 }
 
 const CraftCard = ({
-  product: { id, name, color, size, qty, unit_price, image },
+  product: {
+    id,
+    name,
+    color,
+    size,
+    qty,
+    unit_price,
+    image,
+    original_price,
+    discount_percent,
+  },
 }: CraftProduct) => {
-  const { decreaseQty, increaseQty,removeProduct } = useCraftStore();
+  const { decreaseQty, increaseQty, removeProduct } = useCraftStore();
 
   const Product = {
     id: id,
@@ -48,7 +58,12 @@ const CraftCard = ({
       />
       <div className="flex-1">
         <div className="flex flex-row justify-between gap-5">
-          <p className="text-sm font-medium flex-1">{name}</p>
+          <div className="flex flex-row items-center gap-3">
+            <p className="text-sm font-medium flex-1">{name}</p>
+            <p className="text-xs text-gray-600 rounded-full border border-gray-500 px-1.5 py-0.5">
+                {discount_percent}% OFF
+              </p>
+          </div>
           <div onClick={handleRemoveProduct}>
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -110,7 +125,14 @@ const CraftCard = ({
               </svg>
             </div>
           </div>
-          <div className="text-sm font-semibold">{unit_price * qty} Ks</div>
+          <div className="flex flex-row gap-3">
+            {discount_percent > 0 && (
+              <div className="text-sm text-gray-500 line-through">
+                {original_price * qty}
+              </div>
+            )}
+            <div className="text-sm font-semibold">{unit_price * qty} Ks</div>
+          </div>
         </div>
       </div>
     </div>

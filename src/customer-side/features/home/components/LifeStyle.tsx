@@ -22,7 +22,7 @@ const LifeStyle = ({ data }) => {
               discount_percent={product.discount_percent}
               discount_price={product.discount_price}
               key={product.id}
-              href={"/life-style/details/" + product.id}
+              href={"/details/" + product.id}
               img={product.img}
               title={product.title}
               color={product.color}

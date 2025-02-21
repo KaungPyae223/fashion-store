@@ -9,7 +9,6 @@ import { fetchCustomer } from "@/customer-side/services/HomePage";
 import { storeOrder } from "@/customer-side/services/Order";
 import toast, { Toaster } from "react-hot-toast";
 import { useRouter } from "next/navigation";
-import { json } from "stream/consumers";
 
 const OrderInformationInput = () => {
   const [shippingInformation, setShippingInformation] = useState({
@@ -59,6 +58,14 @@ const OrderInformationInput = () => {
         return total + product.unit_price * product.qty;
       }, 0);
 
+      const totalDiscount = data.reduce((total, product) => {
+        return total + product.discount_amount * product.qty;
+      }, 0);
+
+      const totalProfit = data.reduce((total, product) => {
+        return total + product.profit_amount * product.qty;
+      }, 0);
+
       const totalQty = data.reduce((total, product) => {
         return total + product.qty;
       }, 0);
@@ -66,6 +73,7 @@ const OrderInformationInput = () => {
       const orderDetails = data.map((el) => {
         return {
           product_id: el.id,
+          product_size_id: el.product_size_id,
           size: el.size,
           unit_price: el.unit_price,
           qty: el.qty,
@@ -79,6 +87,8 @@ const OrderInformationInput = () => {
         tax: Math.ceil(subTotal * 0.05),
         total_price: subTotal + Math.ceil(subTotal * 0.05),
         total_qty: totalQty,
+        discount_amount: totalDiscount,
+        profit_amount: totalProfit,
         total_products: data.length,
         name: shippingInformation.Name,
         email: shippingInformation.Email,
@@ -87,8 +97,6 @@ const OrderInformationInput = () => {
         note: shippingInformation.Note,
         orderDetails: orderDetails,
       };
-
-      console.log(JSON.stringify(StoreData));
 
       try {
         const res = await storeOrder(StoreData);
@@ -101,7 +109,7 @@ const OrderInformationInput = () => {
         }
 
         toast.success("Product ordered successfully");
-        router.push("/");
+        router.push("/order-details/"+json.data.id);
       } catch (error) {
         toast.error("An error occurred while ordering the product.");
         console.error("Error:", error);

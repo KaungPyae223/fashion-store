@@ -9,9 +9,9 @@ import NoData from "@/admin-side/components/NoData";
 
 const AdminManagementPage = () => {
   const { handleFilter, data, isLoading, filterAdminNameRef, roleRef, error } =
-    useAdminData();
+    
+  useAdminData();
 
-    console.log(data);
 
   return (
     <div>

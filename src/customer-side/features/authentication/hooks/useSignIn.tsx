@@ -14,23 +14,30 @@ export const useSignIn = (email: string) => {
   const passwordRef = useRef();
 
   const handleSignIn = async () => {
-    isLoading(true);
+    isLoading(true); // Correctly setting the loading state
 
     const logInData = {
       email: email,
       password: passwordRef.current.value,
     };
 
-    const res = await login(logInData);
-    const json = await res.json();
+    try {
+      const res = await login(logInData);
+      const json = await res.json();
 
-    if (json.status === 200) {
-      toast.success("Log In Successful");
-      setToken(json.token);
+      if (json.status === 200) {
+        toast.success("Log In Successful");
 
-      Router.back();
-    } else {
-      toast.error(json.message);
+        setToken(json.token); 
+        Router.back();
+         
+      } else {
+        toast.error(json.message);
+      }
+    } catch (error) {
+      toast.error("Something went wrong. Please try again.");
+    } finally {
+      isLoading(false); // Ensure loading state is reset in all cases
     }
   };
 

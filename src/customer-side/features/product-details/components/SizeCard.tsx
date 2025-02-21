@@ -14,12 +14,12 @@ const SizeCard = ({
   selectedSize,
   setSelectedSize,
   setSizeName,
+  
 }: SizeCardInterface) => {
-
-    const handleSizeChange = () => {
-        setSelectedSize(id);
-        setSizeName(size);
-    }
+  const handleSizeChange = () => {
+    setSelectedSize(id);
+    setSizeName(size);
+  };
   return (
     <div
       onClick={handleSizeChange}

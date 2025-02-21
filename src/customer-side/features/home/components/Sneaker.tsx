@@ -18,7 +18,7 @@ const Sneaker = ({ data }) => {
               title={sneaker.title}
               amount={sneaker.amount}
               color={sneaker.color}
-              href={"/footwears/details/" + sneaker.id}
+              href={"/details/" + sneaker.id}
             />
           ))}
         </div>

@@ -10,7 +10,7 @@ import { storeWishList } from "@/customer-side/services/Wishlist";
 import toast, { Toaster } from "react-hot-toast";
 
 const ProductData = ({ productData }) => {
-  const { data, setStoreCraft } = useCraftStore();
+  const { setStoreCraft } = useCraftStore();
 
   const [selectedSize, setSelectedSize] = useState<number>(null);
   const [sizeName, setSizeName] = useState<string>("Select a size");
@@ -22,8 +22,13 @@ const ProductData = ({ productData }) => {
       color: productData.color,
       size: sizeName,
       image: productData.cover_image,
-      unit_price: productData.price,
+      discount_amount: productData.discount_price,
+      profit_amount: productData.profit_amount,
+      discount_percent: productData.discount_percent,
+      original_price: productData.price,
+      unit_price: productData.price - productData.discount_price,
       qty: 1,
+      product_size_id: selectedSize,
     };
 
     setStoreCraft(data);
@@ -62,7 +67,24 @@ const ProductData = ({ productData }) => {
         </div>
 
         <p className="text-gray-500 my-4 mt-6">{productData.color}</p>
-        <p className="font-medium text-lg">{productData.price} Ks</p>
+        {productData.discount_percent > 0 ? (
+          <div className="flex flex-col items-center gap-3">
+            <div className="flex flex-row items-center gap-3">
+              <p className="line-through text-gray-500">
+                {productData.price} Ks
+              </p>
+              <p className="text-sm text-gray-600 rounded-full border border-gray-500 px-3 py-0.5">
+                {productData.discount_percent}% OFF
+              </p>
+            </div>
+            <p className="font-medium text-lg">
+              {productData.price - productData.discount_price} Ks
+            </p>
+          </div>
+        ) : (
+          <p className="font-medium text-lg">{productData.price} Ks</p>
+        )}
+
         <div className="w-full mt-8">
           <div className="text-xs flex flex-row justify-between items-center">
             <p>{sizeName}</p>
@@ -87,7 +109,10 @@ const ProductData = ({ productData }) => {
         >
           Add to craft
         </button>
-        <div onClick={handleWishList} className="uppercase tracking-wider py-3 w-[300px] flex justify-center cursor-pointer mt-5 font-medium bg-slate-100 hover:text-gray-500 duration-300 text-gray-800">
+        <div
+          onClick={handleWishList}
+          className="uppercase tracking-wider py-3 w-[300px] flex justify-center cursor-pointer mt-5 font-medium bg-slate-100 hover:text-gray-500 duration-300 text-gray-800"
+        >
           Add to Wishlist
         </div>
         <div className="mt-16 mb-6 border-b border-gray-500">

@@ -1,8 +1,25 @@
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
+import { restartPassword } from "@/admin-side/services/admin";
+import toast from "react-hot-toast";
 
 const AdminTr = ({ admin }) => {
+
+  const handleRestartPassword = async () => {
+    if (window.confirm("Sure to reset password the admin " + admin.name)) {
+      
+      const result = await restartPassword(admin.user_id);
+      
+
+      if (result.ok) {
+        toast.success("Successfully reset password");
+      } else {
+        toast.error("Failed to reset password");
+      }
+    }
+  };
+
   return (
     <tr className="text-gray-800 bg-white border-y-[12px] border-y-gray-100">
       <td className="p-2 border-spacing-0">
@@ -49,6 +66,22 @@ const AdminTr = ({ admin }) => {
       </td>
       <td className="px-2">
         <div className="flex flex-row justify-center items-center gap-3">
+          <div onClick={handleRestartPassword}>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              strokeWidth={1}
+              stroke="currentColor"
+              className="size-4 cursor-pointer"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                d="M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.993 0 3.181 3.183a8.25 8.25 0 0 0 13.803-3.7M4.031 9.865a8.25 8.25 0 0 1 13.803-3.7l3.181 3.182m0-4.991v4.99"
+              />
+            </svg>
+          </div>
           <Link href={`/admin/admin-management/update/${admin.id}`}>
             <svg
               xmlns="http://www.w3.org/2000/svg"

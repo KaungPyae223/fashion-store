@@ -18,7 +18,7 @@ const Trending = ({ data }) => {
               title={product.title}
               color={product.color}
               amount={product.amount}
-              href={"clothing/details/" + product.id}
+              href={"/details/" + product.id}
             />
           ))}
         </div>

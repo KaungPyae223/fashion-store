@@ -18,7 +18,7 @@ const PasswordUpdateForm = ({
   } = useForm();
 
 
-  const handleCreateColor = async (data) => {
+  const handlePasswordChange = async (data) => {
     try {
       const res = await updatePassword(data);
       const json = await res.json();
@@ -44,7 +44,7 @@ const PasswordUpdateForm = ({
         <h2 className="text-2xl font-semibold mb-4 text-center">
           Change Password
         </h2>
-        <form onSubmit={handleSubmit(handleCreateColor)} className="my-4">
+        <form onSubmit={handleSubmit(handlePasswordChange)} className="my-4">
           <AdminInput
             register={register}
             errors={errors}

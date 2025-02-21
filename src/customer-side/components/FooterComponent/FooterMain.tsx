@@ -4,25 +4,26 @@ import FooterLink from "./FooterLink";
 import { HiHome, HiPhone, HiEnvelope, HiClock } from "react-icons/hi2";
 
 const FooterMain = () => {
-  const abut: string[] = [
-    "Our Purpose",
-    "Careers",
-    "Affiliates",
-    "Press",
-    "Stores",
+  const abut: { name: string; link: string }[] = [
+    { name: "Our Purpose", link: "/" },
+    { name: "Careers", link: "/" },
+    { name: "Affiliates", link: "/" },
+    { name: "Press", link: "/" },
+    { name: "Stores", link: "/" },
   ];
-  const customerServices: string[] = [
-    "Help",
-    "FAQ",
-    "Shipping",
-    "Payment",
-    "Return",
-    "Your Order",
+  const customerServices: { name: string; link: string }[] = [
+    { name: "Help", link: "/" },
+    { name: "FAQ", link: "/" },
+    { name: "Shipping", link: "/" },
+    { name: "Payment", link: "/" },
+    { name: "Return", link: "/" },
+    { name: "Your Order", link: "/" },
   ];
-  const policies: string[] = [
-    "Terms & Conditions",
-    "Privacy Policy",
-    "Other Policies",
+
+  const policies: { name: string; link: string }[] = [
+    { name: "Terms & Conditions", link: "/" },
+    { name: "Privacy Policy", link: "/privacy-policy" },
+    { name: "Other Policies", link: "/" },
   ];
 
   return (

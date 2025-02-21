@@ -2,9 +2,11 @@
 import Lottie from "lottie-react";
 import React from "react";
 import AdminWelcome from "@/assets/AdminWelcome.json";
+import { getCookie } from "react-use-cookie";
 
 const DefaultPage = () => {
-  
+  const admintoken = getCookie("token");
+  console.log(admintoken);
 
   return (
     <div

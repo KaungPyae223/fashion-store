@@ -18,7 +18,7 @@ const DeliveryContainer = ({ deliveries }) => {
         </thead>
         <tbody>
           {deliveries.map((delivery) => (
-            <DeliveryTr key={delivery.id} delivery={delivery} />
+            <DeliveryTr  key={delivery.id} delivery={delivery} />
           ))}
         </tbody>
       </table>

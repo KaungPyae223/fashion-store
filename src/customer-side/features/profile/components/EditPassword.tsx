@@ -3,6 +3,8 @@ import SectionTitle from "@/customer-side/components/SectionTitle";
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import ValidOrNot from "../../authentication/components/ValidOrNot";
+import toast, { Toaster } from "react-hot-toast";
+import { updatePassword } from "@/customer-side/services/Customer";
 
 const EditPassword = () => {
   const [validations, setValidations] = useState({
@@ -26,14 +28,35 @@ const EditPassword = () => {
     register,
     handleSubmit,
     formState: { errors },
+    reset,
   } = useForm();
 
-  const handleEditPassword = (data) => {};
+  const handlePasswordUpdate = async (data) => {
+    try {
+      const res = await updatePassword(data);
+      const json = await res.json();
+
+      if (res.status !== 200) {
+        toast.error(json.message);
+        return;
+      }
+
+      toast.success("Password Updated successfully");
+      reset();
+    } catch (error) {
+      toast.error("An error occurred while updating the password.");
+      console.error("Error:", error);
+    }
+  };
 
   return (
     <div>
+      <Toaster/>
       <SectionTitle title="Edit Password" />
-      <form className="max-w-[400px]" onSubmit={handleSubmit(handleEditPassword)}>
+      <form
+        className="max-w-[400px]"
+        onSubmit={handleSubmit(handlePasswordUpdate)}
+      >
         <div className="mb-6 ">
           <p className="uppercase font-medium text-sm">Old Password *</p>
           <input

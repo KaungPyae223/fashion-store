@@ -3,6 +3,7 @@ import React from "react";
 
 import { AnimatePresence, motion } from "motion/react";
 import { useSignIn } from "../hooks/useSignIn";
+import { Toaster } from "react-hot-toast";
 
 interface SignInInterface {
   email: string;
@@ -13,6 +14,7 @@ const SignIn = ({ email }: SignInInterface) => {
 
   return (
     <div>
+      <Toaster/>
       <p className="uppercase text-xl text-center tracking-wider mb-10">
         Log in
       </p>

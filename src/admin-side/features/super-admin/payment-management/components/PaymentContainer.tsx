@@ -16,7 +16,7 @@ const PaymentContainer = ({payments}) => {
         </thead>
         <tbody>
           {payments.map((payment) => (
-            <PaymentTr payment={payment}/>
+            <PaymentTr key={payment.id} payment={payment}/>
           ))}
         </tbody>
       </table>

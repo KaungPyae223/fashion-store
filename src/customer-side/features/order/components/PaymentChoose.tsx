@@ -29,7 +29,7 @@ const PaymentChoose = ({ setPaymentID, setCompleteForm, completeForm }) => {
         <p className="font-semibold uppercase tracking-widest">Payment</p>
       </div>
       <div className="p-7">
-        {!isLoading &&
+        {!isLoading && data.length>0 &&
           data.map((payment) => (
             <DeliveryRadio
               label={payment.name}

@@ -15,10 +15,14 @@ const OrderPage = () => {
   const { data } = useCraftStore();
 
   const subTotal = data.reduce((total, product) => {
-    return total + product.unit_price * product.qty;
+    return total + product.original_price * product.qty;
   }, 0);
 
-  const tax = Math.ceil(subTotal * 0.05);
+  const discountTotal = data.reduce((total, product) => {
+    return total + product.discount_amount * product.qty;
+  }, 0);
+
+  const tax = Math.ceil((subTotal - discountTotal) * 0.05);
 
   if (!token) {
     Router.push("/authentication");
@@ -63,7 +67,7 @@ const OrderPage = () => {
         </div>
         <div className="grid col-span-full grid-cols-2 mt-3 gap-20">
           <OrderInformationInput />
-          <OrderSummary subTotal={subTotal} tax={tax} data={data} />
+          <OrderSummary subTotal={subTotal} discountTotal={discountTotal} tax={tax} data={data} />
         </div>
       </Container>
     </div>

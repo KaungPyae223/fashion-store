@@ -35,7 +35,6 @@ const CreateDeliveryForm = ({
         toast.error(json.message);
         return;
       }
-      revalidateTag("delivery");
       toast.success("Product created successfully");
       reset();
 

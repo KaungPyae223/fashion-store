@@ -24,3 +24,20 @@ export const askQuestion = (data) => {
     body: JSON.stringify(data),
   });
 };
+
+export const updatePassword = (data) => {
+
+  
+  return fetch(process.env.NEXT_PUBLIC_BASE_URL + "/customer/change-password", {
+    method: "POST",
+    body: JSON.stringify({
+      old_password: data.oldPassword,
+      new_password: data.newPassword,
+    }),
+    headers: {
+      "Content-Type": "application/json",
+      Accept: "application/json",
+      Authorization: `Bearer ${getCookie("user_token")}`,
+    },
+  });
+};

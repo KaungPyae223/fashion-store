@@ -6,6 +6,7 @@ import Lottie from "lottie-react";
 import CraftAnimation from "@/assets/CraftAnimation.json";
 import useCraftStore from "@/customer-side/stores/useCraftStore";
 import { useRouter } from "next/navigation";
+import { getCookie } from "react-use-cookie";
 
 interface CraftInterface {
   setOpenCraft: React.Dispatch<SetStateAction<boolean>>;
@@ -17,16 +18,24 @@ const Craft = ({ setOpenCraft }: CraftInterface) => {
   const router = useRouter();
 
   const subTotal = data.reduce((total, product) => {
-    return total + product.unit_price * product.qty;
+    return total + product.original_price * product.qty;
+  }, 0);
+
+  const discountTotal = data.reduce((total, product) => {
+    return total + product.discount_amount * product.qty;
   }, 0);
 
   const routeOrder = () => {
-    if (data.length > 0) {
+    const user_token = getCookie("user_token");
+
+    if (data.length > 0 && user_token) {
       router.push("/order");
+    } else {
+      router.push("/authentication");
     }
   };
 
-  const tax = Math.ceil(subTotal * 0.05);
+  const tax = Math.ceil((subTotal - discountTotal) * 0.05);
 
   return (
     <div className="h-screen flex flex-col z-50 bg-white w-[390px]">
@@ -64,16 +73,22 @@ const Craft = ({ setOpenCraft }: CraftInterface) => {
       </div>
       <div className="mt-auto p-5 border-t">
         <div className="flex items-center mb-1 text-sm justify-between">
-          <p>Subtotal:</p>
+          <p>Sub total:</p>
           <p>{subTotal} Ks</p>
         </div>
+        <div className="flex items-center mb-1 text-sm justify-between">
+          <p>Discount total:</p>
+          <p>{discountTotal} Ks</p>
+        </div>
+
         <div className="flex items-center mb-3 text-sm justify-between">
           <p>Tax:</p>
           <p>{tax} Ks</p>
         </div>
+
         <div className="flex items-center font-medium mb-6 justify-between">
           <p>Total:</p>
-          <p>{subTotal + tax} Ks</p>
+          <p>{subTotal + tax - discountTotal} Ks</p>
         </div>
         <div
           onClick={routeOrder}

@@ -8,7 +8,7 @@ import EditPassword from "./EditPassword";
 import OrderInformation from "./OrderInformation";
 import OrderHistory from "./OrderHistory";
 import { AnimatePresence, motion } from "motion/react";
-import reactUseCookie from "react-use-cookie";
+import reactUseCookie, { removeCookie } from "react-use-cookie";
 import { useRouter } from "next/navigation";
 import { fetchCustomer } from "@/customer-side/services/HomePage";
 import useSWR from "swr";
@@ -28,6 +28,11 @@ const ProfileSectionContainer = () => {
     process.env.NEXT_PUBLIC_BASE_URL + "/customer-data",
     fetchCustomer
   );
+
+  
+  if (data?.message === "Unauthenticated.") {
+    router.push("/authentication");
+  }
 
   return (
     !isLoading && (

@@ -35,6 +35,19 @@ export const updatePassword = (data) => {
   });
 };
 
+export const restartPassword = (id) => {
+  return fetch(
+    process.env.NEXT_PUBLIC_BASE_URL + "/admin/restart-password/" + id,
+    {
+      method: "POST",
+      headers: {
+        Accept: "application/json",
+        Authorization: `Bearer ${getCookie("token")}`,
+      },
+    }
+  );
+};
+
 export const logOut = () => {
   return fetch(process.env.NEXT_PUBLIC_BASE_URL + "/logout", {
     method: "POST",
