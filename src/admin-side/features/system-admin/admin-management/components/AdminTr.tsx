@@ -5,12 +5,9 @@ import { restartPassword } from "@/admin-side/services/admin";
 import toast from "react-hot-toast";
 
 const AdminTr = ({ admin }) => {
-
   const handleRestartPassword = async () => {
     if (window.confirm("Sure to reset password the admin " + admin.name)) {
-      
       const result = await restartPassword(admin.user_id);
-      
 
       if (result.ok) {
         toast.success("Successfully reset password");
@@ -57,6 +54,10 @@ const AdminTr = ({ admin }) => {
         ) : admin.role === "System Admin" ? (
           <div className="text-sm bg-stone-400 px-4 py-1 rounded-full w-fit mx-auto">
             System Admin
+          </div>
+        ) : admin.role === "Blog Management" ? (
+          <div className="text-sm bg-orange-400 px-4 py-1 rounded-full w-fit mx-auto">
+            Blog Management
           </div>
         ) : (
           <div className="text-sm border border-gray-400 px-4 py-1 rounded-full w-fit mx-auto">

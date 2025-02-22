@@ -13,7 +13,7 @@ const RatingContainer = ({
   id: string;
   ratingData: any;
 }) => {
-  const rating = ratingData.average?.toFixed(1)? ratingData.average.toFixed(1):0;
+  const rating = ratingData.average?.toFixed(1) || "0";
 
   const [page, setPage] = useState(`1`);
 

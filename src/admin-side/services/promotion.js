@@ -15,3 +15,18 @@ export const makePromotion = (id, startDate, endDate, discount) => {
     },
   });
 };
+
+export const deletePromotion = (id) => {
+  return fetch(
+    process.env.NEXT_PUBLIC_BASE_URL + "/product/delete-promotion/" + id,
+    {
+      method: "PUT",
+
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json",
+        Authorization: `Bearer ${getCookie("token")}`,
+      },
+    }
+  );
+};

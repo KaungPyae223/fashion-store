@@ -122,7 +122,7 @@ const Rating = ({
         ></div>
       </div>
       <div className=" text-sm flex flex-row items-center justify-start">
-        <div className=" flex w-9 flex-row text-gray-700 font-medium items-center justify-start">
+        <div className=" flex w-9 text-nowrap flex-row text-gray-700 font-medium items-center justify-start">
           {percent} %
         </div>
         <div className="ms-3 text-gray-500">( {totalRaters} reviews )</div>

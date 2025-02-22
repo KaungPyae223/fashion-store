@@ -26,5 +26,12 @@ export const useRevalidatedData = () => {
     [baseURL]
   );
 
-  return { revalidate, revalidateWithoutParam };
+  const revalidateURL = useCallback(
+    async (url) => {
+      await mutate(url);
+    },
+    [baseURL]
+  );
+
+  return { revalidate, revalidateWithoutParam, revalidateURL };
 };

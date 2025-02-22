@@ -30,8 +30,11 @@ const ProductReviewTable = ({ data, url }) => {
 };
 
 const ReviewTr = ({ data, url }) => {
+
+  console.log(url);
+
   const { formatDate } = useFormatDate();
-  const { revalidate } = useRevalidatedData();
+  const { revalidateURL } = useRevalidatedData();
 
   const deleteRating = async () => {
     if (window.confirm("Sure to delete?")) {
@@ -43,7 +46,7 @@ const ReviewTr = ({ data, url }) => {
         return;
       }
 
-      await revalidate(url);
+      await revalidateURL(url);
     }
   };
 

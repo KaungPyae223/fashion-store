@@ -22,8 +22,6 @@ const ProductPromotionContainer = ({
             <th className="text-end px-2">Profit</th>
             <th className="text-end px-2">Promotion</th>
             <th className="text-end px-2">Current Price</th>
-
-            <th className="text-end px-2">Action</th>
           </tr>
         </thead>
         <tbody>
