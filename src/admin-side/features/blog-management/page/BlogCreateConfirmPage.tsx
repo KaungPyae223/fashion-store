@@ -2,70 +2,74 @@
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import useBlogStore from "@/admin-side/stores/useBlogStore";
+import { storeBlog } from "@/admin-side/services/blog";
 import React from "react";
+import { useRevalidatedData } from "@/hooks/useRevalidatedData";
+import toast, { Toaster } from "react-hot-toast";
 
 const BlogCreateConfirmPage = () => {
   const { data } = useBlogStore();
   const router = useRouter();
+  const { revalidate } = useRevalidatedData();
 
-  const handleSubmit = () => {
-    // Simulate sending data to an API
-    console.log("Submitting Blog:", data);
-    alert("Blog submitted successfully!");
+  const handleSubmit = async () => {
+    try {
+      const res = await storeBlog(data);
+      const json = await res.json();
 
-    // Redirect to blog list after submission
-    router.push("/admin/blog-list");
+      if (res.status !== 201) {
+        toast.error(json.message);
+        return;
+      }
+      await revalidate("/blog");
+      toast.success("Blog created successfully");
+
+      router.push("/admin/blog-list")
+
+    } catch (error) {
+      toast.error("An error occurred while creating blog.");
+      console.error("Error:", error);
+    }
   };
 
   return (
     <div className="max-w-3xl mx-auto p-6 bg-white shadow-md mt-6">
-      <h1 className="text-2xl font-bold text-gray-800 mb-6">Confirm Your Blog</h1>
-
-      {/* Blog Title */}
-      <div className="mb-6">
-        <h2 className="text-xl font-semibold text-gray-700">Title:</h2>
-        <p className="text-gray-600">{data.title || "No title provided"}</p>
-      </div>
-
-      {/* Blog Image */}
+      <Toaster />
       {data.image && (
         <div className="mb-6">
-          <h2 className="text-xl font-semibold text-gray-700">Blog Image:</h2>
           <Image
             src={URL.createObjectURL(data.image)}
             width={400}
             height={250}
             alt="Blog Image"
-            className="rounded-lg shadow-md object-cover"
+            className="shadow-md object-cover w-full max-h-[400px]"
           />
         </div>
       )}
+      <div className="mb-6">
+        <p className="text-gray-800 text-3xl font-semibold">
+          {data.title || "No title provided"}
+        </p>
+      </div>
 
       {/* Blog Content */}
       <div className="mb-6">
-        <h2 className="text-xl font-semibold text-gray-700">Content:</h2>
-        <div className="p-4 border border-gray-300 rounded-md bg-gray-100">
+        <div>
           <p
-            dangerouslySetInnerHTML={{ __html: data.content || "No content provided" }}
-            className="text-gray-600"
+            dangerouslySetInnerHTML={{
+              __html: data.content || "No content provided",
+            }}
           ></p>
         </div>
       </div>
 
       {/* Action Buttons */}
-      <div className="flex justify-between">
-        <button
-          onClick={() => router.push("/blog-list/create")}
-          className="px-6 py-2 bg-gray-500 text-white rounded shadow-md hover:bg-gray-600 transition"
-        >
-          Edit
-        </button>
-
+      <div className="flex justify-end">
         <button
           onClick={handleSubmit}
-          className="px-6 py-2 bg-green-600 text-white rounded shadow-md hover:bg-green-700 transition"
+          className="px-6 py-2 bg-gray-800 text-white shadow-md transition"
         >
-          Confirm & Submit
+          Confirm
         </button>
       </div>
     </div>

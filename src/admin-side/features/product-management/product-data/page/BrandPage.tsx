@@ -19,7 +19,7 @@ const BrandPage = () => {
     isLoading,
     openModal,
     setOpenModal,
-    filterBrandRef,
+    filterBlogRef,
     error,
   } = useBrandData();
 
@@ -93,7 +93,7 @@ const BrandPage = () => {
               Brand Name
             </label>
             <input
-              ref={filterBrandRef}
+              ref={filterBlogRef}
               id="search"
               type="text"
               className="border border-gray-300  px-3 py-2 outline-none h-10 w-[250px]"

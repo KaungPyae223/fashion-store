@@ -1,9 +1,16 @@
 "use client";
 
+import AdminPagination from "@/admin-side/components/AdminPagimation";
+import Loading from "@/admin-side/components/Loading";
+import NoData from "@/admin-side/components/NoData";
 import Link from "next/link";
 import React from "react";
+import { useBlogData } from "../hooks/useBlogData";
+import BlogContainer from "../components/BlogContainer";
 
 const BlogListPage = () => {
+  const { handleFilter, data, isLoading, filterBlogRef, error } = useBlogData();
+
   return (
     <div>
       <div className="flex flex-row justify-between border-b pb-6">
@@ -36,18 +43,14 @@ const BlogListPage = () => {
               Blog Name
             </label>
             <input
-              
               id="search"
               type="text"
+              ref={filterBlogRef}
               className="border border-gray-300  px-3 py-2 outline-none h-10 w-[250px]"
             />
           </div>
-          
 
-          <div
-            
-            className="flex flex-row h-10 mt-auto cursor-pointer justify-center items-center gap-2 p-3 text-sm  text-gray-700 border bg-gray-300 hover:border-gray-800 duration-300"
-          >
+          <div onClick={handleFilter} className="flex flex-row h-10 mt-auto cursor-pointer justify-center items-center gap-2 p-3 text-sm  text-gray-700 border bg-gray-300 hover:border-gray-800 duration-300">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
@@ -66,6 +69,16 @@ const BlogListPage = () => {
           </div>
         </div>
       </div>
+      {isLoading ? (
+        <Loading />
+      ) : data.data && data?.data.length ? (
+        <>
+          <BlogContainer data={data.data} />
+          <AdminPagination meta={data?.meta} />
+        </>
+      ) : (
+        <NoData />
+      )}
     </div>
   );
 };
