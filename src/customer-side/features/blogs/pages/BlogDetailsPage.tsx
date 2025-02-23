@@ -26,8 +26,7 @@ const BlogDetailsPage = ({ id }) => {
     fetchBlog();
   }, []);
 
-  console.log(blog);
-
+  
   return (
     blog && (
       <div className="max-w-3xl mx-auto p-6 my-12 bg-white shadow-md ">

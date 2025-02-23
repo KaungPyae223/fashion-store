@@ -10,20 +10,20 @@ import useSWR from "swr";
 export const useAdsController = () => {
   const router = useRouter();
 
-  const {revalidateWithoutParam} = useRevalidatedData();
-
   const url = process.env.NEXT_PUBLIC_BASE_URL + "/ads";
 
   const [ads, setAds] = useState([]);
 
-  
-  const { data, isLoading, error } = useSWR(url, fetchHome);
-
   useEffect(() => {
-    if (!isLoading) {
-      setAds(data.ads.split("/"));
-    }
-  }, [isLoading]);
+    const fetchAds = async () => {
+      const res = await fetch(url);
+      const json = await res.json();
+
+      setAds(json.ads.split("/"));
+    };
+
+    fetchAds();
+  }, []);
 
   const HeaderAdsRef = useRef();
 
@@ -55,10 +55,8 @@ export const useAdsController = () => {
           toast.error(json.message);
           return;
         }
-        await revalidateWithoutParam("/ads");
         toast.success("Ads updated successfully");
         router.push("/admin/page-management");
-        
       } catch (error) {
         toast.error("An error occurred while updating the ads.");
         console.error("Error:", error);

@@ -4,7 +4,7 @@ import useProductStore from "@/admin-side/stores/useProductStore";
 import BreadCrumb from "@/customer-side/components/BreadCrumb";
 import Link from "next/link";
 import React, { useEffect } from "react";
-import useSWR from "swr";
+
 import ProductUpdateForm from "../components/ProductUpdateComponents/ProductUpdateForm";
 
 const ProductUpdatePage = ({ id }: { id: string }) => {
@@ -17,11 +17,11 @@ const ProductUpdatePage = ({ id }: { id: string }) => {
 
   const url = `${baseUrl}/product/details-data/${id}`;
 
-  const { data, isLoading, error } = useSWR(url, fetchProduct);
-
   useEffect(() => {
-    if (!isLoading) {
+    const fetchProductData = async () => {
       if (productData.Name === null) {
+        const data = await fetchProduct(url);
+       
         const product = {
           productID: data.data.id,
           productData: {
@@ -56,8 +56,10 @@ const ProductUpdatePage = ({ id }: { id: string }) => {
 
         setUpdateProductData(product);
       }
-    }
-  }, [isLoading]);
+    };
+
+    fetchProductData();
+  }, []);
 
   return (
     <div>

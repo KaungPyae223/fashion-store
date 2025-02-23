@@ -1,5 +1,6 @@
 import { storeCarousel } from "@/admin-side/services/page";
 import useCarouselStore from "@/admin-side/stores/useCarouselStore";
+import { useRevalidatedData } from "@/hooks/useRevalidatedData";
 import { useRouter } from "next/navigation";
 
 import { useState } from "react";
@@ -32,7 +33,6 @@ export const useCarouselCreate = () => {
         toast.error(json.message);
         return;
       }
-      
       toast.success("Carousel created successfully");
       router.push("/admin/page-management");
     } catch (error) {

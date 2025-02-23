@@ -1,22 +1,22 @@
+"use client";
 import AdminSubTitle from "@/admin-side/components/AdminSubTitle";
 import React, { useEffect, useState } from "react";
 import HomeCarouselPreview from "./HomeCarouselPreview.tsx";
 import Link from "next/link.js";
-import useSWR from "swr";
-import { fetchHome } from "@/customer-side/services/HomePage.js";
 
 const HomeCarouselController = () => {
   const url = process.env.NEXT_PUBLIC_BASE_URL + "/carousels";
 
   const [carouselData, setCarousel] = useState([]);
 
-  const { data, isLoading, error } = useSWR(url, fetchHome);
-
   useEffect(() => {
-    if (!isLoading) {
-      setCarousel(data);
-    }
-  }, [isLoading]);
+    const fetchBlog = async () => {
+      const res = await fetch(url);
+      const json = await res.json();
+      setCarousel(json);
+    };
+    fetchBlog();
+  }, []);
 
   return (
     <div className="mt-6">

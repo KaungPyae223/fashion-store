@@ -29,9 +29,11 @@ const AdminNav = () => {
 
   const [check, setCheck] = useState(true);
 
-  
+
   useEffect(() => {
-    if (!isLoading) {
+    const fetchAdminData = async () => {
+      const data = await fetchAdmin(process.env.NEXT_PUBLIC_BASE_URL + "/admin-data");
+
       if (data?.admin) {
         setAdmin(data.admin);
         setCheck(false);
@@ -39,8 +41,11 @@ const AdminNav = () => {
         toast.error(data.message);
         router.push("/admin-log-in");
       }
-    }
-  }, [isLoading]);
+    };
+
+    fetchAdminData();
+
+  }, []);
 
   return (
     <div className="h-screen overflow-y-auto scrollbar-hide p-5 w-[300px] shadow flex flex-col">

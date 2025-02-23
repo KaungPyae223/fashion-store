@@ -12,19 +12,20 @@ const PageManagement = () => {
 
   const [ads, setAds] = useState([]);
 
-  const { data, isLoading, error } = useSWR(url, fetchHome);
-
   const { setResetData } = useCarouselStore();
 
   useEffect(() => {
     setResetData();
-  }, []);
 
-  useEffect(() => {
-    if (!isLoading) {
-      setAds(data.ads.split("/"));
-    }
-  }, [isLoading]);
+    const fetchAds = async () => {
+      const res = await fetch(url);
+      const json = await res.json();
+
+      setAds(json.ads.split("/"));
+    };
+
+    fetchAds();
+  }, []);
 
   return (
     <div>

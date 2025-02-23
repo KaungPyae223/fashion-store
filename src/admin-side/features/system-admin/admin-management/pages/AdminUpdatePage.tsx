@@ -8,10 +8,7 @@ import { IoCameraSharp } from "react-icons/io5";
 import { BsPersonFillCheck } from "react-icons/bs";
 import AdminDataUpdate from "../components/adminUpdate/AdminDataUpdate";
 import { fetchAdmin } from "@/admin-side/services/admin";
-import useSWR from "swr";
-import { pre } from "motion/react-client";
 import useAdminStore from "@/admin-side/stores/useAdminStore";
-import Loading from "@/admin-side/components/Loading";
 import AdminPhotoEntry from "../components/adminCreate/AdminPhotoEntry";
 import AdminRoleUpdate from "../components/adminUpdate/adminRoleUpdate";
 import AdminUpdateConfirm from "../components/adminUpdate/AdminUpdateConfirm";
@@ -24,10 +21,9 @@ const AdminUpdatePage = ({ id }: { id: string }) => {
 
   const url = `${baseUrl}/admin/${id}`;
 
-  const { data, isLoading, error } = useSWR(url, fetchAdmin);
-
   useEffect(() => {
-    if (!isLoading) {
+    const fetchAdminData = async () => {
+      const data = await fetchAdmin(url);
       const adminData = {
         admin: {
           name: data.data.name,
@@ -43,12 +39,9 @@ const AdminUpdatePage = ({ id }: { id: string }) => {
       };
       setStage(1);
       setAdmin(adminData);
-    }
-  }, [isLoading]);
-
-  if (isLoading) {
-    return <Loading />;
-  }
+    };
+    fetchAdminData();
+  }, []);
 
   return (
     <div className="mt-16 flex flex-row gap-12 scrollbar-hide">
