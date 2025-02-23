@@ -4,9 +4,7 @@ import Image from "next/image";
 import { useRouter } from "next/navigation";
 import React, { useEffect, useState } from "react";
 
-const BlogDetailsPage = ({ blog }) => {
-  
-
+const BlogDetailsPage = ({ id }) => {
   const { formatDate } = useFormatDate();
 
   const route = useRouter();
@@ -15,8 +13,23 @@ const BlogDetailsPage = ({ blog }) => {
     route.back();
   };
 
+  const [blog, setBlog] = useState();
+
+  useEffect(() => {
+    const fetchBlog = async () => {
+      const res = await fetch(
+        `${process.env.NEXT_PUBLIC_BASE_URL}/get-blog-details/${id}`
+      );
+      const json = await res.json();
+      setBlog(json);
+    };
+    fetchBlog();
+  }, []);
+
+  console.log(blog);
+
   return (
-    
+    blog && (
       <div className="max-w-3xl mx-auto p-6 my-12 bg-white shadow-md ">
         <div className="mb-5 flex flex-row justify-between items-center">
           <div
@@ -73,7 +86,7 @@ const BlogDetailsPage = ({ blog }) => {
           </div>
         </div>
       </div>
-    
+    )
   );
 };
 

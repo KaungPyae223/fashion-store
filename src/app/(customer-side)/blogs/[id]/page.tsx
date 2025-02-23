@@ -57,12 +57,11 @@ export async function generateMetadata({
   };
 }
 
-const page = async ({ params: { id } }: { params: { id: string } }) => {
-  const blog = await fetchBlogData(id);
-
+const page =  ({ params: { id } }: { params: { id: string } }) => {
+  
   return (
     <div>
-      <BlogDetailsPage blog={blog} />
+      <BlogDetailsPage id={id} />
     </div>
   );
 };
