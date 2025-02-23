@@ -10,6 +10,14 @@ const useBlogStore = create((set) => ({
     set({
       data: newData,
     }),
+  resetBlog: () =>
+    set({
+      data: {
+        content: "",
+        title: "",
+        image: null,
+      },
+    }),
 }));
 
 export default useBlogStore;

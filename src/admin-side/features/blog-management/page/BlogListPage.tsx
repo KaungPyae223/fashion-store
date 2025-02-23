@@ -4,12 +4,19 @@ import AdminPagination from "@/admin-side/components/AdminPagimation";
 import Loading from "@/admin-side/components/Loading";
 import NoData from "@/admin-side/components/NoData";
 import Link from "next/link";
-import React from "react";
+import React, { useEffect } from "react";
 import { useBlogData } from "../hooks/useBlogData";
 import BlogContainer from "../components/BlogContainer";
+import useBlogStore from "@/admin-side/stores/useBlogStore";
 
 const BlogListPage = () => {
   const { handleFilter, data, isLoading, filterBlogRef, error } = useBlogData();
+
+  const {resetBlog} = useBlogStore();
+
+  useEffect(() => {
+    resetBlog();
+  }, []);
 
   return (
     <div>

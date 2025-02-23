@@ -25,9 +25,9 @@ async function fetchProductData(id: string) {
 }
 
 export async function generateMetadata({
-  params: { id },
+  params: { id,name },
 }: {
-  params: { id: string };
+  params: { id: string,name:string };
 }) {
   const product = await fetchProductData(id);
 
@@ -37,7 +37,7 @@ export async function generateMetadata({
     openGraph: {
       title: product.DetailsData.title,
       description: product.DetailsData.description,
-      url: `https://alexa.com.mm/accessories/details/${product.DetailsData.id}`,
+      url: `https://alexa.com.mm/brands/${name}/details/${product.DetailsData.id}`,
       images: [
         {
           url: product.DetailsData.cover_image,

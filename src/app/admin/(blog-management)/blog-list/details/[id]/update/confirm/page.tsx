@@ -1,5 +1,5 @@
 import AdminCheck from "@/admin-side/components/AdminCheck";
-import BlogDetailsPage from "@/admin-side/features/blog-management/page/BlogDetailsPage";
+import BlogUpdateConfirmPage from "@/admin-side/features/blog-management/page/BlogUpdateConfirmPage";
 import BreadCrumb from "@/customer-side/components/BreadCrumb";
 import Link from "next/link";
 import React from "react";
@@ -9,7 +9,7 @@ const page = ({ params: { id } }: { params: { id: string } }) => {
     <div>
       <div className="flex flex-row justify-between items-center border-b pb-4">
         <Link
-          href={"/admin/blog-list"}
+          href={"/admin/blog-list/details/"+id+"/update"}
           className="flex flex-row items-center gap-3 py-3 px-6 cursor-pointer hover:border-gray-800 duration-300 border border-gray-300"
         >
           <svg
@@ -30,15 +30,19 @@ const page = ({ params: { id } }: { params: { id: string } }) => {
         </Link>
 
         <div className="flex flex-col items-center">
-          <p className="text-xl tracking-wide mb-3">Blog Details</p>
+          <p className="text-xl tracking-wide mb-3">Confirm Blog</p>
           <BreadCrumb
-            previousSection={[{ link: "/admin/blog-list", title: "Blog List" }]}
-            title="Details"
+            previousSection={[
+              { link: "/admin/blog-list", title: "Blog List" },
+              { link: "/admin/blog-list/details/"+id, title: "Details" },
+              { link: "/admin/blog-list/details/"+id+"/update", title: "Update" }
+            ]}
+            title="Confirm"
           />
         </div>
       </div>
       <AdminCheck allow={"Blog Management"}>
-        <BlogDetailsPage id={id} />
+        <BlogUpdateConfirmPage  />
       </AdminCheck>
     </div>
   );

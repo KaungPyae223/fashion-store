@@ -22,9 +22,9 @@ const HomePage = () => {
   }
     `;
 
-  
-
   const { data, isLoading, error } = useSWR(url, fetchHome);
+
+  
 
   if (isLoading) {
     return <Loading />;
@@ -39,7 +39,8 @@ const HomePage = () => {
         {data?.trending && <Trending data={data.trending} />}
         {data?.accessories && <Accessories data={data.accessories} />}
         {data?.lifeStyle && <LifeStyle data={data.lifeStyle} />}
-        <HomeBlog />
+        {data?.blogs && <HomeBlog  data={data.blogs} />}
+              
       </div>
     );
   }
