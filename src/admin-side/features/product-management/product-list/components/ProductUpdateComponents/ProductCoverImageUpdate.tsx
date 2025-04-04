@@ -41,7 +41,7 @@ const ProductCoverImageUpdate = ({ setStage }) => {
             src={coverImage.preview}
             width={280}
             height={280}
-            className="w-[400px] h-[300px] object-cover"
+            className="w-[400px] min-h-[300px] object-cover"
           />
         ) : (
           <Image

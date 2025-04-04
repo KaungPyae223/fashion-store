@@ -20,6 +20,10 @@ input[type="checkbox"]:checked {
     rgba(90, 125, 188, 0.05) 0px 0.25em 1em;
 }
 
+.lgHidden{
+  @apply lg:hidden;
+}
+
 .admin-nav-active {
   @apply bg-gray-800 text-white;
 }
@@ -29,7 +33,7 @@ input[type="checkbox"]:checked {
 }
 
 .custom-bullet {
-  @apply h-1 w-16 z-50 bg-gray-800/30 cursor-pointer overflow-x-hidden;
+  @apply h-1 w-6 md:w-12 lg:w-16 z-50 bg-gray-800/30 cursor-pointer overflow-x-hidden;
 }
 
 th {

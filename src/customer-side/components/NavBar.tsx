@@ -8,6 +8,7 @@ import SearchSection from "./NavBarComponent/SearchSection";
 import { AnimatePresence, motion } from "motion/react";
 import Craft from "./NavBarComponent/Craft";
 import { usePathname } from "next/navigation";
+import Link from "next/link";
 
 const NavBar = () => {
   const navRef = useRef<HTMLDivElement>(null);
@@ -25,7 +26,7 @@ const NavBar = () => {
       document.body.classList.remove("no-scroll");
     }
     return () => document.body.classList.remove("no-scroll");
-  }, [openCraft,openSearchSection]);
+  }, [openCraft, openSearchSection]);
 
   // Handle scroll behavior
   const handleScroll = () => {
@@ -73,11 +74,19 @@ const NavBar = () => {
         className="duration-300 Navigation fixed w-full bg-white z-30"
       >
         <Noti />
-        <NavBody
-          setOpenCraft={setOpenCraft}
-          setOpenSearchSection={setOpenSearchSection}
-        />
-        <NavLink />
+        <div className="block md:hidden text-center py-3 border-b ">
+          <Link href={"/"} className="text-3xl font-bold">
+            Alexa
+          </Link>
+          
+        </div>
+        <div>
+          <NavBody
+            setOpenCraft={setOpenCraft}
+            setOpenSearchSection={setOpenSearchSection}
+          />
+          <NavLink />
+        </div>
       </div>
 
       <AnimatePresence>

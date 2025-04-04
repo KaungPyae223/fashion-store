@@ -10,6 +10,7 @@ interface ProductCardInterface {
   href: string;
   discount_percent: number;
   discount_price: number;
+  index:number;
 }
 
 const ProductCard = ({
@@ -20,9 +21,10 @@ const ProductCard = ({
   href,
   discount_percent,
   discount_price,
+  index
 }: ProductCardInterface) => {
   return (
-    <Link href={href} className="relative">
+    <Link href={href} className={`relative md:last:hidden ${index==8 ? "lgHidden":""} xl:block xl:last:block`}>
       <Image
         alt={title}
         height={500}

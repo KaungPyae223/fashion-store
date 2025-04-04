@@ -16,7 +16,7 @@ const QuestionsHistory = () => {
 
   return isLoading ? (
     <Loading />
-  ) : data.data.length > 0 ? (
+  ) : data.data?.length > 0 ? (
     <div className="mt-10">
       <SectionSubTitle title="History" />
       {data?.data.map((el) => (

@@ -39,7 +39,8 @@ const NavBody = ({ setOpenSearchSection, setOpenCraft }: NavBodyInterface) => {
 
   return (
     <Container>
-      <div className="col-span-full flex items-center justify-between py-3">
+      <div className="col-span-full flex items-center flex-col md:flex-row gap-4 md:gap-0 justify-between py-3">
+     
         <div className="flex items-center gap-5">
           <div
             onClick={() => handleGenderChange("Men")}
@@ -49,6 +50,7 @@ const NavBody = ({ setOpenSearchSection, setOpenCraft }: NavBodyInterface) => {
           >
             Men
           </div>
+          
           <div
             onClick={() => handleGenderChange("Women")}
             className={`cursor-pointer font-medium uppercase ${
@@ -58,7 +60,8 @@ const NavBody = ({ setOpenSearchSection, setOpenCraft }: NavBodyInterface) => {
             Women
           </div>
         </div>
-        <Link href={"/"} className="text-4xl font-bold">
+
+        <Link href={"/"} className="text-4xl font-bold hidden md:block">
           Alexa
         </Link>
         <div className="flex flex-row gap-4 items-center">
@@ -113,7 +116,5 @@ const NavBody = ({ setOpenSearchSection, setOpenCraft }: NavBodyInterface) => {
     </Container>
   );
 };
-
-
 
 export default NavBody;

@@ -28,8 +28,8 @@ const FooterMain = () => {
 
   return (
     <Container>
-      <div className="col-span-full flex justify-between py-12">
-        <div className="flex flex-row gap-44">
+      <div className="col-span-full flex flex-col md:flex-row justify-between py-12 gap-9 md:gap-6">
+        <div className="flex flex-wrap md:flex-row justify-between flex-1 max-w-[700px]">
           <FooterLink title="About" links={abut} />
           <FooterLink title="Customer Service" links={customerServices} />
           <FooterLink title="Policies" links={policies} />

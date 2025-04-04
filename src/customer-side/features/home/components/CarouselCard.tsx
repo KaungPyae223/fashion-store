@@ -35,8 +35,8 @@ const CarouselCard = ({ data }) => {
           transition={{ duration: 0.5, delay: 0.5 }}
           className="flex flex-col justify-center items-center"
         >
-          <h1 className="text-white text-4xl font-bold">{data.title}</h1>
-          <p className="text-white text-lg">{data.sub_title}</p>
+          <h1 className="text-white text-4xl font-bold text-center mx-3">{data.title}</h1>
+          <p className="text-white text-lg text-center mx-3">{data.sub_title}</p>
           <Link href={data.link} className="bg-white text-black px-8 py-2 mt-4">
             {data.link_title}
           </Link>

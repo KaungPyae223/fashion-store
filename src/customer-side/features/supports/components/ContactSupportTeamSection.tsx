@@ -1,7 +1,7 @@
 "use client";
 import SectionSubTitle from "@/customer-side/components/SectionSubTitle";
 import SectionTitle from "@/customer-side/components/SectionTitle";
-import React from "react";
+import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import toast, { Toaster } from "react-hot-toast";
 import QuestionsHistory from "./QuestionsHistory";
@@ -18,7 +18,11 @@ const ContactSupportTeamSection = () => {
 
   const { revalidateWithoutParam } = useRevalidatedData();
 
+  const [loading, isLoading] = useState<boolean>(false);
+
   const handleAskQuestion = async (data) => {
+    isLoading(true);
+
     try {
       const res = await askQuestion({ question: data.Question });
       const json = await res.json();
@@ -33,6 +37,8 @@ const ContactSupportTeamSection = () => {
     } catch (error) {
       toast.error("An error occurred while asking the question.");
       console.error("Error:", error);
+    } finally {
+      isLoading(false);
     }
   };
 
@@ -56,8 +62,13 @@ const ContactSupportTeamSection = () => {
         {errors.Question && (
           <FormErrorMessage message={errors.Question.message} />
         )}
-        <button className="my-3 block ms-auto bg-black text-white py-2 px-12">
-          Ask
+        <button
+          disabled={loading}
+          className="disabled:opacity-50 my-3 block ms-auto bg-black text-white py-2 px-12"
+        >
+          {
+            loading ? "Sending" : "Ask"
+          }
         </button>
       </form>
       <QuestionsHistory />

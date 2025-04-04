@@ -5,8 +5,8 @@ const FooterFooter = () => {
   return (
     <div className="border">
       <Container>
-        <div className="col-span-full py-3 flex justify-between items-center">
-          <p className="font-medium text-3xl">Alexa</p>
+        <div className="col-span-full py-3 flex justify-center md:justify-between items-center">
+          <p className="font-medium text-3xl hidden md:block">Alexa</p>
           <p className="text-gray-500">
             www.alexa.com.mm | All Rights Reserved
           </p>

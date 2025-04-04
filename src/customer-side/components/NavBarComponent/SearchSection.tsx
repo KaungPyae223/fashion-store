@@ -60,10 +60,38 @@ const SearchSection = ({ setOpenSearchSection }: SearchSectionInterface) => {
   return (
     <div className="w-full h-full overflow-y-scroll z-50">
       <div className="py-4 border-b col-span-full">
+        <div className="flex flex-row md:hidden items-center mb-3 justify-between p-3">
+          <div className="text-3xl font-medium">
+            Alexa
+          </div>
+          <div
+            onClick={() => setOpenSearchSection(false)}
+            className="flex flex-row gap-3 items-center border w-fit px-5 py-1.5  rounded-full border-gray-300 "
+          >
+            <div>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                strokeWidth={1.5}
+                stroke="currentColor"
+                className="size-6 cursor-pointer md:hidden"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M6 18 18 6M6 6l12 12"
+                />
+              </svg>
+            </div>
+            Cancel
+          </div>
+        </div>
+
         <Container>
           <div className="col-span-full flex items-center justify-between">
-            <div></div>
-            <div className="flex gap-1.5 w-1/2 items-center bg-gray-100 border rounded-md px-2 py-3">
+            <div className="hidden md:block"></div>
+            <div className="flex gap-1.5 w-full md:w-1/2 items-center bg-gray-100 border rounded-md px-2 py-3">
               <input
                 type="text"
                 ref={searchRef}
@@ -98,7 +126,7 @@ const SearchSection = ({ setOpenSearchSection }: SearchSectionInterface) => {
               viewBox="0 0 24 24"
               strokeWidth={1.5}
               stroke="currentColor"
-              className="size-6 cursor-pointer"
+              className="size-6 cursor-pointer hidden md:block"
               onClick={() => setOpenSearchSection(false)}
             >
               <path
@@ -110,13 +138,16 @@ const SearchSection = ({ setOpenSearchSection }: SearchSectionInterface) => {
           </div>
         </Container>
       </div>
-      <div className="py-16">
+      <div className="py-6 md:py-16">
         <Container>
-          <div className="col-span-3">
+          <div className="col-span-3 hidden md:block">
             <SearchTitle title="Recently Search" />
-            <SearchTitleList setOpenSearchSection={setOpenSearchSection} searchHistory={searchHistory} />
+            <SearchTitleList
+              setOpenSearchSection={setOpenSearchSection}
+              searchHistory={searchHistory}
+            />
           </div>
-          <div className="col-span-9">
+          <div className="col-span-full md:col-span-9">
             <SearchTitle title="Relative Products" />
             {!isLoading && data?.data && data?.data.length ? (
               <SearchProducts data={data.data} q={searchRef.current.value} />

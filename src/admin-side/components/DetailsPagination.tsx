@@ -1,7 +1,6 @@
 "use client";
 
 const DetailsPagination = ({ meta, setPage }) => {
-
   const totalPage = meta.last_page;
 
   const currentPage = meta.current_page;
@@ -20,11 +19,21 @@ const DetailsPagination = ({ meta, setPage }) => {
     }
   };
 
-  const lastPage = Math.min(currentPage + 2, totalPage);
+  const last = Math.min(currentPage + 2, totalPage);
+  const start = Math.max(1, currentPage - 2);
+
+  const lastPage =
+    last > 5 && last <= totalPage
+      ? last
+      : currentPage > totalPage
+      ? totalPage
+      : 5 > totalPage
+      ? totalPage
+      : 5;
+
+  // Handle the First page
   const startPage =
-    currentPage < 3
-      ? 1
-      : Math.max(1, totalPage >= 5 ? currentPage - 2 : totalPage - 4);
+    start > totalPage - 4 && totalPage - 5 >= 1 ? totalPage - 4 : start;
 
   const Pages = Array.from(
     { length: lastPage - startPage + 1 },

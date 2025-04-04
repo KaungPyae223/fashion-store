@@ -38,7 +38,7 @@ const HomeHero = ({ data }) => {
       ))}
 
       {/* Custom Navigation Buttons */}
-      <div className="custom-navigation absolute top-1/2 px-12 left-0 right-0 flex justify-between z-50">
+      <div className="custom-navigation hidden md:flex absolute top-1/2 px-12 left-0 right-0 justify-between z-50">
         <div className="custom-prev w-10 h-10 cursor-pointer text-white/80 hover:text-white hover:bg-opacity-50 duration-300 rounded-full bg-black bg-opacity-20 flex items-center justify-center">
           <svg
             xmlns="http://www.w3.org/2000/svg"

@@ -7,8 +7,8 @@ const Footer = () => {
   return (
     <div>
       <FooterHead />
-      <FooterMain />
-      <FooterFooter />
+       <FooterMain />
+     <FooterFooter />
     </div>
   );
 };
