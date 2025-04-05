@@ -2,14 +2,14 @@ import Image from "next/image";
 import Link from "next/link";
 import React from "react";
 
-const HomeBrandTypeCard = ({ img, title, link }) => {
+const HomeBrandCard = ({ img, title, link }) => {
   return (
-    <div>
+    <div className="flex flex-col">
       <Image
         width={800}
         height={800}
         alt={title}
-        className="h-[350px] w-full object-cover"
+        className=" h-[200px] sm:h-auto sm:flex-1 w-full object-contain "
         src={img}
       />
       <p className="mt-5 text-lg font-medium">{title}</p>
@@ -20,4 +20,4 @@ const HomeBrandTypeCard = ({ img, title, link }) => {
   );
 };
 
-export default HomeBrandTypeCard;
+export default HomeBrandCard;

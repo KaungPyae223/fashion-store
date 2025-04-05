@@ -2,7 +2,7 @@
 import Container from "@/customer-side/components/Container";
 import SectionTitle from "@/customer-side/components/SectionTitle";
 import React from "react";
-import HomeBrandTypeCard from "../../../components/HomeBrandTypeCard";
+import HomeBrandTypeCard from "../../../components/HomeBrandCard";
 import { fetchHome } from "@/customer-side/services/HomePage";
 import useSWR from "swr";
 import useAddParamsToURL from "@/hooks/useAddParamsToURL";

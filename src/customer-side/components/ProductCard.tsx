@@ -24,7 +24,7 @@ const ProductCard = ({
   index
 }: ProductCardInterface) => {
   return (
-    <Link href={href} className={`relative md:last:hidden ${index==8 ? "lgHidden":""} xl:block xl:last:block`}>
+    <Link href={href} className={`relative ${index==9 ? "md:last:hidden":""}  ${index==8 ? "lgHidden":""} xl:block xl:last:block`}>
       <Image
         alt={title}
         height={500}

@@ -29,13 +29,13 @@ const HomePage = () => {
   } else {
     return (
       <div className="bg-white">
-        {/* {data?.hero && <HomeHero data={data.hero} />} */}
-          {data?.latest && <Latest data={data.latest} />}
-       {/* {data?.brand && <HomeBrand data={data.brand} />}
-        {data?.sneakers && <Sneaker data={data.sneakers} />}
+        {data?.hero && <HomeHero data={data.hero} />}
+        {data?.latest && <Latest data={data.latest} />}
+        {data?.brand && <HomeBrand data={data.brand} />}
+         {data?.sneakers && <Sneaker data={data.sneakers} />}
         <Type />
         {data?.trending && <Trending data={data.trending} />}
-        {data?.accessories && <Accessories data={data.accessories} />}
+        {/*{data?.accessories && <Accessories data={data.accessories} />}
         {data?.lifeStyle && <LifeStyle data={data.lifeStyle} />}
         {data?.blogs && <HomeBlog  data={data.blogs} />} */}
       </div>
