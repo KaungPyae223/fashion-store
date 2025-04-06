@@ -12,11 +12,11 @@ const LifeStyle = ({ data }) => {
       <Container>
         <HomeTitle title="Lifestyle" link="/life-style" />
         <div
-          className="col-span-6 relative bg-cover bg-center"
+          className="col-span-4 lg:col-span-6 hidden md:block relative bg-cover bg-center"
           style={{ backgroundImage: `url(${Furniture.src})` }}
         />
 
-        <div className="col-span-6 grid grid-cols-2 gap-3">
+        <div className="col-span-full md:col-span-8 lg:col-span-6 grid grid-cols-2 gap-3 gap-y-6">
           {data.map((product) => (
             <ProductCard
               discount_percent={product.discount_percent}

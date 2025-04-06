@@ -10,11 +10,11 @@ const AuthenticationPage = () => {
     <div>
       <div className="py-16">
         <Container>
-          <div className="col-span-6 flex flex-col">
+          <div className="col-span-full lg:col-span-6 flex flex-col">
             <p className="text-xl font-medium">Authentication</p>
             <AuthenticationContainer />
           </div>
-          <div className="col-span-6">
+          <div className="col-span-6 hidden lg:block">
             <Image
               width={600}
               height={600}

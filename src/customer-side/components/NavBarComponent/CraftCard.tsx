@@ -60,9 +60,11 @@ const CraftCard = ({
         <div className="flex flex-row justify-between gap-5">
           <div className="flex flex-row items-center gap-3">
             <p className="text-sm font-medium flex-1">{name}</p>
-            <p className="text-xs text-gray-600 rounded-full border border-gray-500 px-1.5 py-0.5">
+            {discount_percent > 0 && (
+              <p className="text-xs text-gray-600 rounded-full border border-gray-500 px-1.5 py-0.5">
                 {discount_percent}% OFF
               </p>
+            )}
           </div>
           <div onClick={handleRemoveProduct}>
             <svg

@@ -13,12 +13,11 @@ const WishListContainer = () => {
     fetchCustomer
   );
 
-  console.log(data)
-
+  
   return isLoading ? (
     <Loading />
   ) : data.length > 0 ? (
-    <div className="mt-6 grid grid-cols-5 gap-6 gap-y-12">
+    <div className="mt-6 grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-y-6 gap-x-3 md:gap-x-6">
 
       {data.map((data) => (
         <WishCard

@@ -26,20 +26,20 @@ const RatingContainer = ({
   return (
     <div className="mt-20 mb-10">
       <div className="flex gap-8 items-center">
-        <p className="text-2xl font-medium">Rating</p>
+        <p className="text-2xl font-medium hidden sm:block">Rating</p>
         <div className="flex items-center">
           <Rating rating={rating} />
           <span className="ms-3 me-2 tracking-wide font-medium">
             ({rating}/5)
           </span>
-          <span className="text-sm">{ratingData.totalReviews} reviewers</span>
+          <span className="text-sm hidden sm:block">{ratingData.totalReviews} reviewers</span>
         </div>
         <ReviewRoute />
       </div>
 
       {!isLoading && (
         <>
-          <div className="grid grid-cols-2 gap-2 mt-10">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-2 mt-10">
             {data.data.map((review) => (
               <ReviewCard review={review} key={review.id} />
             ))}

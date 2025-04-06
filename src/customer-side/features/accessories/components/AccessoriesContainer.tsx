@@ -7,11 +7,11 @@ const AccessoriesContainer = () => {
   return (
     <div className="py-10">
       <Container>
-        <div className="col-span-3">
+        <div className="col-span-full lg:col-span-3">
           <AccessoriesFilterSection />
         </div>
 
-        <div className="col-span-9">
+        <div className="col-span-full lg:col-span-9">
           <AccessoriesDisplaySection />
         </div>
       </Container>

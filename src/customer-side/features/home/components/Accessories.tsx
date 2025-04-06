@@ -8,9 +8,10 @@ const Accessories = ({ data }) => {
     <div className="pt-16 pb-6 mb-12">
       <Container>
         <HomeTitle title="Accessories" link="accessories" />
-        <div className="col-span-full grid grid-cols-4 gap-6">
-          {data.map((accessory) => (
+        <div className="col-span-full grid grid-cols-2  lg:grid-cols-4 gap-y-6 gap-x-3 md:gap-x-6">
+          {data.map((accessory,i) => (
             <ProductCard
+              index={i}
               discount_percent={accessory.discount_percent}
               discount_price={accessory.discount_price}
               key={accessory.id}

@@ -19,7 +19,7 @@ const NavLink = () => {
   };
 
   return (
-    <div className="p-3 flex items-center justify-center flex-wrap gap-6 border">
+    <div className="p-3 flex items-center justify-center flex-wrap gap-6 border-y">
       <Link
         href={changePage("/")}
         className={

@@ -30,6 +30,7 @@ const BrandDetailsPage = ({ name }: { name: string }) => {
     );
   }, [gender]);
 
+
   return (
     !isLoading && (
       <div>
@@ -39,7 +40,7 @@ const BrandDetailsPage = ({ name }: { name: string }) => {
             { title: "Home", link: "/" },
             { title: "Brands", link: "/brands" },
           ]}
-          title={name}
+          title={data.brand_name}
         />
         <BrandClothesContainer filterData={data.filerData} name={name} />
       </div>

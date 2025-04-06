@@ -51,14 +51,14 @@ const ProductData = ({ productData }) => {
   };
 
   return (
-    <div className="container grid grid-cols-3 gap-6 border-b pb-16 border-b-gray-200">
+    <div className="grid grid-cols-3 gap-6 border-b pb-16 border-b-gray-200">
       <Toaster />
-      <div className="grid col-span-2 grid-cols-2 gap-1">
+      <div className="grid col-span-full lg:col-span-2 grid-cols-2 gap-1">
         {productData.detailsImage.map((el, i) => (
           <ProductImage key={i} image={el} />
         ))}
       </div>
-      <div className="flex flex-col items-center px-6">
+      <div className="flex flex-col col-span-full lg:col-span-1 items-center px-6">
         <p className="uppercase tracking-wider text-xl font-semibold text-center">
           {productData.title}
         </p>

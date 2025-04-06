@@ -35,9 +35,9 @@ const HomePage = () => {
          {data?.sneakers && <Sneaker data={data.sneakers} />}
         <Type />
         {data?.trending && <Trending data={data.trending} />}
-        {/*{data?.accessories && <Accessories data={data.accessories} />}
+        {data?.accessories && <Accessories data={data.accessories} />}
         {data?.lifeStyle && <LifeStyle data={data.lifeStyle} />}
-        {data?.blogs && <HomeBlog  data={data.blogs} />} */}
+        {data?.blogs && <HomeBlog  data={data.blogs} />} 
       </div>
     );
   }

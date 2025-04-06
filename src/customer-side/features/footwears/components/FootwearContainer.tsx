@@ -7,11 +7,11 @@ const FootwearContainer = () => {
   return (
     <div className="py-10">
       <Container>
-        <div className="col-span-3">
+        <div className="col-span-full lg:col-span-3">
           <FootwearFilterSection />
         </div>
 
-        <div className="col-span-9">
+        <div className="col-span-full lg:col-span-9">
           <FootwearDisplaySection />
         </div>
       </Container>

@@ -47,7 +47,7 @@ const FootwearDisplaySection = () => {
 
 const ProductsContainer = ({ products }) => {
   return (
-    <div className="grid grid-cols-3 gap-x-3 gap-y-6">
+    <div className="grid grid-cols-2 md:grid-cols-3 gap-x-3 gap-y-6">
       {products.map((product) => (
         <ProductCard
           key={product.id}

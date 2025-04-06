@@ -23,6 +23,8 @@ const NavNotification = () => {
       <div className="flex py-2 w-full text-sm text-white overflow-hidden">
         <NotiBar NotiText={NotiText} />
         <NotiBar NotiText={NotiText} />
+        <NotiBar NotiText={NotiText} />
+
       </div>
     </div>
   );
