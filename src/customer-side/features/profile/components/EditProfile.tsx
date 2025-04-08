@@ -45,7 +45,7 @@ const EditProfile = ({ data }) => {
       <Toaster />
       <SectionTitle title="Edit Profile" />
       <form
-        className="max-w-[400px]"
+        className="max-w-[400px] mx-auto lg:mx-0"
         onSubmit={handleSubmit(handleProfileDataChange)}
       >
         <ProfileEditInput

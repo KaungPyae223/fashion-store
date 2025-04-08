@@ -3,7 +3,7 @@ import OrderProduct from "./OrderProduct";
 
 const OrderSummary = ({ data, subTotal, tax, discountTotal }) => {
   return (
-    <div className="px-20 flex flex-col gap-6">
+    <div className="px-3 xl:px-20 row-start-1 lg:col-start-2 flex flex-col gap-6">
       <div className="flex flex-row justify-between items-center pb-6 border-b">
         <p className="text-sm uppercase font-semibold tracking-widest">
           Order Summary

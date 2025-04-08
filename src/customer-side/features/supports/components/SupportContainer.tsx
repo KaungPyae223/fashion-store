@@ -18,34 +18,37 @@ export const SupportContainer = () => {
   return (
     <div className="py-10">
       <Container>
-        <div className="col-span-4 pe-12">
+        <div className="col-span-full border-b lg:border-none lg:col-span-4 flex lg:block flex-wrap justify-center gap-3 lg:gap-6 gap-y-3 lg:gap-y-6 pb-6 lg:pb-0 lg:pe-12">
+          <div className="hidden lg:block">
           <SectionTitle title="sections" />
+
+          </div>
           <div
             onClick={() => setSection("FAQ")}
-            className={`border-b ${
+            className={`border lg:border-x-0 lg:border-t-0  border-gray-300  py-2 px-6 lg:px-0 rounded-full lg:rounded-none lg:border-b ${
               section === "FAQ" ? "" : "text-gray-400"
-            }  cursor-pointer py-4 pr-8 tracking-wider font-medium`}
+            }  cursor-pointer lg:py-4 lg:pr-8 tracking-wider font-medium`}
           >
             <p>Frequently Ask Questions</p>
           </div>
           <div
             onClick={() => setSection("CST")}
-            className={`border-b ${
+            className={`border lg:border-x-0 lg:border-t-0  border-gray-300  py-2 px-6 lg:px-0 rounded-full lg:rounded-none lg:border-b ${
               section === "CST" ? "" : "text-gray-400"
-            }  cursor-pointer py-4 pr-8 tracking-wider font-medium`}
+            }  cursor-pointer lg:py-4 lg:pr-8 tracking-wider font-medium`}
           >
             <p>Contact Support Team</p>
           </div>
           <div
             onClick={() => setSection("STF")}
-            className={`border-b ${
+            className={`border lg:border-x-0 lg:border-t-0  border-gray-300  py-2 px-6 lg:px-0 rounded-full lg:rounded-none lg:border-b ${
               section === "STF" ? "" : "text-gray-400"
-            }  cursor-pointer py-4 pr-8 tracking-wider font-medium`}
+            }  cursor-pointer lg:py-4 lg:pr-8 tracking-wider font-medium`}
           >
             <p>Support Team Feedbacks</p>
           </div>
         </div>
-        <div className="col-span-8">
+        <div className="col-span-full lg:col-span-8">
           <AnimatePresence mode="wait">
             {section === "FAQ" ? (
               <motion.div

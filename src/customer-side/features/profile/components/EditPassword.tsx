@@ -54,7 +54,7 @@ const EditPassword = () => {
       <Toaster/>
       <SectionTitle title="Edit Password" />
       <form
-        className="max-w-[400px]"
+        className="max-w-[400px] mx-auto lg:mx-0"
         onSubmit={handleSubmit(handlePasswordUpdate)}
       >
         <div className="mb-6 ">

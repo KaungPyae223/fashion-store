@@ -49,7 +49,7 @@ const BlogContainer = () => {
 const BlogsContainer = ({ blogs }) => {
   return (
     <Container>
-      <div className="col-span-full grid grid-cols-3 gap-8">
+      <div className="col-span-full grid grid-cols-2 md:grid-cols-3 gap-8">
         {blogs.map((blog) => (
           <BlogCard
             img={blog.photo}

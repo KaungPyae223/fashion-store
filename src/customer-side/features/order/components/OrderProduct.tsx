@@ -25,19 +25,21 @@ const OrderProduct = ({ data }) => {
   return (
     <div className="flex flex-row items-start gap-6 mb-6">
       <Image
-        width={80}
-        height={80}
-        alt={data.name}
-        className=" h-fit object-cover object-center"
+        alt={data.name + "image"}
+        height={120}
+        width={200}
+        className="w-[80px] h-fit object-cover object-center"
         src={data.image}
       />
       <div className="flex-1 text-sm">
         <div className="flex flex-row justify-between w-full">
           <div className="flex flex-row gap-3 items-center">
             <p className="font-medium text-base">{data.name}</p>
-            <p className="text-xs text-gray-600 rounded-full border border-gray-500 px-1.5 py-0.5">
-              {data.discount_percent}% OFF
-            </p>
+            {data.discount_percent > 0 && (
+              <p className="text-xs text-gray-600 rounded-full border border-gray-500 px-1.5 py-0.5">
+                {data.discount_percent}% OFF
+              </p>
+            )}
           </div>
           <div onClick={handleRemoveProduct}>
             <svg

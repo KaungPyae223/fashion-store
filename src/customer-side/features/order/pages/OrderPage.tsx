@@ -61,13 +61,13 @@ const OrderPage = () => {
             Back
           </div>
 
-          <p className="text-xl flex-1 uppercase text-end font-medium tracking-wider">
+          <p className="text-xl flex-1 uppercase text-end text-nowrap font-medium tracking-wider">
             Order The Products
           </p>
         </div>
-        <div className="grid col-span-full grid-cols-2 mt-3 gap-20">
-          <OrderInformationInput />
-          <OrderSummary subTotal={subTotal} discountTotal={discountTotal} tax={tax} data={data} />
+        <div className="grid col-span-full grid-cols-1 lg:grid-cols-2 mt-3 gap-12 lg:gap-6 xl:gap-20">
+           <OrderInformationInput />
+          <OrderSummary subTotal={subTotal} discountTotal={discountTotal} tax={tax} data={data} /> 
         </div>
       </Container>
     </div>

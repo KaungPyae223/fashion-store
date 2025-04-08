@@ -60,7 +60,7 @@ const OrderDetailsPage = ({ orderID }: { orderID: string }) => {
               </svg>
               Back
             </div>
-            <div className="flex-1">
+            <div className="hidden md:flex-1 md:block">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 fill="none"
@@ -77,7 +77,7 @@ const OrderDetailsPage = ({ orderID }: { orderID: string }) => {
                 />
               </svg>
             </div>
-            <p className="text-xl flex-1 uppercase text-end font-medium tracking-wider">
+            <p className="text-xl flex-1 text-nowrap uppercase text-end font-medium tracking-wider">
               Order Details
             </p>
           </div>
@@ -104,29 +104,30 @@ const OrderDetailsPage = ({ orderID }: { orderID: string }) => {
                 </p>
               </div>
             </div>
-            <p className="text-center mt-5 mb-10 uppercase tracking-wide text-xl font-medium">
+            <p className="text-center text-nowrap mt-5 mb-10 uppercase tracking-wide text-xl font-medium">
               Order Products
             </p>
-            <div className="border-b pb-5">
-              <table className="w-full">
+
+            <div className="border-b pb-5 overflow-auto">
+              <table className="min-w-[600px] w-full">
                 <thead>
                   <tr>
-                    <td className="p-3 text-lg px-4 mb-3 font-semibold bg-gray-200">
+                    <td className="p-3 text-sm sm:text-base font-semibold bg-gray-200">
                       No
                     </td>
-                    <td className="p-3 text-lg px-4 font-semibold bg-gray-200">
+                    <td className="p-3 text-sm sm:text-base font-semibold bg-gray-200">
                       Product Name
                     </td>
-                    <td className="p-3 text-lg px-4 font-semibold bg-gray-200">
+                    <td className="p-3 text-sm sm:text-base font-semibold bg-gray-200">
                       Size
                     </td>
-                    <td className="p-3 text-lg px-4 font-semibold bg-gray-200 text-end">
+                    <td className="p-3 text-sm sm:text-base font-semibold bg-gray-200 text-end">
                       Unit Price
                     </td>
-                    <td className="p-3 text-lg px-4 font-semibold bg-gray-200 text-end">
+                    <td className="p-3 text-sm sm:text-base font-semibold bg-gray-200 text-end">
                       Qty
                     </td>
-                    <td className="p-3 text-lg px-4 font-semibold bg-gray-200 text-end">
+                    <td className="p-3 text-sm sm:text-base font-semibold bg-gray-200 text-end">
                       Price
                     </td>
                   </tr>
@@ -145,18 +146,26 @@ const OrderDetailsPage = ({ orderID }: { orderID: string }) => {
                 </tbody>
                 <tfoot>
                   <tr>
-                    <td colSpan={5} className="px-4 pt-12 text-end">
+                    <td
+                      colSpan={5}
+                      className="px-4 pt-12 text-end text-sm sm:text-base"
+                    >
                       Sub Total
                     </td>
-                    <td className="px-4 pt-12 text-end">
+                    <td className="px-4 pt-12 text-end text-sm sm:text-base">
                       {data.order.sub_total}
                     </td>
                   </tr>
                   <tr>
-                    <td colSpan={5} className="px-4 pt-3 text-end">
+                    <td
+                      colSpan={5}
+                      className="px-4 pt-3 text-end text-sm sm:text-base"
+                    >
                       Tax (5%)
                     </td>
-                    <td className="px-4 pt-3 text-end">{data.order.tax}</td>
+                    <td className="px-4 pt-3 text-end text-sm sm:text-base">
+                      {data.order.tax}
+                    </td>
                   </tr>
                   <tr>
                     <td
@@ -172,6 +181,7 @@ const OrderDetailsPage = ({ orderID }: { orderID: string }) => {
                 </tfoot>
               </table>
             </div>
+
             <div className="flex flex-row justify-between gap-5 pt-14 pb-6">
               <div>
                 <SectionTitle title="Ship to" />
@@ -257,7 +267,7 @@ const OrderDetailsPage = ({ orderID }: { orderID: string }) => {
                 </table>
               </div>
 
-              <div className="flex  md:justify-end">
+              <div className="  md:justify-end hidden md:flex">
                 <div>
                   <SectionTitle title="Contact Information" />
                   <table>

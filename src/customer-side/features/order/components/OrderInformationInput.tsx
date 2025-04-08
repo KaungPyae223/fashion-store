@@ -118,7 +118,7 @@ const OrderInformationInput = () => {
   };
 
   return (
-    <div className="px-10 flex flex-col gap-12">
+    <div className="px-3 xl:px-10 flex flex-col gap-12">
       <Toaster />
       {completeForm.shipping ? (
         <CompleteShippingData

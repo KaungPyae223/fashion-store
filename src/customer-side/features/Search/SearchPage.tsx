@@ -39,7 +39,6 @@ const SearchPage = ({ q }) => {
     fetchHome
   );
 
-  console.log(data);
 
   return (
     <div>
@@ -51,7 +50,7 @@ const SearchPage = ({ q }) => {
         <Loading />
       ) : data?.data && data?.data.length ? (
         <Container>
-          <div className="grid grid-cols-5 col-span-full gap-x-3 gap-y-6 mb-6">
+          <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 col-span-full gap-x-3 gap-y-6 mb-6">
             {data.data.map((SearchProduct) => (
               <SearchProductCard
                 q={q}

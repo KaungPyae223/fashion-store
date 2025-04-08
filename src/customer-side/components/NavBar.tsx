@@ -97,7 +97,7 @@ const NavBar = () => {
             exit={{ opacity: 0 }}
             key="search-section"
             transition={{ duration: 0.3, ease: "easeOut" }}
-            className="w-screen h-screen bg-white fixed top-0 left-0 z-50"
+            className="w-full h-full bg-white fixed top-0 left-0 z-50"
           >
             <SearchSection setOpenSearchSection={setOpenSearchSection} />
           </motion.div>

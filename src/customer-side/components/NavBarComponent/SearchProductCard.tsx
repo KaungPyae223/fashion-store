@@ -35,7 +35,7 @@ const SearchProductCard = ({
         className="h-[300px] w-full object-cover object-center"
         src={img}
       />
-      <p className="mt-1">{title}</p>
+      <p className="mt-1 font-medium">{title}</p>
       <p className="text-gray-500 text-sm">{brand}</p>
       {discount_price > 0 ? (
         <div className="flex flex-row gap-1">

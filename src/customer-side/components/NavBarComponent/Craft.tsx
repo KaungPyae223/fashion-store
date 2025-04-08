@@ -38,7 +38,7 @@ const Craft = ({ setOpenCraft }: CraftInterface) => {
   const tax = Math.ceil((subTotal - discountTotal) * 0.05);
 
   return (
-    <div className="h-screen flex flex-col z-50 bg-white max-w-[390px] w-full">
+    <div className="h-full flex flex-col z-50 bg-white w-[430px] max-w-full">
       <div className="border-b py-3 px-5 gap-5 flex flex-row items-center justify-between">
         <div>
           <svg
