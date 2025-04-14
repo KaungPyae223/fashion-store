@@ -2,9 +2,8 @@
 import React from "react";
 import Loading from "@/admin-side/components/Loading";
 import NoData from "@/admin-side/components/NoData";
-import AdminPagination from "@/admin-side/components/AdminPagimation";
 import DeliveryDataContainer from "../components/DeliveryDataContainer";
-import { useDeliveryData } from "@/admin-side/features/super-admin/delivery-management/hooks/useDeliveryData";
+import { useOrderDelivery } from "../hook/useOrderDelivery";
 
 const DeliveryPage = () => {
   const {
@@ -13,7 +12,7 @@ const DeliveryPage = () => {
     isLoading,
     filterDeliveryRef,
     error,
-  } = useDeliveryData();
+  } = useOrderDelivery();
 
   console.log(data);
 
@@ -61,10 +60,9 @@ const DeliveryPage = () => {
 
       {isLoading ? (
         <Loading />
-      ) : data.data && data?.data.length > 0 ? (
+      ) : data.delivery_data && data?.delivery_data.length > 0 ? (
         <>
-          <DeliveryDataContainer deliveries={data.data} />
-          <AdminPagination meta={data?.meta} />
+          <DeliveryDataContainer deliveries={data.delivery_data} />
         </>
       ) : (
         <NoData />

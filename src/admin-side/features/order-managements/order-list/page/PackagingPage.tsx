@@ -18,7 +18,7 @@ import { usePackagingData } from "../hooks/usePackagingData";
 const PackagingPage = ({ id }) => {
   const [currentStage, setCurrentStage] = useState(1);
 
-  const { data, error, isLoading } = usePackagingData();
+  const { data, error, isLoading } = usePackagingData(id);
 
   const [select, setSelect] = useState<number | null>(null);
 

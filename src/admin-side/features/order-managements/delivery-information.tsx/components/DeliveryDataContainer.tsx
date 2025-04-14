@@ -12,7 +12,7 @@ const DeliveryDataContainer = ({ deliveries }) => {
             <th className="text-start px-2">Email</th>
             <th className="text-start px-2">Address</th>
             <th className="text-center px-2">Status</th>
-            <th className="text-end px-2 pe-4">Total Delivers</th>
+          
           </tr>
         </thead>
         <tbody>

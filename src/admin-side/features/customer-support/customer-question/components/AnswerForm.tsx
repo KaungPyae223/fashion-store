@@ -28,7 +28,7 @@ const AnswerForm = ({ setOpenModal, id, question, handleRevalidate }) => {
         return;
       }
 
-      toast.success("Product created successfully");
+      toast.success("Successfully answered the question");
       reset();
 
       handleRevalidate();

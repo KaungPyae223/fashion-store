@@ -41,7 +41,10 @@ const AdminMonitorTr = ({ activity }) => {
           <div className="text-sm text-nowrap bg-stone-400 px-4 py-1 rounded-full w-fit mx-auto">
             System Admin
           </div>
-        ) : (
+        ) : activity.role === "Blog Management" ? (
+          <div className="text-sm text-nowrap bg-slate-400 px-4 py-1 rounded-full w-fit mx-auto">
+            Blog Management
+          </div>) : (
           <div className="text-sm text-nowrap border border-gray-400 px-4 py-1 rounded-full w-fit mx-auto">
             Retired
           </div>

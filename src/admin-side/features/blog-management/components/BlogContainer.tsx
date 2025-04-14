@@ -5,7 +5,7 @@ import React from "react";
 
 const BlogContainer = ({ data }) => {
   return (
-    <div className="my-6 grid grid-cols-4 gap-4">
+    <div className="my-6 grid grid-cols-3 gap-3">
       {data.map((blog) => (
         <BlogCard key={blog.id} blog={blog} />
       ))}
@@ -17,7 +17,7 @@ const BlogCard = ({ blog }) => {
   const { formatDate } = useFormatDate();
 
   return (
-    <div className="h-full">
+    <div className="h-full bg-white p-3">
       <Image
         alt={blog.title}
         height={500}

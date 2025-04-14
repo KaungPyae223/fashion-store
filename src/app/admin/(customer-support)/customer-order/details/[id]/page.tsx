@@ -41,7 +41,7 @@ const page = ({ params: { id } }: { params: { id: string } }) => {
       </div>
 
       <AdminCheck allow={"Customer Support"}>
-        <OrderDetailsPage id={id} />
+        <OrderDetailsPage id={id} isCustomerSupport={true}/>
       </AdminCheck>
     </div>
   );

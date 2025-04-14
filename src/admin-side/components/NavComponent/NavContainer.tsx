@@ -247,78 +247,21 @@ const SuperAdmin = ({ pathName }) => {
   return (
     <div className="mt-16">
       <p className="text-sm text-gray-500 mb-4">Analysis</p>
-      <div className="flex flex-row items-center gap-3 text-gray-500 hover:text-gray-800 duration-300 cursor-pointer p-3 rounded">
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          fill="none"
-          viewBox="0 0 24 24"
-          strokeWidth={1}
-          stroke="currentColor"
-          className="size-5"
-        >
-          <path
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            d="M10.5 6a7.5 7.5 0 1 0 7.5 7.5h-7.5V6Z"
-          />
-          <path
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            d="M13.5 10.5H21A7.5 7.5 0 0 0 13.5 3v7.5Z"
-          />
-        </svg>
-
-        <p className="font-medium">Web Analysis</p>
-      </div>
-      <div className="flex flex-row items-center gap-3 text-gray-500 hover:text-gray-700 duration-300 cursor-pointer p-3 rounded">
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          fill="none"
-          viewBox="0 0 24 24"
-          strokeWidth={1}
-          stroke="currentColor"
-          className="size-5"
-        >
+      <NavButton
+        pathName={pathName}
+        href="/admin/order-analysis"
+        name="Orders Analysis"
+        icon={
           <path
             strokeLinecap="round"
             strokeLinejoin="round"
             d="M3.75 3v11.25A2.25 2.25 0 0 0 6 16.5h2.25M3.75 3h-1.5m1.5 0h16.5m0 0h1.5m-1.5 0v11.25A2.25 2.25 0 0 1 18 16.5h-2.25m-7.5 0h7.5m-7.5 0-1 3m8.5-3 1 3m0 0 .5 1.5m-.5-1.5h-9.5m0 0-.5 1.5m.75-9 3-3 2.148 2.148A12.061 12.061 0 0 1 16.5 7.605"
           />
-        </svg>
-
-        <p className="font-medium">Orders Analysis</p>
-      </div>
-      <div className="flex flex-row items-center gap-3 text-gray-500 hover:text-gray-700 duration-300 cursor-pointer p-3 rounded">
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          fill="none"
-          viewBox="0 0 24 24"
-          strokeWidth={1}
-          stroke="currentColor"
-          className="size-5"
-        >
-          <path
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            d="M20.25 6.375c0 2.278-3.694 4.125-8.25 4.125S3.75 8.653 3.75 6.375m16.5 0c0-2.278-3.694-4.125-8.25-4.125S3.75 4.097 3.75 6.375m16.5 0v11.25c0 2.278-3.694 4.125-8.25 4.125s-8.25-1.847-8.25-4.125V6.375m16.5 0v3.75m-16.5-3.75v3.75m16.5 0v3.75C20.25 16.153 16.556 18 12 18s-8.25-1.847-8.25-4.125v-3.75m16.5 0c0 2.278-3.694 4.125-8.25 4.125s-8.25-1.847-8.25-4.125"
-          />
-        </svg>
-
-        <p className="font-medium">Products Analysis</p>
-      </div>
-
-      <NavButton
-        pathName={pathName}
-        href="/admin/payment-report"
-        name="Payment Report"
-        icon={
-          <path
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            d="m9 7.5 3 4.5m0 0 3-4.5M12 12v5.25M15 12H9m6 3H9m12-3a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"
-          />
         }
       />
+      
+      
+      <p className="text-sm mt-4 text-gray-500 mb-4">Management</p>
 
       <NavButton
         pathName={pathName}
@@ -341,18 +284,6 @@ const SuperAdmin = ({ pathName }) => {
             strokeLinecap="round"
             strokeLinejoin="round"
             d="M8.25 18.75a1.5 1.5 0 0 1-3 0m3 0a1.5 1.5 0 0 0-3 0m3 0h6m-9 0H3.375a1.125 1.125 0 0 1-1.125-1.125V14.25m17.25 4.5a1.5 1.5 0 0 1-3 0m3 0a1.5 1.5 0 0 0-3 0m3 0h1.125c.621 0 1.129-.504 1.09-1.124a17.902 17.902 0 0 0-3.213-9.193 2.056 2.056 0 0 0-1.58-.86H14.25M16.5 18.75h-2.25m0-11.177v-.958c0-.568-.422-1.048-.987-1.106a48.554 48.554 0 0 0-10.026 0 1.106 1.106 0 0 0-.987 1.106v7.635m12-6.677v6.677m0 4.5v-4.5m0 0h-12"
-          />
-        }
-      />
-      <NavButton
-        pathName={pathName}
-        href="/admin/review-analysis"
-        name="Review Analysis"
-        icon={
-          <path
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            d="M11.48 3.499a.562.562 0 0 1 1.04 0l2.125 5.111a.563.563 0 0 0 .475.345l5.518.442c.499.04.701.663.321.988l-4.204 3.602a.563.563 0 0 0-.182.557l1.285 5.385a.562.562 0 0 1-.84.61l-4.725-2.885a.562.562 0 0 0-.586 0L6.982 20.54a.562.562 0 0 1-.84-.61l1.285-5.386a.562.562 0 0 0-.182-.557l-4.204-3.602a.562.562 0 0 1 .321-.988l5.518-.442a.563.563 0 0 0 .475-.345L11.48 3.5Z"
           />
         }
       />

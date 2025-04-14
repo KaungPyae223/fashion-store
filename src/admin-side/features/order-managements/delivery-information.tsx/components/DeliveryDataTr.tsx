@@ -8,7 +8,7 @@ const DeliveryDataTr = ({ delivery }) => {
 
   return (
       <tr className=" text-gray-800 bg-white border-y-[12px] border-y-gray-100">
-        <td className="text-start p-2 ps-4 py-4 ">{delivery.delivery}</td>
+        <td className="text-start p-2 ps-4 py-4 ">{delivery.name}</td>
         <td className="text-start p-2 ">{delivery.phone}</td>
         <td className="text-start p-2 ">{delivery.email}</td>
         <td className="text-start p-2 ">{delivery.address}</td>
@@ -23,7 +23,7 @@ const DeliveryDataTr = ({ delivery }) => {
             </div>
           )}
         </td>
-        <td className="  p-2 text-end pe-4">{delivery.totalDeliver}</td>
+        
       </tr>
     
   );

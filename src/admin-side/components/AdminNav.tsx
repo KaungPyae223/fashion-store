@@ -22,6 +22,8 @@ const AdminNav = () => {
     router.push("/admin-log-in");
   }
 
+  
+
   const { data, isLoading, error } = useSWR(
     process.env.NEXT_PUBLIC_BASE_URL + "/admin-data",
     fetchAdmin

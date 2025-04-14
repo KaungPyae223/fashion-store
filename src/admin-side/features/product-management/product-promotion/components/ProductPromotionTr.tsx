@@ -58,15 +58,14 @@ const ProductPromotionTr = ({
         </div>
       </td>
       <td title="Product Quantity" className="text-end px-2">{product.qty}</td>
-      <td title="Original Price" className="text-end px-2">{product.original_price} Ks</td>
-      <td title="Discount %" className="text-end px-2">{product.discount} %</td>
-      <td title="Discount Amount" className="text-end px-2">{product.discount_amount} Ks</td>
+      <td title="Original Price" className="text-end px-2 text-nowrap">{product.original_price} Ks</td>
+      <td title="Discount %" className="text-end px-2 text-nowrap ">{product.discount} %</td>
+      <td title="Discount Amount" className="text-end px-2 text-nowrap ">{product.discount_amount} Ks</td>
       <td title="Discount Start Date" className="text-center px-2">{product.discount_start_date && formatDate(product.discount_start_date)}</td>
       <td title="Discount End Date" className="text-center px-2">{product.discount_end_date && formatDate(product.discount_end_date)}</td>
-      <td title="Product Profit During Promotion" className="text-end px-2">{product.profit} Ks</td>
+      <td title="Product Profit During Promotion" className="text-end text-nowrap px-2">{product.profit} Ks</td>
+      <td title="Product Price at Current Time" className="text-end text-nowrap px-2">{product.sell_price} Ks</td>
       <td title="Product Promotion Price" className="text-end px-2">{product.promotion_sell_price} Ks</td>
-      <td title="Product Price at Current Time" className="text-end px-2">{product.sell_price} Ks</td>
-
       
     </tr>
   );

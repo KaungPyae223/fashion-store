@@ -18,14 +18,16 @@ import { useFormatDate } from "@/hooks/useFormatDate";
 import { format } from "path";
 import InformationContent from "@/admin-side/components/InformationContent";
 
-const OrderDetailsPage = ({ id }) => {
-  const baseUrl =
-    process.env.NEXT_PUBLIC_BASE_URL + "/order/order-history/" + id;
+const OrderDetailsPage = ({ id,isCustomerSupport }) => {
+
+
+
+  const baseUrl =   process.env.NEXT_PUBLIC_BASE_URL + (isCustomerSupport? "/customer/order-details/" : "/order/order-history/") + id;
 
   const { data, isLoading, error } = useSWR(baseUrl, fetchOrder);
 
-  console.log(data);
-
+  console.log(data)
+  
   const { formatDate } = useFormatDate();
 
   if (isLoading) {

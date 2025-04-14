@@ -48,7 +48,7 @@ const page = ({
         </div>
       </div>
       <AdminCheck allow={"Customer Support"}>
-        <OrderDetailsPage id={orderID} />
+        <OrderDetailsPage id={orderID} isCustomerSupport={true} />
       </AdminCheck>
     </div>
   );
