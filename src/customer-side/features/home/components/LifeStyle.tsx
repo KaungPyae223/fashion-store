@@ -6,7 +6,7 @@ import Furniture from "@/assets/Furniture.jpg";
 import Image from "next/image";
 import { url } from "inspector";
 
-const LifeStyle = ({ data }) => {
+const LifeStyle = ({ data,gender }) => {
   return (
     <div className="py-16  mb-6 bg-[#F8F8F8]">
       <Container>
@@ -22,7 +22,7 @@ const LifeStyle = ({ data }) => {
               discount_percent={product.discount_percent}
               discount_price={product.discount_price}
               key={product.id}
-              href={"/details/" + product.id}
+              href={"/details/" + product.id+(gender ? "?gender=" + gender : "")}
               img={product.img}
               title={product.title}
               color={product.color}

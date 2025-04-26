@@ -9,6 +9,7 @@ import useAddParamsToURL from "@/hooks/useAddParamsToURL";
 import Loading from "@/admin-side/components/Loading";
 import NoData from "@/admin-side/components/NoData";
 import AdminPagination from "@/admin-side/components/AdminPagimation";
+import { useSearchParams } from "next/navigation";
 
 const BrandContainer = () => {
   const AddParamsToURL = useAddParamsToURL();
@@ -17,6 +18,9 @@ const BrandContainer = () => {
     AddParamsToURL(process.env.NEXT_PUBLIC_BASE_URL + "/all-brands"),
     fetchHome
   );
+
+  const searchParams = useSearchParams();
+  const gender = searchParams.get("gender");
 
   return isLoading ? (
     <Loading />
@@ -30,7 +34,7 @@ const BrandContainer = () => {
               <HomeBrandTypeCard
                 key={brand.id}
                 img={brand.img}
-                link={`/brands/${brand.name}`}
+                link={`/brands/${brand.name}${gender?("?gender="+gender):""}`}
                 title={brand.name}
               />
             ))}

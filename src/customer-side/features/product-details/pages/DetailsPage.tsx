@@ -5,9 +5,6 @@ import React from "react";
 import ProductData from "../components/ProductData";
 import RatingContainer from "../components/RatingContainer";
 import RelativeProducts from "../components/RelativeProducts";
-import useSWR from "swr";
-import { fetchHome } from "@/customer-side/services/HomePage";
-import Loading from "@/admin-side/components/Loading";
 
 const DetailsPage = ({
   data,
@@ -16,6 +13,8 @@ const DetailsPage = ({
   data: any;
   PreviousSection: { link: string; title: string }[];
 }) => {
+
+  
   return (
     <div className="py-5">
       <Container>

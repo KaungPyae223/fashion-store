@@ -12,13 +12,14 @@ import useSWR from "swr";
 
 const LifeStyleProducts = () => {
   const searchParams = useSearchParams();
+  const gender = searchParams.get("gender");
 
   const AddParamsToURL = useAddParamsToURL();
 
   const baseUrl = process.env.NEXT_PUBLIC_BASE_URL;
 
   const [fetchUrl, setFetchUrl] = useState(
-    AddParamsToURL(baseUrl + "/customer-product/1")
+    AddParamsToURL(baseUrl + "/customer-product/4")
   );
 
   const { data, isLoading, error } = useSWR(fetchUrl, fetchHome);
@@ -35,7 +36,7 @@ const LifeStyleProducts = () => {
         <Loading />
       ) : data.data && data?.data.length ? (
         <>
-          <ProductsContainer products={data.data} />
+          <ProductsContainer gender={gender} products={data.data} />
           <AdminPagination meta={data?.meta} />
         </>
       ) : (
@@ -45,7 +46,7 @@ const LifeStyleProducts = () => {
   );
 };
 
-const ProductsContainer = ({ products }) => {
+const ProductsContainer = ({ products, gender }) => {
   return (
     <div className="grid grid-cols-2 md:grid-cols-3 gap-x-3 gap-y-6">
       {products.map((product) => (
@@ -57,7 +58,11 @@ const ProductsContainer = ({ products }) => {
           title={product.name}
           color={product.color}
           amount={product.price}
-          href={"/life-style/details/" + product.id}
+          href={
+            "/life-style/details/" +
+            product.id +
+            (gender ? "?gender=" + gender : "")
+          }
         />
       ))}
     </div>

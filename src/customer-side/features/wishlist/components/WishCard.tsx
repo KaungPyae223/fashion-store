@@ -2,6 +2,7 @@ import { deleteWishList } from "@/customer-side/services/Wishlist";
 import { useRevalidatedData } from "@/hooks/useRevalidatedData";
 import Image from "next/image";
 import Link from "next/link";
+import { useSearchParams } from "next/navigation";
 import React from "react";
 import toast from "react-hot-toast";
 
@@ -35,6 +36,9 @@ const WishCard = ({
     revalidateWithoutParam("/customer-wishlist");
   };
 
+  const searchParams = useSearchParams();
+  const gender = searchParams.get("gender");
+
   return (
     <div className="relative">
       <div>
@@ -61,7 +65,7 @@ const WishCard = ({
       </div>
       <div className="flex flex-row gap-3 mt-3">
         <Link
-          href={"/wishlist/details/" + product_id}
+          href={"/wishlist/details/" + product_id +(gender?("?gender="+gender):"")}
           className="uppercase cursor-pointer hover:border-black duration-300 flex flex-1 items-center justify-center tracking-wider border py-2 text-sm font-medium"
         >
           Details

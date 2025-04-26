@@ -3,7 +3,7 @@ import Container from "../../../components/Container";
 import { HomeTitle } from "./HomeTitle";
 import HomeBrandCard from "../../../components/HomeBrandCard";
 
-const HomeBrand = ({ data }) => {
+const HomeBrand = ({ data,gender }) => {
   return (
     <div className="py-16 mb-6 bg-[#F8F8F8]">
       <Container>
@@ -13,7 +13,7 @@ const HomeBrand = ({ data }) => {
             <HomeBrandCard
               key={brand.id}
               img={brand.photo}
-              link={"/brands/" + brand.name}
+              link={"/brands/" + brand.name + (gender ? "?gender=" + gender : "")}
               title={brand.name}
             />
           ))}

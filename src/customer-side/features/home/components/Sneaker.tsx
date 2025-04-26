@@ -3,7 +3,7 @@ import Container from "../../../components/Container";
 import { HomeTitle } from "./HomeTitle";
 import ProductCard from "../../../components/ProductCard";
 
-const Sneaker = ({ data }) => {
+const Sneaker = ({ data, gender }) => {
   return (
     <div className="pt-16 pb-6 mb-12">
       <Container>
@@ -18,7 +18,9 @@ const Sneaker = ({ data }) => {
               title={sneaker.title}
               amount={sneaker.amount}
               color={sneaker.color}
-              href={"/details/" + sneaker.id}
+              href={
+                "/details/" + sneaker.id + (gender ? "?gender=" + gender : "")
+              }
             />
           ))}
         </div>

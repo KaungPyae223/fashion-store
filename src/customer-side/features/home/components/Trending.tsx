@@ -3,7 +3,7 @@ import { HomeTitle } from "./HomeTitle";
 import Container from "../../../components/Container";
 import ProductCard from "../../../components/ProductCard";
 
-const Trending = ({ data }) => {
+const Trending = ({ data,gender }) => {
   return (
     <div className="pt-16 pb-6 mb-6">
       <Container>
@@ -19,7 +19,7 @@ const Trending = ({ data }) => {
               title={product.title}
               color={product.color}
               amount={product.amount}
-              href={"/details/" + product.id}
+              href={"/details/" + product.id+(gender ? "?gender=" + gender : "")}
             />
           ))}
         </div>

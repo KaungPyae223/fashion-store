@@ -4,11 +4,11 @@ import { useRouter } from "next/navigation";
 import React, { useEffect, useState } from "react";
 import reactUseCookie from "react-use-cookie";
 
-const CheckToken = () => {
+const CheckToken = ({gender}) => {
   const router = useRouter();
 
   const RouteToProfile = () => {
-    router.push("/profile");
+    router.push("/profile"+(gender?("?gender="+gender):""));
   };
 
   return (

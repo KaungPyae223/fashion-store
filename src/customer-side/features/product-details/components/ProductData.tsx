@@ -50,6 +50,8 @@ const ProductData = ({ productData }) => {
     }
   };
 
+  
+  
   return (
     <div className="grid grid-cols-3 gap-6 border-b pb-16 border-b-gray-200">
       <Toaster />
@@ -90,7 +92,7 @@ const ProductData = ({ productData }) => {
             <p>{sizeName}</p>
           </div>
           <div className="my-5 flex flex-wrap justify-center items-center">
-            {productData.size.map((el) => (
+            {productData.size?.map((el) => (
               <SizeCard
                 key={el.id}
                 size={el.name}

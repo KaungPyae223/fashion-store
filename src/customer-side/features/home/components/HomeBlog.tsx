@@ -4,7 +4,7 @@ import { HomeTitle } from "./HomeTitle";
 import Container from "../../../components/Container";
 import BlogCard from "../../../components/BlogCard";
 
-const HomeBlog = ({data}) => {
+const HomeBlog = ({data,gender}) => {
   
   return (
     <div className="pt-16 pb-6 mb-12">
@@ -14,7 +14,7 @@ const HomeBlog = ({data}) => {
           {data.map((blog) => (
             <BlogCard
               img={blog.photo}
-              link={"/blogs/"+blog.id}
+              link={"/blogs/"+blog.id + (gender ? "?gender=" + gender : "")}
               date={blog.time}
               title={blog.title}
               key={blog.id}

@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useRef, useState } from "react";
 import { debounce } from "lodash";
 import Container from "../Container";
 import SearchTitle from "./SearchTitle";
@@ -19,18 +19,11 @@ const SearchSection = ({ setOpenSearchSection }: SearchSectionInterface) => {
 
   const searchParams = useSearchParams();
 
-  const [gender, setGender] = useState<string>("");
+  const gender = searchParams.get("gender");
 
   const history = getCookie("search-history");
 
   const searchHistory = history ? JSON.parse(history) : [];
-
-  useEffect(() => {
-    const genderParam = searchParams.get("gender");
-    if (genderParam) {
-      setGender(genderParam);
-    }
-  }, []);
 
   const [searchURl, setSearchURl] = useState<string>(
     process.env.NEXT_PUBLIC_BASE_URL + "/search-input?q=&gender=" + gender
@@ -41,10 +34,11 @@ const SearchSection = ({ setOpenSearchSection }: SearchSectionInterface) => {
       process.env.NEXT_PUBLIC_BASE_URL +
         "/search-input?q=" +
         e.target.value +
-        "&gender=" +
-        gender
+        (gender ? "&gender=" + gender : "")
     );
   }, 500);
+
+  
 
   const { data, isLoading, error } = useSWR(searchURl, fetchHome);
 
@@ -52,8 +46,9 @@ const SearchSection = ({ setOpenSearchSection }: SearchSectionInterface) => {
 
   const changeSearchRoute = () => {
     if (searchRef.current.value === "") return;
-
-    router.push("/search/" + searchRef.current.value);
+ 
+    router.push("/search/" + searchRef.current.value + (gender ? "?gender=" + gender : ""));
+   
     setOpenSearchSection(false);
   };
 
@@ -61,9 +56,7 @@ const SearchSection = ({ setOpenSearchSection }: SearchSectionInterface) => {
     <div className="w-full h-full overflow-y-scroll z-50">
       <div className="py-4 border-b col-span-full">
         <div className="flex flex-row md:hidden items-center mb-3 justify-between p-3">
-          <div className="text-3xl font-medium">
-            Alexa
-          </div>
+          <div className="text-3xl font-medium">Alexa</div>
           <div
             onClick={() => setOpenSearchSection(false)}
             className="flex flex-row gap-3 items-center border w-fit px-5 py-1.5  rounded-full border-gray-300 "
@@ -143,6 +136,7 @@ const SearchSection = ({ setOpenSearchSection }: SearchSectionInterface) => {
           <div className="col-span-3 hidden md:block">
             <SearchTitle title="Recently Search" />
             <SearchTitleList
+            gender = {gender}
               setOpenSearchSection={setOpenSearchSection}
               searchHistory={searchHistory}
             />

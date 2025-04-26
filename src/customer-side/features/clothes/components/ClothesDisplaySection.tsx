@@ -12,6 +12,7 @@ import useSWR from "swr";
 
 const ClothesDisplaySection = () => {
   const searchParams = useSearchParams();
+  const gender = searchParams.get("gender");
 
   const AddParamsToURL = useAddParamsToURL();
 
@@ -22,6 +23,8 @@ const ClothesDisplaySection = () => {
   );
 
   const { data, isLoading, error } = useSWR(fetchUrl, fetchHome);
+
+  
 
   useEffect(() => {
     setFetchUrl(AddParamsToURL(baseUrl + "/customer-product/1"));
@@ -35,7 +38,7 @@ const ClothesDisplaySection = () => {
         <Loading />
       ) : data.data && data?.data.length ? (
         <>
-          <ProductsContainer products={data.data} />
+          <ProductsContainer gender={gender} products={data.data} />
           <AdminPagination meta={data?.meta} />
         </>
       ) : (
@@ -45,9 +48,10 @@ const ClothesDisplaySection = () => {
   );
 };
 
-const ProductsContainer = ({ products }) => {
+const ProductsContainer = ({ products,gender }) => {
 
   
+
   return (
     <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-x-3 gap-y-6">
       {products.map((product) => (
@@ -59,7 +63,7 @@ const ProductsContainer = ({ products }) => {
           title={product.name}
           color={product.color}
           amount={product.price}
-          href={"/clothing/details/"+product.id}
+          href={"/clothing/details/"+product.id+(gender?("?gender="+gender):"")}
         />
       ))}
     </div>

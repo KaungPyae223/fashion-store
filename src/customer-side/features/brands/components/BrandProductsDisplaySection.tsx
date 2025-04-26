@@ -12,6 +12,9 @@ import useSWR from "swr";
 
 const BrandProductsDisplaySection = ({ name }) => {
   const searchParams = useSearchParams();
+  const gender = searchParams.get("gender");
+
+
   const AddParamsToURL = useAddParamsToURL();
 
   const [fetchURL, setFetchUrl] = useState(
@@ -36,7 +39,7 @@ const BrandProductsDisplaySection = ({ name }) => {
           <Loading />
         ) : data.data && data?.data.length ? (
           <>
-            <ProductsContainer products={data.data} name={name} />
+            <ProductsContainer gender={gender} products={data.data} name={name} />
             <AdminPagination meta={data?.meta} />
           </>
         ) : (
@@ -47,7 +50,7 @@ const BrandProductsDisplaySection = ({ name }) => {
   );
 };
 
-const ProductsContainer = ({ products, name }) => {
+const ProductsContainer = ({ products, name,gender }) => {
   return (
     <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-x-3 gap-y-6">
       {products.map((product) => (
@@ -59,7 +62,7 @@ const ProductsContainer = ({ products, name }) => {
           title={product.name}
           color={product.color}
           amount={product.price}
-          href={"/brands/" + name + "/details/" + product.id}
+          href={"/brands/" + name + "/details/" + product.id + (gender?("?gender="+gender):"") }
         />
       ))}
     </div>

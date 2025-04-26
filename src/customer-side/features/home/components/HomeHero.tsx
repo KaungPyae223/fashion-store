@@ -8,7 +8,7 @@ import { Autoplay, Pagination, Navigation } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
 import CarouselCard from "./CarouselCard";
 
-const HomeHero = ({ data }) => {
+const HomeHero = ({ data,gender }) => {
   return (
     <Swiper
       spaceBetween={0}
@@ -33,7 +33,7 @@ const HomeHero = ({ data }) => {
     >
       {data.map((el) => (
         <SwiperSlide key={el.id}>
-          <CarouselCard data={el} />
+          <CarouselCard data={el} gender={gender} />
         </SwiperSlide>
       ))}
 
@@ -73,7 +73,7 @@ const HomeHero = ({ data }) => {
         </div>
       </div>
 
-      {/* Custom Pagination */}
+    
       <div className="z-50 absolute bottom-10 w-full custom-pagination flex flex-row gap-3 items-center justify-center"></div>
     </Swiper>
   );

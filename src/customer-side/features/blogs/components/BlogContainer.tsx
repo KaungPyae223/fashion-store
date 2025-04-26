@@ -13,6 +13,7 @@ import useSWR from "swr";
 
 const BlogContainer = () => {
   const searchParams = useSearchParams();
+  const gender = searchParams.get("gender");
 
   const AddParamsToURL = useAddParamsToURL();
 
@@ -36,7 +37,7 @@ const BlogContainer = () => {
         <Loading />
       ) : data.data && data?.data.length ? (
         <>
-          <BlogsContainer blogs={data.data} />
+          <BlogsContainer gender={gender} blogs={data.data} />
           <AdminPagination meta={data?.meta} />
         </>
       ) : (
@@ -46,14 +47,14 @@ const BlogContainer = () => {
   );
 };
 
-const BlogsContainer = ({ blogs }) => {
+const BlogsContainer = ({ blogs, gender }) => {
   return (
     <Container>
       <div className="col-span-full grid grid-cols-2 md:grid-cols-3 gap-8">
         {blogs.map((blog) => (
           <BlogCard
             img={blog.photo}
-            link={"/blogs/"+blog.id}
+            link={"/blogs/" + blog.id + (gender ? "?gender=" + gender : "")}
             date={blog.time}
             title={blog.title}
             key={blog.id}

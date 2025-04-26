@@ -7,7 +7,7 @@ import NavLink from "./NavBarComponent/NavLink";
 import SearchSection from "./NavBarComponent/SearchSection";
 import { AnimatePresence, motion } from "motion/react";
 import Craft from "./NavBarComponent/Craft";
-import { usePathname } from "next/navigation";
+import { usePathname, useSearchParams } from "next/navigation";
 import Link from "next/link";
 
 const NavBar = () => {
@@ -54,6 +54,9 @@ const NavBar = () => {
     };
   }, [previousScroll]);
 
+  const searchParams = useSearchParams();
+  const gender = searchParams.get("gender");
+
   // Adjust container height based on nav height
   useEffect(() => {
     if (navRef.current && containerRef.current) {
@@ -75,7 +78,7 @@ const NavBar = () => {
       >
         <Noti />
         <div className="block md:hidden text-center py-3 border-b ">
-          <Link href={"/"} className="text-3xl font-bold">
+          <Link href={"/"+(gender?("?gender="+gender):"")} className="text-3xl font-bold">
             Alexa
           </Link>
           

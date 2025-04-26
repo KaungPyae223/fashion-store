@@ -13,20 +13,19 @@ import useSWR from "swr";
 const SearchPage = ({ q }) => {
   const searchParams = useSearchParams();
 
-  const [gender, setGender] = useState<string>("");
+  const gender = searchParams.get("gender");
+
 
   const [history, setHistory] = reactUseCookie("search-history");
 
   useEffect(() => {
-    const genderParam = searchParams.get("gender");
-    if (genderParam) {
-      setGender(genderParam);
-    }
 
     const historyArr = history ? JSON.parse(history) : [];
 
-    if (!historyArr.includes(q)) {
-      historyArr.unshift(q);
+    const searchKeyword = decodeURIComponent(q);
+
+    if (!historyArr.includes(searchKeyword)) {
+      historyArr.unshift(searchKeyword);
       if (historyArr.length > 10) {
         historyArr.splice(10);
       }
@@ -35,16 +34,17 @@ const SearchPage = ({ q }) => {
   }, []);
 
   const { data, isLoading, error } = useSWR(
-    process.env.NEXT_PUBLIC_BASE_URL + "/search?q=" + q + "&gender=" + gender,
+    process.env.NEXT_PUBLIC_BASE_URL + "/search?q=" + q + (gender? ("&gender=" + gender):""),
     fetchHome
   );
 
+  
 
   return (
     <div>
       <p className="text-xl text-center my-20 tracking-wide">
         Search Result for{" "}
-        <span className="font-semibold mx-1 text-2xl">" {q} "</span>
+        <span className="font-semibold mx-1 text-2xl"> {decodeURIComponent(q)} </span>
       </p>
       {isLoading ? (
         <Loading />
