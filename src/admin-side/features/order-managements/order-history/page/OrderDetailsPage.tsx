@@ -26,7 +26,7 @@ const OrderDetailsPage = ({ id,isCustomerSupport }) => {
 
   const { data, isLoading, error } = useSWR(baseUrl, fetchOrder);
 
-  console.log(data)
+  
   
   const { formatDate } = useFormatDate();
 

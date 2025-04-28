@@ -13,7 +13,7 @@ export const useAdminUpdate = () => {
 
   const handleUpdateAdmin = async () => {
     const updateData = {
-      id: data.admin.id,
+      id: Number(data.admin.id),
       name: data.admin.name,
       email: data.admin.email,
       phone: data.admin.phone,
@@ -22,10 +22,12 @@ export const useAdminUpdate = () => {
       photo: data.adminPhoto.file,
     };
 
+    
     try {
       const res = await updateAdmin(updateData);
       const json = await res.json();
 
+      
       if (res.status !== 200) {
         toast.error(json.message);
         return;

@@ -24,7 +24,7 @@ const ProductTrashPage = () => {
     handleCategoryChange,
   } = useProductTrashData();
 
-  console.log(data);
+  
 
   return (
     <div>

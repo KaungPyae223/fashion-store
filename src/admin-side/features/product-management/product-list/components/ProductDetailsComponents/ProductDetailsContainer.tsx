@@ -10,7 +10,6 @@ const ProductDetailsContainer = ({ data }) => {
   return (
     <div className="grid grid-cols-3 gap-6 mt-6">
       <ProductDetailsTable data={data} />
-      <ProductSaleColumnChart data={data} />
       <ProductAverageRating id={data.id} />
       <ProductCardContainer data={data} />
       <ProductDetailsPreview data={data} />

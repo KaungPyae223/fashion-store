@@ -31,7 +31,7 @@ const ProductReviewTable = ({ data, url }) => {
 
 const ReviewTr = ({ data, url }) => {
 
-  console.log(url);
+  
 
   const { formatDate } = useFormatDate();
   const { revalidateURL } = useRevalidatedData();

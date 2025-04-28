@@ -13,7 +13,7 @@ import useAdminProfileStore from "@/admin-side/stores/useAdminProfileStore";
 const ProfileAdminData = () => {
   const { adminData } = useAdminProfileStore();
 
-  console.log(adminData);
+  
 
   return (
     <div>{!adminData ? <Loading /> : <AdminDetails data={adminData} />}</div>

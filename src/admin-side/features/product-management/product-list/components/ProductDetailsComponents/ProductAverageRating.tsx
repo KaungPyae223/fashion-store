@@ -12,7 +12,7 @@ const ProductAverageReview = ({ id }) => {
 
   return (
     !isLoading && (
-      <div className="p-5 bg-white col-span-2">
+      <div className="p-6 bg-white rounded-2xl col-span-2 shadow-md">
         <p className="text-xl tracking-wider font-medium">Average Rating</p>
 
         <div className="my-5 flex flex-row justify-start items-center gap-3">

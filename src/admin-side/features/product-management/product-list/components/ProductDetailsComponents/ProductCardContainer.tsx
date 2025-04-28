@@ -3,7 +3,7 @@ import React from "react";
 
 const ProductCardContainer = ({ data }) => {
   return (
-    <div className="bg-white p-5 pointer-events-none">
+    <div className="p-6 bg-white rounded-2xl shadow-md pointer-events-none">
       <p className="text-xl tracking-wider font-medium mb-5">Product Card</p>
       <ProductCard
         img={data.cover_photo}

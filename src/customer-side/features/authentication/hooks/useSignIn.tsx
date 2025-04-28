@@ -29,7 +29,7 @@ export const useSignIn = (email: string) => {
         toast.success("Log In Successful");
 
         setToken(json.token); 
-        Router.back();
+        Router.push("/");
          
       } else {
         toast.error(json.message);

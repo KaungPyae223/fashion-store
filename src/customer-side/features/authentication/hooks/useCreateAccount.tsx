@@ -40,8 +40,7 @@ export const useCreateAccount = (email: string) => {
   const [loading, isLoading] = useState<boolean>(false);
 
   const handleCreateAccount = async (data) => {
-    console.log(data);
-
+    
     isLoading(true);
     const res = await registerAccount(data.name, data.email, data.password);
 
@@ -49,7 +48,7 @@ export const useCreateAccount = (email: string) => {
 
     if (json.token) {
       setToken(json.token);
-      Router.back();
+      Router.push("/");
     } else {
       toast.error(json.message);
       isLoading(false);

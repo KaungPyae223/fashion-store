@@ -2,89 +2,64 @@ import React from "react";
 
 const ProductDetailsTable = ({ data }) => {
   return (
-    <div className="p-5 bg-white">
-      <p className="text-xl tracking-wider font-medium">{data.name} Info</p>
-      <div className="mt-5">
-        <table className="mt-4">
-          <tbody>
-            <tr>
-              <td className="pe-2 pb-1 font-semibold">Name:</td>
-              <td className="pb-1">{data.name}</td>
-            </tr>
-            <tr>
-              <td className="pe-2 pb-1 font-semibold">Status:</td>
-              <td className="pb-1">
-                {data.status === "public" ? (
-                  <div className="text-sm bg-green-400 text-gray-700 w-fit rounded-full px-5 py-0.5">
-                    Public
-                  </div>
-                ) : (
-                  <div className="text-sm bg-red-600 text-white w-fit rounded-full px-5 py-0.5">
-                    Private
-                  </div>
-                )}
-              </td>
-            </tr>
-            <tr>
-              <td className="pe-2 pb-1 font-semibold">Original Price:</td>
-              <td className="pb-1">{data.original_price} Ks</td>
-            </tr>
-            <tr>
-              <td className="pe-2 pb-1 font-semibold">Profit Percent:</td>
-              <td className="pb-1">{data.profit_percent} %</td>
-            </tr>
-            <tr>
-              <td className="pe-2 pb-1 font-semibold">Discount:</td>
-              <td className="pb-1">{data.discount_price} Ks</td>
-            </tr>
-            <tr>
-              <td className="pe-2 pb-1 font-semibold">Sell Price:</td>
-              <td className="pb-1">{data.price} Ks</td>
-            </tr>
-            <tr>
-              <td className="pe-2 pb-1 font-semibold">Category:</td>
-              <td className="pb-1">{data.category}</td>
-            </tr>
-            <tr>
-              <td className="pe-2 pb-1 font-semibold">Brand:</td>
-              <td className="pb-1">{data.brand}</td>
-            </tr>
-            <tr>
-              <td className="pe-2 pb-1 font-semibold">Type:</td>
-              <td className="pb-1">{data.type}</td>
-            </tr>
-            <tr>
-              <td className="pe-2 pb-1 font-semibold">Gender:</td>
-              <td className="pb-1">{data.gender}</td>
-            </tr>
-            <tr>
-              <td className="pe-2 pb-1 font-semibold">Color:</td>
-              <td className="pb-1">{data.color}</td>
-            </tr>
-            <tr>
-              <td className="pe-2 pb-1 font-semibold">Size:</td>
-              <td className="pb-1">
-                <div className="flex flex-row gap-2">
-                  {data.sizes.map((el, index) => (
-                    <div
-                      key={el.id || index}
-                      className="text-sm text-gray-600 bg-gray-300 rounded-full px-2 py-0.5"
-                    >
-                      {el.name}
-                    </div>
-                  ))}
-                </div>
-              </td>
-            </tr>
-          </tbody>
-        </table>
+    <div className="p-6 bg-white rounded-2xl col-span-3 shadow-md">
+      <p className="text-2xl font-semibold tracking-wide mb-6">{data.name} Info</p>
+
+      <div className="grid grid-cols-1 sm:grid-cols-4 gap-4">
+        <InfoItem label="Name" value={data.name} />
+        <InfoItem
+          label="Status"
+          value={
+            <span
+              className={`text-sm px-4 py-1 rounded-full font-medium ${
+                data.status === "public"
+                  ? "bg-green-400 text-gray-800"
+                  : "bg-red-600 text-white"
+              }`}
+            >
+              {data.status === "public" ? "Public" : "Private"}
+            </span>
+          }
+        />
+        <InfoItem label="Original Price" value={`${data.original_price} Ks`} />
+        <InfoItem label="Profit Percent" value={`${data.profit_percent} %`} />
+        <InfoItem label="Discount" value={`${data.discount_price} Ks`} />
+        <InfoItem label="Sell Price" value={`${data.price} Ks`} />
+        <InfoItem label="Category" value={data.category} />
+        <InfoItem label="Brand" value={data.brand} />
+        <InfoItem label="Type" value={data.type} />
+        <InfoItem label="Gender" value={data.gender} />
+        <InfoItem label="Color" value={data.color} />
         <div>
-          <p className="font-semibold my-1.5 mt-3">Description:</p>
-          <p className="text-justify text-sm">{data.description}</p>
+          <p className="text-sm font-semibold mb-1">Size:</p>
+          <div className="flex flex-wrap gap-2">
+            {data.sizes.map((el, index) => (
+              <span
+                key={el.id || index}
+                className="text-sm bg-gray-200 text-gray-700 rounded-full px-3 py-0.5"
+              >
+                {el.name}
+              </span>
+            ))}
+          </div>
         </div>
+      </div>
+
+      <div className="mt-6">
+        <p className="font-semibold text-base mb-2">Description:</p>
+        <p className="text-sm text-justify text-gray-600 leading-relaxed">
+          {data.description}
+        </p>
       </div>
     </div>
   );
 };
+
+const InfoItem = ({ label, value }) => (
+  <div>
+    <p className="text-sm font-semibold text-gray-700 mb-1">{label}:</p>
+    <p className="text-sm text-gray-600">{value}</p>
+  </div>
+);
 
 export default ProductDetailsTable;

@@ -10,6 +10,7 @@ const ProductDataUpdateForm = ({ setStage }) => {
     setProductData,
     product: { productData },
     resetProductProperties,
+    resetProductPropertiesWithoutSize,
   } = useProductStore();
 
   const {
@@ -41,7 +42,7 @@ const ProductDataUpdateForm = ({ setStage }) => {
     }
 
     if (productData.Gender !== data.Gender) {
-      resetProductProperties();
+      resetProductPropertiesWithoutSize();
     }
 
     setProductData(addProductData);

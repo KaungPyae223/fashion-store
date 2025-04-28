@@ -46,6 +46,17 @@ const useProductStore = create((set) => ({
       },
     })),
 
+    resetProductPropertiesWithoutSize: () =>
+      set((state) => ({
+        product: {
+          ...state.product,
+          productProperties: {
+            ...state.product.productProperties,
+            Type: null,
+          },
+        },
+      })),
+
   setProductProperties: (productProperties) =>
     set((state) => ({
       product: { ...state.product, productProperties: productProperties },

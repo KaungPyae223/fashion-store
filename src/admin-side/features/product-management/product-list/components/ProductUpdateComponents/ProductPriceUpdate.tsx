@@ -6,12 +6,14 @@ import { useForm } from "react-hook-form";
 
 const ProductPriceUpdate = ({ setStage }) => {
   const [nextStage, setNextStage] = useState(1);
-  const [sellPrice, setSellPrice] = useState(0);
-
+  
   const {
     product: { productPrice },
     setProductPrice,
   } = useProductStore();
+
+  const [sellPrice, setSellPrice] = useState(productPrice.SellPrice);
+
 
   const {
     register,

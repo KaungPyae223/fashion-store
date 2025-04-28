@@ -13,7 +13,7 @@ const ProductDetailsPreview = ({ data }) => {
   };
 
   return (
-    <div className="bg-white p-5 col-span-3">
+    <div className="p-6 bg-white rounded-2xl col-span-3 pointer-events-none shadow-md">
       <p className="text-xl tracking-wider font-medium mb-5">
         Product Details Section Preview
       </p>

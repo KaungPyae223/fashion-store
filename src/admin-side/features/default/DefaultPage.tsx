@@ -6,7 +6,8 @@ import { getCookie } from "react-use-cookie";
 
 const DefaultPage = () => {
   const admintoken = getCookie("token");
-  console.log(admintoken);
+ 
+  console.log(admintoken)
 
   return (
     <div

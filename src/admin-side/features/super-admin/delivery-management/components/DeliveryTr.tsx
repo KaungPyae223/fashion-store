@@ -19,7 +19,6 @@ const DeliveryTr = ({ delivery }) => {
 
         if (res.ok) {
           toast.success(json.message);
-          revalidateTag("delivery");
           await revalidate("/deliver");
         } else {
           toast.error(json.message);

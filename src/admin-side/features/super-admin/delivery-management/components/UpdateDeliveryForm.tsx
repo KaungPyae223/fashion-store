@@ -47,10 +47,10 @@ const UpdateDeliveryForm = ({
 
       if(res.status != 200){
         toast.error(json.message);
-        
+        console.log(json)
         return;
       }
-      revalidateTag("delivery");
+     
       toast.success("Delivery Data updated successfully");
       reset();
       await revalidate("/deliver");
@@ -65,7 +65,7 @@ const UpdateDeliveryForm = ({
     <div>
       <div className="bg-white p-5">
         <h2 className="text-2xl font-semibold mb-4 text-center">
-          Create Delivery
+          Update Delivery
         </h2>
         <form onSubmit={handleSubmit(handleCreateDelivery)} className="my-4">
           <AdminInput

@@ -8,7 +8,7 @@ type ProgressItem = {
 
 
 const ProgressBar = ({ title, data }: { title: string; data: any }) => {
-  console.log(data);
+  
   return (
     <div className="flex flex-col">
       <p className="text-lg font-semibold my-6">{title}</p>

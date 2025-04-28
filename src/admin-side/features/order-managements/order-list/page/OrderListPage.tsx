@@ -11,7 +11,7 @@ const OrderListPage = () => {
 
   const baseUrl = process.env.NEXT_PUBLIC_BASE_URL;
   const { data, isLoading, error } = useSWR(
-    baseUrl + "/order-list",
+    baseUrl + "/order-management-list",
     fetchOrder
   );
 

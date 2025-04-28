@@ -18,7 +18,6 @@ const PaymentTr = ({ payment }) => {
         const json = await res.json();
 
         if (res.ok) {
-          revalidateTag("allPayments");
           toast.success(json.message);
           await revalidate("/payment");
         } else {

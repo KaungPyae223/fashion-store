@@ -34,12 +34,12 @@ const UpdatePaymentForm = ({
 
       const json = await res.json();
 
-      if (res.status != 200) {
+      
+      if (!res.ok) {
         toast.error(json.message);
         return;
       }
 
-      revalidateTag("allPayments");
       toast.success("Product updated successfully");
       reset();
       await revalidate("/payment");

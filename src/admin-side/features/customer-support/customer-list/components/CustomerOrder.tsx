@@ -17,7 +17,7 @@ const CustomerOrder = ({ id }) => {
     fetchAdmin
   );
 
-  console.log(data);
+  
 
   return !isLoading && (
     <>

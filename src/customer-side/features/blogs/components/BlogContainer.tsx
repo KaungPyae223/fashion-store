@@ -29,7 +29,7 @@ const BlogContainer = () => {
     setFetchUrl(AddParamsToURL(baseUrl + "/get-blogs"));
   }, [searchParams]);
 
-  console.log(data);
+  
 
   return (
     <div className="py-10">

@@ -4,7 +4,7 @@ import CustomersQuestionsTr from "./CustomersQuestionsTr";
 
 const CustomersQuestionsContainer = ({questions,handleRevalidate}) => {
 
-  console.log(questions);
+  
 
   return (
     <div className="mt-6">

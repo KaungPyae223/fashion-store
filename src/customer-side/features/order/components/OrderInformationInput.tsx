@@ -104,7 +104,7 @@ const OrderInformationInput = () => {
 
         if (json.status !== 201) {
           toast.error(json.message);
-          console.log(json);
+          
           return;
         }
 

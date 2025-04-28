@@ -14,7 +14,7 @@ const DeliveryPage = () => {
     error,
   } = useOrderDelivery();
 
-  console.log(data);
+  
 
   return (
     <div>
